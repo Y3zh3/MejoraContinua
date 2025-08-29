@@ -46,7 +46,7 @@ const CustomCylinderBar = (props: any) => {
 
     if (height <= 0) return null;
 
-    const baseHeight = 30; // Increased from 20 to 30
+    const baseHeight = 50;
     const bodyHeight = height > baseHeight ? height - baseHeight : 0;
     const radius = width / 2;
 
@@ -116,7 +116,7 @@ const FacturadoAnualChart = () => {
                         content={(props) => {
                             const { x, y, width, height, value } = props;
                             if (height <= 0) return null;
-                            const baseHeight = 30; // Increased from 20 to 30
+                            const baseHeight = 50;
                             const bodyHeight = height > baseHeight ? height - baseHeight : 0;
                             return (
                                 <g>
@@ -280,4 +280,5 @@ export default function InspeccionesPage() {
     
 
     
+
 
