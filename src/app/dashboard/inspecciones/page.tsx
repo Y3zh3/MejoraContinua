@@ -41,27 +41,16 @@ const oportunidadesData = [
 ];
 
 const CylinderBar = (props: any) => {
-    const { x, y, width, height, fill, value } = props;
-    const radius = width / 2;
-
+    const { fill, x, y, width, height } = props;
+  
     return (
-        <g>
-            <rect x={x} y={y} width={width} height={height} fill="rgba(0,0,0,0.1)" />
-            <path
-                d={`M ${x},${y + radius}
-                    A ${radius},${radius} 0 0 1 ${x + width},${y + radius}
-                    L ${x + width},${y + height}
-                    L ${x},${y + height}
-                    Z`}
-                fill={fill}
-            />
-            <ellipse cx={x + radius} cy={y + radius} rx={radius} ry={radius/3} fill={fill} />
-             <text x={x + width / 2} y={y + height / 2} fill="#fff" textAnchor="middle" dominantBaseline="middle" transform={`rotate(-90, ${x+width/2}, ${y+height/2})`} fontSize="12" fontWeight="bold">
-                {value.toLocaleString()} m³
-            </text>
-        </g>
+      <g>
+        <path d={`M${x},${y + height} L${x},${y} L${x + width},${y} L${x + width},${y + height} Z`} fill={fill} />
+        <ellipse cx={x + width / 2} cy={y} rx={width / 2} ry={5} fill={fill} opacity={0.6} />
+        <ellipse cx={x + width / 2} cy={y} rx={width / 2} ry={5} fill={fill} />
+      </g>
     );
-};
+  };
 
 const VolumenAnualChart = () => {
     return (
@@ -87,6 +76,7 @@ const VolumenAnualChart = () => {
                     }}
                 />
                 <Bar dataKey="value" shape={<CylinderBar />} fill="hsl(var(--chart-1))">
+                    <LabelList dataKey="value" position="top" formatter={(value: number) => new Intl.NumberFormat('es-PE', { notation: 'compact', compactDisplay: 'short' }).format(value)} />
                 </Bar>
             </BarChart>
         </ResponsiveContainer>
