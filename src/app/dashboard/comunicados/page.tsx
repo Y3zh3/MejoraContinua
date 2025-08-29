@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChartCard } from "@/components/charts";
 import {
   ChartContainer,
   ChartTooltipContent,
@@ -57,6 +56,7 @@ function BasesChart() {
           tickLine={false}
           tickMargin={10}
           axisLine={false}
+          tick={{ fontWeight: 'bold' }}
         />
         <YAxis
           yAxisId="left"
