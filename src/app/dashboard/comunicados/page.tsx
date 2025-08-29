@@ -59,6 +59,8 @@ const ResumenEficaciaTable = () => {
   const totalEficacia = totals.total > 0 ? Math.round((totals.conFirma / totals.total) * 100) : 0;
 
   return (
+    <div className="flex justify-center items-center h-full">
+      <div className="transform scale-70 -translate-x-12 -translate-y-12">
     <Card className="h-full transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
       <CardHeader className="p-2">
         <CardTitle className="text-center font-headline text-primary text-sm">RESUMEN DE % DE EFICACIA POR BASE</CardTitle>
@@ -108,6 +110,8 @@ const ResumenEficaciaTable = () => {
         </Table>
       </CardContent>
     </Card>
+      </div>
+    </div>
   );
 };
 
