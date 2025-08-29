@@ -22,11 +22,11 @@ const morosidadData = [
 ];
 
 const facturadoAnualData = [
-    { year: '2019', value: 65355388, startColor: '#005fec', endColor: '#53a2ff' },
-    { year: '2020', value: 52885862, startColor: '#005fec', endColor: '#53a2ff' },
-    { year: '2021', value: 57862414, startColor: '#005fec', endColor: '#53a2ff' },
-    { year: '2022', value: 75421036, startColor: '#005fec', endColor: '#53a2ff' },
-    { year: '2023', value: 76920707, startColor: '#005fec', endColor: '#53a2ff' },
+    { year: '2019', value: 65355388, startColor: '#228DFF', endColor: '#0052B4' },
+    { year: '2020', value: 52885862, startColor: '#228DFF', endColor: '#0052B4' },
+    { year: '2021', value: 57862414, startColor: '#228DFF', endColor: '#0052B4' },
+    { year: '2022', value: 75421036, startColor: '#228DFF', endColor: '#0052B4' },
+    { year: '2023', value: 76920707, startColor: '#228DFF', endColor: '#0052B4' },
 ];
 
 const facturadoData = [
@@ -42,16 +42,18 @@ const oportunidadesData = [
 ];
 
 const CustomCylinderBar = (props: any) => {
-    const { x, y, width, height, payload, value, yAxis } = props;
+    const { x, y, width, height, payload, value } = props;
+    
+    if (height <= 0 || !props.yAxis) return null;
+    
+    const { yAxis } = props;
     const { startColor, endColor, year } = payload;
-
-    if (height <= 0) return null;
 
     const radius = width / 2;
     const ellipseHeight = radius / 3;
     const baseHeight = 60;
-    const totalCylinderHeight = yAxis.height;
-
+    const chartHeight = yAxis.height;
+    
     const gradientId = `cylinderGradient-${year}`;
     
     const numTicks = 5;
@@ -71,9 +73,14 @@ const CustomCylinderBar = (props: any) => {
             </defs>
 
             {/* Glass Cylinder */}
-            <rect x={x} y={y - (totalCylinderHeight - height)} width={width} height={totalCylinderHeight} fill="rgba(255, 255, 255, 0.3)" rx={radius} ry={radius} />
-            <path d={`M${x},${y- (totalCylinderHeight - height) + ellipseHeight} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y- (totalCylinderHeight - height) + ellipseHeight}`} fill="rgba(255, 255, 255, 0.5)" />
-            <rect x={x} y={y- (totalCylinderHeight - height) + ellipseHeight} width={width} height={totalCylinderHeight - ellipseHeight} fill="rgba(235, 245, 255, 0.6)" />
+            <rect x={x} y={yAxis.y} width={width} height={chartHeight} fill="rgba(255, 255, 255, 0.3)" rx={radius} ry={radius} />
+            <path d={`M${x},${yAxis.y + ellipseHeight} A${radius},${ellipseHeight} 0 1,1 ${x + width},${yAxis.y + ellipseHeight}`} fill="rgba(255, 255, 255, 0.5)" />
+            <rect x={x} y={yAxis.y + ellipseHeight} width={width} height={chartHeight - ellipseHeight} fill="rgba(235, 245, 255, 0.6)" />
+
+            {/* Measurement Ticks */}
+            {tickPositions.map((tickY, i) => (
+                <path key={i} d={`M ${x + 5} ${y + height - tickY} h -5`} stroke="rgba(0,0,0,0.2)" strokeWidth="1" />
+            ))}
 
             {/* Liquid */}
             <rect x={x} y={y} width={width} height={height} fill={`url(#${gradientId})`} />
@@ -83,19 +90,14 @@ const CustomCylinderBar = (props: any) => {
             <path d={`M${x+width*0.25},${y} C${x+width*0.35},${y+height*0.33} ${x+width*0.35},${y+height*0.66} ${x+width*0.25},${y+height}`} 
                 fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="10" />
 
-            {/* Measurement Ticks */}
-            {tickPositions.map((tickY, i) => (
-                <path key={i} d={`M ${x + 5} ${y + height - tickY} h -5`} stroke="rgba(255,255,255,0.8)" strokeWidth="2" />
-            ))}
-
             {/* Base */}
-            <rect x={x} y={y+height} width={width} height={baseHeight} fill="#1c1c1c" />
-            <path d={`M${x},${y+height} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height} L${x+width},${y+height} A${radius},${ellipseHeight} 0 0,1 ${x},${y+height} Z`} fill="#2c2c2c" />
-            <path d={`M${x},${y+height+baseHeight} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height+baseHeight}`} fill="#2c2c2c" />
+            <rect x={x} y={yAxis.y + chartHeight} width={width} height={baseHeight} fill="#1c1c1c" />
+            <path d={`M${x},${yAxis.y + chartHeight} A${radius},${ellipseHeight} 0 0,0 ${x+width},${yAxis.y + chartHeight} L${x+width},${yAxis.y + chartHeight} A${radius},${ellipseHeight} 0 0,1 ${x},${yAxis.y + chartHeight} Z`} fill="#2c2c2c" />
+            <path d={`M${x},${yAxis.y + chartHeight + baseHeight} A${radius},${ellipseHeight} 0 0,0 ${x+width},${yAxis.y + chartHeight + baseHeight}`} fill="#2c2c2c" />
 
 
             {/* Base Content */}
-            <g transform={`translate(${x + radius}, ${y + height + baseHeight/2 + 5})`}>
+            <g transform={`translate(${x + radius}, ${yAxis.y + chartHeight + baseHeight/2 + 5})`}>
                  <Droplet size={18} fill="#56CCF2" stroke="white" strokeWidth={0.5} y={-14}/>
                  <text y={10} fill="white" fontSize="16" fontWeight="bold" textAnchor="middle">{year}</text>
             </g>
@@ -289,25 +291,5 @@ export default function InspeccionesPage() {
         </div>
     );
 }
-
-    
-
-    
-
-
-
-
-    
-
-    
-
-    
-
-
-
-
-    
-
-    
 
     
