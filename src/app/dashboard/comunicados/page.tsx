@@ -15,34 +15,40 @@ import { ChartCard } from "@/components/charts";
 import {
   ChartContainer,
   ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ComposedChart, LabelList } from "recharts";
 
 const basesData = [
-  { name: "CO", quality: 92 },
-  { name: "CA", quality: 85 },
-  { name: "ATE", quality: 78 },
-  { name: "BRE", quality: 95 },
-  { name: "SJL", quality: 88 },
-  { name: "CE", quality: 98 },
-  { name: "SUR", quality: 91 },
-  { name: "VES", quality: 82 },
+  { name: "CO", quality: 92, total: 905 },
+  { name: "CA", quality: 85, total: 468 },
+  { name: "ATE", quality: 78, total: 734 },
+  { name: "BRE", quality: 95, total: 1834 },
+  { name: "SJL", quality: 88, total: 1270 },
+  { name: "CE", quality: 98, total: 640 },
+  { name: "SUR", quality: 91, total: 87 },
+  { name: "VES", quality: 82, total: 341 },
 ];
 
 const chartConfig = {
   quality: {
-    label: "Calidad",
+    label: "Eficacia",
     color: "hsl(var(--chart-1))",
   },
+  total: {
+    label: "Total Comunicados",
+    color: "hsl(var(--chart-2))",
+  }
 };
 
 function BasesChart() {
   return (
     <ChartContainer config={chartConfig} className="min-h-[300px] w-full">
-      <BarChart
+      <ComposedChart
         accessibilityLayer
         data={basesData}
-        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+        margin={{ top: 30, right: 20, bottom: 20, left: 20 }}
       >
         <CartesianGrid vertical={false} />
         <XAxis
@@ -52,18 +58,56 @@ function BasesChart() {
           axisLine={false}
         />
         <YAxis
+          yAxisId="left"
           domain={[0, 100]}
           tickFormatter={(value) => `${value}%`}
+          hide
+        />
+        <YAxis
+          yAxisId="right"
+          orientation="right"
+          domain={[0, Math.max(...basesData.map(d => d.total)) + 500]}
+          hide
         />
         <Tooltip
           cursor={false}
           content={<ChartTooltipContent
-            formatter={(value) => `${value}%`}
             indicator="dot"
+            formatter={(value, name) => name === 'quality' ? `${value}%` : value}
           />}
         />
-        <Bar dataKey="quality" fill="var(--color-quality)" radius={8} />
-      </BarChart>
+        <ChartLegend content={<ChartLegendContent />} />
+        <Bar dataKey="quality" yAxisId="left" fill="var(--color-quality)" radius={8}>
+            <LabelList
+                dataKey="total"
+                position="top"
+                offset={10}
+                className="fill-foreground"
+                fontSize={12}
+             />
+             <LabelList
+                dataKey="quality"
+                position="inside"
+                formatter={(value: number) => `${value}%`}
+                className="fill-primary-foreground"
+                fontSize={12}
+             />
+        </Bar>
+        <Line
+          dataKey="total"
+          yAxisId="right"
+          type="monotone"
+          stroke="var(--color-total)"
+          strokeWidth={2}
+          strokeDasharray="3 3"
+          dot={{
+            fill: "var(--color-total)",
+          }}
+          activeDot={{
+            r: 6,
+          }}
+        />
+      </ComposedChart>
     </ChartContainer>
   );
 }
