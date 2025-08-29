@@ -1,6 +1,14 @@
 import { KpiCard } from "@/components/kpi-card";
 import { Megaphone, CheckCircle, MailOpen, AlertCircle } from "lucide-react";
-import { BarChartExample, LineChartExample, ChartCard } from "@/components/charts";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
 export default function ComunicadosPage() {
   const kpis = [
@@ -10,7 +18,29 @@ export default function ComunicadosPage() {
     { title: "Rebotes", value: "358", icon: AlertCircle, trend: "-5% vs mes anterior", trendDirection: "down" },
   ];
 
-  const locations = ["Comas", "Callao", "Ate", "Breña", "SJL", "Clientes Especiales", "Surquillo", "VES"];
+  const comunicados = [
+    { id: "COM-001", asunto: "Corte de servicio programado", fecha: "2024-07-20", area: "Comas", estado: "Enviado" },
+    { id: "COM-002", asunto: "Aviso de mantenimiento de red", fecha: "2024-07-19", area: "Callao", estado: "Entregado" },
+    { id: "COM-003", asunto: "Factura de Julio disponible", fecha: "2024-07-18", area: "Ate", estado: "Leído" },
+    { id: "COM-004", asunto: "Campaña de ahorro de agua", fecha: "2024-07-17", area: "Breña", estado: "Rebotado" },
+    { id: "COM-005", asunto: "Actualización de política de privacidad", fecha: "2024-07-16", area: "SJL", estado: "Enviado" },
+    { id: "COM-006", asunto: "Encuesta de satisfacción", fecha: "2024-07-15", area: "Clientes Especiales", estado: "Leído" },
+  ];
+
+  const getBadgeVariant = (estado: string) => {
+    switch (estado) {
+      case "Enviado":
+        return "default";
+      case "Entregado":
+        return "secondary";
+      case "Leído":
+        return "outline";
+      case "Rebotado":
+        return "destructive";
+      default:
+        return "default";
+    }
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -25,15 +55,34 @@ export default function ComunicadosPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-2">
-        {locations.map((location) => (
-            <ChartCard
-                key={location}
-                title={`Comunicados en ${location}`}
-                description="Tendencia de comunicados enviados en los últimos 6 meses."
-                chart={<LineChartExample />}
-            />
-        ))}
+      <div>
+        <h2 className="font-headline text-2xl font-bold mb-4">Últimos Comunicados</h2>
+        <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>ID</TableHead>
+                <TableHead>Asunto</TableHead>
+                <TableHead>Fecha</TableHead>
+                <TableHead>Área</TableHead>
+                <TableHead>Estado</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {comunicados.map((comunicado) => (
+                <TableRow key={comunicado.id}>
+                  <TableCell className="font-medium">{comunicado.id}</TableCell>
+                  <TableCell>{comunicado.asunto}</TableCell>
+                  <TableCell>{comunicado.fecha}</TableCell>
+                  <TableCell>{comunicado.area}</TableCell>
+                  <TableCell>
+                    <Badge variant={getBadgeVariant(comunicado.estado)}>{comunicado.estado}</Badge>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );
