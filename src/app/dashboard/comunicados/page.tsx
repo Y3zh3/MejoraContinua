@@ -9,6 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TableFooter,
 } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +22,7 @@ import {
 } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ComposedChart, LabelList } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 
 
 const basesData = [
@@ -44,6 +46,81 @@ const chartConfig = {
     color: "hsl(var(--chart-2))",
   }
 };
+
+const resumenEficaciaData = [
+  { base: "3. ATE", conFirma: 36, bajoPuerta: 6, total: 42, meta: "80%", eficacia: 86 },
+  { base: "5. SJL", conFirma: 22, bajoPuerta: 5, total: 27, meta: "80%", eficacia: 81 },
+  { base: "2. CA", conFirma: 56, bajoPuerta: 15, total: 71, meta: "80%", eficacia: 79 },
+  { base: "4. BRE", conFirma: 40, bajoPuerta: 17, total: 57, meta: "80%", eficacia: 70 },
+  { base: "1. CO", conFirma: 134, bajoPuerta: 70, total: 204, meta: "80%", eficacia: 66 },
+];
+
+const ResumenEficaciaTable = () => {
+  const totals = resumenEficaciaData.reduce(
+    (acc, item) => {
+      acc.conFirma += item.conFirma;
+      acc.bajoPuerta += item.bajoPuerta;
+      acc.total += item.total;
+      return acc;
+    },
+    { conFirma: 0, bajoPuerta: 0, total: 0 }
+  );
+
+  const totalEficacia = Math.round((totals.conFirma / totals.total) * 100);
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="text-center font-headline text-primary">RESUMEN DE % DE EFICACIA POR BASE</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>BASE</TableHead>
+              <TableHead className="text-center">Con firma</TableHead>
+              <TableHead className="text-center">Bajo puerta</TableHead>
+              <TableHead className="text-center">Total de cartas</TableHead>
+              <TableHead className="text-center">Meta</TableHead>
+              <TableHead className="text-center">%Eficacia</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {resumenEficaciaData.map((row) => (
+              <TableRow key={row.base}>
+                <TableCell className="font-medium">{row.base}</TableCell>
+                <TableCell className="text-center">{row.conFirma}</TableCell>
+                <TableCell className="text-center">{row.bajoPuerta}</TableCell>
+                <TableCell className="text-center">{row.total}</TableCell>
+                <TableCell className="text-center">{row.meta}</TableCell>
+                <TableCell className="text-center font-bold">
+                  <div className="flex items-center justify-center gap-2">
+                    <span className={cn(
+                      "h-3 w-3 rounded-full",
+                      row.eficacia >= 80 ? "bg-green-500" : "bg-red-500"
+                    )}></span>
+                    {row.eficacia}%
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            <TableRow className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <TableCell className="font-bold">Total</TableCell>
+              <TableCell className="text-center font-bold">{totals.conFirma}</TableCell>
+              <TableCell className="text-center font-bold">{totals.bajoPuerta}</TableCell>
+              <TableCell className="text-center font-bold">{totals.total}</TableCell>
+              <TableCell className="text-center font-bold">80%</TableCell>
+              <TableCell className="text-center font-bold">{totalEficacia}%</TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </CardContent>
+    </Card>
+  );
+};
+
 
 function BasesChart() {
   return (
@@ -166,6 +243,8 @@ export default function ComunicadosPage() {
                 <StatCard key={kpi.title} title={kpi.title} value={kpi.value} />
               ))}
             </div>
+
+            <ResumenEficaciaTable />
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
@@ -338,3 +417,5 @@ export default function ComunicadosPage() {
     </div>
   );
 }
+
+    
