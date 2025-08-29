@@ -19,7 +19,7 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ComposedChart, LabelList } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ComposedChart, LabelList, Legend } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 
@@ -116,6 +116,40 @@ function BasesChart() {
   );
 }
 
+const monthlyPerformanceData = [
+    { month: "Enero", total: 1200, efficacy: 85, goal: 80, underDoor: 150 },
+    { month: "Febrero", total: 1500, efficacy: 88, goal: 80, underDoor: 180 },
+    { month: "Marzo", total: 1300, efficacy: 90, goal: 85, underDoor: 130 },
+    { month: "Abril", total: 1600, efficacy: 86, goal: 85, underDoor: 224 },
+    { month: "Mayo", total: 1800, efficacy: 92, goal: 90, underDoor: 144 },
+    { month: "Junio", total: 1750, efficacy: 95, goal: 90, underDoor: 87 },
+];
+
+const monthlyChartConfig = {
+    total: { label: "Total Cédulas", color: "hsl(var(--chart-1))" },
+    efficacy: { label: "Eficacia", color: "hsl(var(--chart-2))" },
+    goal: { label: "Meta", color: "hsl(var(--chart-3))" },
+    underDoor: { label: "Bajo Puerta", color: "hsl(var(--chart-4))" },
+};
+
+function MonthlyPerformanceChart() {
+    return (
+        <ChartContainer config={monthlyChartConfig} className="min-h-[300px] w-full">
+            <ComposedChart data={monthlyPerformanceData} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <CartesianGrid vertical={false} />
+                <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
+                <YAxis yAxisId="left" orientation="left" stroke="#888888" />
+                <YAxis yAxisId="right" orientation="right" stroke="#888888" domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
+                <Tooltip content={<ChartTooltipContent />} />
+                <Legend />
+                <Bar dataKey="total" barSize={30} yAxisId="left" fill="var(--color-total)" radius={[4, 4, 0, 0]} />
+                <Line type="monotone" dataKey="efficacy" yAxisId="right" stroke="var(--color-efficacy)" strokeWidth={2} />
+                <Line type="monotone" dataKey="goal" yAxisId="right" stroke="var(--color-goal)" strokeWidth={2} strokeDasharray="5 5" />
+                <Line type="monotone" dataKey="underDoor" yAxisId="left" stroke="var(--color-underDoor)" strokeWidth={2} />
+            </ComposedChart>
+        </ChartContainer>
+    );
+}
 
 export default function ComunicadosPage() {
   const kpis = [
@@ -237,12 +271,20 @@ export default function ComunicadosPage() {
                 </CardContent>
               </Card>
             </div>
+            
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <ChartCard
+                  title="Calidad de Comunicados por Base"
+                  description="Efectividad de entrega de comunicados con cédula por cada base."
+                  chart={<BasesChart />}
+                />
+                 <ChartCard
+                    title="Rendimiento Mensual de Cédulas B3"
+                    description="Evolución mensual del total de cédulas, eficacia y metas."
+                    chart={<MonthlyPerformanceChart />}
+                />
+            </div>
 
-            <ChartCard
-              title="Calidad de Comunicados por Base"
-              description="Efectividad de entrega de comunicados con cédula por cada base."
-              chart={<BasesChart />}
-            />
           </div>
         </TabsContent>
         <TabsContent value="preventivas-b4" className="mt-6">
@@ -341,4 +383,5 @@ export default function ComunicadosPage() {
 
     
 
+    
     
