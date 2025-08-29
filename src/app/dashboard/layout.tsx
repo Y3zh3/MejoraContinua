@@ -120,7 +120,7 @@ export default function DashboardLayout({
       </Sidebar>
       <SidebarInset>
         <header className="flex h-14 items-center gap-4 border-b bg-card px-4 sm:px-6">
-          <SidebarTrigger className="md:hidden" />
+          <SidebarTrigger />
           <div className="flex-1">
             {/* Page title or breadcrumbs can go here */}
           </div>
