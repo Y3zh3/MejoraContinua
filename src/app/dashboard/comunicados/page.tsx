@@ -246,15 +246,99 @@ export default function ComunicadosPage() {
           </div>
         </TabsContent>
         <TabsContent value="preventivas-b4" className="mt-6">
-          <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
             <div>
-              <h1 className="font-headline text-3xl font-bold">Reporte de Llamadas Preventivas</h1>
-              <p className="text-muted-foreground">Aquí irá el contenido para Preventivas B4.</p>
+              <h1 className="font-headline text-3xl font-bold">Reporte de efectividad en la entrega de los comunicados "Con firma"</h1>
+              <p className="text-muted-foreground">Análisis de la efectividad de las comunicaciones con cédula.</p>
             </div>
+            
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {kpis.map((kpi) => (
+                <StatCard key={kpi.title} title={kpi.title} value={kpi.value} />
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="font-headline">Trabajadores con Resultados por Encima de la Meta</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>BASE</TableHead>
+                        <TableHead>Nombre</TableHead>
+                        <TableHead className="text-right">Con Firma</TableHead>
+                        <TableHead className="text-right">Bajo Puerta</TableHead>
+                        <TableHead className="text-right">Total</TableHead>
+                        <TableHead className="text-right">% Eficacia</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {trabajadoresEncimaMeta.map((trabajador, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium">{trabajador.base}</TableCell>
+                          <TableCell>{trabajador.nombre}</TableCell>
+                          <TableCell className="text-right">{trabajador.conFirma}</TableCell>
+                          <TableCell className="text-right">{trabajador.bajoPuerta}</TableCell>
+                          <TableCell className="text-right">{trabajador.total}</TableCell>
+                          <TableCell className="text-right">
+                            <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="font-headline">Trabajadores por Debajo de la Meta</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>BASE</TableHead>
+                        <TableHead>Nombre</TableHead>
+                        <TableHead className="text-right">Con Firma</TableHead>
+                        <TableHead className="text-right">Bajo Puerta</TableHead>
+                        <TableHead className="text-right">Total</TableHead>
+                        <TableHead className="text-right">% Eficacia</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {trabajadoresDebajoMeta.map((trabajador, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium">{trabajador.base}</TableCell>
+                          <TableCell>{trabajador.nombre}</TableCell>
+                          <TableCell className="text-right">{trabajador.conFirma}</TableCell>
+                          <TableCell className="text-right">{trabajador.bajoPuerta}</TableCell>
+                          <TableCell className="text-right">{trabajador.total}</TableCell>
+                          <TableCell className="text-right">
+                            <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </div>
+
+            <ChartCard
+              title="Calidad de Comunicados por Base"
+              description="Efectividad de entrega de comunicados con cédula por cada base."
+              chart={<BasesChart />}
+            />
           </div>
         </TabsContent>
       </Tabs>
     </div>
   );
+
+    
 
     
