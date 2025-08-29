@@ -1,3 +1,4 @@
+
 "use client";
 
 import { StatCard } from "@/components/stat-card";
@@ -82,14 +83,14 @@ function BasesChart() {
                 dataKey="total"
                 position="top"
                 offset={10}
-                className="fill-foreground"
+                className="fill-foreground font-bold"
                 fontSize={12}
              />
              <LabelList
                 dataKey="quality"
                 position="inside"
                 formatter={(value: number) => `${value}%`}
-                className="fill-primary-foreground"
+                className="fill-primary-foreground font-bold"
                 fontSize={12}
              />
         </Bar>
