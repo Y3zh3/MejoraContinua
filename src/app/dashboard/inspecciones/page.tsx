@@ -41,13 +41,13 @@ const oportunidadesData = [
 ];
 
 const CylinderBar = (props: any) => {
-    const { fill, x, y, width, height, background } = props;
+    const { fill, x, y, width, height, background, payload } = props;
     const waterLevelY = y + background.height - height;
   
     return (
       <g>
         {/* Cilindro contenedor */}
-        <rect x={x} y={y} width={width} height={background.height} fill="#e0e0e0" opacity="0.3" />
+        <rect x={x} y={y} width={width} height={background.height} fill="#e0e0e0" opacity="0.3" rx={width/2} ry={width/2} />
         <ellipse cx={x + width / 2} cy={y} rx={width / 2} ry={5} fill="#f0f0f0" stroke="#ccc" strokeWidth="0.5" />
         <ellipse cx={x + width / 2} cy={y + background.height} rx={width / 2} ry={5} fill="#555" />
         
@@ -56,29 +56,28 @@ const CylinderBar = (props: any) => {
         <ellipse cx={x + width / 2} cy={waterLevelY} rx={width / 2} ry={5} fill={fill} style={{filter: 'brightness(1.1)'}} />
 
         {/* Etiqueta del año en la base */}
-        <text x={x + width / 2} y={y + background.height + 15} textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">{props.year}</text>
-        <path d={`M ${x + width/2 - 5},${y + background.height - 8} A 5 5 0 1 1 ${x + width/2 + 5},${y + background.height - 8}`} stroke="white" strokeWidth="1" fill="none" />
-        <circle cx={x+width/2} cy={y + background.height - 5} r="1.5" fill="white" />
-
+        <text x={x + width / 2} y={y + background.height + 15} textAnchor="middle" fill="black" fontSize="12" fontWeight="bold">{payload.year}</text>
       </g>
     );
 };
 
 
 const VolumenAnualChart = () => {
+    const maxVal = Math.max(...volumenAnualData.map(d => d.value));
     return (
         <ResponsiveContainer width="100%" height={300}>
             <BarChart 
                 data={volumenAnualData} 
                 margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                barSize={60}
             >
                 <CartesianGrid vertical={false} strokeDasharray="3 3"/>
-                <XAxis dataKey="year" tickLine={false} axisLine={false} tick={false} />
+                <XAxis dataKey="year" tickLine={false} axisLine={false} tick={false} interval={0} />
                 <YAxis 
                     axisLine={false}
                     tickLine={false}
                     tickFormatter={(value) => new Intl.NumberFormat('es-PE').format(value)}
-                    domain={[21500000, 25500000]}
+                    domain={[0, maxVal + 5000000]}
                  />
                 <Tooltip
                     content={({ active, payload, label }) => {
@@ -99,8 +98,8 @@ const VolumenAnualChart = () => {
                         position="center"
                         formatter={(value: number) => `${value.toLocaleString()} m³`}
                         angle={-90}
-                        offset={15}
-                        style={{ fill: 'white', fontWeight: 'bold' }}
+                        offset={0}
+                        style={{ fill: 'white', fontWeight: 'bold', textAnchor: 'middle' }}
                     />
                 </Bar>
             </BarChart>
@@ -124,9 +123,9 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
             <CardContent className="flex flex-col justify-center items-center h-[260px] gap-4">
                 <div className="relative w-28 h-52">
                      {/* Cilindro contenedor */}
-                    <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-t-full rounded-b-full" style={{ clipPath: 'inset(0 0 0 0 round 100px 100px 10px 10px)' }}></div>
+                    <div className="absolute top-0 left-0 w-full h-full bg-gray-200" style={{ borderRadius: '40px / 10px', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }}></div>
                     <div className="absolute top-0 left-0 w-full h-5 rounded-full bg-gray-300"></div>
-                    <div className="absolute bottom-0 left-0 w-full h-5 rounded-full bg-gray-200"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-5 rounded-b-full bg-gray-400"></div>
 
                      {/* Relleno del cilindro */}
                     <div className="absolute bottom-2.5 left-0 w-full" style={{ height: `calc(${percentage}% - 10px)`}}>
@@ -134,7 +133,7 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                     </div>
                     
                      {/* Tapa superior del relleno */}
-                    <div className="absolute top-0 left-0 w-full" style={{ top: `calc(${100 - percentage}% + 2.5px)`}}>
+                    <div className="absolute w-full" style={{ top: `calc(${100 - percentage}%)`, transform: 'translateY(2.5px)' }}>
                          <div className="w-full h-5 rounded-full" style={{backgroundColor: color, filter: 'brightness(0.8)'}}></div>
                     </div>
                 </div>
