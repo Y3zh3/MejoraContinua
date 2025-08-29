@@ -42,16 +42,16 @@ const oportunidadesData = [
 ];
 
 const CustomCylinderBar = (props: any) => {
-    const { x, y, width, height, payload, value } = props;
+    const { x, y, width, height, payload, value, yAxis } = props;
 
-    if (height <= 0) return null;
+    if (height <= 0 || !yAxis) return null;
 
     const { year, startColor, endColor } = payload;
     const radius = width / 2;
     const ellipseHeight = radius * 0.35;
     const baseHeight = 60;
-    const chartHeight = props.yAxis.height;
-    const chartY = props.yAxis.y;
+    const chartHeight = yAxis.height;
+    const chartY = yAxis.y;
 
     const gradientId = `cylinderGradient-${year}`;
 
@@ -82,14 +82,7 @@ const CustomCylinderBar = (props: any) => {
                     strokeWidth="1"
                 />
             ))}
-
-            {/* Base */}
-            <g transform={`translate(${x}, ${chartY + chartHeight})`}>
-                <rect width={width} height={baseHeight} fill="#1c1c1c" />
-                <path d={`M0,0 A${radius},${ellipseHeight} 0 0,0 ${width},0 L${width},${ellipseHeight} A${radius},${ellipseHeight} 0 0,1 0,${ellipseHeight} Z`} fill="#2c2c2c" />
-                <path d={`M0,${baseHeight} A${radius},${ellipseHeight} 0 0,0 ${width},${baseHeight}`} fill="#111" />
-            </g>
-
+            
             {/* Liquid */}
             <rect x={x} y={y} width={width} height={height} fill={`url(#${gradientId})`} />
             <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill={startColor} style={{ filter: 'brightness(1.2)' }} />
@@ -98,6 +91,12 @@ const CustomCylinderBar = (props: any) => {
             <path d={`M${x + width * 0.25},${y} C${x + width * 0.35},${y + height * 0.33} ${x + width * 0.35},${y + height * 0.66} ${x + width * 0.25},${y + height}`}
                 fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth={10} />
 
+            {/* Base */}
+            <g transform={`translate(${x}, ${chartY + chartHeight})`}>
+                 <rect width={width} height={baseHeight} fill="#1c1c1c" />
+                <path d={`M0,0 A${radius},${ellipseHeight} 0 0,0 ${width},0 L${width},${ellipseHeight} A${radius},${ellipseHeight} 0 0,1 0,${ellipseHeight} Z`} fill="#2c2c2c" />
+                <path d={`M0,${baseHeight} A${radius},${ellipseHeight} 0 0,0 ${width},${baseHeight}`} fill="#111" />
+            </g>
 
             {/* Base Content */}
             <g transform={`translate(${x + radius}, ${chartY + chartHeight + baseHeight / 2 + 5})`}>
@@ -294,5 +293,3 @@ export default function InspeccionesPage() {
         </div>
     );
 }
-
-    
