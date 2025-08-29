@@ -41,6 +41,18 @@ const oportunidadesData = [
     { entidad: "SEDALIB S.A.", objeto: "Servicio de transporte de materiales y equipos.", fecha: "28/05/2024", valor: "S/ 420,000" },
 ];
 
+const CylinderBar = (props: any) => {
+    const { fill, x, y, width, height } = props;
+    const radius = width / 2;
+  
+    return (
+      <g>
+        <path d={`M${x},${y + radius} L${x},${y + height - radius} A${radius},${radius} 0 0 0 ${x + width},${y + height - radius} L${x + width},${y + radius} A${radius},${radius} 0 0 1 ${x},${y + radius}`} fill={fill} />
+        <path d={`M${x},${y + radius} A${radius},${radius} 0 0 0 ${x + width},${y + radius}`} fill={fill} opacity="0.4" />
+      </g>
+    );
+  };
+
 const VolumenAnualChart = () => {
     return (
         <ResponsiveContainer width="100%" height={300}>
@@ -67,7 +79,16 @@ const VolumenAnualChart = () => {
                         return null;
                     }}
                 />
-                <Bar dataKey="value" fill="hsl(var(--chart-1))" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" fill="hsl(var(--chart-1))" shape={<CylinderBar />}>
+                    <LabelList 
+                        dataKey="value" 
+                        position="inside" 
+                        formatter={(value: number) => value.toLocaleString()}
+                        fill="#fff"
+                        fontSize={12}
+                        fontWeight="bold"
+                    />
+                </Bar>
             </BarChart>
         </ResponsiveContainer>
     );
@@ -87,19 +108,23 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center h-[260px] gap-4">
-                <div className="relative w-28 h-52">
-                     {/* Cilindro contenedor */}
-                    <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-t-full"></div>
-                    <div className="absolute bottom-0 left-0 w-full h-5" style={{ background: '#7d7d7d', borderBottomLeftRadius: '50% 10px', borderBottomRightRadius: '50% 10px' }}></div>
-
-                     {/* Relleno del cilindro */}
-                    <div className="absolute bottom-2.5 left-0 w-full" style={{ height: `calc(${percentage}% - 10px)`}}>
-                        <div className="absolute bottom-0 left-0 w-full h-full" style={{ backgroundColor: color, borderTopLeftRadius: '50% 10px', borderTopRightRadius: '50% 10px' }}></div>
-                    </div>
-                    
-                     {/* Tapa superior del relleno (superficie) */}
-                    <div className="absolute w-full" style={{ top: `calc(${100 - percentage}%)`, transform: 'translateY(2.5px)' }}>
-                         <div className="w-full h-5 rounded-full" style={{backgroundColor: color, filter: 'brightness(0.8)'}}></div>
+                <div className="relative w-28 h-52 bg-gray-200 rounded-t-full">
+                    <div 
+                        className="absolute bottom-0 w-full bg-blue-500" 
+                        style={{ 
+                            height: `${percentage}%`,
+                            backgroundColor: color,
+                            borderTopLeftRadius: '50% 10px',
+                            borderTopRightRadius: '50% 10px'
+                        }}
+                    >
+                         <div 
+                            className="absolute w-full h-5 rounded-full -top-2.5" 
+                            style={{
+                                backgroundColor: color, 
+                                filter: 'brightness(0.8)'
+                            }}>
+                        </div>
                     </div>
                 </div>
                  <div className="text-center">
@@ -200,7 +225,5 @@ export default function InspeccionesPage() {
         </div>
     );
 }
-
-    
 
     
