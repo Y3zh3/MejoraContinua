@@ -22,11 +22,11 @@ const morosidadData = [
 ];
 
 const facturadoAnualData = [
-    { year: '2019', value: 65355388, startColor: '#3498db', endColor: '#2980b9' },
-    { year: '2020', value: 52885862, startColor: '#5dade2', endColor: '#3498db' },
-    { year: '2021', value: 57862414, startColor: '#85c1e9', endColor: '#5dade2' },
-    { year: '2022', value: 75421036, startColor: '#a9d6e5', endColor: '#85c1e9' },
-    { year: '2023', value: 76920707, startColor: '#e0f7fa', endColor: '#a9d6e5' },
+    { year: '2019', value: 65355388, startColor: '#56CCF2', endColor: '#2F80ED' },
+    { year: '2020', value: 52885862, startColor: '#56CCF2', endColor: '#2F80ED' },
+    { year: '2021', value: 57862414, startColor: '#56CCF2', endColor: '#2F80ED' },
+    { year: '2022', value: 75421036, startColor: '#56CCF2', endColor: '#2F80ED' },
+    { year: '2023', value: 76920707, startColor: '#56CCF2', endColor: '#2F80ED' },
 ];
 
 const facturadoData = [
@@ -42,67 +42,67 @@ const oportunidadesData = [
 ];
 
 const CustomCylinderBar = (props: any) => {
-    const { x, y, width, height, payload, value, yAxis } = props;
-    
-    if (!yAxis || height <= 0) return null;
-    
-    const { year, startColor, endColor } = payload;
+    const { x, y, width, height, payload, value } = props;
 
+    if (height <= 0) return null;
+
+    const { year, startColor, endColor } = payload;
     const radius = width / 2;
     const ellipseHeight = radius * 0.35;
     const baseHeight = 60;
-    const totalCylinderHeight = yAxis.height; 
-    
-    const gradientId = `cylinderGradient-${year}`;
-    
-    const numTicks = 5;
-    const tickPositions = Array.from({ length: numTicks }, (_, i) => (totalCylinderHeight / (numTicks - 1)) * i);
+    const chartHeight = props.yAxis.height;
+    const chartY = props.yAxis.y;
 
+    const gradientId = `cylinderGradient-${year}`;
 
     return (
         <g>
-             <defs>
+            <defs>
                 <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor={startColor} stopOpacity={0.8} />
                     <stop offset="100%" stopColor={endColor} />
                 </linearGradient>
-                <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="2" dy="5" stdDeviation="3" floodColor="#000" floodOpacity="0.3"/>
-                </filter>
             </defs>
 
             {/* Glass Cylinder */}
-            <rect x={x} y={yAxis.y} width={width} height={totalCylinderHeight} fill="rgba(255, 255, 255, 0.3)" rx={radius} ry={radius} />
-            <path d={`M${x},${yAxis.y + ellipseHeight} A${radius},${ellipseHeight} 0 1,1 ${x + width},${yAxis.y + ellipseHeight}`} fill="rgba(255, 255, 255, 0.5)" />
-            <rect x={x} y={yAxis.y + ellipseHeight} width={width} height={totalCylinderHeight - ellipseHeight * 2} fill="rgba(235, 245, 255, 0.6)" />
-            <path d={`M${x},${yAxis.y + totalCylinderHeight - ellipseHeight} A${radius},${ellipseHeight} 0 1,0 ${x + width},${yAxis.y + totalCylinderHeight - ellipseHeight}`} fill="rgba(255, 255, 255, 0.2)" />
-
-
-            {/* Liquid */}
-            <rect x={x} y={y} width={width} height={height} fill={`url(#${gradientId})`} />
-            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill={startColor} style={{ filter: 'brightness(1.2)' }} />
-
-            {/* Liquid Highlight */}
-            <path d={`M${x+width*0.25},${y} C${x+width*0.35},${y+height*0.33} ${x+width*0.35},${y+height*0.66} ${x+width*0.25},${y+height}`} 
-                fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth={10} />
-
-            {/* Measurement Ticks */}
-            {tickPositions.map((tickY, i) => (
-                <path key={i} d={`M ${x + 5} ${yAxis.y + totalCylinderHeight - tickY} h -5`} stroke="rgba(0,0,0,0.2)" strokeWidth="1" />
+            <rect x={x} y={chartY} width={width} height={chartHeight} fill="rgba(255, 255, 255, 0.3)" rx={radius} ry={radius} />
+            <path d={`M${x},${chartY + ellipseHeight} A${radius},${ellipseHeight} 0 1,1 ${x + width},${chartY + ellipseHeight}`} fill="rgba(255, 255, 255, 0.5)" />
+            <rect x={x} y={chartY + ellipseHeight} width={width} height={chartHeight - ellipseHeight * 2} fill="rgba(235, 245, 255, 0.6)" />
+            <path d={`M${x},${chartY + chartHeight - ellipseHeight} A${radius},${ellipseHeight} 0 1,0 ${x + width},${chartY + chartHeight - ellipseHeight}`} fill="rgba(255, 255, 255, 0.2)" />
+            
+             {/* Measurement Ticks */}
+             {[...Array(5)].map((_, i) => (
+                <line
+                    key={i}
+                    x1={x}
+                    y1={chartY + (chartHeight / 5) * (i + 1)}
+                    x2={x + 5}
+                    y2={chartY + (chartHeight / 5) * (i + 1)}
+                    stroke="rgba(0,0,0,0.2)"
+                    strokeWidth="1"
+                />
             ))}
 
             {/* Base */}
-             <g transform={`translate(${x}, ${yAxis.y + totalCylinderHeight})`}>
+            <g transform={`translate(${x}, ${chartY + chartHeight})`}>
                 <rect width={width} height={baseHeight} fill="#1c1c1c" />
                 <path d={`M0,0 A${radius},${ellipseHeight} 0 0,0 ${width},0 L${width},${ellipseHeight} A${radius},${ellipseHeight} 0 0,1 0,${ellipseHeight} Z`} fill="#2c2c2c" />
                 <path d={`M0,${baseHeight} A${radius},${ellipseHeight} 0 0,0 ${width},${baseHeight}`} fill="#111" />
             </g>
 
+            {/* Liquid */}
+            <rect x={x} y={y} width={width} height={height} fill={`url(#${gradientId})`} />
+            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill={startColor} style={{ filter: 'brightness(1.2)' }} />
+            
+            {/* Liquid Highlight */}
+            <path d={`M${x + width * 0.25},${y} C${x + width * 0.35},${y + height * 0.33} ${x + width * 0.35},${y + height * 0.66} ${x + width * 0.25},${y + height}`}
+                fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth={10} />
+
 
             {/* Base Content */}
-            <g transform={`translate(${x + radius}, ${yAxis.y + totalCylinderHeight + baseHeight/2 + 5})`}>
-                 <Droplet size={18} fill="#56CCF2" stroke="white" strokeWidth={0.5} y={-14}/>
-                 <text y={12} fill="white" fontSize="16" fontWeight="bold" textAnchor="middle">{year}</text>
+            <g transform={`translate(${x + radius}, ${chartY + chartHeight + baseHeight / 2 + 5})`}>
+                <Droplet size={18} fill="#56CCF2" stroke="white" strokeWidth={0.5} y={-14} />
+                <text y={12} fill="white" fontSize="16" fontWeight="bold" textAnchor="middle">{year}</text>
             </g>
         </g>
     );
@@ -294,3 +294,5 @@ export default function InspeccionesPage() {
         </div>
     );
 }
+
+    
