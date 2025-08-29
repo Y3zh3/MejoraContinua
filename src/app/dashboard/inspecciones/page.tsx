@@ -22,11 +22,11 @@ const morosidadData = [
 ];
 
 const facturadoAnualData = [
-    { year: '2019', value: 65355388, startColor: '#90d5ff', endColor: '#0077c2' },
-    { year: '2020', value: 52885862, startColor: '#ffcda1', endColor: '#ff8c00' },
-    { year: '2021', value: 57862414, startColor: '#e1b0e5', endColor: '#c71585' },
-    { year: '2022', value: 75421036, startColor: '#89e0e0', endColor: '#008080' },
-    { year: '2023', value: 76920707, startColor: '#d4e99f', endColor: '#6b8e23' },
+    { year: '2019', value: 65355388, startColor: '#005fec', endColor: '#53a2ff' },
+    { year: '2020', value: 52885862, startColor: '#005fec', endColor: '#53a2ff' },
+    { year: '2021', value: 57862414, startColor: '#005fec', endColor: '#53a2ff' },
+    { year: '2022', value: 75421036, startColor: '#005fec', endColor: '#53a2ff' },
+    { year: '2023', value: 76920707, startColor: '#005fec', endColor: '#53a2ff' },
 ];
 
 const facturadoData = [
@@ -42,55 +42,61 @@ const oportunidadesData = [
 ];
 
 const CustomCylinderBar = (props: any) => {
-    const { x, y, width, height, payload } = props;
+    const { x, y, width, height, payload, value } = props;
     const { startColor, endColor, year } = payload;
 
     if (height <= 0) return null;
 
     const radius = width / 2;
-    const baseHeight = 50;
     const liquidHeight = height;
-    const ellipseHeight = radius / 4;
+    const ellipseHeight = radius / 3;
+    const baseHeight = 50;
 
     const gradientId = `cylinderGradient-${year}`;
-
-    const numTicks = 8;
+    
+    const numTicks = 5;
     const tickPositions = Array.from({ length: numTicks }, (_, i) => (liquidHeight / (numTicks - 1)) * i);
 
 
     return (
         <g>
              <defs>
-                <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={startColor} stopOpacity={0.9} />
-                    <stop offset="100%" stopColor={endColor} stopOpacity={1} />
+                <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor={startColor} />
+                    <stop offset="100%" stopColor={endColor} />
                 </linearGradient>
                 <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="2" dy="4" stdDeviation="3" floodColor="#000" floodOpacity="0.2"/>
+                    <feDropShadow dx="2" dy="5" stdDeviation="3" floodColor="#000" floodOpacity="0.3"/>
                 </filter>
             </defs>
 
-            {/* Cylinder Glass */}
-            <rect x={x} y={y - ellipseHeight} width={width} height={height + ellipseHeight} fill="rgba(235, 245, 255, 0.6)" rx={radius} ry={radius} style={{filter: 'url(#shadow)'}} />
-            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill="rgba(255, 255, 255, 0.7)" />
+            {/* Glass Cylinder */}
+            <rect x={x} y={y - ellipseHeight*2} width={width} height={height + baseHeight + ellipseHeight*2} fill="rgba(255, 255, 255, 0.3)" rx={radius} ry={radius} />
+            <path d={`M${x},${y-ellipseHeight} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y-ellipseHeight}`} fill="rgba(255, 255, 255, 0.5)" />
+            <rect x={x} y={y-ellipseHeight} width={width} height={height+ellipseHeight} fill="rgba(235, 245, 255, 0.6)" />
 
-            
             {/* Liquid */}
-            <rect x={x} y={y} width={width} height={liquidHeight} fill={`url(#${gradientId})`} rx={0} ry={0} />
-            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill={startColor} style={{ filter: 'brightness(1.1)' }} />
-            
+            <rect x={x} y={y} width={width} height={liquidHeight} fill={`url(#${gradientId})`} />
+            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill={startColor} style={{ filter: 'brightness(1.2)' }} />
+
+            {/* Liquid Highlight */}
+            <path d={`M${x+width*0.25},${y} C${x+width*0.35},${y+liquidHeight*0.33} ${x+width*0.35},${y+liquidHeight*0.66} ${x+width*0.25},${y+liquidHeight}`} 
+                fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="10" />
+
             {/* Measurement Ticks */}
             {tickPositions.map((tickY, i) => (
-                <path key={i} d={`M ${x + 5} ${y + liquidHeight - tickY} h 5`} stroke="rgba(0,0,0,0.2)" strokeWidth="1" />
+                <path key={i} d={`M ${x + 5} ${y + liquidHeight - tickY} h -5`} stroke="rgba(0,0,0,0.3)" strokeWidth="1" />
             ))}
 
             {/* Base */}
-            <rect x={x} y={y + height} width={width} height={baseHeight} fill="#1c1c1c" />
+            <path d={`M${x},${y+height+baseHeight} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height+baseHeight} L${x+width},${y+height} A${radius},${ellipseHeight} 0 0,1 ${x},${y+height} Z`} fill="#1c1c1c" />
+            <path d={`M${x},${y+height+baseHeight} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height+baseHeight}`} fill="#2c2c2c" />
 
-            {/* Icon and Year */}
-            <g transform={`translate(${x + radius - 20}, ${y + height + baseHeight - 40 })`}>
-                <Droplet size={14} fill="#56CCF2" stroke="white" strokeWidth={0.5} />
-                <text x={18} y={10} fill="white" fontSize="14" fontWeight="bold" textAnchor="start">{year}</text>
+
+            {/* Base Content */}
+            <g transform={`translate(${x + radius}, ${y + height + baseHeight/2 + 5})`}>
+                 <Droplet size={14} fill="#56CCF2" stroke="white" strokeWidth={0.5} y={-10}/>
+                 <text y={10} fill="white" fontSize="14" fontWeight="bold" textAnchor="middle">{year}</text>
             </g>
         </g>
     );
@@ -108,7 +114,6 @@ const FacturadoAnualChart = () => {
                     tickFormatter={(value) => new Intl.NumberFormat('es-PE', { notation: 'compact', compactDisplay: 'short' }).format(value)}
                     domain={[0, 85000000]}
                     tickCount={10}
-                    label={{ value: 'Soles', angle: -90, position: 'insideLeft' }}
                 />
                 <Tooltip
                     cursor={{ fill: 'rgba(206, 212, 218, 0.2)' }}
@@ -129,12 +134,12 @@ const FacturadoAnualChart = () => {
                         dataKey="value"
                         position="center"
                         angle={-90}
-                        offset={25}
+                        offset={20}
                         formatter={(value: number) => new Intl.NumberFormat('es-PE').format(value)}
                         fill="#fff"
                         fontSize={16}
                         fontWeight="bold"
-                        style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
+                        style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.7)' }}
                     />
                 </Bar>
             </BarChart>
@@ -299,5 +304,7 @@ export default function InspeccionesPage() {
 
 
 
+
+    
 
     
