@@ -161,7 +161,7 @@ export default function ComunicadosPage() {
               <p className="text-muted-foreground">Análisis de la efectividad de las comunicaciones con cédula.</p>
             </div>
             
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
               {kpis.map((kpi) => (
                 <StatCard key={kpi.title} title={kpi.title} value={kpi.value} />
               ))}
@@ -251,7 +251,7 @@ export default function ComunicadosPage() {
               <p className="text-muted-foreground">Análisis de la efectividad de las comunicaciones con cédula.</p>
             </div>
             
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
               {kpis.map((kpi) => (
                 <StatCard key={kpi.title} title={kpi.title} value={kpi.value} />
               ))}
@@ -338,3 +338,5 @@ export default function ComunicadosPage() {
     </div>
   );
 }
+
+    
