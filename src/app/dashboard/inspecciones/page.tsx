@@ -54,16 +54,8 @@ const CustomCylinderBar = (props: any) => {
     // Create a unique ID for the gradient
     const gradientId = `cylinderGradient-${year}`;
 
-    // Colors from image
-    const colorStops = {
-        '2019': ['#56CCF2', '#2F80ED'],
-        '2020': ['#56F2A5', '#2FED81'],
-        '2021': ['#F2C94C', '#F2994A'],
-        '2022': ['#EB5757', '#EB5757'],
-        '2023': ['#BB6BD9', '#9B51E0'],
-    };
-
-    const [startColor, endColor] = colorStops[year as keyof typeof colorStops] || ['#56CCF2', '#2F80ED'];
+    const startColor = '#56CCF2';
+    const endColor = '#2F80ED';
 
     const numTicks = 5;
     const tickPositions = Array.from({ length: numTicks }, (_, i) => liquidHeight * (i / (numTicks -1)));
@@ -90,7 +82,7 @@ const CustomCylinderBar = (props: any) => {
             
             {/* Measurement Ticks */}
             {liquidHeight > 20 && tickPositions.map((tickY, i) => (
-                 <path key={i} d={`M ${x-5} ${y + liquidHeight - tickY} h 5`} stroke="#a0a0a0" strokeWidth="1" />
+                 <path key={i} d={`M ${x} ${y + liquidHeight - tickY} h 5`} stroke="rgba(255,255,255,0.7)" strokeWidth="1" />
             ))}
 
             {/* Base */}
