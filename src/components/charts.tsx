@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -20,6 +21,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 const barChartData = [
   { month: "January", desktop: 186, mobile: 80 },
@@ -170,18 +172,21 @@ type ChartCardProps = {
     title: string;
     description: string;
     chart: React.ReactNode;
+    className?: string;
 }
   
-export function ChartCard({ title, description, chart}: ChartCardProps) {
+export function ChartCard({ title, description, chart, className}: ChartCardProps) {
     return (
-        <Card>
-            <CardHeader>
-            <CardTitle className="font-headline">{title}</CardTitle>
-            <CardDescription>{description}</CardDescription>
+        <Card className={cn(className)}>
+            <CardHeader className="p-1">
+              <CardTitle className="font-headline text-xs text-center">{title}</CardTitle>
+              <CardDescription className="text-center text-[10px] -mt-1">{description}</CardDescription>
             </CardHeader>
-            <CardContent>
-            {chart}
+            <CardContent className="p-0">
+              {chart}
             </CardContent>
         </Card>
     );
 }
+
+    
