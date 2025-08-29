@@ -149,15 +149,15 @@ export default function ComunicadosPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <Tabs defaultValue="cedulas-b3">
+      <Tabs defaultValue="cartas-b3">
         <TabsList>
-          <TabsTrigger value="cedulas-b3">Cédulas B3</TabsTrigger>
+          <TabsTrigger value="cartas-b3">Cartas B3</TabsTrigger>
           <TabsTrigger value="preventivas-b4">Preventivas B4</TabsTrigger>
         </TabsList>
-        <TabsContent value="cedulas-b3" className="mt-6">
+        <TabsContent value="cartas-b3" className="mt-6">
           <div className="flex flex-col gap-6">
             <div>
-              <h1 className="font-headline text-3xl font-bold">Reporte de efectividad en la entrega de los comunicados "Con firma"</h1>
+              <h1 className="font-headline text-3xl font-bold">Eficacia de Comunicados Cartas B3</h1>
               <p className="text-muted-foreground">Análisis de la efectividad de las comunicaciones con cédula.</p>
             </div>
             
@@ -337,10 +337,6 @@ export default function ComunicadosPage() {
       </Tabs>
     </div>
   );
-
-    
-
-    
-    
+}
 
     
