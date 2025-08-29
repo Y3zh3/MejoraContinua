@@ -22,11 +22,11 @@ const morosidadData = [
 ];
 
 const facturadoAnualData = [
-    { year: '2019', value: 65355388, startColor: '#005fec', endColor: '#00a4ff' },
-    { year: '2020', value: 52885862, startColor: '#f78f00', endColor: '#f7b500' },
-    { year: '2021', value: 57862414, startColor: '#9b00a7', endColor: '#d600e0' },
-    { year: '2022', value: 75421036, startColor: '#009a9b', endColor: '#00d6d7' },
-    { year: '2023', value: 76920707, startColor: '#84a900', endColor: '#b4d900' },
+    { year: '2019', value: 65355388, startColor: '#90d5ff', endColor: '#0077c2' },
+    { year: '2020', value: 52885862, startColor: '#ffcda1', endColor: '#ff8c00' },
+    { year: '2021', value: 57862414, startColor: '#e1b0e5', endColor: '#c71585' },
+    { year: '2022', value: 75421036, startColor: '#89e0e0', endColor: '#008080' },
+    { year: '2023', value: 76920707, startColor: '#d4e99f', endColor: '#6b8e23' },
 ];
 
 const facturadoData = [
@@ -76,21 +76,19 @@ const CustomCylinderBar = (props: any) => {
 
             
             {/* Liquid */}
-            <rect x={x} y={y} width={width} height={liquidHeight} fill={`url(#${gradientId})`} />
+            <rect x={x} y={y} width={width} height={liquidHeight} fill={`url(#${gradientId})`} rx={0} ry={0} />
             <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill={startColor} style={{ filter: 'brightness(1.1)' }} />
             
             {/* Measurement Ticks */}
             {tickPositions.map((tickY, i) => (
-                <path key={i} d={`M ${x + 2} ${y + liquidHeight - tickY} h 5`} stroke="rgba(255,255,255,0.7)" strokeWidth="1" />
+                <path key={i} d={`M ${x + 5} ${y + liquidHeight - tickY} h 5`} stroke="rgba(0,0,0,0.2)" strokeWidth="1" />
             ))}
 
             {/* Base */}
-            <path d={`M${x},${y + liquidHeight} C${x},${y + liquidHeight + baseHeight/1.5}, ${x+width},${y + liquidHeight + baseHeight/1.5}, ${x+width},${y + liquidHeight}`} fill="#1c1c1c" />
-            <ellipse cx={x + radius} cy={y + liquidHeight} rx={radius} ry={ellipseHeight*1.2} fill="#2c2c2c" />
-
+            <rect x={x} y={y + height} width={width} height={baseHeight} fill="#1c1c1c" />
 
             {/* Icon and Year */}
-            <g transform={`translate(${x + radius - 20}, ${y + height + baseHeight - 45 })`}>
+            <g transform={`translate(${x + radius - 20}, ${y + height + baseHeight - 40 })`}>
                 <Droplet size={14} fill="#56CCF2" stroke="white" strokeWidth={0.5} />
                 <text x={18} y={10} fill="white" fontSize="14" fontWeight="bold" textAnchor="start">{year}</text>
             </g>
@@ -300,3 +298,6 @@ export default function InspeccionesPage() {
     
 
 
+
+
+    
