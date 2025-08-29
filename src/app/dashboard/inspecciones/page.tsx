@@ -42,17 +42,41 @@ const oportunidadesData = [
 
 const CylinderBar = (props: any) => {
     const { fill, x, y, width, height } = props;
-    if (height <= 0) return null;
     const radius = width / 2;
+  
+    // Don't render if height is 0 or less
+    if (height <= 0) return null;
+  
+    // Adjusted to prevent visual glitches on very small heights
+    const bodyHeight = Math.max(height - radius, 0);
   
     return (
       <g>
-        <path d={`M${x},${y + radius} L${x},${y + height - radius} A${radius},${radius} 0 0 0 ${x + width},${y + height - radius} L${x + width},${y + radius} A${radius},${radius} 0 0 1 ${x},${y + radius} Z`} fill={fill} />
-        <ellipse cx={x + radius} cy={y + radius} rx={radius} ry={radius / 2} fill={fill} opacity={0.5} />
-        <ellipse cx={x + radius} cy={y + height - radius} rx={radius} ry={radius / 2} fill={fill} />
+        {/* Cylinder Body */}
+        <rect x={x} y={y} width={width} height={bodyHeight} fill={fill} />
+  
+        {/* Bottom Ellipse (base of the cylinder) */}
+        <ellipse
+          cx={x + radius}
+          cy={y + bodyHeight}
+          rx={radius}
+          ry={radius / 3}
+          fill={fill}
+          style={{ filter: 'brightness(0.85)' }}
+        />
+  
+        {/* Top Ellipse (surface of the water) */}
+        <ellipse
+          cx={x + radius}
+          cy={y}
+          rx={radius}
+          ry={radius / 3}
+          fill={fill}
+          style={{ filter: 'brightness(1.15)' }}
+        />
       </g>
     );
-};
+  };
 
 const VolumenAnualChart = () => {
     return (
@@ -74,7 +98,7 @@ const VolumenAnualChart = () => {
                             return (
                                 <div className="p-2 bg-background border rounded-md shadow-md">
                                     <p className="font-bold">{label}</p>
-                                    <p style={{ color: "hsl(var(--chart-1))" }}>Volumen: {payload[0].value.toLocaleString()} m³</p>
+                                    <p style={{ color: "hsl(var(--chart-1))" }}>Volumen: {new Intl.NumberFormat('es-PE').format(payload[0].value as number)} m³</p>
                                 </div>
                             );
                         }
@@ -85,9 +109,9 @@ const VolumenAnualChart = () => {
                     <LabelList 
                         dataKey="value" 
                         position="center" 
-                        formatter={(value: number) => value.toLocaleString()}
+                        formatter={(value: number) => new Intl.NumberFormat('es-PE').format(value)}
                         fill="#fff"
-                        fontSize={12}
+                        fontSize={11}
                         fontWeight="bold"
                     />
                 </Bar>
@@ -109,17 +133,19 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center h-[260px] gap-4">
-                <div className="relative w-28 h-52 bg-gray-200/50 rounded-lg flex items-end overflow-hidden">
-                    <div className="absolute top-0 w-full h-4 bg-gray-300/50" style={{ borderTopLeftRadius: '50%', borderTopRightRadius: '50%' }}></div>
+                <div className="relative w-28 h-52 bg-gray-200/50 rounded-lg flex items-end overflow-hidden" style={{borderBottomLeftRadius: '60px', borderBottomRightRadius: '60px'}}>
+                     <div className="absolute w-full h-8 bg-gray-300/40" style={{top: 0, borderTopLeftRadius: '60px', borderTopRightRadius: '60px'}}></div>
                     <div 
                         className="relative w-full" 
                         style={{ 
                             height: `${percentage}%`,
-                            backgroundColor: color
+                            backgroundColor: color,
+                            borderBottomLeftRadius: '60px',
+                            borderBottomRightRadius: '60px',
                         }}
                     >
                          <div 
-                            className="absolute w-full h-5 rounded-full -top-2.5" 
+                            className="absolute w-full h-8 rounded-full -top-4" 
                             style={{
                                 backgroundColor: color, 
                                 filter: 'brightness(1.2)'
@@ -127,12 +153,12 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                         </div>
                     </div>
                      <div 
-                        className="absolute w-full h-4 bg-gray-800/80 rounded-full" 
-                        style={{ bottom: '-8px' }}>
+                        className="absolute w-full h-8 bg-gray-800/80 " 
+                        style={{ bottom: '-15px', borderBottomLeftRadius: '60px', borderBottomRightRadius: '60px' }}>
                     </div>
 
 
-                    <div className="absolute z-10 text-white text-center w-full bottom-1/4">
+                    <div className="absolute z-10 text-white text-center w-full bottom-1/2 translate-y-1/2">
                         <p className="font-bold text-lg drop-shadow">{formattedValue}</p>
                         <p className="text-xs drop-shadow">({percentage.toFixed(1)}%)</p>
                     </div>
