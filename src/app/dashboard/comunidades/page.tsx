@@ -21,7 +21,7 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ComposedChart, LabelList } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ComposedChart, LabelList, ResponsiveContainer } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 
@@ -70,7 +70,7 @@ const ResumenEficaciaTable = () => {
   const totalEficacia = Math.round((totals.conFirma / totals.total) * 100);
 
   return (
-    <Card>
+    <Card className="transition-all duration-300 hover:shadow-2xl hover:scale-105">
       <CardHeader>
         <CardTitle className="text-center font-headline text-primary">RESUMEN DE % DE EFICACIA POR BASE</CardTitle>
       </CardHeader>
@@ -125,76 +125,78 @@ const ResumenEficaciaTable = () => {
 
 function BasesChart() {
   return (
-    <ChartContainer config={chartConfig} className="min-h-[300px] w-full">
-      <ComposedChart
-        accessibilityLayer
-        data={basesData}
-        margin={{ top: 30, right: 20, bottom: 20, left: 20 }}
-      >
-        <CartesianGrid vertical={false} />
-        <XAxis
-          dataKey="name"
-          tickLine={false}
-          tickMargin={10}
-          axisLine={false}
-          tick={{ fontWeight: 'bold' }}
-        />
-        <YAxis
-          yAxisId="left"
-          domain={[0, 100]}
-          tickFormatter={(value) => `${value}%`}
-          hide
-        />
-        <YAxis
-          yAxisId="right"
-          orientation="right"
-          domain={[0, Math.max(...basesData.map(d => d.total)) + 500]}
-          hide
-        />
-        <Tooltip
-          cursor={false}
-          content={<ChartTooltipContent
-            indicator="dot"
-            formatter={(value, name) => name === 'quality' ? `${value}%` : value}
-          />}
-        />
-        <ChartLegend content={<ChartLegendContent />} />
-        <Bar dataKey="quality" yAxisId="left" fill="var(--color-quality)" radius={8}>
-            <LabelList
-                dataKey="total"
-                position="top"
-                offset={10}
-                className="fill-foreground font-bold"
-                fontSize={12}
-             />
-             <LabelList
-                dataKey="quality"
-                position="inside"
-                formatter={(value: number) => `${value}%`}
-                className="fill-primary-foreground font-bold"
-                fontSize={12}
-             />
-        </Bar>
-        <Line
-          dataKey="total"
-          yAxisId="right"
-          type="monotone"
-          stroke="var(--color-total)"
-          strokeWidth={2}
-          strokeDasharray="3 3"
-          dot={{
-            fill: "var(--color-total)",
-          }}
-          activeDot={{
-            r: 6,
-          }}
-        />
-      </ComposedChart>
-    </ChartContainer>
+    <ResponsiveContainer width="100%" height={300}>
+      <ChartContainer config={chartConfig} className="min-h-[300px] w-full">
+        <ComposedChart
+          accessibilityLayer
+          data={basesData}
+          margin={{ top: 30, right: 20, bottom: 20, left: 20 }}
+        >
+          <CartesianGrid vertical={false} />
+          <XAxis
+            dataKey="name"
+            tickLine={false}
+            tickMargin={10}
+            axisLine={false}
+            tick={{ fontWeight: 'bold' }}
+          />
+          <YAxis
+            yAxisId="left"
+            domain={[0, 100]}
+            tickFormatter={(value) => `${value}%`}
+            hide
+          />
+          <YAxis
+            yAxisId="right"
+            orientation="right"
+            domain={[0, Math.max(...basesData.map(d => d.total)) + 500]}
+            hide
+          />
+          <Tooltip
+            cursor={false}
+            content={<ChartTooltipContent
+              indicator="dot"
+              formatter={(value, name) => name === 'quality' ? `${value}%` : value}
+            />}
+          />
+          <ChartLegend content={<ChartLegendContent />} />
+          <Bar dataKey="quality" yAxisId="left" fill="var(--color-quality)" radius={8}>
+              <LabelList
+                  dataKey="total"
+                  position="top"
+                  offset={10}
+                  className="fill-foreground font-bold"
+                  fontSize={12}
+              />
+              <LabelList
+                  dataKey="quality"
+                  position="inside"
+                  formatter={(value: number) => `${value}%`}
+                  className="fill-primary-foreground font-bold"
+                  fontSize={12}
+              />
+          </Bar>
+          <Line
+            dataKey="total"
+            yAxisId="right"
+            type="monotone"
+            stroke="var(--color-total)"
+            strokeWidth={2}
+            strokeDasharray="3 3"
+            dot={{
+              fill: "var(--color-total)",
+            }}
+            activeDot={{
+              r: 6,
+            }}
+          />
+        </ComposedChart>
+      </ChartContainer>
+    </ResponsiveContainer>
   );
 }
 
-export default function ComunicadosPage() {
+export default function ComunidadesPage() {
   const kpis = [
     { title: "Total de Cartas", value: "401" },
     { title: "Con Firma", value: "288" },
@@ -233,97 +235,81 @@ export default function ComunicadosPage() {
           <TabsTrigger value="preventivas-b4">Preventivas B4</TabsTrigger>
         </TabsList>
         <TabsContent value="cartas-b3" className="mt-6">
-          <div className="flex flex-col gap-6">
-            <div className="text-center">
-              <h1 className="font-headline text-3xl font-bold">Eficacia de Comunicados Cartas B3</h1>
-              <p className="text-muted-foreground">Análisis de la efectividad de las comunicaciones con cédula.</p>
-            </div>
-            
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
-              {kpis.map((kpi) => (
-                <StatCard key={kpi.title} title={kpi.title} value={kpi.value} />
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <ResumenEficaciaTable />
-              <ChartCard
-                title="Calidad de Comunicados por Base"
-                description="Efectividad de entrega de comunicados con cédula por cada base."
-                chart={<BasesChart />}
-              />
-            </div>
-            
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="font-headline">Trabajadores con Resultados por Encima de la Meta</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>BASE</TableHead>
-                        <TableHead>Nombre</TableHead>
-                        <TableHead className="text-right">Con Firma</TableHead>
-                        <TableHead className="text-right">Bajo Puerta</TableHead>
-                        <TableHead className="text-right">Total</TableHead>
-                        <TableHead className="text-right">% Eficacia</TableHead>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <ResumenEficaciaTable />
+            <ChartCard
+              title="Calidad de Comunicados por Base"
+              description="Efectividad de entrega de comunicados con cédula por cada base."
+              chart={<BasesChart />}
+              className="transition-all duration-300 hover:shadow-2xl hover:scale-105"
+            />
+            <Card className="lg:col-span-2 transition-all duration-300 hover:shadow-2xl hover:scale-105">
+              <CardHeader>
+                <CardTitle className="font-headline">Trabajadores con Resultados por Encima de la Meta</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>BASE</TableHead>
+                      <TableHead>Nombre</TableHead>
+                      <TableHead className="text-right">Con Firma</TableHead>
+                      <TableHead className="text-right">Bajo Puerta</TableHead>
+                      <TableHead className="text-right">Total</TableHead>
+                      <TableHead className="text-right">% Eficacia</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {trabajadoresEncimaMeta.map((trabajador, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">{trabajador.base}</TableCell>
+                        <TableCell>{trabajador.nombre}</TableCell>
+                        <TableCell className="text-right">{trabajador.conFirma}</TableCell>
+                        <TableCell className="text-right">{trabajador.bajoPuerta}</TableCell>
+                        <TableCell className="text-right">{trabajador.total}</TableCell>
+                        <TableCell className="text-right">
+                          <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
+                        </TableCell>
                       </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {trabajadoresEncimaMeta.map((trabajador, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">{trabajador.base}</TableCell>
-                          <TableCell>{trabajador.nombre}</TableCell>
-                          <TableCell className="text-right">{trabajador.conFirma}</TableCell>
-                          <TableCell className="text-right">{trabajador.bajoPuerta}</TableCell>
-                          <TableCell className="text-right">{trabajador.total}</TableCell>
-                          <TableCell className="text-right">
-                            <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="font-headline">Trabajadores por Debajo de la Meta</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>BASE</TableHead>
-                        <TableHead>Nombre</TableHead>
-                        <TableHead className="text-right">Con Firma</TableHead>
-                        <TableHead className="text-right">Bajo Puerta</TableHead>
-                        <TableHead className="text-right">Total</TableHead>
-                        <TableHead className="text-right">% Eficacia</TableHead>
+            <Card className="lg:col-span-2 transition-all duration-300 hover:shadow-2xl hover:scale-105">
+              <CardHeader>
+                <CardTitle className="font-headline">Trabajadores por Debajo de la Meta</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>BASE</TableHead>
+                      <TableHead>Nombre</TableHead>
+                      <TableHead className="text-right">Con Firma</TableHead>
+                      <TableHead className="text-right">Bajo Puerta</TableHead>
+                      <TableHead className="text-right">Total</TableHead>
+                      <TableHead className="text-right">% Eficacia</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {trabajadoresDebajoMeta.map((trabajador, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">{trabajador.base}</TableCell>
+                        <TableCell>{trabajador.nombre}</TableCell>
+                        <TableCell className="text-right">{trabajador.conFirma}</TableCell>
+                        <TableCell className="text-right">{trabajador.bajoPuerta}</TableCell>
+                        <TableCell className="text-right">{trabajador.total}</TableCell>
+                        <TableCell className="text-right">
+                          <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
+                        </TableCell>
                       </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {trabajadoresDebajoMeta.map((trabajador, index) => (
-                        <TableRow key={index}>
-                          <TableCell className="font-medium">{trabajador.base}</TableCell>
-                          <TableCell>{trabajador.nombre}</TableCell>
-                          <TableCell className="text-right">{trabajador.conFirma}</TableCell>
-                          <TableCell className="text-right">{trabajador.bajoPuerta}</TableCell>
-                          <TableCell className="text-right">{trabajador.total}</TableCell>
-                          <TableCell className="text-right">
-                            <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </div>
-            
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
           </div>
         </TabsContent>
         <TabsContent value="preventivas-b4" className="mt-6">
