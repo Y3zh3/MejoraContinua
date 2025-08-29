@@ -59,7 +59,7 @@ const ResumenEficaciaTable = () => {
   const totalEficacia = totals.total > 0 ? Math.round((totals.conFirma / totals.total) * 100) : 0;
 
   return (
-    <Card className="h-full">
+    <Card className="h-full transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
       <CardHeader className="p-2">
         <CardTitle className="text-center font-headline text-primary text-sm">RESUMEN DE % DE EFICACIA POR BASE</CardTitle>
       </CardHeader>
@@ -114,7 +114,7 @@ const ResumenEficaciaTable = () => {
 
 function EficaciaPorBaseChart() {
   return (
-    <Card className="h-full">
+    <Card className="h-full transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
       <CardHeader className="p-2">
         <CardTitle className="text-center font-headline text-primary text-sm">% EFICACIA POR BASE</CardTitle>
       </CardHeader>
@@ -210,7 +210,7 @@ export default function ComunicadosPage() {
             
 
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-              <Card>
+              <Card className="transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
                 <CardHeader className="p-2">
                   <CardTitle className="font-headline text-sm">TRABAJADORES CON RESULTADOS POR ENCIMA DE LA META</CardTitle>
                 </CardHeader>
@@ -244,7 +244,7 @@ export default function ComunicadosPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
                 <CardHeader className="p-2">
                   <CardTitle className="font-headline text-sm">TRABAJADORES POR DEBAJO DE LA META</CardTitle>
                 </CardHeader>
