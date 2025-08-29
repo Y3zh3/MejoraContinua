@@ -41,74 +41,18 @@ const oportunidadesData = [
     { entidad: "SEDALIB S.A.", objeto: "Servicio de transporte de materiales y equipos.", fecha: "28/05/2024", valor: "S/ 420,000" },
 ];
 
-const CylinderBar = (props: any) => {
-    const { fill, x, y, width, height, payload, value } = props;
-    const backgroundHeight = props.background?.height || 200;
-    const waterLevelY = y + (backgroundHeight - height);
-  
-    return (
-      <g>
-        {/* Cilindro contenedor (parte vacía) */}
-        <rect x={x} y={y} width={width} height={backgroundHeight} fill="#e0e0e0" opacity="0.3" rx={width/2} ry={width/2} />
-        {/* Tapa superior del contenedor */}
-        <ellipse cx={x + width / 2} cy={y} rx={width / 2} ry={5} fill="#f0f0f0" stroke="#ccc" strokeWidth="0.5" />
-        
-        {/* Nivel del agua */}
-        <rect x={x} y={waterLevelY} width={width} height={height} fill={fill} />
-        {/* Superficie del agua */}
-        <ellipse cx={x + width / 2} cy={waterLevelY} rx={width / 2} ry={5} fill={fill} style={{filter: 'brightness(1.1)'}} />
-        
-        {/* Base del cilindro */}
-        <ellipse cx={x + width / 2} cy={y + backgroundHeight} rx={width / 2} ry={5} fill="#555" />
-        
-        {/* Etiqueta del valor dentro del cilindro */}
-        <text 
-            x={x + width / 2} 
-            y={waterLevelY + height / 2}
-            textAnchor="middle"
-            dominantBaseline="central"
-            fill="white" 
-            fontSize="12" 
-            fontWeight="bold"
-            transform={`rotate(-90, ${x + width / 2}, ${waterLevelY + height / 2})`}
-        >
-            {value.toLocaleString()} m³
-        </text>
-
-        {/* Etiqueta del año en la base */}
-        <text 
-            x={x + width / 2} 
-            y={y + backgroundHeight} 
-            textAnchor="middle" 
-            dominantBaseline="middle"
-            fill="white" 
-            fontSize="12" 
-            fontWeight="bold">
-            {payload.year}
-        </text>
-      </g>
-    );
-};
-
-
 const VolumenAnualChart = () => {
-    const maxVal = Math.max(...volumenAnualData.map(d => d.value));
     return (
         <ResponsiveContainer width="100%" height={300}>
-            <BarChart 
-                data={volumenAnualData} 
-                margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-                barSize={60}
-            >
+            <BarChart data={volumenAnualData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                 <CartesianGrid vertical={false} strokeDasharray="3 3"/>
-                <XAxis dataKey="year" tickLine={false} axisLine={false} tick={false} interval={0} />
+                <XAxis dataKey="year" tickLine={false} axisLine={false} />
                 <YAxis
-                    label={{ value: 'Metros cúbicos', angle: -90, position: 'insideLeft', offset: -10 }}
                     axisLine={false}
                     tickLine={false}
                     tickFormatter={(value) => new Intl.NumberFormat('es-PE').format(value)}
-                    domain={[21500000, 25500000]}
-                    tickCount={9}
+                    domain={[24000000, 'dataMax + 100000']}
+                    tickCount={7}
                  />
                 <Tooltip
                     content={({ active, payload, label }) => {
@@ -123,7 +67,7 @@ const VolumenAnualChart = () => {
                         return null;
                     }}
                 />
-                <Bar dataKey="value" shape={<CylinderBar />} fill="hsl(var(--chart-1))" background={{ fill: '#eee' }} />
+                <Bar dataKey="value" fill="hsl(var(--chart-1))" radius={[4, 4, 0, 0]} />
             </BarChart>
         </ResponsiveContainer>
     );
