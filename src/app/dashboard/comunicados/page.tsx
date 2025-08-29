@@ -9,6 +9,63 @@ import {
 } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ChartCard } from "@/components/charts";
+import {
+  ChartContainer,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
+
+const basesData = [
+  { name: "CO", quality: 92 },
+  { name: "CA", quality: 85 },
+  { name: "ATE", quality: 78 },
+  { name: "BRE", quality: 95 },
+  { name: "SJL", quality: 88 },
+  { name: "CE", quality: 98 },
+  { name: "SUR", quality: 91 },
+  { name: "VES", quality: 82 },
+];
+
+const chartConfig = {
+  quality: {
+    label: "Calidad",
+    color: "hsl(var(--chart-1))",
+  },
+};
+
+function BasesChart() {
+  return (
+    <ChartContainer config={chartConfig} className="min-h-[300px] w-full">
+      <BarChart
+        accessibilityLayer
+        data={basesData}
+        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+      >
+        <CartesianGrid vertical={false} />
+        <XAxis
+          dataKey="name"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+        />
+        <YAxis
+          domain={[0, 100]}
+          tickFormatter={(value) => `${value}%`}
+        />
+        <Tooltip
+          cursor={false}
+          content={<ChartTooltipContent
+            formatter={(value) => `${value}%`}
+            indicator="dot"
+          />}
+        />
+        <Bar dataKey="quality" fill="var(--color-quality)" radius={8} />
+      </BarChart>
+    </ChartContainer>
+  );
+}
+
 
 export default function ComunicadosPage() {
   const kpis = [
@@ -123,6 +180,13 @@ export default function ComunicadosPage() {
           </CardContent>
         </Card>
       </div>
+
+      <ChartCard
+        title="Calidad de Comunicados por Base"
+        description="Efectividad de entrega de comunicados con cédula por cada base."
+        chart={<BasesChart />}
+      />
+
     </div>
   );
 }
