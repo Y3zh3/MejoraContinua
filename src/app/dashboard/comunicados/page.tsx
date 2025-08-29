@@ -42,13 +42,13 @@ const EficaciaPorCicloChart = () => (
         <CardContent className="p-2 h-[400px]">
           <ResponsiveContainer width="100%" height="100%">
             <ChartContainer config={chartConfig} className="w-full h-full">
-                <BarChart layout="vertical" data={eficaciaPorCicloData} margin={{ top: 0, right: 40, left: 10, bottom: 10 }}>
-                    <CartesianGrid horizontal={false} strokeDasharray="3 3" />
-                    <XAxis type="number" domain={[0, 100]} hide />
-                    <YAxis dataKey="ciclo" type="category" tickLine={false} axisLine={false} width={60} fontSize={14} fontWeight="bold" />
+                <BarChart data={eficaciaPorCicloData} margin={{ top: 20, right: 20, left: 20, bottom: 10 }}>
+                    <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                    <XAxis dataKey="ciclo" tickLine={false} axisLine={false} tickMargin={10} fontSize={14} fontWeight="bold" />
+                    <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
                     <Tooltip content={<ChartTooltipContent />} />
-                    <Bar dataKey="eficacia" fill="hsl(var(--chart-1))" radius={[0, 4, 4, 0]} barSize={35}>
-                        <LabelList dataKey="eficacia" position="right" formatter={(value:number) => `${value}%`} className="fill-foreground font-bold" fontSize={14} />
+                    <Bar dataKey="eficacia" fill="hsl(var(--chart-1))" radius={[4, 4, 0, 0]} barSize={40}>
+                        <LabelList dataKey="eficacia" position="top" formatter={(value:number) => `${value}%`} className="fill-foreground font-bold" fontSize={14} />
                     </Bar>
                 </BarChart>
             </ChartContainer>
