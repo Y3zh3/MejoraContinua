@@ -99,7 +99,6 @@ const VolumenAnualChart = () => {
 const CylinderChart = ({ data, title, description, color }: { data: any[], title: string, description: string, color: string }) => {
     const percentage = (data[0].value / data[0].meta) * 100;
     const formattedValue = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' }).format(data[0].value);
-    const formattedMeta = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' }).format(data[0].meta);
     
     return (
         <Card>
@@ -108,28 +107,52 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center h-[260px] gap-4">
-                <div className="relative w-28 h-52 bg-gray-200 rounded-t-full">
+                <div className="relative w-28 h-52 bg-gray-200/50 rounded-t-full rounded-b-lg flex items-end">
+                    {/* Base oscura */}
+                    <div className="absolute bottom-0 w-full h-8 bg-gray-700 rounded-b-lg"></div>
+
+                    {/* Efecto de elipse en la base */}
                     <div 
-                        className="absolute bottom-0 w-full bg-blue-500" 
+                        className="absolute w-full h-4 bg-gray-800 rounded-full" 
+                        style={{ bottom: '-8px' }}>
+                    </div>
+
+                    {/* Nivel de agua */}
+                    <div 
+                        className="relative w-full" 
                         style={{ 
-                            height: `${percentage}%`,
+                            height: `calc(${percentage}% - 2rem)`,
                             backgroundColor: color,
-                            borderTopLeftRadius: '50% 10px',
-                            borderTopRightRadius: '50% 10px'
+                            bottom: '2rem'
                         }}
                     >
+                         {/* Superficie del agua */}
                          <div 
                             className="absolute w-full h-5 rounded-full -top-2.5" 
                             style={{
                                 backgroundColor: color, 
-                                filter: 'brightness(0.8)'
+                                filter: 'brightness(1.2)'
                             }}>
                         </div>
                     </div>
+
+                     {/* Borde superior del cilindro */}
+                     <div 
+                        className="absolute w-full h-5 rounded-full top-0 border-t-4 border-gray-300"
+                        style={{
+                            borderRadius: '50%/100%',
+                            borderBottom: 'none'
+                        }}>
+                    </div>
+
+                    <div className="absolute z-10 text-white text-center w-full" style={{ bottom: 'calc(2rem + 20%)' }}>
+                        <p className="font-bold text-lg drop-shadow">{formattedValue}</p>
+                        <p className="text-xs drop-shadow">({percentage.toFixed(1)}%)</p>
+                    </div>
+
                 </div>
-                 <div className="text-center">
-                    <p className="text-2xl font-bold">{formattedValue}</p>
-                    <p className="text-sm text-muted-foreground">Meta: {formattedMeta} ({percentage.toFixed(1)}%)</p>
+                 <div className="text-center mt-2">
+                    <p className="text-xl font-bold">Importe Facturado</p>
                 </div>
             </CardContent>
         </Card>
@@ -225,5 +248,7 @@ export default function InspeccionesPage() {
         </div>
     );
 }
+
+    
 
     
