@@ -135,51 +135,53 @@ function EficaciaPorBaseChart() {
           <CardTitle className="text-center font-bold text-primary text-sm">% EFICACIA POR BASE</CardTitle>
         </CardHeader>
         <CardContent className="p-0 h-[250px]">
-          <ChartContainer config={chartConfig} className="w-full h-full">
-            <ComposedChart
-              data={resumenEficaciaData}
-              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis dataKey="base" tickLine={false} tickMargin={10} axisLine={false} fontSize={12} />
-              <YAxis yAxisId="left" domain={[0, 100]} hide />
-               <YAxis yAxisId="right" orientation="right" domain={[0, Math.max(...resumenEficaciaData.map(d => d.total)) + 50]} hide />
-              <Tooltip
-                content={<ChartTooltipContent formatter={(value, name) => name === 'eficacia' ? `${value}%` : value} />}
-              />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Bar dataKey="eficacia" yAxisId="left" fill="var(--color-eficacia)" radius={4} barSize={40}>
-                <LabelList
-                  dataKey="total"
-                  position="top"
-                  offset={8}
-                  className="fill-foreground font-bold"
-                  fontSize={12}
+          <ResponsiveContainer width="100%" height="100%">
+            <ChartContainer config={chartConfig} className="w-full h-full">
+                <ComposedChart
+                data={resumenEficaciaData}
+                margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                >
+                <CartesianGrid vertical={false} />
+                <XAxis dataKey="base" tickLine={false} tickMargin={10} axisLine={false} fontSize={12} />
+                <YAxis yAxisId="left" domain={[0, 100]} hide />
+                <YAxis yAxisId="right" orientation="right" domain={[0, Math.max(...resumenEficaciaData.map(d => d.total)) + 50]} hide />
+                <Tooltip
+                    content={<ChartTooltipContent formatter={(value, name) => name === 'eficacia' ? `${value}%` : value} />}
                 />
-                <LabelList
-                  dataKey="eficacia"
-                  position="center"
-                  formatter={(value: number) => `${value}%`}
-                  className="fill-primary-foreground font-bold"
-                  fontSize={12}
+                <ChartLegend content={<ChartLegendContent />} />
+                <Bar dataKey="eficacia" yAxisId="left" fill="var(--color-eficacia)" radius={4} barSize={40}>
+                    <LabelList
+                    dataKey="total"
+                    position="top"
+                    offset={8}
+                    className="fill-foreground font-bold"
+                    fontSize={12}
+                    />
+                    <LabelList
+                    dataKey="eficacia"
+                    position="center"
+                    formatter={(value: number) => `${value}%`}
+                    className="fill-primary-foreground font-bold"
+                    fontSize={12}
+                    />
+                </Bar>
+                <Line
+                    yAxisId="right"
+                    dataKey="total"
+                    type="monotone"
+                    stroke="var(--color-total)"
+                    strokeWidth={2}
+                    strokeDasharray="3 3"
+                    dot={{
+                    fill: "var(--color-total)",
+                    }}
+                    activeDot={{
+                    r: 6,
+                    }}
                 />
-              </Bar>
-              <Line
-                yAxisId="right"
-                dataKey="total"
-                type="monotone"
-                stroke="var(--color-total)"
-                strokeWidth={2}
-                strokeDasharray="3 3"
-                dot={{
-                  fill: "var(--color-total)",
-                }}
-                activeDot={{
-                  r: 6,
-                }}
-              />
-            </ComposedChart>
-          </ChartContainer>
+                </ComposedChart>
+            </ChartContainer>
+          </ResponsiveContainer>
         </CardContent>
       </Card>
     );
@@ -450,5 +452,3 @@ export default function ComunicadosPage() {
     </div>
   );
 }
-
-    
