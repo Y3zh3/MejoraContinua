@@ -85,25 +85,40 @@ const VolumenAnualChart = () => {
 
 
 
-const CylinderChart = ({ data, title, color }: { data: any[], title: string, color: string }) => {
-    const percentage = ((data[0].value / data[0].meta) * 100).toFixed(1);
+const CylinderChart = ({ data, title, description, color }: { data: any[], title: string, description: string, color: string }) => {
+    const percentage = (data[0].value / data[0].meta) * 100;
+    const formattedValue = new Intl.NumberFormat('es-PE').format(data[0].value);
+    
     return (
         <Card>
             <CardHeader>
                 <CardTitle>{title}</CardTitle>
+                <CardDescription>{description}</CardDescription>
             </CardHeader>
-            <CardContent>
-                <div className="flex items-end gap-4 h-60">
-                     <div className="relative w-24 h-full">
-                        <div className="absolute bottom-0 w-full bg-gray-200 rounded-t-full" style={{height: "100%"}}>
-                            <div className="absolute bottom-0 w-full rounded-t-full" style={{ height: `${(data[0].value / data[0].meta) * 100}%`, backgroundColor: color }}></div>
-                        </div>
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[110%] h-8 bg-gray-300 rounded-full -translate-y-1/2"></div>
-                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] h-8 bg-gray-200 rounded-full translate-y-1/2"></div>
-                     </div>
-                    <div className="flex flex-col">
-                        <span className="text-3xl font-bold">{data[0].value.toLocaleString()} m³</span>
-                        <span className="text-lg text-muted-foreground">{percentage}% de la meta</span>
+            <CardContent className="flex justify-center items-center h-[260px]">
+                <div className="relative w-40 h-full">
+                    {/* Cilindro de fondo */}
+                    <div className="absolute bottom-0 left-0 w-full h-full bg-gray-200" style={{ clipPath: 'polygon(0% 5%, 100% 5%, 100% 95%, 0% 95%)' }}></div>
+                    <div className="absolute top-[calc(5%-10px)] left-0 w-full h-5 rounded-full bg-gray-300"></div>
+                    <div className="absolute bottom-[calc(5%-10px)] left-0 w-full h-5 rounded-full bg-gray-200"></div>
+
+                    {/* Relleno del cilindro */}
+                    <div className="absolute bottom-0 left-0 w-full" style={{ height: `${percentage}%`}}>
+                        <div className="absolute bottom-0 left-0 w-full h-full" style={{ backgroundColor: color, clipPath: 'polygon(0% 5%, 100% 5%, 100% 100%, 0% 100%)' }}></div>
+                        <div className="absolute top-[calc(5%-10px)] left-0 w-full h-5 rounded-full" style={{backgroundColor: color}}></div>
+                    </div>
+                    
+                    {/* Tapa superior del relleno */}
+                    <div className="absolute top-0 left-0 w-full" style={{ top: `calc(${100 - percentage}% + 5% - 10px)`}}>
+                         <div className="w-full h-5 rounded-full" style={{backgroundColor: color, filter: 'brightness(0.8)'}}></div>
+                    </div>
+
+                     {/* Textos */}
+                    <div className="absolute w-full text-center text-white font-bold" style={{ top: `calc(${100 - percentage}% + 5% - 2px)` }}>
+                        <p className="text-xl">{formattedValue} m³</p>
+                    </div>
+                     <div className="absolute w-full text-center" style={{ top: `calc(100% - 5%)` }}>
+                         <p className="text-lg font-bold text-muted-foreground">{percentage.toFixed(1)}%</p>
                     </div>
                 </div>
             </CardContent>
@@ -130,7 +145,12 @@ export default function InspeccionesPage() {
                         <VolumenAnualChart />
                     </CardContent>
                 </Card>
-                <CylinderChart data={facturadoData} title="Importe facturado por Agua y Alcantarillado" color="hsl(var(--chart-2))" />
+                <CylinderChart 
+                    data={facturadoData} 
+                    title="Importe facturado por Agua y Alcantarillado" 
+                    description="Fuentes: Eps Sedacusco SA-2023"
+                    color="hsl(var(--chart-2))" 
+                />
             </div>
             
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -195,3 +215,5 @@ export default function InspeccionesPage() {
         </div>
     );
 }
+
+    
