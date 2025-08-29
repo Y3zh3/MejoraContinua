@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Bell,
@@ -35,7 +37,6 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { usePathname } from "next/navigation";
 import NavLink from "@/components/nav-link";
 
 const navItems = [

@@ -13,7 +13,7 @@ export default function LoginPage() {
             Aqua Insights
           </h1>
           <p className="mt-2 text-muted-foreground">
-            Please sign in to access your dashboard
+            Por favor, inicia sesión para acceder a tu panel
           </p>
         </div>
         <LoginForm />
