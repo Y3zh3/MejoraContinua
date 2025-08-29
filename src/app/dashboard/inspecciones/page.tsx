@@ -46,8 +46,8 @@ const CustomCylinderBar = (props: any) => {
 
     if (height <= 0) return null;
 
-    const baseHeight = 30;
-    const bodyHeight = height - baseHeight;
+    const baseHeight = 20;
+    const bodyHeight = height > baseHeight ? height - baseHeight : 0;
     const radius = width / 2;
 
     return (
@@ -115,12 +115,14 @@ const FacturadoAnualChart = () => {
                         position="bottom"
                         content={(props) => {
                             const { x, y, width, height, value } = props;
+                            if (height <= 0) return null;
+                            const baseHeight = 20;
+                            const bodyHeight = height > baseHeight ? height - baseHeight : 0;
                             return (
                                 <g>
-                                    <foreignObject x={x} y={y + height + 5} width={width} height={30} >
-                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'black', height: '100%' }}>
-                                            <Droplet size={14} fill="black" stroke="none"/>
-                                            <span style={{ fontSize: 14, fontWeight: 'bold' }}>{value}</span>
+                                    <foreignObject x={x} y={y + bodyHeight + 2} width={width} height={baseHeight} >
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', height: '100%', fontSize: 14, fontWeight: 'bold' }}>
+                                            <span>{value}</span>
                                         </div>
                                     </foreignObject>
                                 </g>
