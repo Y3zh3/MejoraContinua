@@ -41,22 +41,39 @@ const oportunidadesData = [
 ];
 
 const CylinderBar = (props: any) => {
-    const { fill, x, y, width, height, background, payload } = props;
-    const waterLevelY = y + background.height - height;
+    const { fill, x, y, width, height, payload, value } = props;
+    
+    // Ensure background has a height, providing a default if not present
+    const backgroundHeight = props.background?.height || 200; // Default height of 200 if undefined
+    const waterLevelY = y + (backgroundHeight - height);
   
     return (
       <g>
         {/* Cilindro contenedor */}
-        <rect x={x} y={y} width={width} height={background.height} fill="#e0e0e0" opacity="0.3" rx={width/2} ry={width/2} />
+        <rect x={x} y={y} width={width} height={backgroundHeight} fill="#e0e0e0" opacity="0.3" rx={width/2} ry={width/2} />
         <ellipse cx={x + width / 2} cy={y} rx={width / 2} ry={5} fill="#f0f0f0" stroke="#ccc" strokeWidth="0.5" />
-        <ellipse cx={x + width / 2} cy={y + background.height} rx={width / 2} ry={5} fill="#555" />
+        <ellipse cx={x + width / 2} cy={y + backgroundHeight} rx={width / 2} ry={5} fill="#555" />
         
         {/* Nivel del agua */}
         <rect x={x} y={waterLevelY} width={width} height={height} fill={fill} />
         <ellipse cx={x + width / 2} cy={waterLevelY} rx={width / 2} ry={5} fill={fill} style={{filter: 'brightness(1.1)'}} />
 
+        {/* Etiqueta del valor dentro del cilindro */}
+        <text 
+            x={x + width / 2} 
+            y={y + backgroundHeight - height / 2} 
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fill="white" 
+            fontSize="12" 
+            fontWeight="bold"
+            transform={`rotate(-90, ${x + width / 2}, ${y + backgroundHeight - height / 2})`}
+        >
+            {value.toLocaleString()} m³
+        </text>
+
         {/* Etiqueta del año en la base */}
-        <text x={x + width / 2} y={y + background.height + 15} textAnchor="middle" fill="black" fontSize="12" fontWeight="bold">{payload.year}</text>
+        <text x={x + width / 2} y={y + backgroundHeight + 15} textAnchor="middle" fill="black" fontSize="12" fontWeight="bold">{payload.year}</text>
       </g>
     );
 };
@@ -92,16 +109,7 @@ const VolumenAnualChart = () => {
                         return null;
                     }}
                 />
-                <Bar dataKey="value" shape={<CylinderBar />} fill="hsl(var(--chart-1))">
-                    <LabelList 
-                        dataKey="value" 
-                        position="center"
-                        formatter={(value: number) => `${value.toLocaleString()} m³`}
-                        angle={-90}
-                        offset={0}
-                        style={{ fill: 'white', fontWeight: 'bold', textAnchor: 'middle' }}
-                    />
-                </Bar>
+                <Bar dataKey="value" shape={<CylinderBar />} fill="hsl(var(--chart-1))" />
             </BarChart>
         </ResponsiveContainer>
     );
@@ -235,7 +243,5 @@ export default function InspeccionesPage() {
         </div>
     );
 }
-
-    
 
     
