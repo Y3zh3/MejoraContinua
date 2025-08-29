@@ -43,15 +43,33 @@ const oportunidadesData = [
 
 const CylinderBar = (props: any) => {
     const { fill, x, y, width, height } = props;
+  
+    if (height <= 0) {
+      return null;
+    }
+  
     const radius = width / 2;
   
     return (
       <g>
-        <path d={`M${x},${y + radius} L${x},${y + height - radius} A${radius},${radius} 0 0 0 ${x + width},${y + height - radius} L${x + width},${y + radius} A${radius},${radius} 0 0 1 ${x},${y + radius}`} fill={fill} />
-        <path d={`M${x},${y + radius} A${radius},${radius} 0 0 0 ${x + width},${y + radius}`} fill={fill} opacity="0.4" />
+        {/* Top ellipse */}
+        <ellipse cx={x + radius} cy={y} rx={radius} ry={radius / 3} fill={fill} opacity="0.4" />
+        
+        {/* Main body */}
+        <path
+          d={`M ${x},${y}
+                 L ${x},${y + height}
+                 A ${radius},${radius / 3} 0 0 0 ${x + width},${y + height}
+                 L ${x + width},${y}
+                 Z`}
+          fill={fill}
+        />
+        
+        {/* Bottom ellipse */}
+        <ellipse cx={x + radius} cy={y + height} rx={radius} ry={radius / 3} fill={fill} />
       </g>
     );
-  };
+};
 
 const VolumenAnualChart = () => {
     return (
@@ -67,6 +85,7 @@ const VolumenAnualChart = () => {
                     tickCount={7}
                  />
                 <Tooltip
+                    cursor={{fill: 'rgba(206, 212, 218, 0.2)'}}
                     content={({ active, payload, label }) => {
                         if (active && payload && payload.length) {
                             return (
@@ -79,10 +98,10 @@ const VolumenAnualChart = () => {
                         return null;
                     }}
                 />
-                <Bar dataKey="value" fill="hsl(var(--chart-1))" shape={<CylinderBar />}>
+                <Bar dataKey="value" fill="hsl(var(--chart-1))" shape={<CylinderBar />} barSize={60}>
                     <LabelList 
                         dataKey="value" 
-                        position="inside" 
+                        position="center" 
                         formatter={(value: number) => value.toLocaleString()}
                         fill="#fff"
                         fontSize={12}
@@ -248,6 +267,8 @@ export default function InspeccionesPage() {
         </div>
     );
 }
+
+    
 
     
 
