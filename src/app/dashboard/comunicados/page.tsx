@@ -85,7 +85,7 @@ export default function ComunicadosPage() {
                 <h1 className="text-2xl font-bold text-primary flex-1 text-center">Reporte de efectividad en la entrega de los comunicados "Con firma"</h1>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {kpis.map(kpi => <StatCard key={kpi.title} title={kpi.title} value={kpi.value} />)}
             </div>
             
