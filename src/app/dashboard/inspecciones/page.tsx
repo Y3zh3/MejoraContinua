@@ -118,8 +118,8 @@ const FacturadoAnualChart = () => {
                             return (
                                 <g>
                                     <foreignObject x={x} y={y + height + 5} width={width} height={30} >
-                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', height: '100%' }}>
-                                            <Droplet size={14} fill="white" stroke="none"/>
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'black', height: '100%' }}>
+                                            <Droplet size={14} fill="black" stroke="none"/>
                                             <span style={{ fontSize: 14, fontWeight: 'bold' }}>{value}</span>
                                         </div>
                                     </foreignObject>
@@ -274,5 +274,7 @@ export default function InspeccionesPage() {
         </div>
     );
 }
+
+    
 
     
