@@ -41,26 +41,44 @@ const oportunidadesData = [
 ];
 
 const CylinderBar = (props: any) => {
-    const { fill, x, y, width, height } = props;
+    const { fill, x, y, width, height, background } = props;
+    const waterLevelY = y + background.height - height;
   
     return (
       <g>
-        <path d={`M${x},${y + height} L${x},${y} L${x + width},${y} L${x + width},${y + height} Z`} fill={fill} />
-        <ellipse cx={x + width / 2} cy={y} rx={width / 2} ry={5} fill={fill} opacity={0.6} />
-        <ellipse cx={x + width / 2} cy={y} rx={width / 2} ry={5} fill={fill} />
+        {/* Cilindro contenedor */}
+        <rect x={x} y={y} width={width} height={background.height} fill="#e0e0e0" opacity="0.3" />
+        <ellipse cx={x + width / 2} cy={y} rx={width / 2} ry={5} fill="#f0f0f0" stroke="#ccc" strokeWidth="0.5" />
+        <ellipse cx={x + width / 2} cy={y + background.height} rx={width / 2} ry={5} fill="#555" />
+        
+        {/* Nivel del agua */}
+        <rect x={x} y={waterLevelY} width={width} height={height} fill={fill} />
+        <ellipse cx={x + width / 2} cy={waterLevelY} rx={width / 2} ry={5} fill={fill} style={{filter: 'brightness(1.1)'}} />
+
+        {/* Etiqueta del año en la base */}
+        <text x={x + width / 2} y={y + background.height + 15} textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">{props.year}</text>
+        <path d={`M ${x + width/2 - 5},${y + background.height - 8} A 5 5 0 1 1 ${x + width/2 + 5},${y + background.height - 8}`} stroke="white" strokeWidth="1" fill="none" />
+        <circle cx={x+width/2} cy={y + background.height - 5} r="1.5" fill="white" />
+
       </g>
     );
-  };
+};
+
 
 const VolumenAnualChart = () => {
     return (
         <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={volumenAnualData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <BarChart 
+                data={volumenAnualData} 
+                margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+            >
                 <CartesianGrid vertical={false} strokeDasharray="3 3"/>
-                <XAxis dataKey="year" tick={{fontWeight: 'bold'}} />
+                <XAxis dataKey="year" tickLine={false} axisLine={false} tick={false} />
                 <YAxis 
-                    tickFormatter={(value) => new Intl.NumberFormat('es-PE', { notation: 'compact', compactDisplay: 'short' }).format(value)}
-                    domain={['dataMin - 100000', 'dataMax + 100000']}
+                    axisLine={false}
+                    tickLine={false}
+                    tickFormatter={(value) => new Intl.NumberFormat('es-PE').format(value)}
+                    domain={[21500000, 25500000]}
                  />
                 <Tooltip
                     content={({ active, payload, label }) => {
@@ -76,7 +94,14 @@ const VolumenAnualChart = () => {
                     }}
                 />
                 <Bar dataKey="value" shape={<CylinderBar />} fill="hsl(var(--chart-1))">
-                    <LabelList dataKey="value" position="top" formatter={(value: number) => new Intl.NumberFormat('es-PE', { notation: 'compact', compactDisplay: 'short' }).format(value)} />
+                    <LabelList 
+                        dataKey="value" 
+                        position="center"
+                        formatter={(value: number) => `${value.toLocaleString()} m³`}
+                        angle={-90}
+                        offset={15}
+                        style={{ fill: 'white', fontWeight: 'bold' }}
+                    />
                 </Bar>
             </BarChart>
         </ResponsiveContainer>
@@ -87,7 +112,8 @@ const VolumenAnualChart = () => {
 
 const CylinderChart = ({ data, title, description, color }: { data: any[], title: string, description: string, color: string }) => {
     const percentage = (data[0].value / data[0].meta) * 100;
-    const formattedValue = new Intl.NumberFormat('es-PE').format(data[0].value);
+    const formattedValue = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' }).format(data[0].value);
+    const formattedMeta = new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' }).format(data[0].meta);
     
     return (
         <Card>
@@ -95,31 +121,26 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                 <CardTitle>{title}</CardTitle>
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
-            <CardContent className="flex justify-center items-center h-[260px]">
-                <div className="relative w-40 h-full">
-                    {/* Cilindro de fondo */}
-                    <div className="absolute bottom-0 left-0 w-full h-full bg-gray-200" style={{ clipPath: 'polygon(0% 5%, 100% 5%, 100% 95%, 0% 95%)' }}></div>
-                    <div className="absolute top-[calc(5%-10px)] left-0 w-full h-5 rounded-full bg-gray-300"></div>
-                    <div className="absolute bottom-[calc(5%-10px)] left-0 w-full h-5 rounded-full bg-gray-200"></div>
+            <CardContent className="flex flex-col justify-center items-center h-[260px] gap-4">
+                <div className="relative w-28 h-52">
+                     {/* Cilindro contenedor */}
+                    <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-t-full rounded-b-full" style={{ clipPath: 'inset(0 0 0 0 round 100px 100px 10px 10px)' }}></div>
+                    <div className="absolute top-0 left-0 w-full h-5 rounded-full bg-gray-300"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-5 rounded-full bg-gray-200"></div>
 
-                    {/* Relleno del cilindro */}
-                    <div className="absolute bottom-0 left-0 w-full" style={{ height: `${percentage}%`}}>
-                        <div className="absolute bottom-0 left-0 w-full h-full" style={{ backgroundColor: color, clipPath: 'polygon(0% 5%, 100% 5%, 100% 100%, 0% 100%)' }}></div>
-                        <div className="absolute top-[calc(5%-10px)] left-0 w-full h-5 rounded-full" style={{backgroundColor: color}}></div>
+                     {/* Relleno del cilindro */}
+                    <div className="absolute bottom-2.5 left-0 w-full" style={{ height: `calc(${percentage}% - 10px)`}}>
+                        <div className="absolute bottom-0 left-0 w-full h-full" style={{ backgroundColor: color }}></div>
                     </div>
                     
-                    {/* Tapa superior del relleno */}
-                    <div className="absolute top-0 left-0 w-full" style={{ top: `calc(${100 - percentage}% + 5% - 10px)`}}>
+                     {/* Tapa superior del relleno */}
+                    <div className="absolute top-0 left-0 w-full" style={{ top: `calc(${100 - percentage}% + 2.5px)`}}>
                          <div className="w-full h-5 rounded-full" style={{backgroundColor: color, filter: 'brightness(0.8)'}}></div>
                     </div>
-
-                     {/* Textos */}
-                    <div className="absolute w-full text-center text-white font-bold" style={{ top: `calc(${100 - percentage}% + 5% - 2px)` }}>
-                        <p className="text-xl">{formattedValue} m³</p>
-                    </div>
-                     <div className="absolute w-full text-center" style={{ top: `calc(100% - 5%)` }}>
-                         <p className="text-lg font-bold text-muted-foreground">{percentage.toFixed(1)}%</p>
-                    </div>
+                </div>
+                 <div className="text-center">
+                    <p className="text-2xl font-bold">{formattedValue}</p>
+                    <p className="text-sm text-muted-foreground">Meta: {formattedMeta} ({percentage.toFixed(1)}%)</p>
                 </div>
             </CardContent>
         </Card>
@@ -215,5 +236,7 @@ export default function InspeccionesPage() {
         </div>
     );
 }
+
+    
 
     
