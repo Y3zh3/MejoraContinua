@@ -44,28 +44,27 @@ const oportunidadesData = [
 const CustomCylinderBar = (props: any) => {
     const { x, y, width, height, payload, value, yAxis } = props;
     
-    if (height <= 0 || !props.yAxis) return null;
+    if (!yAxis || height <= 0) return null;
     
-    const { year } = payload;
+    const { year, startColor, endColor } = payload;
 
     const radius = width / 2;
     const ellipseHeight = radius * 0.35;
-    const baseHeight = 50; 
+    const baseHeight = 60;
     const chartHeight = yAxis.height; 
     
     const gradientId = `cylinderGradient-${year}`;
     
     const numTicks = 5;
-    const tickPositions = Array.from({ length: numTicks }, (_, i) => (height / (numTicks - 1)) * i);
+    const tickPositions = Array.from({ length: numTicks }, (_, i) => (chartHeight / (numTicks - 1)) * i);
 
 
     return (
         <g>
              <defs>
-                <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#007bff" />
-                    <stop offset="50%" stopColor="#0052B4" />
-                    <stop offset="100%" stopColor="#007bff" />
+                <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={startColor} stopOpacity={0.8} />
+                    <stop offset="100%" stopColor={endColor} />
                 </linearGradient>
                 <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
                     <feDropShadow dx="2" dy="5" stdDeviation="3" floodColor="#000" floodOpacity="0.3"/>
@@ -81,15 +80,15 @@ const CustomCylinderBar = (props: any) => {
 
             {/* Liquid */}
             <rect x={x} y={y} width={width} height={height} fill={`url(#${gradientId})`} />
-            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill="#4DA8FF" style={{ filter: 'brightness(1.2)' }} />
+            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill={startColor} style={{ filter: 'brightness(1.2)' }} />
 
             {/* Liquid Highlight */}
             <path d={`M${x+width*0.25},${y} C${x+width*0.35},${y+height*0.33} ${x+width*0.35},${y+height*0.66} ${x+width*0.25},${y+height}`} 
-                fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="10" />
+                fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth={10} />
 
             {/* Measurement Ticks */}
             {tickPositions.map((tickY, i) => (
-                <path key={i} d={`M ${x + 5} ${y + height - tickY} h -5`} stroke="rgba(0,0,0,0.2)" strokeWidth="1" />
+                <path key={i} d={`M ${x + 5} ${yAxis.y + chartHeight - tickY} h -5`} stroke="rgba(0,0,0,0.2)" strokeWidth="1" />
             ))}
 
             {/* Base */}
@@ -101,7 +100,7 @@ const CustomCylinderBar = (props: any) => {
 
 
             {/* Base Content */}
-            <g transform={`translate(${x + radius}, ${yAxis.y + chartHeight + baseHeight/2 + 5})`}>
+            <g transform={`translate(${x + radius}, ${yAxis.y + chartHeight + baseHeight/2 + 10})`}>
                  <Droplet size={18} fill="#56CCF2" stroke="white" strokeWidth={0.5} y={-14}/>
                  <text y={12} fill="white" fontSize="16" fontWeight="bold" textAnchor="middle">{year}</text>
             </g>
@@ -295,3 +294,5 @@ export default function InspeccionesPage() {
         </div>
     );
 }
+
+    
