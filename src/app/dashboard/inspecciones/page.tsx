@@ -7,8 +7,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList, Cell, ResponsiveContainer } from "recharts";
 import { Badge } from "@/components/ui/badge";
+import { Tooltip } from 'recharts';
 
 
 const morosidadData = [
@@ -42,38 +43,49 @@ const oportunidadesData = [
 
 const CylinderBar = (props: any) => {
     const { fill, x, y, width, height, payload, value } = props;
-    
-    // Ensure background has a height, providing a default if not present
-    const backgroundHeight = props.background?.height || 200; // Default height of 200 if undefined
+    const backgroundHeight = props.background?.height || 200;
     const waterLevelY = y + (backgroundHeight - height);
   
     return (
       <g>
-        {/* Cilindro contenedor */}
+        {/* Cilindro contenedor (parte vacía) */}
         <rect x={x} y={y} width={width} height={backgroundHeight} fill="#e0e0e0" opacity="0.3" rx={width/2} ry={width/2} />
+        {/* Tapa superior del contenedor */}
         <ellipse cx={x + width / 2} cy={y} rx={width / 2} ry={5} fill="#f0f0f0" stroke="#ccc" strokeWidth="0.5" />
-        <ellipse cx={x + width / 2} cy={y + backgroundHeight} rx={width / 2} ry={5} fill="#555" />
         
         {/* Nivel del agua */}
         <rect x={x} y={waterLevelY} width={width} height={height} fill={fill} />
+        {/* Superficie del agua */}
         <ellipse cx={x + width / 2} cy={waterLevelY} rx={width / 2} ry={5} fill={fill} style={{filter: 'brightness(1.1)'}} />
-
+        
+        {/* Base del cilindro */}
+        <ellipse cx={x + width / 2} cy={y + backgroundHeight} rx={width / 2} ry={5} fill="#555" />
+        
         {/* Etiqueta del valor dentro del cilindro */}
         <text 
             x={x + width / 2} 
-            y={y + backgroundHeight - height / 2} 
+            y={waterLevelY + height / 2}
             textAnchor="middle"
-            dominantBaseline="middle"
+            dominantBaseline="central"
             fill="white" 
             fontSize="12" 
             fontWeight="bold"
-            transform={`rotate(-90, ${x + width / 2}, ${y + backgroundHeight - height / 2})`}
+            transform={`rotate(-90, ${x + width / 2}, ${waterLevelY + height / 2})`}
         >
             {value.toLocaleString()} m³
         </text>
 
         {/* Etiqueta del año en la base */}
-        <text x={x + width / 2} y={y + backgroundHeight + 15} textAnchor="middle" fill="black" fontSize="12" fontWeight="bold">{payload.year}</text>
+        <text 
+            x={x + width / 2} 
+            y={y + backgroundHeight} 
+            textAnchor="middle" 
+            dominantBaseline="middle"
+            fill="white" 
+            fontSize="12" 
+            fontWeight="bold">
+            {payload.year}
+        </text>
       </g>
     );
 };
@@ -90,11 +102,13 @@ const VolumenAnualChart = () => {
             >
                 <CartesianGrid vertical={false} strokeDasharray="3 3"/>
                 <XAxis dataKey="year" tickLine={false} axisLine={false} tick={false} interval={0} />
-                <YAxis 
+                <YAxis
+                    label={{ value: 'Metros cúbicos', angle: -90, position: 'insideLeft', offset: -10 }}
                     axisLine={false}
                     tickLine={false}
                     tickFormatter={(value) => new Intl.NumberFormat('es-PE').format(value)}
-                    domain={[0, maxVal + 5000000]}
+                    domain={[21500000, 25500000]}
+                    tickCount={9}
                  />
                 <Tooltip
                     content={({ active, payload, label }) => {
@@ -109,7 +123,7 @@ const VolumenAnualChart = () => {
                         return null;
                     }}
                 />
-                <Bar dataKey="value" shape={<CylinderBar />} fill="hsl(var(--chart-1))" />
+                <Bar dataKey="value" shape={<CylinderBar />} fill="hsl(var(--chart-1))" background={{ fill: '#eee' }} />
             </BarChart>
         </ResponsiveContainer>
     );
@@ -131,16 +145,15 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
             <CardContent className="flex flex-col justify-center items-center h-[260px] gap-4">
                 <div className="relative w-28 h-52">
                      {/* Cilindro contenedor */}
-                    <div className="absolute top-0 left-0 w-full h-full bg-gray-200" style={{ borderRadius: '40px / 10px', borderBottomLeftRadius: '10px', borderBottomRightRadius: '10px' }}></div>
-                    <div className="absolute top-0 left-0 w-full h-5 rounded-full bg-gray-300"></div>
-                    <div className="absolute bottom-0 left-0 w-full h-5 rounded-b-full bg-gray-400"></div>
+                    <div className="absolute top-0 left-0 w-full h-full bg-gray-200 rounded-t-full"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-5" style={{ background: '#7d7d7d', borderBottomLeftRadius: '50% 10px', borderBottomRightRadius: '50% 10px' }}></div>
 
                      {/* Relleno del cilindro */}
                     <div className="absolute bottom-2.5 left-0 w-full" style={{ height: `calc(${percentage}% - 10px)`}}>
-                        <div className="absolute bottom-0 left-0 w-full h-full" style={{ backgroundColor: color }}></div>
+                        <div className="absolute bottom-0 left-0 w-full h-full" style={{ backgroundColor: color, borderTopLeftRadius: '50% 10px', borderTopRightRadius: '50% 10px' }}></div>
                     </div>
                     
-                     {/* Tapa superior del relleno */}
+                     {/* Tapa superior del relleno (superficie) */}
                     <div className="absolute w-full" style={{ top: `calc(${100 - percentage}%)`, transform: 'translateY(2.5px)' }}>
                          <div className="w-full h-5 rounded-full" style={{backgroundColor: color, filter: 'brightness(0.8)'}}></div>
                     </div>
@@ -243,5 +256,7 @@ export default function InspeccionesPage() {
         </div>
     );
 }
+
+    
 
     
