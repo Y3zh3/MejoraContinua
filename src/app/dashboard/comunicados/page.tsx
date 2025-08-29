@@ -54,31 +54,31 @@ const ResumenEficaciaTable = () => {
 
   return (
     <Card>
-      <CardHeader className="p-4">
-        <CardTitle className="text-center font-headline text-primary text-base">RESUMEN DE % DE EFICACIA POR BASE</CardTitle>
+      <CardHeader className="p-2">
+        <CardTitle className="text-center font-headline text-primary text-sm">RESUMEN DE % DE EFICACIA POR BASE</CardTitle>
       </CardHeader>
       <CardContent className="p-0">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="p-2">BASE</TableHead>
-              <TableHead className="text-center p-2">Con firma</TableHead>
-              <TableHead className="text-center p-2">Bajo puerta</TableHead>
-              <TableHead className="text-center p-2">Total</TableHead>
-              <TableHead className="text-center p-2">Meta</TableHead>
-              <TableHead className="text-center p-2">%Eficacia</TableHead>
+              <TableHead className="p-1 text-xs">BASE</TableHead>
+              <TableHead className="text-center p-1 text-xs">Con firma</TableHead>
+              <TableHead className="text-center p-1 text-xs">Bajo puerta</TableHead>
+              <TableHead className="text-center p-1 text-xs">Total</TableHead>
+              <TableHead className="text-center p-1 text-xs">Meta</TableHead>
+              <TableHead className="text-center p-1 text-xs">%Eficacia</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {resumenEficaciaData.map((row) => (
               <TableRow key={row.base}>
-                <TableCell className="font-medium p-2">{row.base}</TableCell>
-                <TableCell className="text-center p-2">{row.conFirma}</TableCell>
-                <TableCell className="text-center p-2">{row.bajoPuerta}</TableCell>
-                <TableCell className="text-center p-2">{row.total}</TableCell>
-                <TableCell className="text-center p-2">{row.meta}</TableCell>
-                <TableCell className="text-center font-bold p-2">
-                  <div className="flex items-center justify-center gap-2">
+                <TableCell className="font-medium p-1 text-xs">{row.base}</TableCell>
+                <TableCell className="text-center p-1 text-xs">{row.conFirma}</TableCell>
+                <TableCell className="text-center p-1 text-xs">{row.bajoPuerta}</TableCell>
+                <TableCell className="text-center p-1 text-xs">{row.total}</TableCell>
+                <TableCell className="text-center p-1 text-xs">{row.meta}</TableCell>
+                <TableCell className="text-center font-bold p-1 text-xs">
+                  <div className="flex items-center justify-center gap-1">
                     <span className={cn(
                       "h-2 w-2 rounded-full",
                       row.eficacia >= 80 ? "bg-green-500" : "bg-red-500"
@@ -91,12 +91,12 @@ const ResumenEficaciaTable = () => {
           </TableBody>
           <TableFooter>
             <TableRow className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <TableCell className="font-bold p-2">Total</TableCell>
-              <TableCell className="text-center font-bold p-2">{totals.conFirma}</TableCell>
-              <TableCell className="text-center font-bold p-2">{totals.bajoPuerta}</TableCell>
-              <TableCell className="text-center font-bold p-2">{totals.total}</TableCell>
-              <TableCell className="text-center font-bold p-2">80%</TableCell>
-              <TableCell className="text-center font-bold p-2">{totalEficacia}%</TableCell>
+              <TableCell className="font-bold p-1 text-xs">Total</TableCell>
+              <TableCell className="text-center font-bold p-1 text-xs">{totals.conFirma}</TableCell>
+              <TableCell className="text-center font-bold p-1 text-xs">{totals.bajoPuerta}</TableCell>
+              <TableCell className="text-center font-bold p-1 text-xs">{totals.total}</TableCell>
+              <TableCell className="text-center font-bold p-1 text-xs">80%</TableCell>
+              <TableCell className="text-center font-bold p-1 text-xs">{totalEficacia}%</TableCell>
             </TableRow>
           </TableFooter>
         </Table>
@@ -108,21 +108,21 @@ const ResumenEficaciaTable = () => {
 
 function BasesChart() {
   return (
-    <ChartContainer config={chartConfig} className="min-h-[250px] w-full">
+    <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
       <BarChart
         accessibilityLayer
         data={resumenEficaciaData}
         layout="vertical"
-        margin={{ right: 20 }}
+        margin={{ right: 30, top: 10, bottom: 10 }}
       >
         <CartesianGrid horizontal={false} />
         <YAxis
           dataKey="base"
           type="category"
           tickLine={false}
-          tickMargin={10}
+          tickMargin={5}
           axisLine={false}
-          tick={{ fontSize: 12, fontWeight: 'bold' }}
+          tick={{ fontSize: 10, fontWeight: 'bold' }}
         />
         <XAxis
           type="number"
@@ -137,14 +137,14 @@ function BasesChart() {
             formatter={(value) => `${value}%`}
           />}
         />
-        <Bar dataKey="eficacia" fill="var(--color-eficacia)" radius={8}>
+        <Bar dataKey="eficacia" fill="var(--color-eficacia)" radius={4}>
             <LabelList
                 dataKey="eficacia"
                 position="right"
-                offset={10}
+                offset={8}
                 formatter={(value: number) => `${value}%`}
                 className="fill-foreground font-bold"
-                fontSize={12}
+                fontSize={10}
              />
         </Bar>
       </BarChart>
@@ -184,26 +184,26 @@ export default function ComunicadosPage() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       <Tabs defaultValue="cartas-b3">
         <TabsList>
           <TabsTrigger value="cartas-b3">Cartas B3</TabsTrigger>
           <TabsTrigger value="preventivas-b4">Preventivas B4</TabsTrigger>
         </TabsList>
-        <TabsContent value="cartas-b3" className="mt-4">
-          <div className="flex flex-col gap-4">
+        <TabsContent value="cartas-b3" className="mt-2">
+          <div className="flex flex-col gap-2">
             <div className="text-center">
-              <h1 className="font-headline text-2xl font-bold">Eficacia de Comunicados Cartas B3</h1>
-              <p className="text-sm text-muted-foreground">Análisis de la efectividad de las comunicaciones con cédula.</p>
+              <h1 className="font-headline text-xl font-bold">Eficacia de Comunicados Cartas B3</h1>
+              <p className="text-xs text-muted-foreground">Análisis de la efectividad de las comunicaciones con cédula.</p>
             </div>
             
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-4">
               {kpis.map((kpi) => (
                 <StatCard key={kpi.title} title={kpi.title} value={kpi.value} />
               ))}
             </div>
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
               <ResumenEficaciaTable />
               <ChartCard
                 title="Eficacia por Base"
@@ -213,32 +213,32 @@ export default function ComunicadosPage() {
             </div>
             
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
               <Card>
-                <CardHeader className="p-4">
-                  <CardTitle className="font-headline text-base">Trabajadores con Resultados por Encima de la Meta</CardTitle>
+                <CardHeader className="p-2">
+                  <CardTitle className="font-headline text-sm">Trabajadores con Resultados por Encima de la Meta</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="p-2">BASE</TableHead>
-                        <TableHead className="p-2">Nombre</TableHead>
-                        <TableHead className="text-right p-2">C/Firma</TableHead>
-                        <TableHead className="text-right p-2">B/Puerta</TableHead>
-                        <TableHead className="text-right p-2">Total</TableHead>
-                        <TableHead className="text-right p-2">% Eficacia</TableHead>
+                        <TableHead className="p-1 text-xs">BASE</TableHead>
+                        <TableHead className="p-1 text-xs">Nombre</TableHead>
+                        <TableHead className="text-right p-1 text-xs">C/Firma</TableHead>
+                        <TableHead className="text-right p-1 text-xs">B/Puerta</TableHead>
+                        <TableHead className="text-right p-1 text-xs">Total</TableHead>
+                        <TableHead className="text-right p-1 text-xs">% Eficacia</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {trabajadoresEncimaMeta.map((trabajador, index) => (
                         <TableRow key={index}>
-                          <TableCell className="font-medium p-2">{trabajador.base}</TableCell>
-                          <TableCell className="p-2">{trabajador.nombre}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.conFirma}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.bajoPuerta}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.total}</TableCell>
-                          <TableCell className="text-right p-2">
+                          <TableCell className="font-medium p-1 text-xs">{trabajador.base}</TableCell>
+                          <TableCell className="p-1 text-xs">{trabajador.nombre}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.conFirma}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.bajoPuerta}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.total}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">
                             <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
                           </TableCell>
                         </TableRow>
@@ -249,30 +249,30 @@ export default function ComunicadosPage() {
               </Card>
 
               <Card>
-                <CardHeader className="p-4">
-                  <CardTitle className="font-headline text-base">Trabajadores por Debajo de la Meta</CardTitle>
+                <CardHeader className="p-2">
+                  <CardTitle className="font-headline text-sm">Trabajadores por Debajo de la Meta</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="p-2">BASE</TableHead>
-                        <TableHead className="p-2">Nombre</TableHead>
-                        <TableHead className="text-right p-2">C/Firma</TableHead>
-                        <TableHead className="text-right p-2">B/Puerta</TableHead>
-                        <TableHead className="text-right p-2">Total</TableHead>
-                        <TableHead className="text-right p-2">% Eficacia</TableHead>
+                        <TableHead className="p-1 text-xs">BASE</TableHead>
+                        <TableHead className="p-1 text-xs">Nombre</TableHead>
+                        <TableHead className="text-right p-1 text-xs">C/Firma</TableHead>
+                        <TableHead className="text-right p-1 text-xs">B/Puerta</TableHead>
+                        <TableHead className="text-right p-1 text-xs">Total</TableHead>
+                        <TableHead className="text-right p-1 text-xs">% Eficacia</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {trabajadoresDebajoMeta.map((trabajador, index) => (
                         <TableRow key={index}>
-                          <TableCell className="font-medium p-2">{trabajador.base}</TableCell>
-                          <TableCell className="p-2">{trabajador.nombre}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.conFirma}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.bajoPuerta}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.total}</TableCell>
-                          <TableCell className="text-right p-2">
+                          <TableCell className="font-medium p-1 text-xs">{trabajador.base}</TableCell>
+                          <TableCell className="p-1 text-xs">{trabajador.nombre}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.conFirma}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.bajoPuerta}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.total}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">
                             <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
                           </TableCell>
                         </TableRow>
@@ -285,45 +285,45 @@ export default function ComunicadosPage() {
             
           </div>
         </TabsContent>
-        <TabsContent value="preventivas-b4" className="mt-4">
-        <div className="flex flex-col gap-4">
+        <TabsContent value="preventivas-b4" className="mt-2">
+        <div className="flex flex-col gap-2">
             <div className="text-center">
-              <h1 className="font-headline text-2xl font-bold">Reporte de efectividad en la entrega de los comunicados "Con firma"</h1>
-              <p className="text-sm text-muted-foreground">Análisis de la efectividad de las comunicaciones con cédula.</p>
+              <h1 className="font-headline text-xl font-bold">Reporte de efectividad en la entrega de los comunicados "Con firma"</h1>
+              <p className="text-xs text-muted-foreground">Análisis de la efectividad de las comunicaciones con cédula.</p>
             </div>
             
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-4">
               {kpis.map((kpi) => (
                 <StatCard key={kpi.title} title={kpi.title} value={kpi.value} />
               ))}
             </div>
 
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
               <Card>
-                <CardHeader className="p-4">
-                  <CardTitle className="font-headline text-base">Trabajadores con Resultados por Encima de la Meta</CardTitle>
+                <CardHeader className="p-2">
+                  <CardTitle className="font-headline text-sm">Trabajadores con Resultados por Encima de la Meta</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="p-2">BASE</TableHead>
-                        <TableHead className="p-2">Nombre</TableHead>
-                        <TableHead className="text-right p-2">C/Firma</TableHead>
-                        <TableHead className="text-right p-2">B/Puerta</TableHead>
-                        <TableHead className="text-right p-2">Total</TableHead>
-                        <TableHead className="text-right p-2">% Eficacia</TableHead>
+                        <TableHead className="p-1 text-xs">BASE</TableHead>
+                        <TableHead className="p-1 text-xs">Nombre</TableHead>
+                        <TableHead className="text-right p-1 text-xs">C/Firma</TableHead>
+                        <TableHead className="text-right p-1 text-xs">B/Puerta</TableHead>
+                        <TableHead className="text-right p-1 text-xs">Total</TableHead>
+                        <TableHead className="text-right p-1 text-xs">% Eficacia</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {trabajadoresEncimaMeta.map((trabajador, index) => (
                         <TableRow key={index}>
-                          <TableCell className="font-medium p-2">{trabajador.base}</TableCell>
-                          <TableCell className="p-2">{trabajador.nombre}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.conFirma}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.bajoPuerta}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.total}</TableCell>
-                          <TableCell className="text-right p-2">
+                          <TableCell className="font-medium p-1 text-xs">{trabajador.base}</TableCell>
+                          <TableCell className="p-1 text-xs">{trabajador.nombre}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.conFirma}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.bajoPuerta}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.total}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">
                             <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
                           </TableCell>
                         </TableRow>
@@ -334,30 +334,30 @@ export default function ComunicadosPage() {
               </Card>
 
               <Card>
-                <CardHeader className="p-4">
-                  <CardTitle className="font-headline text-base">Trabajadores por Debajo de la Meta</CardTitle>
+                <CardHeader className="p-2">
+                  <CardTitle className="font-headline text-sm">Trabajadores por Debajo de la Meta</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="p-2">BASE</TableHead>
-                        <TableHead className="p-2">Nombre</TableHead>
-                        <TableHead className="text-right p-2">C/Firma</TableHead>
-                        <TableHead className="text-right p-2">B/Puerta</TableHead>
-                        <TableHead className="text-right p-2">Total</TableHead>
-                        <TableHead className="text-right p-2">% Eficacia</TableHead>
+                        <TableHead className="p-1 text-xs">BASE</TableHead>
+                        <TableHead className="p-1 text-xs">Nombre</TableHead>
+                        <TableHead className="text-right p-1 text-xs">C/Firma</TableHead>
+                        <TableHead className="text-right p-1 text-xs">B/Puerta</TableHead>
+                        <TableHead className="text-right p-1 text-xs">Total</TableHead>
+                        <TableHead className="text-right p-1 text-xs">% Eficacia</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {trabajadoresDebajoMeta.map((trabajador, index) => (
                         <TableRow key={index}>
-                          <TableCell className="font-medium p-2">{trabajador.base}</TableCell>
-                          <TableCell className="p-2">{trabajador.nombre}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.conFirma}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.bajoPuerta}</TableCell>
-                          <TableCell className="text-right p-2">{trabajador.total}</TableCell>
-                          <TableCell className="text-right p-2">
+                          <TableCell className="font-medium p-1 text-xs">{trabajador.base}</TableCell>
+                          <TableCell className="p-1 text-xs">{trabajador.nombre}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.conFirma}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.bajoPuerta}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">{trabajador.total}</TableCell>
+                          <TableCell className="text-right p-1 text-xs">
                             <Badge variant={getEficaciaVariant(trabajador.eficacia)}>{trabajador.eficacia}</Badge>
                           </TableCell>
                         </TableRow>
@@ -379,5 +379,3 @@ export default function ComunicadosPage() {
     </div>
   );
 }
-
-    
