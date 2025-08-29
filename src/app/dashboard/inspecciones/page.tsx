@@ -22,11 +22,11 @@ const morosidadData = [
 ];
 
 const facturadoAnualData = [
-    { year: '2019', value: 65355388, color: "url(#cylinderGradient-2019)" },
-    { year: '2020', value: 52885862, color: "url(#cylinderGradient-2020)" },
-    { year: '2021', value: 57862414, color: "url(#cylinderGradient-2021)" },
-    { year: '2022', value: 75421036, color: "url(#cylinderGradient-2022)" },
-    { year: '2023', value: 76920707, color: "url(#cylinderGradient-2023)" },
+    { year: '2019', value: 65355388, startColor: '#005fec', endColor: '#00a4ff' },
+    { year: '2020', value: 52885862, startColor: '#f78f00', endColor: '#f7b500' },
+    { year: '2021', value: 57862414, startColor: '#9b00a7', endColor: '#d600e0' },
+    { year: '2022', value: 75421036, startColor: '#009a9b', endColor: '#00d6d7' },
+    { year: '2023', value: 76920707, startColor: '#84a900', endColor: '#b4d900' },
 ];
 
 const facturadoData = [
@@ -42,57 +42,57 @@ const oportunidadesData = [
 ];
 
 const CustomCylinderBar = (props: any) => {
-    const { x, y, width, height, fill, value, year, color, index } = props;
+    const { x, y, width, height, payload } = props;
+    const { startColor, endColor, year } = payload;
 
     if (height <= 0) return null;
 
     const radius = width / 2;
     const baseHeight = 50; 
-    const liquidHeight = height > baseHeight ? height - baseHeight : 0;
-    const ellipseHeight = radius / 3;
+    const liquidHeight = height > baseHeight ? height - baseHeight : height;
+    const ellipseHeight = radius / 4;
 
-    // Create a unique ID for the gradient
     const gradientId = `cylinderGradient-${year}`;
 
-    const startColor = '#56CCF2';
-    const endColor = '#2F80ED';
+    const numTicks = 8;
+    const tickPositions = Array.from({ length: numTicks }, (_, i) => (liquidHeight / (numTicks - 1)) * i);
 
-    const numTicks = 5;
-    const tickPositions = Array.from({ length: numTicks }, (_, i) => liquidHeight * (i / (numTicks -1)));
 
     return (
         <g>
              <defs>
                 <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor={startColor} stopOpacity={0.8} />
+                    <stop offset="0%" stopColor={startColor} stopOpacity={0.9} />
                     <stop offset="100%" stopColor={endColor} stopOpacity={1} />
                 </linearGradient>
                 <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="2" dy="2" stdDeviation="2" floodColor="#000" floodOpacity="0.2"/>
+                    <feDropShadow dx="2" dy="4" stdDeviation="3" floodColor="#000" floodOpacity="0.2"/>
                 </filter>
             </defs>
 
             {/* Cylinder Glass */}
-            <rect x={x} y={y - ellipseHeight} width={width} height={height + ellipseHeight} fill="rgba(255, 255, 255, 0.3)" rx={radius} ry={radius} style={{filter: 'url(#shadow)'}} />
-            <ellipse cx={x + radius} cy={y} rx={radius} ry={ellipseHeight} fill="rgba(255, 255, 255, 0.5)" />
+            <rect x={x} y={y - ellipseHeight} width={width} height={height + ellipseHeight} fill="rgba(235, 245, 255, 0.6)" rx={radius} ry={radius} style={{filter: 'url(#shadow)'}} />
+            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill="rgba(255, 255, 255, 0.7)" />
+
             
             {/* Liquid */}
             <rect x={x} y={y} width={width} height={liquidHeight} fill={`url(#${gradientId})`} />
-            <ellipse cx={x + radius} cy={y} rx={radius} ry={ellipseHeight} fill={startColor} style={{ filter: 'brightness(1.2)' }} />
+            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill={startColor} style={{ filter: 'brightness(1.1)' }} />
             
             {/* Measurement Ticks */}
-            {liquidHeight > 20 && tickPositions.map((tickY, i) => (
-                 <path key={i} d={`M ${x} ${y + liquidHeight - tickY} h 5`} stroke="rgba(255,255,255,0.7)" strokeWidth="1" />
+            {tickPositions.map((tickY, i) => (
+                <path key={i} d={`M ${x + 2} ${y + liquidHeight - tickY} h 5`} stroke="rgba(255,255,255,0.7)" strokeWidth="1" />
             ))}
 
             {/* Base */}
-            <rect x={x} y={y + liquidHeight} width={width} height={baseHeight} fill="#1C1C1C" />
-            <ellipse cx={x + radius} cy={y + liquidHeight + baseHeight} rx={radius} ry={ellipseHeight} fill="#0A0A0A" />
-            <ellipse cx={x + radius} cy={y + liquidHeight} rx={radius} ry={ellipseHeight} fill="#2C2C2C" />
+            <path d={`M${x},${y + liquidHeight} C${x},${y + liquidHeight + baseHeight/1.5}, ${x+width},${y + liquidHeight + baseHeight/1.5}, ${x+width},${y + liquidHeight}`} fill="#1c1c1c" />
+            <ellipse cx={x + radius} cy={y + liquidHeight} rx={radius} ry={ellipseHeight*1.2} fill="#2c2c2c" />
 
-            {/* Water Drop Icon */}
-             <g transform={`translate(${x + radius - 7}, ${y + liquidHeight + 5})`}>
+
+            {/* Icon and Year */}
+            <g transform={`translate(${x + radius - 20}, ${y + height - baseHeight / 2 - 10})`}>
                 <Droplet size={14} fill="#56CCF2" stroke="white" strokeWidth={0.5} />
+                <text x={18} y={10} fill="white" fontSize="14" fontWeight="bold" textAnchor="start">{year}</text>
             </g>
         </g>
     );
@@ -100,14 +100,14 @@ const CustomCylinderBar = (props: any) => {
 
 const FacturadoAnualChart = () => {
     return (
-        <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={facturadoAnualData} margin={{ top: 20, right: 30, left: 20, bottom: 40 }}>
+        <ResponsiveContainer width="100%" height={400}>
+            <BarChart data={facturadoAnualData} margin={{ top: 20, right: 30, left: 20, bottom: 40 }} barSize={80}>
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis dataKey="year" tickLine={false} axisLine={false} tick={false} />
                 <YAxis
                     axisLine={false}
                     tickLine={false}
-                    tickFormatter={(value) => new Intl.NumberFormat('es-PE').format(value)}
+                    tickFormatter={(value) => new Intl.NumberFormat('es-PE', { notation: 'compact', compactDisplay: 'short' }).format(value)}
                     domain={[0, 85000000]}
                     tickCount={10}
                     label={{ value: 'Soles', angle: -90, position: 'insideLeft' }}
@@ -126,38 +126,17 @@ const FacturadoAnualChart = () => {
                         return null;
                     }}
                 />
-                <Bar dataKey="value" shape={<CustomCylinderBar />} background={false}>
-                     {facturadoAnualData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
+                <Bar dataKey="value" shape={<CustomCylinderBar />}>
                     <LabelList
                         dataKey="value"
                         position="center"
                         angle={-90}
-                        offset={20}
+                        offset={25}
                         formatter={(value: number) => new Intl.NumberFormat('es-PE').format(value)}
                         fill="#fff"
-                        fontSize={14}
+                        fontSize={16}
                         fontWeight="bold"
-                    />
-                     <LabelList
-                        dataKey="year"
-                        position="bottom"
-                        content={(props) => {
-                            const { x, y, width, height, value } = props;
-                            if (height <= 0) return null;
-                            const baseHeight = 50;
-                            const bodyHeight = height > baseHeight ? height - baseHeight : 0;
-                            return (
-                                <g>
-                                    <foreignObject x={x} y={y + bodyHeight + 20} width={width} height={baseHeight - 20} >
-                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', height: '100%', fontSize: 14, fontWeight: 'bold' }}>
-                                            <span>{value}</span>
-                                        </div>
-                                    </foreignObject>
-                                </g>
-                            );
-                        }}
+                        style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}
                     />
                 </Bar>
             </BarChart>
@@ -176,7 +155,7 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                 <CardTitle>{title}</CardTitle>
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col justify-center items-center h-[350px] gap-4">
+            <CardContent className="flex flex-col justify-center items-center h-[400px] gap-4">
                 <div className="relative w-28 h-64 bg-gray-200/50 rounded-t-lg flex items-end" style={{ borderBottomLeftRadius: '60px', borderBottomRightRadius: '60px' }}>
                     <div className="absolute w-full h-8 bg-gray-300/40" style={{top: 0, borderTopLeftRadius: '60px', borderTopRightRadius: '60px'}}></div>
                     <div 
@@ -232,7 +211,7 @@ export default function InspeccionesPage() {
                         <CardTitle>Importe facturado anual</CardTitle>
                         <CardDescription>Fuentes: Eps Sedacusco SA-2023</CardDescription>
                     </CardHeader>
-                    <CardContent className="h-[350px]">
+                    <CardContent className="h-[400px]">
                         <FacturadoAnualChart />
                     </CardContent>
                 </Card>
@@ -319,3 +298,4 @@ export default function InspeccionesPage() {
     
 
     
+
