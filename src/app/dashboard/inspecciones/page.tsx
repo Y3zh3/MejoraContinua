@@ -7,8 +7,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 import { Badge } from "@/components/ui/badge";
+import { Droplet } from "lucide-react";
 
 
 const morosidadData = [
@@ -20,12 +21,12 @@ const morosidadData = [
     { month: "Jun", morosidad: 65, recuperacion: 35 },
 ];
 
-const volumenAnualData = [
-    { year: '2019', value: 24145282 },
-    { year: '2020', value: 24353121 },
-    { year: '2021', value: 24394440 },
-    { year: '2022', value: 25291879 },
-    { year: '2023', value: 25058487 },
+const facturadoAnualData = [
+    { year: '2019', value: 65355388, color: 'hsl(var(--chart-1))' },
+    { year: '2020', value: 52885862, color: 'hsl(var(--chart-2))' },
+    { year: '2021', value: 57862414, color: '#d02596' },
+    { year: '2022', value: 75421036, color: '#00a09a' },
+    { year: '2023', value: 76920707, color: '#88c242' },
 ];
 
 const facturadoData = [
@@ -40,86 +41,97 @@ const oportunidadesData = [
     { entidad: "SEDALIB S.A.", objeto: "Servicio de transporte de materiales y equipos.", fecha: "28/05/2024", valor: "S/ 420,000" },
 ];
 
-const CylinderBar = (props: any) => {
-    const { fill, x, y, width, height } = props;
-    const radius = width / 2;
-  
-    // Don't render if height is 0 or less
-    if (height <= 0) return null;
-  
-    // Adjusted to prevent visual glitches on very small heights
-    const bodyHeight = Math.max(height - radius, 0);
-  
-    return (
-      <g>
-        {/* Cylinder Body */}
-        <rect x={x} y={y} width={width} height={bodyHeight} fill={fill} />
-  
-        {/* Bottom Ellipse (base of the cylinder) */}
-        <ellipse
-          cx={x + radius}
-          cy={y + bodyHeight}
-          rx={radius}
-          ry={radius / 3}
-          fill={fill}
-          style={{ filter: 'brightness(0.85)' }}
-        />
-  
-        {/* Top Ellipse (surface of the water) */}
-        <ellipse
-          cx={x + radius}
-          cy={y}
-          rx={radius}
-          ry={radius / 3}
-          fill={fill}
-          style={{ filter: 'brightness(1.15)' }}
-        />
-      </g>
-    );
-  };
+const CustomCylinderBar = (props: any) => {
+    const { x, y, width, height, fill } = props;
 
-const VolumenAnualChart = () => {
+    if (height <= 0) return null;
+
+    const baseHeight = 30;
+    const bodyHeight = height - baseHeight;
+    const radius = width / 2;
+
     return (
-        <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={volumenAnualData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid vertical={false} strokeDasharray="3 3"/>
-                <XAxis dataKey="year" tickLine={false} axisLine={false} />
+        <g>
+            {/* Glass Cylinder */}
+            <rect x={x} y={y - 20} width={width} height={props.background.height + 20} fill="#e0e0e0" opacity={0.3} />
+            <ellipse cx={x + radius} cy={y - 20} rx={radius} ry={radius / 3} fill="#f0f0f0" opacity={0.5} />
+
+            {/* Liquid */}
+            <rect x={x} y={y} width={width} height={bodyHeight} fill={fill} />
+            <ellipse cx={x + radius} cy={y} rx={radius} ry={radius / 3} fill={fill} style={{ filter: 'brightness(1.1)' }} />
+
+            {/* Base */}
+            <rect x={x} y={y + bodyHeight} width={width} height={baseHeight} fill="#333" />
+            <ellipse cx={x + radius} cy={y + bodyHeight + baseHeight} rx={radius} ry={radius / 3} fill="#222" />
+            <ellipse cx={x + radius} cy={y + bodyHeight} rx={radius} ry={radius / 3} fill="#444" />
+        </g>
+    );
+};
+
+const FacturadoAnualChart = () => {
+    return (
+        <ResponsiveContainer width="100%" height={350}>
+            <BarChart data={facturadoAnualData} margin={{ top: 20, right: 30, left: 20, bottom: 40 }}>
+                <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                <XAxis dataKey="year" tickLine={false} axisLine={false} tick={false} />
                 <YAxis
                     axisLine={false}
                     tickLine={false}
                     tickFormatter={(value) => new Intl.NumberFormat('es-PE').format(value)}
-                    domain={[24000000, 'dataMax + 100000']}
-                    tickCount={7}
-                 />
+                    domain={[0, 85000000]}
+                    tickCount={10}
+                    label={{ value: 'Soles', angle: -90, position: 'insideLeft' }}
+                />
                 <Tooltip
-                    cursor={{fill: 'rgba(206, 212, 218, 0.2)'}}
+                    cursor={{ fill: 'rgba(206, 212, 218, 0.2)' }}
                     content={({ active, payload, label }) => {
                         if (active && payload && payload.length) {
                             return (
                                 <div className="p-2 bg-background border rounded-md shadow-md">
                                     <p className="font-bold">{label}</p>
-                                    <p style={{ color: "hsl(var(--chart-1))" }}>Volumen: {new Intl.NumberFormat('es-PE').format(payload[0].value as number)} m³</p>
+                                    <p style={{ color: payload[0].fill }}>Importe: {new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' }).format(payload[0].value as number)}</p>
                                 </div>
                             );
                         }
                         return null;
                     }}
                 />
-                <Bar dataKey="value" fill="hsl(var(--chart-1))" shape={<CylinderBar />} barSize={60}>
-                    <LabelList 
-                        dataKey="value" 
-                        position="center" 
+                <Bar dataKey="value" shape={<CustomCylinderBar />} background={{ fill: '#eee', opacity: 0.0 }}>
+                    {facturadoAnualData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                    <LabelList
+                        dataKey="value"
+                        position="center"
+                        angle={-90}
+                        offset={20}
                         formatter={(value: number) => new Intl.NumberFormat('es-PE').format(value)}
                         fill="#fff"
-                        fontSize={11}
+                        fontSize={14}
                         fontWeight="bold"
+                    />
+                    <LabelList
+                        dataKey="year"
+                        position="bottom"
+                        content={(props) => {
+                            const { x, y, width, height, value } = props;
+                            return (
+                                <g>
+                                    <foreignObject x={x} y={y + height + 5} width={width} height={30} >
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', height: '100%' }}>
+                                            <Droplet size={14} fill="white" stroke="none"/>
+                                            <span style={{ fontSize: 14, fontWeight: 'bold' }}>{value}</span>
+                                        </div>
+                                    </foreignObject>
+                                </g>
+                            );
+                        }}
                     />
                 </Bar>
             </BarChart>
         </ResponsiveContainer>
     );
 };
-
 
 
 const CylinderChart = ({ data, title, description, color }: { data: any[], title: string, description: string, color: string }) => {
@@ -132,9 +144,9 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                 <CardTitle>{title}</CardTitle>
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col justify-center items-center h-[260px] gap-4">
-                <div className="relative w-28 h-52 bg-gray-200/50 rounded-lg flex items-end overflow-hidden" style={{borderBottomLeftRadius: '60px', borderBottomRightRadius: '60px'}}>
-                     <div className="absolute w-full h-8 bg-gray-300/40" style={{top: 0, borderTopLeftRadius: '60px', borderTopRightRadius: '60px'}}></div>
+            <CardContent className="flex flex-col justify-center items-center h-[350px] gap-4">
+                <div className="relative w-28 h-64 bg-gray-200/50 rounded-t-lg flex items-end" style={{ borderBottomLeftRadius: '60px', borderBottomRightRadius: '60px' }}>
+                    <div className="absolute w-full h-8 bg-gray-300/40" style={{top: 0, borderTopLeftRadius: '60px', borderTopRightRadius: '60px'}}></div>
                     <div 
                         className="relative w-full" 
                         style={{ 
@@ -142,6 +154,7 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                             backgroundColor: color,
                             borderBottomLeftRadius: '60px',
                             borderBottomRightRadius: '60px',
+                            minHeight: '10px'
                         }}
                     >
                          <div 
@@ -153,7 +166,7 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                         </div>
                     </div>
                      <div 
-                        className="absolute w-full h-8 bg-gray-800/80 " 
+                        className="absolute w-full h-8 bg-gray-800/80" 
                         style={{ bottom: '-15px', borderBottomLeftRadius: '60px', borderBottomRightRadius: '60px' }}>
                     </div>
 
@@ -182,13 +195,13 @@ export default function InspeccionesPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                 <Card>
+                <Card>
                     <CardHeader>
-                        <CardTitle>Volumen producido de agua potable</CardTitle>
+                        <CardTitle>Importe facturado anual</CardTitle>
                         <CardDescription>Fuentes: Eps Sedacusco SA-2023</CardDescription>
                     </CardHeader>
-                    <CardContent className="h-[300px]">
-                        <VolumenAnualChart />
+                    <CardContent className="h-[350px]">
+                        <FacturadoAnualChart />
                     </CardContent>
                 </Card>
                 <CylinderChart 
