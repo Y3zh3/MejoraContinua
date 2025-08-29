@@ -22,11 +22,11 @@ const morosidadData = [
 ];
 
 const facturadoAnualData = [
-    { year: '2019', value: 65355388, color: 'hsl(var(--chart-1))' },
-    { year: '2020', value: 52885862, color: 'hsl(var(--chart-2))' },
-    { year: '2021', value: 57862414, color: '#d02596' },
-    { year: '2022', value: 75421036, color: '#00a09a' },
-    { year: '2023', value: 76920707, color: '#88c242' },
+    { year: '2019', value: 65355388, color: 'hsl(217, 59%, 62%)' },
+    { year: '2020', value: 52885862, color: 'hsl(33, 100%, 67%)' },
+    { year: '2021', value: 57862414, color: '#e066b8' },
+    { year: '2022', value: 75421036, color: '#00c0b8' },
+    { year: '2023', value: 76920707, color: '#a8e262' },
 ];
 
 const facturadoData = [
@@ -46,20 +46,16 @@ const CustomCylinderBar = (props: any) => {
 
     if (height <= 0) return null;
 
-    const baseHeight = 50;
+    const baseHeight = 30; // Increased base height
     const bodyHeight = height > baseHeight ? height - baseHeight : 0;
     const radius = width / 2;
 
     return (
         <g>
-            {/* Glass Cylinder */}
-            <rect x={x} y={y - 20} width={width} height={props.background.height + 20} fill="#e0e0e0" opacity={0.3} />
-            <ellipse cx={x + radius} cy={y - 20} rx={radius} ry={radius / 3} fill="#f0f0f0" opacity={0.5} />
-
             {/* Liquid */}
             <rect x={x} y={y} width={width} height={bodyHeight} fill={fill} />
             <ellipse cx={x + radius} cy={y} rx={radius} ry={radius / 3} fill={fill} style={{ filter: 'brightness(1.1)' }} />
-
+            
             {/* Base */}
             <rect x={x} y={y + bodyHeight} width={width} height={baseHeight} fill="#333" />
             <ellipse cx={x + radius} cy={y + bodyHeight + baseHeight} rx={radius} ry={radius / 3} fill="#222" />
@@ -96,7 +92,7 @@ const FacturadoAnualChart = () => {
                         return null;
                     }}
                 />
-                <Bar dataKey="value" shape={<CustomCylinderBar />} background={{ fill: '#eee', opacity: 0.0 }}>
+                <Bar dataKey="value" shape={<CustomCylinderBar />} background={false}>
                     {facturadoAnualData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
@@ -110,17 +106,17 @@ const FacturadoAnualChart = () => {
                         fontSize={14}
                         fontWeight="bold"
                     />
-                    <LabelList
+                     <LabelList
                         dataKey="year"
                         position="bottom"
                         content={(props) => {
                             const { x, y, width, height, value } = props;
                             if (height <= 0) return null;
-                            const baseHeight = 50;
+                            const baseHeight = 30;
                             const bodyHeight = height > baseHeight ? height - baseHeight : 0;
                             return (
                                 <g>
-                                    <foreignObject x={x} y={y + bodyHeight + 12} width={width} height={baseHeight} >
+                                    <foreignObject x={x} y={y + bodyHeight + 5} width={width} height={baseHeight} >
                                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', height: '100%', fontSize: 14, fontWeight: 'bold' }}>
                                             <span>{value}</span>
                                         </div>
@@ -283,5 +279,7 @@ export default function InspeccionesPage() {
 
 
 
+
+    
 
     
