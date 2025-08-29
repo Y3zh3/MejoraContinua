@@ -56,6 +56,9 @@ const chartConfig = {
     label: "Cantidad de cartas",
     color: "hsl(var(--foreground))",
   },
+  ciclo: {
+    label: "Ciclo"
+  }
 };
 
 const ResumenEficaciaTable = () => {
@@ -189,17 +192,17 @@ const EficaciaPorCicloChart = () => (
             <CardDescription className="text-center text-xs">Meta 80%</CardDescription>
         </CardHeader>
         <CardContent className="p-2 h-[300px]">
-            <ResponsiveContainer width="100%" height="100%">
-                <BarChart layout="vertical" data={eficaciaPorCicloData} margin={{ top: 0, right: 30, left: 0, bottom: 0 }}>
-                    <CartesianGrid horizontal={false} />
-                    <XAxis type="number" domain={[0, 100]} hide />
-                    <YAxis dataKey="ciclo" type="category" tickLine={false} axisLine={false} width={50} fontSize={12} />
-                    <Tooltip content={<ChartTooltipContent />} />
-                    <Bar dataKey="eficacia" fill="hsl(var(--chart-1))" radius={[0, 4, 4, 0]}>
-                        <LabelList dataKey="eficacia" position="right" formatter={(value:number) => `${value}%`} className="fill-foreground font-bold" fontSize={12} />
-                    </Bar>
-                </BarChart>
-            </ResponsiveContainer>
+          <ChartContainer config={chartConfig} className="w-full h-full">
+            <BarChart layout="vertical" data={eficaciaPorCicloData} margin={{ top: 0, right: 30, left: 0, bottom: 0 }}>
+                <CartesianGrid horizontal={false} />
+                <XAxis type="number" domain={[0, 100]} hide />
+                <YAxis dataKey="ciclo" type="category" tickLine={false} axisLine={false} width={50} fontSize={12} />
+                <Tooltip content={<ChartTooltipContent />} />
+                <Bar dataKey="eficacia" fill="hsl(var(--chart-1))" radius={[0, 4, 4, 0]}>
+                    <LabelList dataKey="eficacia" position="right" formatter={(value:number) => `${value}%`} className="fill-foreground font-bold" fontSize={12} />
+                </Bar>
+            </BarChart>
+            </ChartContainer>
         </CardContent>
     </Card>
 );
