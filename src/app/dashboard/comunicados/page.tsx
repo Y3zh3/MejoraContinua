@@ -20,32 +20,10 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, ComposedChart, LabelList } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, LabelList } from "recharts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 
-
-const basesData = [
-  { name: "CO", quality: 92, total: 905 },
-  { name: "CA", quality: 85, total: 468 },
-  { name: "ATE", quality: 78, total: 734 },
-  { name: "BRE", quality: 95, total: 1834 },
-  { name: "SJL", quality: 88, total: 1270 },
-  { name: "CE", quality: 98, total: 640 },
-  { name: "SUR", quality: 91, total: 87 },
-  { name: "VES", quality: 82, total: 341 },
-];
-
-const chartConfig = {
-  quality: {
-    label: "Eficacia",
-    color: "hsl(var(--chart-1))",
-  },
-  total: {
-    label: "Total Comunicados",
-    color: "hsl(var(--chart-2))",
-  }
-};
 
 const resumenEficaciaData = [
   { base: "3. ATE", conFirma: 36, bajoPuerta: 6, total: 42, meta: "80%", eficacia: 86 },
@@ -54,6 +32,14 @@ const resumenEficaciaData = [
   { base: "4. BRE", conFirma: 40, bajoPuerta: 17, total: 57, meta: "80%", eficacia: 70 },
   { base: "1. CO", conFirma: 134, bajoPuerta: 70, total: 204, meta: "80%", eficacia: 66 },
 ];
+
+const chartConfig = {
+  eficacia: {
+    label: "Eficacia",
+    color: "hsl(var(--chart-1))",
+  },
+};
+
 
 const ResumenEficaciaTable = () => {
   const totals = resumenEficaciaData.reduce(
@@ -125,70 +111,45 @@ const ResumenEficaciaTable = () => {
 function BasesChart() {
   return (
     <ChartContainer config={chartConfig} className="min-h-[300px] w-full">
-      <ComposedChart
+      <BarChart
         accessibilityLayer
-        data={basesData}
-        margin={{ top: 30, right: 20, bottom: 20, left: 20 }}
+        data={resumenEficaciaData}
+        layout="vertical"
+        margin={{ right: 20 }}
       >
-        <CartesianGrid vertical={false} />
-        <XAxis
-          dataKey="name"
+        <CartesianGrid horizontal={false} />
+        <YAxis
+          dataKey="base"
+          type="category"
           tickLine={false}
           tickMargin={10}
           axisLine={false}
           tick={{ fontWeight: 'bold' }}
         />
-        <YAxis
-          yAxisId="left"
+        <XAxis
+          type="number"
           domain={[0, 100]}
           tickFormatter={(value) => `${value}%`}
-          hide
-        />
-        <YAxis
-          yAxisId="right"
-          orientation="right"
-          domain={[0, Math.max(...basesData.map(d => d.total)) + 500]}
           hide
         />
         <Tooltip
           cursor={false}
           content={<ChartTooltipContent
             indicator="dot"
-            formatter={(value, name) => name === 'quality' ? `${value}%` : value}
+            formatter={(value) => `${value}%`}
           />}
         />
-        <ChartLegend content={<ChartLegendContent />} />
-        <Bar dataKey="quality" yAxisId="left" fill="var(--color-quality)" radius={8}>
+        <Bar dataKey="eficacia" fill="var(--color-eficacia)" radius={8}>
             <LabelList
-                dataKey="total"
-                position="top"
+                dataKey="eficacia"
+                position="right"
                 offset={10}
+                formatter={(value: number) => `${value}%`}
                 className="fill-foreground font-bold"
                 fontSize={12}
              />
-             <LabelList
-                dataKey="quality"
-                position="inside"
-                formatter={(value: number) => `${value}%`}
-                className="fill-primary-foreground font-bold"
-                fontSize={12}
-             />
         </Bar>
-        <Line
-          dataKey="total"
-          yAxisId="right"
-          type="monotone"
-          stroke="var(--color-total)"
-          strokeWidth={2}
-          strokeDasharray="3 3"
-          dot={{
-            fill: "var(--color-total)",
-          }}
-          activeDot={{
-            r: 6,
-          }}
-        />
-      </ComposedChart>
+      </BarChart>
     </ChartContainer>
   );
 }
@@ -244,7 +205,15 @@ export default function ComunicadosPage() {
               ))}
             </div>
 
-            <ResumenEficaciaTable />
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <ResumenEficaciaTable />
+              <ChartCard
+                title="Eficacia por Base"
+                description="Porcentaje de eficacia de comunicados por cada base."
+                chart={<BasesChart />}
+              />
+            </div>
+            
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
@@ -316,11 +285,6 @@ export default function ComunicadosPage() {
               </Card>
             </div>
             
-            <ChartCard
-              title="Calidad de Comunicados por Base"
-              description="Efectividad de entrega de comunicados con cédula por cada base."
-              chart={<BasesChart />}
-            />
           </div>
         </TabsContent>
         <TabsContent value="preventivas-b4" className="mt-6">
@@ -417,5 +381,3 @@ export default function ComunicadosPage() {
     </div>
   );
 }
-
-    
