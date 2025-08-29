@@ -120,7 +120,7 @@ const FacturadoAnualChart = () => {
                             const bodyHeight = height > baseHeight ? height - baseHeight : 0;
                             return (
                                 <g>
-                                    <foreignObject x={x} y={y + bodyHeight + 2} width={width} height={baseHeight} >
+                                    <foreignObject x={x} y={y + bodyHeight + 12} width={width} height={baseHeight} >
                                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', height: '100%', fontSize: 14, fontWeight: 'bold' }}>
                                             <span>{value}</span>
                                         </div>
@@ -282,3 +282,6 @@ export default function InspeccionesPage() {
     
 
 
+
+
+    
