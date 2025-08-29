@@ -48,8 +48,8 @@ const CustomCylinderBar = (props: any) => {
     if (height <= 0) return null;
 
     const radius = width / 2;
-    const baseHeight = 50; 
-    const liquidHeight = height > baseHeight ? height - baseHeight : height;
+    const baseHeight = 50;
+    const liquidHeight = height;
     const ellipseHeight = radius / 4;
 
     const gradientId = `cylinderGradient-${year}`;
@@ -90,7 +90,7 @@ const CustomCylinderBar = (props: any) => {
 
 
             {/* Icon and Year */}
-            <g transform={`translate(${x + radius - 20}, ${y + height - baseHeight / 2 - 10})`}>
+            <g transform={`translate(${x + radius - 20}, ${y + height + baseHeight - 45 })`}>
                 <Droplet size={14} fill="#56CCF2" stroke="white" strokeWidth={0.5} />
                 <text x={18} y={10} fill="white" fontSize="14" fontWeight="bold" textAnchor="start">{year}</text>
             </g>
@@ -298,4 +298,5 @@ export default function InspeccionesPage() {
     
 
     
+
 
