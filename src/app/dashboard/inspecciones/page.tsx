@@ -89,7 +89,8 @@ const CustomCylinderBar = (props: any) => {
             ))}
 
             {/* Base */}
-            <path d={`M${x},${y+height+baseHeight} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height+baseHeight} L${x+width},${y+height} A${radius},${ellipseHeight} 0 0,1 ${x},${y+height} Z`} fill="#1c1c1c" />
+            <rect x={x} y={y+height} width={width} height={baseHeight} fill="#1c1c1c" />
+            <path d={`M${x},${y+height} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height} L${x+width},${y+height} A${radius},${ellipseHeight} 0 0,1 ${x},${y+height} Z`} fill="#1c1c1c" />
             <path d={`M${x},${y+height+baseHeight} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height+baseHeight}`} fill="#2c2c2c" />
 
 
@@ -304,6 +305,8 @@ export default function InspeccionesPage() {
 
 
 
+
+    
 
     
 
