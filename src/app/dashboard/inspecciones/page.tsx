@@ -7,9 +7,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList, Cell, ResponsiveContainer } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { Badge } from "@/components/ui/badge";
-import { Tooltip } from 'recharts';
 
 
 const morosidadData = [
@@ -43,30 +42,14 @@ const oportunidadesData = [
 
 const CylinderBar = (props: any) => {
     const { fill, x, y, width, height } = props;
-  
-    if (height <= 0) {
-      return null;
-    }
-  
+    if (height <= 0) return null;
     const radius = width / 2;
   
     return (
       <g>
-        {/* Top ellipse */}
-        <ellipse cx={x + radius} cy={y} rx={radius} ry={radius / 3} fill={fill} opacity="0.4" />
-        
-        {/* Main body */}
-        <path
-          d={`M ${x},${y}
-                 L ${x},${y + height}
-                 A ${radius},${radius / 3} 0 0 0 ${x + width},${y + height}
-                 L ${x + width},${y}
-                 Z`}
-          fill={fill}
-        />
-        
-        {/* Bottom ellipse */}
-        <ellipse cx={x + radius} cy={y + height} rx={radius} ry={radius / 3} fill={fill} />
+        <path d={`M${x},${y + radius} L${x},${y + height - radius} A${radius},${radius} 0 0 0 ${x + width},${y + height - radius} L${x + width},${y + radius} A${radius},${radius} 0 0 1 ${x},${y + radius} Z`} fill={fill} />
+        <ellipse cx={x + radius} cy={y + radius} rx={radius} ry={radius / 2} fill={fill} opacity={0.5} />
+        <ellipse cx={x + radius} cy={y + height - radius} rx={radius} ry={radius / 2} fill={fill} />
       </g>
     );
 };
@@ -126,26 +109,15 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                 <CardDescription>{description}</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center h-[260px] gap-4">
-                <div className="relative w-28 h-52 bg-gray-200/50 rounded-t-full rounded-b-lg flex items-end">
-                    {/* Base oscura */}
-                    <div className="absolute bottom-0 w-full h-8 bg-gray-700 rounded-b-lg"></div>
-
-                    {/* Efecto de elipse en la base */}
-                    <div 
-                        className="absolute w-full h-4 bg-gray-800 rounded-full" 
-                        style={{ bottom: '-8px' }}>
-                    </div>
-
-                    {/* Nivel de agua */}
+                <div className="relative w-28 h-52 bg-gray-200/50 rounded-lg flex items-end overflow-hidden">
+                    <div className="absolute top-0 w-full h-4 bg-gray-300/50" style={{ borderTopLeftRadius: '50%', borderTopRightRadius: '50%' }}></div>
                     <div 
                         className="relative w-full" 
                         style={{ 
-                            height: `calc(${percentage}% - 2rem)`,
-                            backgroundColor: color,
-                            bottom: '2rem'
+                            height: `${percentage}%`,
+                            backgroundColor: color
                         }}
                     >
-                         {/* Superficie del agua */}
                          <div 
                             className="absolute w-full h-5 rounded-full -top-2.5" 
                             style={{
@@ -154,17 +126,13 @@ const CylinderChart = ({ data, title, description, color }: { data: any[], title
                             }}>
                         </div>
                     </div>
-
-                     {/* Borde superior del cilindro */}
                      <div 
-                        className="absolute w-full h-5 rounded-full top-0 border-t-4 border-gray-300"
-                        style={{
-                            borderRadius: '50%/100%',
-                            borderBottom: 'none'
-                        }}>
+                        className="absolute w-full h-4 bg-gray-800/80 rounded-full" 
+                        style={{ bottom: '-8px' }}>
                     </div>
 
-                    <div className="absolute z-10 text-white text-center w-full" style={{ bottom: 'calc(2rem + 20%)' }}>
+
+                    <div className="absolute z-10 text-white text-center w-full bottom-1/4">
                         <p className="font-bold text-lg drop-shadow">{formattedValue}</p>
                         <p className="text-xs drop-shadow">({percentage.toFixed(1)}%)</p>
                     </div>
@@ -267,9 +235,5 @@ export default function InspeccionesPage() {
         </div>
     );
 }
-
-    
-
-    
 
     
