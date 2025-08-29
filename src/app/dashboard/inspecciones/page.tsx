@@ -20,9 +20,14 @@ const morosidadData = [
     { month: "Jun", morosidad: 65, recuperacion: 35 },
 ];
 
-const volumenData = [
-    { name: 'Volumen', value: 87346, meta: 100000 },
+const volumenAnualData = [
+    { year: '2019', value: 24145282 },
+    { year: '2020', value: 24353121 },
+    { year: '2021', value: 24394440 },
+    { year: '2022', value: 25291879 },
+    { year: '2023', value: 25058487 },
 ];
+
 const facturadoData = [
     { name: 'Importe', value: 346873, meta: 400000 },
 ];
@@ -36,25 +41,59 @@ const oportunidadesData = [
 ];
 
 const CylinderBar = (props: any) => {
-    const { x, y, width, height, fill } = props;
+    const { x, y, width, height, fill, value } = props;
     const radius = width / 2;
 
     return (
         <g>
+            <rect x={x} y={y} width={width} height={height} fill="rgba(0,0,0,0.1)" />
             <path
                 d={`M ${x},${y + radius}
                     A ${radius},${radius} 0 0 1 ${x + width},${y + radius}
-                    L ${x + width},${y + height - radius}
-                    A ${radius},${radius} 0 0 1 ${x},${y + height - radius}
+                    L ${x + width},${y + height}
+                    L ${x},${y + height}
                     Z`}
                 fill={fill}
             />
-            <ellipse cx={x + radius} cy={y + radius} rx={radius} ry={radius / 2} fill={fill} stroke="#fff" strokeWidth={2} />
-            <path d={`M${x},${y+radius} C${x},${y} ${x+width},${y} ${x+width},${y+radius}`} fill="none" stroke={fill} strokeWidth={1} opacity={0.5} />
-
+            <ellipse cx={x + radius} cy={y + radius} rx={radius} ry={radius/3} fill={fill} />
+             <text x={x + width / 2} y={y + height / 2} fill="#fff" textAnchor="middle" dominantBaseline="middle" transform={`rotate(-90, ${x+width/2}, ${y+height/2})`} fontSize="12" fontWeight="bold">
+                {value.toLocaleString()} m³
+            </text>
         </g>
     );
 };
+
+const VolumenAnualChart = () => {
+    return (
+        <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={volumenAnualData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <CartesianGrid vertical={false} strokeDasharray="3 3"/>
+                <XAxis dataKey="year" tick={{fontWeight: 'bold'}} />
+                <YAxis 
+                    tickFormatter={(value) => new Intl.NumberFormat('es-PE', { notation: 'compact', compactDisplay: 'short' }).format(value)}
+                    domain={['dataMin - 100000', 'dataMax + 100000']}
+                 />
+                <Tooltip
+                    content={({ active, payload, label }) => {
+                        if (active && payload && payload.length) {
+                            return (
+                                <div className="p-2 bg-background border rounded-md shadow-md">
+                                    <p className="font-bold">{label}</p>
+                                    <p style={{ color: "hsl(var(--chart-1))" }}>Volumen: {payload[0].value.toLocaleString()} m³</p>
+                                </div>
+                            );
+                        }
+                        return null;
+                    }}
+                />
+                <Bar dataKey="value" shape={<CylinderBar />} fill="hsl(var(--chart-1))">
+                </Bar>
+            </BarChart>
+        </ResponsiveContainer>
+    );
+};
+
+
 
 const CylinderChart = ({ data, title, color }: { data: any[], title: string, color: string }) => {
     const percentage = ((data[0].value / data[0].meta) * 100).toFixed(1);
@@ -92,7 +131,15 @@ export default function InspeccionesPage() {
             </div>
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <CylinderChart data={volumenData} title="Volumen producido de agua potable" color="hsl(var(--chart-1))" />
+                 <Card>
+                    <CardHeader>
+                        <CardTitle>Volumen producido de agua potable</CardTitle>
+                        <CardDescription>Fuentes: Eps Sedacusco SA-2023</CardDescription>
+                    </CardHeader>
+                    <CardContent className="h-[300px]">
+                        <VolumenAnualChart />
+                    </CardContent>
+                </Card>
                 <CylinderChart data={facturadoData} title="Importe facturado por Agua y Alcantarillado" color="hsl(var(--chart-2))" />
             </div>
             
