@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ChartCard } from "@/components/charts";
 import {
   ChartContainer,
   ChartTooltipContent,
