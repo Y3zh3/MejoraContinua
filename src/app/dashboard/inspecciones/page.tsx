@@ -7,7 +7,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList, Cell, ResponsiveContainer } from "recharts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { Badge } from "@/components/ui/badge";
 
 
@@ -113,8 +113,8 @@ export default function InspeccionesPage() {
                                             return (
                                                 <div className="p-2 bg-background border rounded-md shadow-md">
                                                     <p className="font-bold">{label}</p>
-                                                    <p style={{ color: "hsl(var(--chart-5))" }}>Morosidad: {(payload[1].value! * 100).toFixed(0)}%</p>
-                                                    <p style={{ color: "hsl(var(--chart-3))" }}>Recuperación: {(payload[0].value! * 100).toFixed(0)}%</p>
+                                                    <p style={{ color: "hsl(var(--chart-5))" }}>Morosidad: {((payload[1].value || 0) * 100).toFixed(0)}%</p>
+                                                    <p style={{ color: "hsl(var(--chart-3))" }}>Recuperación: {((payload[0].value || 0) * 100).toFixed(0)}%</p>
                                                 </div>
                                             );
                                         }
