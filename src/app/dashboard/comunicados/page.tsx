@@ -34,21 +34,21 @@ const chartConfig = {
 
 
 const EficaciaPorCicloChart = () => (
-    <Card className="w-full">
+    <Card className="w-full h-full">
         <CardHeader className="p-4">
             <CardTitle className="text-center font-bold text-primary text-xl">%EFICACIA POR CICLO</CardTitle>
             <CardDescription className="text-center text-sm">Meta 80%</CardDescription>
         </CardHeader>
-        <CardContent className="p-2 h-[400px]">
+        <CardContent className="p-2 h-[calc(100%-80px)]">
           <ResponsiveContainer width="100%" height="100%">
             <ChartContainer config={chartConfig} className="w-full h-full">
-                <BarChart data={eficaciaPorCicloData} margin={{ top: 20, right: 20, left: 20, bottom: 10 }}>
-                    <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                    <XAxis dataKey="ciclo" tickLine={false} axisLine={false} tickMargin={10} fontSize={14} fontWeight="bold" />
-                    <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
+                <BarChart data={eficaciaPorCicloData} layout="vertical" margin={{ top: 20, right: 40, left: 0, bottom: 10 }}>
+                    <CartesianGrid horizontal={false} strokeDasharray="3 3" />
+                    <YAxis dataKey="ciclo" type="category" tickLine={false} axisLine={false} tickMargin={10} fontSize={14} fontWeight="bold" />
+                    <XAxis type="number" domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
                     <Tooltip content={<ChartTooltipContent />} />
-                    <Bar dataKey="eficacia" fill="hsl(var(--chart-1))" radius={[4, 4, 0, 0]} barSize={40}>
-                        <LabelList dataKey="eficacia" position="top" formatter={(value:number) => `${value}%`} className="fill-foreground font-bold" fontSize={14} />
+                    <Bar dataKey="eficacia" fill="hsl(var(--chart-1))" radius={[0, 4, 4, 0]} barSize={30}>
+                        <LabelList dataKey="eficacia" position="right" formatter={(value:number) => `${value}%`} className="fill-foreground font-bold" fontSize={14} />
                     </Bar>
                 </BarChart>
             </ChartContainer>
@@ -89,7 +89,7 @@ export default function ComunicadosPage() {
                 {kpis.map(kpi => <StatCard key={kpi.title} title={kpi.title} value={kpi.value} />)}
             </div>
             
-            <div className="flex w-full">
+            <div className="w-[30%] h-[70vh]">
                 <EficaciaPorCicloChart />
             </div>
 
