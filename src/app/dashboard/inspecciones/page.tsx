@@ -42,28 +42,28 @@ const oportunidadesData = [
 ];
 
 const CustomCylinderBar = (props: any) => {
-    const { x, y, width, height, payload, value } = props;
+    const { x, y, width, height, payload, value, yAxis } = props;
     const { startColor, endColor, year } = payload;
 
     if (height <= 0) return null;
 
     const radius = width / 2;
-    const liquidHeight = height;
     const ellipseHeight = radius / 3;
-    const baseHeight = 50;
+    const baseHeight = 60;
+    const totalCylinderHeight = yAxis.height;
 
     const gradientId = `cylinderGradient-${year}`;
     
     const numTicks = 5;
-    const tickPositions = Array.from({ length: numTicks }, (_, i) => (liquidHeight / (numTicks - 1)) * i);
+    const tickPositions = Array.from({ length: numTicks }, (_, i) => (height / (numTicks - 1)) * i);
 
 
     return (
         <g>
              <defs>
-                <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor={startColor} />
-                    <stop offset="100%" stopColor={endColor} />
+                <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#228DFF" />
+                    <stop offset="100%" stopColor="#0052B4" />
                 </linearGradient>
                 <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
                     <feDropShadow dx="2" dy="5" stdDeviation="3" floodColor="#000" floodOpacity="0.3"/>
@@ -71,33 +71,33 @@ const CustomCylinderBar = (props: any) => {
             </defs>
 
             {/* Glass Cylinder */}
-            <rect x={x} y={y - ellipseHeight*2} width={width} height={height + baseHeight + ellipseHeight*2} fill="rgba(255, 255, 255, 0.3)" rx={radius} ry={radius} />
-            <path d={`M${x},${y-ellipseHeight} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y-ellipseHeight}`} fill="rgba(255, 255, 255, 0.5)" />
-            <rect x={x} y={y-ellipseHeight} width={width} height={height+ellipseHeight} fill="rgba(235, 245, 255, 0.6)" />
+            <rect x={x} y={y - (totalCylinderHeight - height)} width={width} height={totalCylinderHeight} fill="rgba(255, 255, 255, 0.3)" rx={radius} ry={radius} />
+            <path d={`M${x},${y- (totalCylinderHeight - height) + ellipseHeight} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y- (totalCylinderHeight - height) + ellipseHeight}`} fill="rgba(255, 255, 255, 0.5)" />
+            <rect x={x} y={y- (totalCylinderHeight - height) + ellipseHeight} width={width} height={totalCylinderHeight - ellipseHeight} fill="rgba(235, 245, 255, 0.6)" />
 
             {/* Liquid */}
-            <rect x={x} y={y} width={width} height={liquidHeight} fill={`url(#${gradientId})`} />
-            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill={startColor} style={{ filter: 'brightness(1.2)' }} />
+            <rect x={x} y={y} width={width} height={height} fill={`url(#${gradientId})`} />
+            <path d={`M${x},${y} A${radius},${ellipseHeight} 0 1,1 ${x + width},${y}`} fill="#4DA8FF" style={{ filter: 'brightness(1.2)' }} />
 
             {/* Liquid Highlight */}
-            <path d={`M${x+width*0.25},${y} C${x+width*0.35},${y+liquidHeight*0.33} ${x+width*0.35},${y+liquidHeight*0.66} ${x+width*0.25},${y+liquidHeight}`} 
+            <path d={`M${x+width*0.25},${y} C${x+width*0.35},${y+height*0.33} ${x+width*0.35},${y+height*0.66} ${x+width*0.25},${y+height}`} 
                 fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="10" />
 
             {/* Measurement Ticks */}
             {tickPositions.map((tickY, i) => (
-                <path key={i} d={`M ${x + 5} ${y + liquidHeight - tickY} h -5`} stroke="rgba(0,0,0,0.3)" strokeWidth="1" />
+                <path key={i} d={`M ${x + 5} ${y + height - tickY} h -5`} stroke="rgba(255,255,255,0.8)" strokeWidth="2" />
             ))}
 
             {/* Base */}
             <rect x={x} y={y+height} width={width} height={baseHeight} fill="#1c1c1c" />
-            <path d={`M${x},${y+height} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height} L${x+width},${y+height} A${radius},${ellipseHeight} 0 0,1 ${x},${y+height} Z`} fill="#1c1c1c" />
+            <path d={`M${x},${y+height} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height} L${x+width},${y+height} A${radius},${ellipseHeight} 0 0,1 ${x},${y+height} Z`} fill="#2c2c2c" />
             <path d={`M${x},${y+height+baseHeight} A${radius},${ellipseHeight} 0 0,0 ${x+width},${y+height+baseHeight}`} fill="#2c2c2c" />
 
 
             {/* Base Content */}
             <g transform={`translate(${x + radius}, ${y + height + baseHeight/2 + 5})`}>
-                 <Droplet size={14} fill="#56CCF2" stroke="white" strokeWidth={0.5} y={-10}/>
-                 <text y={10} fill="white" fontSize="14" fontWeight="bold" textAnchor="middle">{year}</text>
+                 <Droplet size={18} fill="#56CCF2" stroke="white" strokeWidth={0.5} y={-14}/>
+                 <text y={10} fill="white" fontSize="16" fontWeight="bold" textAnchor="middle">{year}</text>
             </g>
         </g>
     );
