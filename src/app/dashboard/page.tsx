@@ -6,14 +6,14 @@ export default function DashboardPage() {
   return (
     <>
       <div className="relative text-center mb-12 rounded-lg overflow-hidden">
-        <div className="absolute inset-0 bg-black/50 z-10" />
+        <div className="absolute inset-0 bg-black/30 z-10" />
         <Image 
-            src="https://picsum.photos/seed/water-plant/1200/300"
+            src="https://picsum.photos/seed/water-treatment-plant/1200/300"
             alt="Hero Background"
             width={1200}
             height={300}
             className="w-full object-cover"
-            data-ai-hint="water treatment"
+            data-ai-hint="water treatment plant"
         />
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-primary-foreground">
             <div className="flex items-center justify-center gap-4">
