@@ -68,7 +68,6 @@ export default function DashboardLayout({
           <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
             {navItems.map((item) => (
               <HorizontalNavLink key={item.href} href={item.href}>
-                {item.label === "Mejora Continua" && <TrendingUp className="h-4 w-4" />}
                 {item.label}
               </HorizontalNavLink>
             ))}
