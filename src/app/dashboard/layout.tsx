@@ -9,6 +9,11 @@ import {
   Settings,
   UserCircle,
   Droplet,
+  Activity,
+  Megaphone,
+  ClipboardList,
+  Handshake,
+  Receipt,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -35,6 +40,11 @@ import NavLink from "@/components/nav-link";
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  { href: "/dashboard/toma-de-estado", icon: Activity, label: "Toma de Estado" },
+  { href: "/dashboard/comunicados", icon: Megaphone, label: "Comunicados" },
+  { href: "/dashboard/inspecciones", icon: ClipboardList, label: "Inspecciones" },
+  { href: "/dashboard/persuasivas", icon: Handshake, label: "Persuasivas" },
+  { href: "/dashboard/recibos", icon: Receipt, label: "Recibos" },
 ];
 
 export default function DashboardLayout({

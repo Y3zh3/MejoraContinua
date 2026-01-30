@@ -24,7 +24,8 @@
             "type": "object",
             "properties": {
               "mes": { "type": "string" },
-              "valor": { "type": "number" }
+              "valor": { "type": "number" },
+              "meta": { "type": "number" }
             },
             "required": ["mes", "valor"]
           }
@@ -51,11 +52,11 @@
     ]
   },
   "firestore": {
-    "/actividades_anuales/{actividadId}": {
+    "/DashboardAnual/{actividadId}": {
       "schema": {
         "$ref": "#/backend/entities/ActividadAnual"
       },
-      "description": "Colección para los datos anuales de las actividades."
+      "description": "Colección para los datos anuales de las actividades del dashboard."
     }
   }
 }
