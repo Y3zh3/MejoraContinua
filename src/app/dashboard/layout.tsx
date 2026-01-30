@@ -63,7 +63,6 @@ export default function DashboardLayout({
         <div className="flex items-center gap-10">
           <Link href="/dashboard" className="flex items-center gap-2 font-semibold text-lg text-primary">
             <TrendingUp className="h-7 w-7" />
-            <span className="hidden sm:inline-block">Aqua Insights</span>
           </Link>
 
           <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
