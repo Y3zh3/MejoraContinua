@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 import {
   Search,
   LogOut,
@@ -62,8 +61,9 @@ export default function DashboardLayout({
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 md:px-6 z-50">
         <div className="flex items-center gap-10">
-          <Link href="/dashboard" className="flex items-center gap-2">
-            <Image src="/sedapal-logo.svg" alt="Sedapal" width={120} height={40} />
+          <Link href="/dashboard" className="flex items-center gap-2 font-semibold text-lg text-primary">
+            <TrendingUp className="h-7 w-7" />
+            <span className="hidden sm:inline-block">Aqua Insights</span>
           </Link>
 
           <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
