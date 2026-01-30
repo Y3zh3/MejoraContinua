@@ -1,23 +1,35 @@
 "use client";
-
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { AlertTriangle } from "lucide-react";
+import { BaseSelector } from '@/components/base-selector';
 
-const weeklyData = [
+const initialWeeklyData = [
   { name: 'Semana 1', value: 12, meta: 10 },
   { name: 'Semana 2', value: 8, meta: 10 },
   { name: 'Semana 3', value: 11, meta: 10 },
   { name: 'Semana 4', value: 9, meta: 10 },
 ];
-const avgValue = Math.round(weeklyData.reduce((acc, item) => acc + item.value, 0) / weeklyData.length);
 
 export default function AtipicasComunicadosPage() {
+  const [weeklyData, setWeeklyData] = useState(initialWeeklyData);
+
+  const handleBaseChange = () => {
+    // Simulate data change for the selected base
+    setWeeklyData(initialWeeklyData.map(d => ({...d, value: Math.floor(Math.random() * 5) + 8 })));
+  };
+
+  const avgValue = Math.round(weeklyData.reduce((acc, item) => acc + item.value, 0) / weeklyData.length);
+  
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex items-center gap-4">
-        <AlertTriangle className="h-8 w-8 text-primary" />
-        <h1 className="font-headline text-3xl font-bold">Comunicados: Atípicas</h1>
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+            <AlertTriangle className="h-8 w-8 text-primary" />
+            <h1 className="font-headline text-3xl font-bold">Comunicados: Atípicas</h1>
+        </div>
+        <BaseSelector onBaseChange={handleBaseChange} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

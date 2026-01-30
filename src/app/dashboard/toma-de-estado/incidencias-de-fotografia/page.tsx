@@ -1,23 +1,34 @@
 "use client";
-
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { CameraOff } from "lucide-react";
+import { BaseSelector } from "@/components/base-selector";
 
-const weeklyData = [
+const initialWeeklyData = [
   { name: 'Semana 1', value: 3, meta: 5 },
   { name: 'Semana 2', value: 4, meta: 5 },
   { name: 'Semana 3', value: 2, meta: 5 },
   { name: 'Semana 4', value: 5, meta: 5 },
 ];
-const avgValue = Math.round(weeklyData.reduce((acc, item) => acc + item.value, 0) / weeklyData.length);
 
 export default function IncidenciasFotografiaTomaDeEstadoPage() {
+  const [weeklyData, setWeeklyData] = useState(initialWeeklyData);
+
+  const handleBaseChange = () => {
+    setWeeklyData(initialWeeklyData.map(d => ({...d, value: Math.floor(Math.random() * 6) + 1 })));
+  };
+  
+  const avgValue = Math.round(weeklyData.reduce((acc, item) => acc + item.value, 0) / weeklyData.length);
+  
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex items-center gap-4">
-        <CameraOff className="h-8 w-8 text-primary" />
-        <h1 className="font-headline text-3xl font-bold">Toma de Estado: Incidencias de Fotografía</h1>
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <CameraOff className="h-8 w-8 text-primary" />
+          <h1 className="font-headline text-3xl font-bold">Toma de Estado: Incidencias de Fotografía</h1>
+        </div>
+        <BaseSelector onBaseChange={handleBaseChange} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
