@@ -9,11 +9,6 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        body: ['Arial', 'Helvetica', 'sans-serif'],
-        headline: ['Arial', 'Helvetica', 'sans-serif'],
-        code: ['monospace'],
-      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
