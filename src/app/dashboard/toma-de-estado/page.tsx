@@ -6,14 +6,14 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ChartCard } from "@/components/charts";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, LabelList } from "recharts";
-import { ClipboardList } from "lucide-react";
+import { Activity } from "lucide-react";
 
 // Mock data
 const sedes = ["General", "Comas", "Callao", "Ate", "Breña", "SJL", "Clientes Especiales", "Surquillo", "VES"];
 const cicloData = Array.from({ length: 13 }, (_, i) => ({
     name: `C${i + 1}`,
-    rendimiento: Math.floor(Math.random() * (100 - 70 + 1)) + 70,
-    meta: 90,
+    rendimiento: Math.floor(Math.random() * (100 - 80 + 1)) + 80, // High performance for this module
+    meta: 95,
 }));
 
 const chartConfig = {
@@ -49,17 +49,17 @@ const CicloChart = () => (
     </ResponsiveContainer>
   );
 
-export default function InspeccionesPage() {
+export default function TomaDeEstadoPage() {
     const [selectedSede, setSelectedSede] = useState("General");
 
     return (
         <div className="flex flex-col gap-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
-                    <ClipboardList className="h-8 w-8 text-primary" />
+                    <Activity className="h-8 w-8 text-primary" />
                     <div>
-                        <h1 className="font-headline text-3xl font-bold">Módulo de Inspecciones</h1>
-                        <p className="text-muted-foreground">Seguimiento de inspecciones atípicas y por reclamo.</p>
+                        <h1 className="font-headline text-3xl font-bold">Módulo de Toma de Estado</h1>
+                        <p className="text-muted-foreground">Análisis de efectividad e incidencias.</p>
                     </div>
                 </div>
                 <div className="w-full sm:w-64">
@@ -81,7 +81,7 @@ export default function InspeccionesPage() {
                 description="Comparativa del rendimiento real vs la meta para cada ciclo de facturación."
                 chart={<CicloChart />}
             />
-            
+
             <Card>
                 <CardHeader>
                     <CardTitle>Mapa de Calor (Heatmap) de Cumplimiento</CardTitle>

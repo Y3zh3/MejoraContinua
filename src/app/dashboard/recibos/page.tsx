@@ -1,40 +1,97 @@
-import { KpiCard } from "@/components/kpi-card";
-import { Receipt, Banknote, CalendarClock, AlertTriangle } from "lucide-react";
-import { LineChartExample, BarChartExample, ChartCard } from "@/components/charts";
+
+"use client";
+
+import { useState } from "react";
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ChartCard } from "@/components/charts";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, LabelList } from "recharts";
+import { Receipt } from "lucide-react";
+
+// Mock data
+const sedes = ["General", "Comas", "Callao", "Ate", "Breña", "SJL", "Clientes Especiales", "Surquillo", "VES"];
+const cicloData = Array.from({ length: 13 }, (_, i) => ({
+    name: `C${i + 1}`,
+    rendimiento: Math.floor(Math.random() * (100 - 90 + 1)) + 90,
+    meta: 98,
+}));
+
+const chartConfig = {
+  rendimiento: {
+    label: "Rendimiento",
+    color: "hsl(var(--chart-1))",
+  },
+  meta: {
+    label: "Meta",
+    color: "hsl(var(--chart-5))",
+  }
+};
+
+const CicloChart = () => (
+    <ResponsiveContainer width="100%" height={400}>
+      <BarChart data={cicloData}>
+        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+        <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+        <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
+        <Tooltip
+            contentStyle={{
+                background: "hsl(var(--background))",
+                borderColor: "hsl(var(--border))",
+            }}
+            formatter={(value, name) => [`${value}%`, name === 'rendimiento' ? 'Rendimiento' : 'Meta']}
+        />
+        <Legend />
+        <Bar dataKey="meta" fill="var(--color-meta)" radius={[4, 4, 0, 0]} barSize={10} />
+        <Bar dataKey="rendimiento" fill="var(--color-rendimiento)" radius={[4, 4, 0, 0]}>
+             <LabelList dataKey="rendimiento" position="top" formatter={(value: number) => `${value}%`} className="fill-foreground font-bold" fontSize={12} />
+        </Bar>
+      </BarChart>
+    </ResponsiveContainer>
+  );
 
 export default function RecibosPage() {
-  const kpis = [
-    { title: "Recibos Emitidos", value: "150,432", icon: Receipt, trend: "+1.2% vs mes anterior", trendDirection: "up" },
-    { title: "Monto Facturado", value: "S/ 1.2M", icon: Banknote, trend: "+3.5% vs mes anterior", trendDirection: "up" },
-    { title: "Pagos a Tiempo", value: "85.7%", icon: CalendarClock, trend: "-0.5% vs mes anterior", trendDirection: "down" },
-    { title: "Pagos Vencidos", value: "14.3%", icon: AlertTriangle, trend: "+0.5% vs mes anterior", trendDirection: "up" },
-  ];
+    const [selectedSede, setSelectedSede] = useState("General");
 
-  const locations = ["Comas", "Callao", "Ate", "Breña", "SJL", "Clientes Especiales", "Surquillo", "VES"];
+    return (
+        <div className="flex flex-col gap-6">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                    <Receipt className="h-8 w-8 text-primary" />
+                    <div>
+                        <h1 className="font-headline text-3xl font-bold">Módulo de Recibos</h1>
+                        <p className="text-muted-foreground">Análisis de la reducción de reclamos por comprobantes.</p>
+                    </div>
+                </div>
+                <div className="w-full sm:w-64">
+                     <Select value={selectedSede} onValueChange={setSelectedSede}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Seleccionar Sede" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {sedes.map(sede => (
+                                <SelectItem key={sede} value={sede}>{sede}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+            </div>
 
-  return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="font-headline text-3xl font-bold">Recibos y Facturación</h1>
-        <p className="text-muted-foreground">Seguimiento de la facturación y pagos.</p>
-      </div>
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {kpis.map((kpi) => (
-          <KpiCard key={kpi.title} {...kpi} />
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-2">
-        {locations.map((location) => (
             <ChartCard
-                key={location}
-                title={`Facturación en ${location}`}
-                description="Evolución de la facturación mensual."
-                chart={<LineChartExample />}
+                title={`Rendimiento por Ciclo - Sede ${selectedSede}`}
+                description="Comparativa del rendimiento real vs la meta para cada ciclo de facturación."
+                chart={<CicloChart />}
             />
-        ))}
-      </div>
-    </div>
-  );
+            
+            <Card>
+                <CardHeader>
+                    <CardTitle>Mapa de Calor (Heatmap) de Cumplimiento</CardTitle>
+                    <CardDescription>Vista histórica del cumplimiento por sede y mes. (Próximamente)</CardDescription>
+                </CardHeader>
+                <CardContent className="flex items-center justify-center h-64 bg-muted/50 rounded-md">
+                    <p className="text-muted-foreground">El mapa de calor estará disponible pronto.</p>
+                </CardContent>
+            </Card>
+
+        </div>
+    );
 }
