@@ -58,11 +58,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      <div className="sticky top-0 z-50 border-b">
-        <div className="flex h-5 items-center justify-between bg-secondary px-4 md:px-6">
-        </div>
-        <header className="grid h-20 grid-cols-3 items-center gap-4 bg-background px-4 md:px-6">
+    <div className="flex min-h-screen w-full flex-col bg-background">
+      <header className="sticky top-0 z-50 grid h-20 grid-cols-3 items-center gap-4 border-b bg-background px-4 md:px-6">
           <div className="flex items-center justify-start">
             <Link href="/dashboard">
               <Image 
@@ -123,8 +120,7 @@ export default function DashboardLayout({
             </DropdownMenu>
           </div>
         </header>
-      </div>
-      <main className="flex-1">
+      <main className="flex-1 p-8 md:p-12">
         {children}
       </main>
     </div>
