@@ -2,13 +2,19 @@
 "use client";
 
 import { ActivitySummary, type Activity } from "@/components/activity-summary";
-import { AreaChartExample, RadarChartExample, ChartCard } from "@/components/charts";
-import { Megaphone, ClipboardList, Handshake, Siren, Activity as ActivityIcon } from "lucide-react";
+import { Megaphone, ClipboardList, Handshake, Siren, Activity as ActivityIcon, Droplet } from "lucide-react";
 
 
 export default function DashboardPage() {
     // Mock data based on the new architecture
     const activities: Activity[] = [
+        {
+            name: "Toma de Estado",
+            kpis: [
+                { id: 'ts1', indicador: "% Efectividad", sede: "Promedio", valor: 98.5, meta: 95, icon: Droplet, description: "Efectividad de lectura" },
+                { id: 'ts2', indicador: "INCIDENCIA: Relecturas", sede: "Promedio", valor: 3, meta: 5, icon: Droplet, description: "Menor es mejor (%)" },
+            ]
+        },
         {
             name: "Comunicados",
             kpis: [
@@ -43,36 +49,11 @@ export default function DashboardPage() {
         <div className="flex flex-col gap-8">
             <div>
                 <h1 className="font-headline text-3xl font-bold">Dashboard de Gestión Operativa</h1>
-                <p className="text-muted-foreground">Una vista general de las métricas clave de la operación.</p>
+                <p className="text-muted-foreground">Capa de Resumen por Actividad (High-Level)</p>
             </div>
 
-            {/* Capa de Resumen (High Level) */}
-            <div className="flex flex-col gap-6">
-                <h2 className="font-headline text-2xl font-bold">Capa de Resumen por Actividad</h2>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {activities.map(activity => <ActivitySummary key={activity.name} activity={activity} />)}
-                </div>
-            </div>
-
-             {/* Capa de Sedes (Splat View) */}
-             <div className="flex flex-col gap-6">
-                <h2 className="font-headline text-2xl font-bold">Capa de Sedes</h2>
-                <ChartCard 
-                    title="Comparativa de Desempeño por Sede"
-                    description="Comparación del desempeño actual vs la meta para las sedes."
-                    chart={<RadarChartExample />}
-                    className="w-full lg:w-1/2"
-                />
-            </div>
-
-            {/* Capa de Ciclos (Deep Dive) */}
-            <div className="flex flex-col gap-6">
-                <h2 className="font-headline text-2xl font-bold">Capa de Ciclos y Tendencias</h2>
-                <ChartCard 
-                    title="Tendencias Mensuales"
-                    description="Evolución de un indicador clave a lo largo del tiempo."
-                    chart={<AreaChartExample />}
-                />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {activities.map(activity => <ActivitySummary key={activity.name} activity={activity} />)}
             </div>
         </div>
     );
