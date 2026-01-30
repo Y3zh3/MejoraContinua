@@ -42,8 +42,8 @@ const HorizontalNavLink = ({ href, children }: { href: string; children: React.R
       className={cn(
         "px-3 py-2 text-sm font-medium transition-colors flex items-center gap-2",
         isActive
-          ? "text-primary font-semibold"
-          : "text-muted-foreground hover:text-primary"
+          ? "text-secondary-foreground font-semibold"
+          : "text-secondary-foreground/80 hover:text-secondary-foreground"
       )}
     >
       {children}
@@ -59,9 +59,9 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 md:px-6 z-50">
+      <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b border-secondary/90 bg-secondary px-4 md:px-6 z-50">
         <div className="flex items-center gap-10">
-          <Link href="/dashboard" className="flex items-center gap-2 font-semibold text-lg text-primary">
+          <Link href="/dashboard" className="flex items-center gap-2 font-semibold text-lg text-secondary-foreground">
             <TrendingUp className="h-7 w-7" />
           </Link>
 
@@ -76,16 +76,16 @@ export default function DashboardLayout({
 
         <div className="flex items-center gap-4">
           <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-secondary-foreground/70" />
             <Input
               type="search"
               placeholder="Buscar"
-              className="pl-8 sm:w-[200px] md:w-[200px] lg:w-[300px] rounded-full"
+              className="pl-8 sm:w-[200px] md:w-[200px] lg:w-[300px] rounded-full bg-secondary-foreground/10 text-secondary-foreground placeholder:text-secondary-foreground/70 border-0 focus-visible:ring-secondary-foreground"
             />
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-10 w-10 rounded-full">
+              <Button variant="ghost" className="h-10 w-10 rounded-full hover:bg-secondary-foreground/10">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="https://picsum.photos/100" data-ai-hint="profile picture" />
                   <AvatarFallback>UA</AvatarFallback>
