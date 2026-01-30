@@ -7,7 +7,8 @@ import {
   Search,
   LogOut,
   Settings,
-  UserCircle
+  UserCircle,
+  TrendingUp,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -23,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 const navItems = [
+    { href: "/dashboard", label: "Mejora Continua" },
     { href: "/dashboard/toma-de-estado", label: "Toma de estado" },
     { href: "/dashboard/comunicados", label: "Comunicados" },
     { href: "/dashboard/inspecciones", label: "Inspecciones" },
@@ -39,7 +41,7 @@ const HorizontalNavLink = ({ href, children }: { href: string; children: React.R
     <Link
       href={href}
       className={cn(
-        "px-3 py-2 text-sm font-medium transition-colors",
+        "px-3 py-2 text-sm font-medium transition-colors flex items-center gap-2",
         isActive
           ? "text-primary font-semibold"
           : "text-muted-foreground hover:text-primary"
@@ -67,6 +69,7 @@ export default function DashboardLayout({
           <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
             {navItems.map((item) => (
               <HorizontalNavLink key={item.href} href={item.href}>
+                {item.label === "Mejora Continua" && <TrendingUp className="h-4 w-4" />}
                 {item.label}
               </HorizontalNavLink>
             ))}
