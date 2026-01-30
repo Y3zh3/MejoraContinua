@@ -60,12 +60,7 @@ export default function DashboardLayout({
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <div className="sticky top-0 z-50 border-b">
-        <div className="flex h-10 items-center justify-between bg-secondary px-4 text-sm text-secondary-foreground md:px-6">
-           <p className="text-xs">AQUAFONO: 317-8000</p>
-           <Link href="#" className="flex items-center gap-2 text-xs font-semibold">
-            Portal de Transparencia
-            <Search className="h-4 w-4" />
-           </Link>
+        <div className="flex h-5 items-center justify-between bg-secondary px-4 md:px-6">
         </div>
         <header className="grid h-20 grid-cols-3 items-center gap-4 bg-background px-4 md:px-6">
           <div className="flex items-center justify-start">

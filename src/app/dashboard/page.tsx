@@ -1,30 +1,21 @@
 
-import Image from 'next/image';
 import { TrendingUp, Target, Zap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function DashboardPage() {
   return (
-    <div className="w-full">
-      <div className="relative h-[400px] w-full">
-        <Image
-          src="https://picsum.photos/seed/improvement/1200/400"
-          alt="Mejora Continua"
-          fill
-          className="object-cover"
-          data-ai-hint="team collaborating planning"
-        />
-        <div className="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-center p-12">
-          <div className="flex items-center gap-4">
-            <TrendingUp className="h-12 w-12 text-white" />
-            <h1 className="text-6xl font-bold text-white font-headline">Mejora Continua</h1>
+    <div className="w-full bg-background p-8 md:p-12">
+      <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-4">
+              <TrendingUp className="h-12 w-12 text-primary" />
+              <h1 className="text-6xl font-bold text-foreground font-headline">Mejora Continua</h1>
           </div>
-          <p className="mt-4 text-xl text-white/90 max-w-3xl">
-            Impulsando la eficiencia y la excelencia operativa a través del análisis de datos y la optimización de procesos.
+          <p className="mt-4 text-xl text-muted-foreground max-w-3xl mx-auto">
+              Impulsando la eficiencia y la excelencia operativa a través del análisis de datos y la optimización de procesos.
           </p>
-        </div>
       </div>
-      <div className="bg-background p-8 md:p-12">
+      
+      <div className="bg-background">
         <h2 className="text-3xl font-bold text-center text-foreground mb-10">Nuestros Pilares de Gestión</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <Card>
