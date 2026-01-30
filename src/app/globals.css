@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -14,7 +10,7 @@ body {
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 207 90% 54%;
+    --primary: 211 65% 30%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -27,7 +23,7 @@ body {
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-    --chart-1: 207 90% 54%;
+    --chart-1: 211 65% 30%;
     --chart-2: 195 100% 44%;
     --chart-3: 350 80% 55%;
     --chart-4: 25 80% 55%;
@@ -35,12 +31,12 @@ body {
     --radius: 0.5rem;
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 215 30% 25%;
-    --sidebar-primary: 202 100% 38%;
+    --sidebar-primary: 211 65% 30%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 20% 94%;
     --sidebar-accent-foreground: 215 30% 25%;
     --sidebar-border: 210 20% 88%;
-    --sidebar-ring: 202 100% 38%;
+    --sidebar-ring: 211 65% 30%;
   }
 
   .dark {
