@@ -1,73 +1,48 @@
-
 {
   "entities": {
-    "KpisResumen": {
-      "title": "KPI Resumen",
-      "description": "Resumen de KPIs de gestión.",
+    "ActividadAnual": {
+      "title": "Actividad Anual",
+      "description": "Datos anuales agregados para una actividad operativa.",
       "type": "object",
       "properties": {
-        "actividad": {
+        "nombre": {
           "type": "string",
-          "description": "Tipo de actividad (Toma de Estado, Comunicados, etc.)"
+          "description": "Nombre de la actividad (e.g., Persuasivas, Toma de Estado)."
         },
-        "indicador": {
-          "type": "string",
-          "description": "Nombre del indicador"
-        },
-        "sede": {
-          "type": "string",
-          "description": "Sede a la que pertenece el KPI (Comas, Callao, etc.)"
-        },
-        "mes": {
-          "type": "string",
-          "description": "Mes del reporte en formato YYYY-MM"
-        },
-        "valor": {
+        "promedioAnual": {
           "type": "number",
-          "description": "Valor del indicador"
+          "description": "Promedio anual de cumplimiento para la actividad."
         },
-        "meta": {
+        "metaAnual": {
           "type": "number",
-          "description": "Meta del indicador"
+          "description": "La meta anual para la actividad."
+        },
+        "historicoMensual": {
+          "type": "array",
+          "description": "Evolución mensual del indicador principal de la actividad.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "mes": { "type": "string" },
+              "valor": { "type": "number" }
+            },
+            "required": ["mes", "valor"]
+          }
+        },
+        "detalleSedes": {
+          "type": "array",
+          "description": "Desglose del valor acumulado por sede.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sede": { "type": "string" },
+              "valor": { "type": "number" }
+            },
+            "required": ["sede", "valor"]
+          }
         }
       },
-      "required": [
-        "actividad",
-        "indicador",
-        "sede",
-        "mes",
-        "valor",
-        "meta"
-      ]
-    },
-    "KpisDetalleCiclos": {
-      "title": "KPI Detalle por Ciclo",
-      "description": "Detalle de KPIs por ciclo.",
-      "type": "object",
-      "properties": {
-        "fuente": {
-          "type": "string",
-          "description": "Fuente del dato"
-        },
-        "sede": {
-          "type": "string",
-          "description": "Sede a la que pertenece el KPI"
-        },
-        "ciclo": {
-          "type": "string",
-          "description": "Ciclo del reporte (C1, C2, etc.)"
-        },
-        "valor": {
-          "type": "number",
-          "description": "Valor del indicador"
-        }
-      },
-      "required": [
-        "fuente",
-        "sede",
-        "ciclo",
-        "valor"
-      ]
+      "required": ["nombre", "promedioAnual", "metaAnual", "historicoMensual", "detalleSedes"]
     }
   },
   "auth": {
@@ -76,17 +51,11 @@
     ]
   },
   "firestore": {
-    "/kpis_resumen/{kpiId}": {
+    "/actividades_anuales/{actividadId}": {
       "schema": {
-        "$ref": "#/backend/entities/KpisResumen"
+        "$ref": "#/backend/entities/ActividadAnual"
       },
-      "description": "Colección para resúmenes de KPIs de gestión."
-    },
-    "/kpis_detalle_ciclos/{detalleId}": {
-      "schema": {
-        "$ref": "#/backend/entities/KpisDetalleCiclos"
-      },
-      "description": "Colección para detalles de KPIs por ciclo."
+      "description": "Colección para los datos anuales de las actividades."
     }
   }
 }

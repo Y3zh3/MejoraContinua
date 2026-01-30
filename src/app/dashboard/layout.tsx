@@ -3,15 +3,10 @@
 
 import Link from "next/link";
 import {
-  Activity,
   Bell,
-  Handshake,
   LayoutDashboard,
   LogOut,
-  Megaphone,
-  Receipt,
   Settings,
-  ClipboardList,
   UserCircle,
   Droplet,
 } from "lucide-react";
@@ -31,21 +26,15 @@ import {
   SidebarContent,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton,
+  SidebarTrigger,
   SidebarFooter,
   SidebarInset,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import NavLink from "@/components/nav-link";
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { href: "/dashboard/toma-de-estado", icon: Activity, label: "Toma de Estado" },
-  { href: "/dashboard/comunicados", icon: Megaphone, label: "Comunicados" },
-  { href: "/dashboard/inspecciones", icon: ClipboardList, label: "Inspecciones" },
-  { href: "/dashboard/persuasivas", icon: Handshake, label: "Persuasivas" },
-  { href: "/dashboard/recibos", icon: Receipt, label: "Recibos" },
 ];
 
 export default function DashboardLayout({
