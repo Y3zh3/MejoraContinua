@@ -2,18 +2,22 @@
 "use client";
 
 import {
+  Area,
+  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
-  Line,
-  LineChart,
+  Legend,
   Pie,
   PieChart,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
-  Legend,
-  Cell,
 } from "recharts";
 import {
   ChartConfig,
@@ -66,55 +70,93 @@ export function BarChartExample() {
 }
 
 
-const lineChartData = [
+const areaChartData = [
     { date: "2024-01-01", value: 87 },
-    { date: "2024-01-02", value: 92 },
-    { date: "2024-01-03", value: 78 },
-    { date: "2024-01-04", value: 105 },
-    { date: "2024-01-05", value: 95 },
-    { date: "2024-01-06", value: 110 },
-    { date: "2024-01-07", value: 102 },
+    { date: "2024-02-01", value: 92 },
+    { date: "2024-03-01", value: 78 },
+    { date: "2024-04-01", value: 105 },
+    { date: "2024-05-01", value: 95 },
+    { date: "2024-06-01", value: 110 },
   ];
   
-  const lineChartConfig = {
+  const areaChartConfig = {
     value: {
       label: "Value",
       color: "hsl(var(--chart-1))",
     },
   } satisfies ChartConfig;
 
-export function LineChartExample() {
+export function AreaChartExample() {
     return (
-        <ChartContainer config={lineChartConfig} className="min-h-[200px] w-full">
-            <LineChart
-            accessibilityLayer
-            data={lineChartData}
-            margin={{
-                left: 12,
-                right: 12,
-            }}
+        <ChartContainer config={areaChartConfig} className="min-h-[200px] w-full">
+            <AreaChart
+                accessibilityLayer
+                data={areaChartData}
+                margin={{ left: 12, right: 12 }}
             >
-            <CartesianGrid vertical={false} />
-            <XAxis
-                dataKey="date"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickFormatter={(value) => new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-            />
-            <YAxis />
-            <Tooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-            <Line
-                dataKey="value"
-                type="natural"
-                stroke="var(--color-value)"
-                strokeWidth={2}
-                dot={false}
-            />
-            </LineChart>
+                <CartesianGrid vertical={false} />
+                 <XAxis
+                    dataKey="date"
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={8}
+                    tickFormatter={(value) => new Date(value).toLocaleDateString('es-ES', { month: 'short' })}
+                />
+                <YAxis />
+                <Tooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
+                <defs>
+                    <linearGradient id="fillValue" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="var(--color-value)" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="var(--color-value)" stopOpacity={0.1} />
+                    </linearGradient>
+                </defs>
+                <Area
+                    dataKey="value"
+                    type="natural"
+                    fill="url(#fillValue)"
+                    stroke="var(--color-value)"
+                    stackId="a"
+                />
+            </AreaChart>
         </ChartContainer>
     );
 }
+
+const radarChartData = [
+    { sede: 'Comas', valor: 120, meta: 110, fullMark: 150 },
+    { sede: 'Callao', valor: 98, meta: 130, fullMark: 150 },
+    { sede: 'Ate', valor: 86, meta: 130, fullMark: 150 },
+    { sede: 'Breña', valor: 99, meta: 100, fullMark: 150 },
+    { sede: 'SJL', valor: 85, meta: 90, fullMark: 150 },
+    { sede: 'Surquillo', valor: 65, meta: 85, fullMark: 150 },
+  ];
+  
+  const radarChartConfig = {
+    valor: { label: 'Desempeño', color: 'hsl(var(--chart-1))' },
+    meta: { label: 'Meta', color: 'hsl(var(--chart-2))' },
+  } satisfies ChartConfig;
+
+export function RadarChartExample() {
+    return (
+      <ChartContainer
+        config={radarChartConfig}
+        className="mx-auto aspect-square h-[250px]"
+      >
+        <RadarChart data={radarChartData}>
+          <ChartTooltip
+            cursor={false}
+            content={<ChartTooltipContent />}
+          />
+          <PolarGrid />
+          <PolarAngleAxis dataKey="sede" />
+          <PolarRadiusAxis angle={30} domain={[0, 150]} />
+          <Radar name="Desempeño" dataKey="valor" stroke="var(--color-valor)" fill="var(--color-valor)" fillOpacity={0.6} />
+          <Radar name="Meta" dataKey="meta" stroke="var(--color-meta)" fill="var(--color-meta)" fillOpacity={0.6} />
+          <Legend />
+        </RadarChart>
+      </ChartContainer>
+    )
+  }
 
 const pieChartData = [
     { name: 'Category A', value: 400, fill: "hsl(var(--chart-1))" },
@@ -178,15 +220,13 @@ type ChartCardProps = {
 export function ChartCard({ title, description, chart, className}: ChartCardProps) {
     return (
         <Card className={cn(className)}>
-            <CardHeader className="p-1">
-              <CardTitle className="font-headline text-xs text-center">{title}</CardTitle>
-              <CardDescription className="text-center text-[10px] -mt-1">{description}</CardDescription>
+            <CardHeader>
+              <CardTitle className="font-headline text-lg">{title}</CardTitle>
+              <CardDescription>{description}</CardDescription>
             </CardHeader>
-            <CardContent className="p-0">
+            <CardContent>
               {chart}
             </CardContent>
         </Card>
     );
 }
-
-    

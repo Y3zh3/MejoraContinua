@@ -1,0 +1,92 @@
+
+{
+  "entities": {
+    "KpisResumen": {
+      "title": "KPI Resumen",
+      "description": "Resumen de KPIs de gestión.",
+      "type": "object",
+      "properties": {
+        "actividad": {
+          "type": "string",
+          "description": "Tipo de actividad (Toma de Estado, Comunicados, etc.)"
+        },
+        "indicador": {
+          "type": "string",
+          "description": "Nombre del indicador"
+        },
+        "sede": {
+          "type": "string",
+          "description": "Sede a la que pertenece el KPI (Comas, Callao, etc.)"
+        },
+        "mes": {
+          "type": "string",
+          "description": "Mes del reporte en formato YYYY-MM"
+        },
+        "valor": {
+          "type": "number",
+          "description": "Valor del indicador"
+        },
+        "meta": {
+          "type": "number",
+          "description": "Meta del indicador"
+        }
+      },
+      "required": [
+        "actividad",
+        "indicador",
+        "sede",
+        "mes",
+        "valor",
+        "meta"
+      ]
+    },
+    "KpisDetalleCiclos": {
+      "title": "KPI Detalle por Ciclo",
+      "description": "Detalle de KPIs por ciclo.",
+      "type": "object",
+      "properties": {
+        "fuente": {
+          "type": "string",
+          "description": "Fuente del dato"
+        },
+        "sede": {
+          "type": "string",
+          "description": "Sede a la que pertenece el KPI"
+        },
+        "ciclo": {
+          "type": "string",
+          "description": "Ciclo del reporte (C1, C2, etc.)"
+        },
+        "valor": {
+          "type": "number",
+          "description": "Valor del indicador"
+        }
+      },
+      "required": [
+        "fuente",
+        "sede",
+        "ciclo",
+        "valor"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "email"
+    ]
+  },
+  "firestore": {
+    "/kpis_resumen/{kpiId}": {
+      "schema": {
+        "$ref": "#/backend/entities/KpisResumen"
+      },
+      "description": "Colección para resúmenes de KPIs de gestión."
+    },
+    "/kpis_detalle_ciclos/{detalleId}": {
+      "schema": {
+        "$ref": "#/backend/entities/KpisDetalleCiclos"
+      },
+      "description": "Colección para detalles de KPIs por ciclo."
+    }
+  }
+}

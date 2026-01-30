@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -41,12 +42,6 @@ import NavLink from "@/components/nav-link";
 
 const navItems = [
   { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { href: "/dashboard/comunicados", icon: Megaphone, label: "Comunicados" },
-  { href: "/dashboard/inspecciones", icon: ClipboardList, label: "Inspecciones" },
-  { href: "/dashboard/recibos", icon: Receipt, label: "Recibos" },
-  { href: "/dashboard/medidores", icon: GaugeCircle, label: "Medidores" },
-  { href: "/dashboard/persuasivas", icon: Handshake, label: "Persuasivas" },
-  { href: "/dashboard/emergencias", icon: Siren, label: "Emergencias" },
 ];
 
 export default function DashboardLayout({

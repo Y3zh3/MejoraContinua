@@ -1,56 +1,79 @@
-import { KpiCard } from "@/components/kpi-card";
-import { 
-  Megaphone,
-  ClipboardList,
-  Receipt,
-  GaugeCircle,
-  Handshake,
-  Siren,
-} from "lucide-react";
-import { BarChartExample, LineChartExample, PieChartExample, ChartCard } from "@/components/charts";
+
+"use client";
+
+import { ActivitySummary, type Activity } from "@/components/activity-summary";
+import { AreaChartExample, RadarChartExample, ChartCard } from "@/components/charts";
+import { Megaphone, ClipboardList, Handshake, Siren, Activity as ActivityIcon } from "lucide-react";
+
 
 export default function DashboardPage() {
-  const kpis = [
-    { title: "Comunicados Enviados", value: "1,250", icon: Megaphone, trend: "+20.1% from last month", trendDirection: "up" },
-    { title: "Inspecciones Realizadas", value: "340", icon: ClipboardList, trend: "+15.2% from last month", trendDirection: "up" },
-    { title: "Recibos Procesados", value: "15,690", icon: Receipt, trend: "+5.3% from last month", trendDirection: "up" },
-    { title: "Medidores Inteligentes", value: "89%", icon: GaugeCircle, trend: "-1.1% from last month", trendDirection: "down" },
-    { title: "Acuerdos Persuasivos", value: "128", icon: Handshake, trend: "+8.9% from last month", trendDirection: "up" },
-    { title: "Emergencias Atendidas", value: "42", icon: Siren, trend: "+2.4% from last month", trendDirection: "neutral" },
-  ];
+    // Mock data based on the new architecture
+    const activities: Activity[] = [
+        {
+            name: "Comunicados",
+            kpis: [
+                { id: 'c1', indicador: "% Eficacia Entrega", sede: "Promedio", valor: 72, meta: 80, icon: Megaphone, description: "Eficacia de entrega" },
+                { id: 'c2', indicador: "INCIDENCIA: Cartas 'Bajo Puerta'", sede: "Promedio", valor: 113, meta: 100, icon: Megaphone, description: "Menor es mejor" },
+            ]
+        },
+        {
+            name: "Inspecciones",
+            kpis: [
+                { id: 'i1', indicador: "Inspecciones Realizadas", sede: "Promedio", valor: 340, meta: 300, icon: ClipboardList, description: "Total realizadas" },
+                { id: 'i2', indicador: "INCIDENCIA: No Conformidades", sede: "Promedio", valor: 15, meta: 20, icon: ClipboardList, description: "Menor es mejor" },
+            ]
+        },
+        {
+            name: "Acuerdos Persuasivos",
+            kpis: [
+                { id: 'p1', indicador: "Acuerdos Logrados", sede: "Promedio", valor: 128, meta: 120, icon: Handshake, description: "Total acuerdos" },
+                { id: 'p2', indicador: "RECLAMO: Tasa de Incumplimiento", sede: "Promedio", valor: 8, meta: 10, icon: Handshake, description: "Menor es mejor (%)" },
+            ]
+        },
+        {
+            name: "Emergencias",
+            kpis: [
+                { id: 'e1', indicador: "Emergencias Atendidas", sede: "Promedio", valor: 42, meta: 40, icon: Siren, description: "Total atendidas" },
+                { id: 'e2', indicador: "RECLAMO: Tiempo de Respuesta (h)", sede: "Promedio", valor: 2, meta: 3, icon: Siren, description: "Menor es mejor" },
+            ]
+        },
+    ];
 
-  return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="font-headline text-3xl font-bold">Dashboard General</h1>
-        <p className="text-muted-foreground">Una vista general de las métricas clave.</p>
-      </div>
+    return (
+        <div className="flex flex-col gap-8">
+            <div>
+                <h1 className="font-headline text-3xl font-bold">Dashboard de Gestión Operativa</h1>
+                <p className="text-muted-foreground">Una vista general de las métricas clave de la operación.</p>
+            </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {kpis.map((kpi) => (
-          <KpiCard key={kpi.title} {...kpi} />
-        ))}
-      </div>
+            {/* Capa de Resumen (High Level) */}
+            <div className="flex flex-col gap-6">
+                <h2 className="font-headline text-2xl font-bold">Capa de Resumen por Actividad</h2>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {activities.map(activity => <ActivitySummary key={activity.name} activity={activity} />)}
+                </div>
+            </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <ChartCard 
-            title="Actividad Mensual"
-            description="Comparativa de actividades de escritorio vs móvil."
-            chart={<BarChartExample />}
-        />
-        <ChartCard
-            title="Tendencia de Valor"
-            description="Seguimiento del valor a lo largo del tiempo."
-            chart={<LineChartExample />}
-        />
-      </div>
-      <div className="grid grid-cols-1 gap-6">
-        <ChartCard
-            title="Distribución por Categoría"
-            description="Desglose de datos por categoría."
-            chart={<PieChartExample />}
-        />
-      </div>
-    </div>
-  );
+             {/* Capa de Sedes (Splat View) */}
+             <div className="flex flex-col gap-6">
+                <h2 className="font-headline text-2xl font-bold">Capa de Sedes</h2>
+                <ChartCard 
+                    title="Comparativa de Desempeño por Sede"
+                    description="Comparación del desempeño actual vs la meta para las sedes."
+                    chart={<RadarChartExample />}
+                    className="w-full lg:w-1/2"
+                />
+            </div>
+
+            {/* Capa de Ciclos (Deep Dive) */}
+            <div className="flex flex-col gap-6">
+                <h2 className="font-headline text-2xl font-bold">Capa de Ciclos y Tendencias</h2>
+                <ChartCard 
+                    title="Tendencias Mensuales"
+                    description="Evolución de un indicador clave a lo largo del tiempo."
+                    chart={<AreaChartExample />}
+                />
+            </div>
+        </div>
+    );
 }
