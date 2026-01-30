@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActivityDetailModal } from '@/components/activity-detail-modal';
+import { BaseSelector } from '@/components/base-selector';
 import { Handshake, Activity, Megaphone, ClipboardList } from 'lucide-react';
 
 const mockData = [
@@ -83,6 +84,7 @@ const mockData = [
 type ActivityData = typeof mockData[0];
 
 export default function ReporteAnualPage() {
+    const [activities, setActivities] = useState(mockData);
     const [selectedActivity, setSelectedActivity] = useState<ActivityData | null>(null);
 
     const handleCardClick = (activity: ActivityData) => {
@@ -93,15 +95,28 @@ export default function ReporteAnualPage() {
         setSelectedActivity(null);
     };
 
+    const handleBaseChange = (base: string) => {
+        // Simulate data change for the selected base
+        setActivities(mockData.map(activity => ({
+            ...activity,
+            promedioAnual: Math.floor(Math.random() * 20) + 75
+        })));
+        // Close modal to prevent showing stale data, as its data would be out of sync
+        setSelectedActivity(null);
+    };
+
     return (
-        <div className="flex flex-col gap-8 p-4 md:p-8">
-            <div>
-                <h1 className="font-headline text-3xl font-bold">Cuadros de Mando Anuales</h1>
-                <p className="text-muted-foreground">Resumen de indicadores por grupo de actividad.</p>
+        <div className="flex flex-col gap-8">
+            <div className="flex items-start justify-between gap-4">
+                <div>
+                    <h1 className="font-headline text-3xl font-bold">Cuadros de Mando Anuales</h1>
+                    <p className="text-muted-foreground">Resumen de indicadores por grupo de actividad.</p>
+                </div>
+                <BaseSelector onBaseChange={handleBaseChange} />
             </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {mockData.map((activity) => (
+                {activities.map((activity) => (
                     <Card key={activity.id} className="cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:border-primary" onClick={() => handleCardClick(activity)}>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                              <CardTitle className="text-xl font-headline">{activity.nombre}</CardTitle>
