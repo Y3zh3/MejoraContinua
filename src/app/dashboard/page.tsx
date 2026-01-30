@@ -16,7 +16,6 @@ export default function DashboardPage() {
         />
         <div className="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-center p-12">
           <div className="flex items-center gap-4">
-            <TrendingUp className="h-16 w-16 text-primary" />
             <h1 className="text-6xl font-bold text-white font-headline">Mejora Continua</h1>
           </div>
           <p className="mt-4 text-xl text-white/90 max-w-3xl">
