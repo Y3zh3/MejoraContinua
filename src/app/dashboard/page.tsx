@@ -1,18 +1,29 @@
-
 import { TrendingUp, Target, Zap } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 
 export default function DashboardPage() {
   return (
     <>
-      <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-4">
-              <TrendingUp className="h-12 w-12 text-primary" />
-              <h1 className="text-6xl font-bold text-foreground font-headline">Mejora Continua</h1>
-          </div>
-          <p className="mt-4 text-xl text-muted-foreground max-w-3xl mx-auto">
-              Impulsando la eficiencia y la excelencia operativa a través del análisis de datos y la optimización de procesos.
-          </p>
+      <div className="relative text-center mb-12 rounded-lg overflow-hidden">
+        <div className="absolute inset-0 bg-black/50 z-10" />
+        <Image 
+            src="https://picsum.photos/seed/mountains-hero/1200/300"
+            alt="Hero Background"
+            width={1200}
+            height={300}
+            className="w-full object-cover"
+            data-ai-hint="mountain landscape"
+        />
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-primary-foreground">
+            <div className="flex items-center justify-center gap-4">
+                <TrendingUp className="h-12 w-12 text-white" />
+                <h1 className="text-6xl font-bold text-white font-headline">Mejora Continua</h1>
+            </div>
+            <p className="mt-4 text-xl text-white/90 max-w-3xl mx-auto">
+                Impulsando la eficiencia y la excelencia operativa a través del análisis de datos y la optimización de procesos.
+            </p>
+        </div>
       </div>
       
       <div>
