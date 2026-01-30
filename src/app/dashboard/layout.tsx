@@ -24,10 +24,8 @@ const HorizontalNavLink = ({ href, children }: { href: string; children: React.R
     <Link
       href={href}
       className={cn(
-        "px-3 py-2 text-sm font-medium transition-colors",
-        isActive
-          ? "text-primary font-semibold"
-          : "text-muted-foreground hover:text-primary"
+        "px-3 py-2 text-sm font-medium transition-colors text-primary",
+        isActive ? "font-semibold" : "hover:opacity-80"
       )}
     >
       {children}
