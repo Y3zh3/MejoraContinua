@@ -25,7 +25,7 @@ export default function EfectividadTomaDeEstadoPage() {
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <TrendingUp className="h-8 w-8 text-primary" />
+          <TrendingUp className="h-8 w-8 text-[hsl(var(--chart-2))]" />
           <h1 className="font-headline text-3xl font-bold">Toma de Estado: Efectividad</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
@@ -51,7 +51,7 @@ export default function EfectividadTomaDeEstadoPage() {
                     formatter={(value: number) => `${value}%`}
                 />
                 <Legend />
-                <Bar dataKey="value" name="Rendimiento" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" name="Rendimiento" fill="hsl(var(--chart-2))" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="meta" name="Meta" fill="hsl(var(--border))" radius={[4, 4, 0, 0]} />
                 </BarChart>
             </ResponsiveContainer>
@@ -69,7 +69,7 @@ export default function EfectividadTomaDeEstadoPage() {
                 <div className="grid grid-cols-2 gap-4">
                     <div className="border p-4 rounded-lg text-center">
                         <p className="text-sm text-muted-foreground">Promedio del periodo</p>
-                        <p className="text-3xl font-bold text-primary">{avgValue}%</p>
+                        <p className="text-3xl font-bold text-[hsl(var(--chart-2))]">{avgValue}%</p>
                     </div>
                      <div className="border p-4 rounded-lg text-center">
                         <p className="text-sm text-muted-foreground">Meta establecida</p>

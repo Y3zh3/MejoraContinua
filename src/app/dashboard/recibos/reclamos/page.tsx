@@ -25,7 +25,7 @@ export default function ReclamosRecibosPage() {
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <FileWarning className="h-8 w-8 text-primary" />
+          <FileWarning className="h-8 w-8 text-[hsl(var(--chart-5))]" />
           <h1 className="font-headline text-3xl font-bold">Recibos: Reclamos</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
@@ -50,7 +50,7 @@ export default function ReclamosRecibosPage() {
                     formatter={(value: number) => `${value} uds.`}
                 />
                 <Legend />
-                <Bar dataKey="value" name="Reclamos" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" name="Reclamos" fill="hsl(var(--chart-5))" radius={[4, 4, 0, 0]} />
                 <Bar dataKey="meta" name="Meta" fill="hsl(var(--border))" radius={[4, 4, 0, 0]} />
                 </BarChart>
             </ResponsiveContainer>
@@ -68,7 +68,7 @@ export default function ReclamosRecibosPage() {
                 <div className="grid grid-cols-2 gap-4">
                     <div className="border p-4 rounded-lg text-center">
                         <p className="text-sm text-muted-foreground">Promedio Semanal</p>
-                        <p className="text-3xl font-bold text-primary">{avgValue} uds.</p>
+                        <p className="text-3xl font-bold text-[hsl(var(--chart-5))]">{avgValue} uds.</p>
                     </div>
                      <div className="border p-4 rounded-lg text-center">
                         <p className="text-sm text-muted-foreground">Meta (máx)</p>

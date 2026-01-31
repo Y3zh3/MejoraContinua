@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Line } from 'recharts';
 import { CircleOff } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
 
@@ -25,7 +25,7 @@ export default function CierresComunicadosPage() {
     <div className="flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <CircleOff className="h-8 w-8 text-primary" />
+          <CircleOff className="h-8 w-8 text-[hsl(var(--chart-3))]" />
           <h1 className="font-headline text-3xl font-bold">Comunicados: Cierres</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
@@ -39,21 +39,27 @@ export default function CierresComunicadosPage() {
             </CardHeader>
             <CardContent className="h-96">
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={weeklyData}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="name" />
-                <YAxis domain={[90, 100]} unit="%"/>
-                <Tooltip
-                    contentStyle={{
-                    background: "hsl(var(--card))",
-                    borderColor: "hsl(var(--border))",
-                    }}
-                    formatter={(value: number) => `${value}%`}
-                />
-                <Legend />
-                <Bar dataKey="value" name="Efectividad" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="meta" name="Meta" fill="hsl(var(--border))" radius={[4, 4, 0, 0]} />
-                </BarChart>
+                <AreaChart data={weeklyData}>
+                  <defs>
+                      <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(var(--chart-3))" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="hsl(var(--chart-3))" stopOpacity={0}/>
+                      </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                  <XAxis dataKey="name" />
+                  <YAxis domain={[90, 100]} unit="%"/>
+                  <Tooltip
+                      contentStyle={{
+                      background: "hsl(var(--card))",
+                      borderColor: "hsl(var(--border))",
+                      }}
+                      formatter={(value: number) => `${value}%`}
+                  />
+                  <Legend />
+                  <Area type="monotone" dataKey="value" name="Efectividad" stroke="hsl(var(--chart-3))" fillOpacity={1} fill="url(#colorValue)" />
+                  <Line type="monotone" dataKey="meta" name="Meta" stroke="hsl(var(--border))" strokeDasharray="5 5" />
+                </AreaChart>
             </ResponsiveContainer>
             </CardContent>
         </Card>
@@ -69,7 +75,7 @@ export default function CierresComunicadosPage() {
                 <div className="grid grid-cols-2 gap-4">
                     <div className="border p-4 rounded-lg text-center">
                         <p className="text-sm text-muted-foreground">Promedio del periodo</p>
-                        <p className="text-3xl font-bold text-primary">{avgValue}%</p>
+                        <p className="text-3xl font-bold text-[hsl(var(--chart-3))]">{avgValue}%</p>
                     </div>
                      <div className="border p-4 rounded-lg text-center">
                         <p className="text-sm text-muted-foreground">Meta establecida</p>
