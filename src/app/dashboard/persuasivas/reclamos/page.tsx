@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Line } from 'recharts';
 import { FileWarning } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const initialWeeklyData = [
   { name: 'Semana 1', value: 7, meta: 5 },
@@ -90,6 +91,36 @@ export default function ReclamosPersuasivasPage() {
         </Card>
       </div>
 
+       <Card className="transition-colors hover:bg-primary/10">
+        <CardHeader>
+            <CardTitle>Detalle Semanal de Reclamos</CardTitle>
+            <p className="text-base text-muted-foreground">
+            Desglose de los reclamos de acciones persuasivas por semana.
+            </p>
+        </CardHeader>
+        <CardContent>
+            <div className="max-h-96 overflow-y-auto">
+            <Table className="text-base">
+                <TableHeader className="sticky top-0 bg-card">
+                <TableRow>
+                    <TableHead className="w-[150px]">Semana</TableHead>
+                    <TableHead>Reclamos</TableHead>
+                    <TableHead className="text-right">Meta (máx)</TableHead>
+                </TableRow>
+                </TableHeader>
+                <TableBody>
+                {weeklyData.map((item) => (
+                    <TableRow key={item.name}>
+                    <TableCell className="font-medium">{item.name}</TableCell>
+                    <TableCell>{item.value} uds.</TableCell>
+                    <TableCell className="text-right font-medium">{item.meta} uds.</TableCell>
+                    </TableRow>
+                ))}
+                </TableBody>
+            </Table>
+            </div>
+        </CardContent>
+        </Card>
     </div>
   );
 }
