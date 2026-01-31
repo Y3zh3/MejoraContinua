@@ -22,7 +22,7 @@ export default function CierresComunicadosPage() {
   const avgValue = Math.round(weeklyData.reduce((acc, item) => acc + item.value, 0) / weeklyData.length);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="max-w-7xl mx-auto flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <CircleOff className="h-8 w-8 text-[hsl(var(--chart-3))]" />
@@ -33,7 +33,7 @@ export default function CierresComunicadosPage() {
 
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card>
+        <Card className="transition-colors hover:bg-primary/10">
             <CardHeader>
                 <CardTitle>Rendimiento - Enero 2025</CardTitle>
             </CardHeader>
@@ -64,27 +64,27 @@ export default function CierresComunicadosPage() {
             </CardContent>
         </Card>
 
-        <Card>
+        <Card className="transition-colors hover:bg-primary/10">
             <CardHeader>
             <CardTitle>Resumen del Indicador</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-4 pt-6">
-                <p className="text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                     Análisis del indicador de <span className="font-semibold text-foreground">Efectividad de Cierres</span> para el periodo de <span className="font-semibold text-foreground">Enero 2025</span>.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                     <div className="border p-4 rounded-lg text-center">
-                        <p className="text-sm text-muted-foreground">Promedio del periodo</p>
+                        <p className="text-base text-muted-foreground">Promedio del periodo</p>
                         <p className="text-3xl font-bold text-[hsl(var(--chart-3))]">{avgValue}%</p>
                     </div>
                      <div className="border p-4 rounded-lg text-center">
-                        <p className="text-sm text-muted-foreground">Meta establecida</p>
+                        <p className="text-base text-muted-foreground">Meta establecida</p>
                         <p className="text-3xl font-bold">{weeklyData[0].meta}%</p>
                     </div>
                 </div>
                 <div className="mt-2">
-                    <h4 className="font-semibold">Observaciones</h4>
-                    <p className="text-sm text-muted-foreground">El rendimiento es consistentemente alto, cumpliendo o superando la meta en la mayoría de las semanas. El proceso parece estar bien controlado.</p>
+                    <h4 className="font-semibold text-lg">Observaciones</h4>
+                    <p className="text-base text-muted-foreground">El rendimiento es consistentemente alto, cumpliendo o superando la meta en la mayoría de las semanas. El proceso parece estar bien controlado.</p>
                 </div>
             </CardContent>
         </Card>

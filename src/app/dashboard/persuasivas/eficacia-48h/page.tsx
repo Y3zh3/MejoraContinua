@@ -22,7 +22,7 @@ export default function Eficacia48hPersuasivasPage() {
   const avgValue = Math.round(weeklyData.reduce((acc, item) => acc + item.value, 0) / weeklyData.length);
   
   return (
-    <div className="flex flex-col gap-8">
+    <div className="max-w-7xl mx-auto flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <Clock9 className="h-8 w-8 text-[hsl(var(--chart-3))]" />
@@ -32,7 +32,7 @@ export default function Eficacia48hPersuasivasPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card>
+        <Card className="transition-colors hover:bg-primary/10">
             <CardHeader>
                 <CardTitle>Rendimiento - Enero 2025</CardTitle>
             </CardHeader>
@@ -57,27 +57,27 @@ export default function Eficacia48hPersuasivasPage() {
             </CardContent>
         </Card>
 
-        <Card>
+        <Card className="transition-colors hover:bg-primary/10">
             <CardHeader>
             <CardTitle>Resumen del Indicador</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-4 pt-6">
-                <p className="text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                     Análisis del indicador de <span className="font-semibold text-foreground">Eficacia 48H</span> para el periodo de <span className="font-semibold text-foreground">Enero 2025</span>.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
                     <div className="border p-4 rounded-lg text-center">
-                        <p className="text-sm text-muted-foreground">Promedio del periodo</p>
+                        <p className="text-base text-muted-foreground">Promedio del periodo</p>
                         <p className="text-3xl font-bold text-[hsl(var(--chart-3))]">{avgValue}%</p>
                     </div>
                      <div className="border p-4 rounded-lg text-center">
-                        <p className="text-sm text-muted-foreground">Meta establecida</p>
+                        <p className="text-base text-muted-foreground">Meta establecida</p>
                         <p className="text-3xl font-bold">{weeklyData[0].meta}%</p>
                     </div>
                 </div>
                 <div className="mt-2">
-                    <h4 className="font-semibold">Observaciones</h4>
-                    <p className="text-sm text-muted-foreground">El rendimiento de eficacia a 48 horas es excelente y cumple consistentemente con la meta. El proceso es muy efectivo.</p>
+                    <h4 className="font-semibold text-lg">Observaciones</h4>
+                    <p className="text-base text-muted-foreground">El rendimiento de eficacia a 48 horas es excelente y cumple consistentemente con la meta. El proceso es muy efectivo.</p>
                 </div>
             </CardContent>
         </Card>
