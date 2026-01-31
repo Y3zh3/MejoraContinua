@@ -172,7 +172,7 @@ export default function EfectividadTomaDeEstadoPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card>
+        <Card className="transition-colors hover:bg-primary/10">
             <CardHeader className="p-4">
                 <CardTitle>Rendimiento por Ciclo - Enero 2026</CardTitle>
             </CardHeader>
@@ -196,7 +196,7 @@ export default function EfectividadTomaDeEstadoPage() {
             </CardContent>
         </Card>
 
-        <Card>
+        <Card className="transition-colors hover:bg-primary/10">
             <CardHeader>
             <CardTitle>Resumen del Indicador</CardTitle>
             </CardHeader>
@@ -222,7 +222,7 @@ export default function EfectividadTomaDeEstadoPage() {
         </Card>
       </div>
 
-      <Card>
+      <Card className="transition-colors hover:bg-primary/10">
         <CardHeader>
           <CardTitle>Detalle de Lecturas por Ciclo</CardTitle>
           <p className="text-base text-muted-foreground">
