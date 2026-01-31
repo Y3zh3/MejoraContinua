@@ -1,3 +1,4 @@
+
 "use client";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -33,10 +34,10 @@ export default function ReclamosRecibosPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card className="transition-colors hover:bg-primary/10">
-            <CardHeader>
+            <CardHeader className="p-4">
                 <CardTitle>Rendimiento - Enero 2025</CardTitle>
             </CardHeader>
-            <CardContent className="h-96">
+            <CardContent className="h-96 p-2">
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={weeklyData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
