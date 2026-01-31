@@ -173,10 +173,10 @@ export default function EfectividadTomaDeEstadoPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
                 <CardTitle>Rendimiento por Ciclo - Enero 2026</CardTitle>
             </CardHeader>
-            <CardContent className="h-96">
+            <CardContent className="h-96 p-2">
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data.ciclos}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -257,5 +257,3 @@ export default function EfectividadTomaDeEstadoPage() {
     </div>
   );
 }
-
-    
