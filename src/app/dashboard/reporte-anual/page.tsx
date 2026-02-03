@@ -97,7 +97,7 @@ const TDE_EFECTIVIDAD_DATA: Record<string, number[]> = {
   'clientes-e': [96.3, 94.8, 95.5, 95.4, 94.6, 94.3, 96.6, 96.2, 95.6, 95.9],
 };
 
-const MONTHS = ['Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic', 'Ene'];
+const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
     const [selectedActivity, setSelectedActivity] = useState<any | null>(null);
@@ -108,7 +108,6 @@ export default function ReporteAnualPage() {
         
         if (activity.id === 'tde_efectividad') {
             if (currentBase === 'todas') {
-                // Promedio de todas las bases para el gráfico consolidado
                 values = MONTHS.map((_, i) => {
                     const allVals = Object.values(TDE_EFECTIVIDAD_DATA).map(b => b[i]);
                     return Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1));
@@ -140,7 +139,21 @@ export default function ReporteAnualPage() {
 
     const handleBaseChange = (base: string) => {
         setCurrentBase(base);
+        // Cerramos el modal si estaba abierto para forzar recarga de datos al volver a abrir
         setSelectedActivity(null);
+    };
+
+    const getIndicatorValue = (id: string, metaAnual: number) => {
+        if (id === 'tde_efectividad') {
+            if (currentBase === 'todas') {
+                const allLastMonthVals = Object.values(TDE_EFECTIVIDAD_DATA).map(b => b[b.length - 1]);
+                return Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1));
+            }
+            const baseVals = TDE_EFECTIVIDAD_DATA[currentBase];
+            return baseVals ? baseVals[baseVals.length - 1] : 0;
+        }
+        // Para los otros que aún no tienen datos reales
+        return Math.floor(Math.random() * 10) + (metaAnual - 5);
     };
 
     return (
@@ -164,39 +177,40 @@ export default function ReporteAnualPage() {
                             <Separator className="flex-1" />
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {cat.items.map((item) => (
-                                <Card 
-                                    key={item.id} 
-                                    className={`cursor-pointer transition-all border border-border/60 group shadow-sm ${cat.hoverBg} ${cat.hoverBorder}`}
-                                    onClick={() => handleCardClick(item)}
-                                >
-                                    <CardHeader className="p-5 flex flex-row items-center justify-between space-y-0">
-                                        <CardTitle className={`text-base font-bold text-muted-foreground group-hover:${cat.color} transition-colors uppercase tracking-tight`}>
-                                            {item.nombre}
-                                        </CardTitle>
-                                        <item.icon className={`h-5 w-5 text-muted-foreground group-hover:${cat.color} transition-colors`} />
-                                    </CardHeader>
-                                    <CardContent className="px-5 pb-6">
-                                        <div className="flex items-baseline gap-2">
-                                            <span className={`text-3xl font-bold text-foreground group-hover:${cat.color} transition-colors tabular-nums`}>
-                                                {item.id === 'tde_efectividad' 
-                                                    ? (currentBase === 'todas' ? 97.7 : (TDE_EFECTIVIDAD_DATA[currentBase]?.[TDE_EFECTIVIDAD_DATA[currentBase].length-1] || 0))
-                                                    : Math.floor(Math.random() * 10) + (item.metaAnual - 5)}%
-                                            </span>
-                                            <span className="text-xs font-semibold text-muted-foreground uppercase">Promedio</span>
-                                        </div>
-                                        <div className="mt-3 flex items-center gap-2">
-                                            <div className="h-1.5 flex-1 bg-secondary rounded-full overflow-hidden">
-                                                <div 
-                                                    className={`h-full opacity-80 bg-current ${cat.color}`} 
-                                                    style={{ width: `${Math.min(100, item.id === 'tde_efectividad' ? 97.7 : Math.floor(Math.random() * 10) + (item.metaAnual - 5))}%` }}
-                                                />
+                            {cat.items.map((item) => {
+                                const val = getIndicatorValue(item.id, item.metaAnual);
+                                return (
+                                    <Card 
+                                        key={item.id} 
+                                        className={`cursor-pointer transition-all border border-border/60 group shadow-sm ${cat.hoverBg} ${cat.hoverBorder}`}
+                                        onClick={() => handleCardClick(item)}
+                                    >
+                                        <CardHeader className="p-5 flex flex-row items-center justify-between space-y-0">
+                                            <CardTitle className={`text-base font-bold text-muted-foreground group-hover:${cat.color} transition-colors uppercase tracking-tight`}>
+                                                {item.nombre}
+                                            </CardTitle>
+                                            <item.icon className={`h-5 w-5 text-muted-foreground group-hover:${cat.color} transition-colors`} />
+                                        </CardHeader>
+                                        <CardContent className="px-5 pb-6">
+                                            <div className="flex items-baseline gap-2">
+                                                <span className={`text-3xl font-bold text-foreground group-hover:${cat.color} transition-colors tabular-nums`}>
+                                                    {val}%
+                                                </span>
+                                                <span className="text-xs font-semibold text-muted-foreground uppercase">Actual</span>
                                             </div>
-                                            <span className="text-[10px] font-bold text-muted-foreground whitespace-nowrap">META: {item.metaAnual}%</span>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            ))}
+                                            <div className="mt-3 flex items-center gap-2">
+                                                <div className="h-1.5 flex-1 bg-secondary rounded-full overflow-hidden">
+                                                    <div 
+                                                        className={`h-full opacity-80 bg-current ${cat.color}`} 
+                                                        style={{ width: `${Math.min(100, val)}%` }}
+                                                    />
+                                                </div>
+                                                <span className="text-[10px] font-bold text-muted-foreground whitespace-nowrap">META: {item.metaAnual}%</span>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                );
+                            })}
                         </div>
                     </div>
                 ))}
