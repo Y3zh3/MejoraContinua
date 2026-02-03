@@ -70,7 +70,7 @@ export default function DashboardLayout({
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
        <header className="sticky top-0 z-50 w-full border-b bg-background">
-        <div className="container flex h-20 items-center">
+        <div className="container mx-auto px-4 flex h-20 items-center">
             <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
                 {navItems.map((item) => {
                     const isActive = item.subItems 
@@ -126,7 +126,7 @@ export default function DashboardLayout({
         </div>
       </header>
       <main className="flex-1 p-4 sm:p-6 md:p-8">
-        <div className="container">
+        <div className="container mx-auto">
           {children}
         </div>
       </main>
