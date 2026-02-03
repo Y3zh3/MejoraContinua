@@ -29,6 +29,7 @@ const categories = [
     title: "Toma de Estado",
     icon: Activity,
     color: "text-[hsl(var(--chart-2))]",
+    bgColor: "bg-[hsl(var(--chart-2))]",
     hoverBg: "hover:bg-[hsl(var(--chart-2))]/5",
     hoverBorder: "hover:border-[hsl(var(--chart-2))]/40",
     items: [
@@ -41,6 +42,7 @@ const categories = [
     title: "Comunicados",
     icon: Megaphone,
     color: "text-[hsl(var(--chart-3))]",
+    bgColor: "bg-[hsl(var(--chart-3))]",
     hoverBg: "hover:bg-[hsl(var(--chart-3))]/5",
     hoverBorder: "hover:border-[hsl(var(--chart-3))]/40",
     items: [
@@ -53,6 +55,7 @@ const categories = [
     title: "Inspecciones",
     icon: ClipboardList,
     color: "text-[hsl(var(--chart-4))]",
+    bgColor: "bg-[hsl(var(--chart-4))]",
     hoverBg: "hover:bg-[hsl(var(--chart-4))]/5",
     hoverBorder: "hover:border-[hsl(var(--chart-4))]/40",
     items: [
@@ -64,6 +67,7 @@ const categories = [
     title: "Persuasivas",
     icon: Handshake,
     color: "text-[hsl(var(--chart-5))]",
+    bgColor: "bg-[hsl(var(--chart-5))]",
     hoverBg: "hover:bg-[hsl(var(--chart-5))]/5",
     hoverBorder: "hover:border-[hsl(var(--chart-5))]/40",
     items: [
@@ -77,6 +81,7 @@ const categories = [
     title: "Recibos",
     icon: Receipt,
     color: "text-[hsl(var(--chart-1))]",
+    bgColor: "bg-[hsl(var(--chart-1))]",
     hoverBg: "hover:bg-[hsl(var(--chart-1))]/5",
     hoverBorder: "hover:border-[hsl(var(--chart-1))]/40",
     items: [
@@ -202,11 +207,11 @@ export default function ReporteAnualPage() {
                                             <div className="mt-3 flex items-center gap-2">
                                                 <div className="h-1.5 flex-1 bg-secondary rounded-full overflow-hidden">
                                                     <div 
-                                                        className={`h-full opacity-80 bg-current ${cat.color}`} 
+                                                        className={`h-full opacity-90 transition-all ${cat.bgColor}`} 
                                                         style={{ width: `${Math.min(100, val)}%` }}
                                                     />
                                                 </div>
-                                                <span className="text-[10px] font-bold text-muted-foreground whitespace-nowrap">META: {item.metaAnual}%</span>
+                                                <span className="text-[10px] font-bold text-muted-foreground whitespace-nowrap uppercase">Meta: {item.metaAnual}%</span>
                                             </div>
                                         </CardContent>
                                     </Card>
