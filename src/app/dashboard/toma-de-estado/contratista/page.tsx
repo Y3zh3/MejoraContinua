@@ -28,48 +28,48 @@ const contratistaData: Record<string, any> = {
         promedio: 23.7,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 38, lecturas: 291, total: 761 },
-            { name: 'C02', value: 43, lecturas: 492, total: 1140 },
-            { name: 'C03', value: 14, lecturas: 121, total: 844 },
-            { name: 'C04', value: 12, lecturas: 245, total: 1965 },
-            { name: 'C05', value: 7, lecturas: 167, total: 2360 },
-            { name: 'C06', value: 21, lecturas: 320, total: 1507 },
-            { name: 'C07', value: 18, lecturas: 487, total: 2694 },
-            { name: 'C08', value: 23, lecturas: 313, total: 1349 },
-            { name: 'C09', value: 34, lecturas: 496, total: 1463 },
-            { name: 'C10', value: 33, lecturas: 434, total: 1322 },
+            { name: 'C01', value: 23, lecturas: 49915, total: 50621 },
+            { name: 'C02', value: 13, lecturas: 42440, total: 42077 },
+            { name: 'C03', value: 15, lecturas: 48785, total: 49555 },
+            { name: 'C04', value: 21, lecturas: 48521, total: 50436 },
+            { name: 'C05', value: 19, lecturas: 38252, total: 40558 },
+            { name: 'C06', value: 21, lecturas: 37315, total: 38777 },
+            { name: 'C07', value: 20, lecturas: 37756, total: 40358 },
+            { name: 'C08', value: 21, lecturas: 39454, total: 40723 },
+            { name: 'C09', value: 17, lecturas: 32835, total: 34207 },
+            { name: 'C10', value: 22, lecturas: 32525, total: 33765 },
         ]
     },
     callao: {
         promedio: 19.1,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 20, lecturas: 94, total: 481 },
-            { name: 'C02', value: 7, lecturas: 37, total: 556 },
-            { name: 'C03', value: 8, lecturas: 32, total: 409 },
-            { name: 'C04', value: 23, lecturas: 50, total: 221 },
-            { name: 'C05', value: 6, lecturas: 40, total: 655 },
-            { name: 'C06', value: 28, lecturas: 131, total: 463 },
-            { name: 'C07', value: 26, lecturas: 126, total: 482 },
-            { name: 'C08', value: 23, lecturas: 123, total: 530 },
-            { name: 'C09', value: 10, lecturas: 74, total: 732 },
-            { name: 'C10', value: 37, lecturas: 122, total: 331 },
+            { name: 'C01', value: 22, lecturas: 94, total: 481 },
+            { name: 'C02', value: 11, lecturas: 37, total: 556 },
+            { name: 'C03', value: 14, lecturas: 32, total: 409 },
+            { name: 'C04', value: 10, lecturas: 50, total: 221 },
+            { name: 'C05', value: 10, lecturas: 40, total: 655 },
+            { name: 'C06', value: 9, lecturas: 131, total: 463 },
+            { name: 'C07', value: 8, lecturas: 126, total: 482 },
+            { name: 'C08', value: 9, lecturas: 123, total: 530 },
+            { name: 'C09', value: 15, lecturas: 74, total: 732 },
+            { name: 'C10', value: 17, lecturas: 122, total: 331 },
         ]
     },
     sjl: {
         promedio: 11.6,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 6, lecturas: 39, total: 648 },
-            { name: 'C02', value: 5, lecturas: 23, total: 440 },
-            { name: 'C03', value: 8, lecturas: 37, total: 450 },
-            { name: 'C04', value: 6, lecturas: 27, total: 426 },
-            { name: 'C05', value: 11, lecturas: 58, total: 529 },
-            { name: 'C06', value: 14, lecturas: 59, total: 408 },
-            { name: 'C07', value: 5, lecturas: 19, total: 363 },
-            { name: 'C08', value: 5, lecturas: 16, total: 330 },
-            { name: 'C09', value: 26, lecturas: 132, total: 502 },
-            { name: 'C10', value: 26, lecturas: 78, total: 302 },
+            { name: 'C01', value: 10, lecturas: 23933, total: 24130 },
+            { name: 'C02', value: 11, lecturas: 17333, total: 17437 },
+            { name: 'C03', value: 13, lecturas: 20302, total: 20410 },
+            { name: 'C04', value: 8, lecturas: 13526, total: 13615 },
+            { name: 'C05', value: 10, lecturas: 18841, total: 18970 },
+            { name: 'C06', value: 12, lecturas: 11150, total: 11252 },
+            { name: 'C07', value: 12, lecturas: 13174, total: 13235 },
+            { name: 'C08', value: 13, lecturas: 12962, total: 13056 },
+            { name: 'C09', value: 11, lecturas: 18761, total: 18971 },
+            { name: 'C10', value: 12, lecturas: 14327, total: 14438 },
         ]
     }
 };
@@ -120,7 +120,7 @@ export default function ContratistaTomaDeEstadoPage() {
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Monitoreo de incidencias operativas del personal contratista en campo. Buscamos la reducción constante de estos eventos para garantizar la excelencia en la recolección de datos y la calidad del servicio.
+                            Monitoreo de incidencias por contratista en campo. El objetivo principal es la reducción progresiva de estos eventos, asegurando un proceso de toma de estado limpio y eficiente que minimice los errores en la recolección de datos.
                         </p>
                     </div>
                 </CardContent>
