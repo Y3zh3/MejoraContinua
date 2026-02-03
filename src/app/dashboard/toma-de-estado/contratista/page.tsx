@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, LineChart, Line } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { HardHat } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -41,8 +41,7 @@ const contratistaData = {
         ciclos: [
             { name: 'C01', value: 20 }, { name: 'C02', value: 7 }, { name: 'C03', value: 8 },
             { name: 'C04', value: 23 }, { name: 'C05', value: 6 }, { name: 'C06', value: 28 },
-            { name: 'C07', value: 26 }, { name: 'C08', value: 23 }, { name: 'C09', value: 10 },
-            { name: 'C10', value: 37 },
+            { name: 'C07', value: 26 }, { name: 'C08', value: 23 }, { name: 'C10', value: 37 },
         ]
     },
     ate: {
@@ -100,7 +99,7 @@ const contratistaData = {
             { name: 'C01', value: 27 }, { name: 'C02', value: 22 }, { name: 'C03', value: 25 },
             { name: 'C04', value: 28 }, { name: 'C05', value: 30 }, { name: 'C06', value: 31 },
             { name: 'C07', value: 15 }, { name: 'C08', value: 30 }, { name: 'C09', value: 24 },
-            { name: 'C10', value: 39 }, { name: 'C11', value: 0 },
+            { name: 'C10', value: 39 },
         ]
     }
 };
@@ -113,23 +112,23 @@ export default function ContratistaTomaDeEstadoPage() {
   };
   
   return (
-    <div className="max-w-6xl mx-auto flex flex-col gap-8">
+    <div className="max-w-7xl mx-auto flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <HardHat className="h-8 w-8 text-[hsl(var(--chart-3))]" />
-          <h1 className="font-headline text-3xl font-bold">Toma de Estado: Contratista</h1>
+          <h1 className="font-headline text-3xl font-bold text-foreground">Toma de Estado: Contratista</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card className="transition-all hover:bg-primary/5 cursor-default border-none shadow-md">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
                 <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
             </CardHeader>
             <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data.ciclos}>
+                <LineChart data={data.ciclos}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" />
                 <YAxis unit="%" />
@@ -142,13 +141,13 @@ export default function ContratistaTomaDeEstadoPage() {
                     formatter={(value: number) => `${value}%`}
                 />
                 <Legend />
-                <Bar dataKey="value" name="Rendimiento" fill="hsl(var(--chart-3))" radius={[4, 4, 0, 0]} />
-                </BarChart>
+                <Line type="monotone" dataKey="value" name="Rendimiento" stroke="hsl(var(--chart-3))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
+                </LineChart>
             </ResponsiveContainer>
             </CardContent>
         </Card>
 
-        <Card className="transition-all hover:bg-primary/5 cursor-default border-none shadow-md">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader>
             <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
             </CardHeader>
@@ -157,11 +156,11 @@ export default function ContratistaTomaDeEstadoPage() {
                     Análisis del rendimiento de <span className="font-semibold text-foreground">Contratistas</span> para el periodo de <span className="font-semibold text-foreground">Enero 2026</span>.
                 </p>
                 <div className="grid grid-cols-2 gap-6">
-                    <div className="border p-6 rounded-xl text-center bg-card">
+                    <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
                         <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Simple</p>
                         <p className="text-4xl font-bold text-[hsl(var(--chart-3))]">{data.promedio}%</p>
                     </div>
-                     <div className="border p-6 rounded-xl text-center bg-card">
+                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
                         <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta (máx)</p>
                         <p className="text-4xl font-bold">{data.meta}%</p>
                     </div>
@@ -169,23 +168,23 @@ export default function ContratistaTomaDeEstadoPage() {
                 <div className="mt-2">
                     <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        El rendimiento del contratista varía significativamente entre ciclos. Es fundamental supervisar los ciclos con desviaciones mayores a la meta del 15% para asegurar la calidad del servicio.
+                        El rendimiento del contratista varía significativamente entre ciclos. Es fundamental supervisar los ciclos con desviaciones mayores a la meta del 15%.
                     </p>
                 </div>
             </CardContent>
         </Card>
       </div>
 
-       <Card className="transition-all hover:bg-primary/5 cursor-default border-none shadow-md">
+       <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
         <CardHeader>
           <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
-          <p className="text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Desglose porcentual del rendimiento del contratista en cada ciclo operativo.
           </p>
         </CardHeader>
         <CardContent>
           <div className="max-h-96 overflow-y-auto rounded-md border">
-            <Table>
+            <Table className="text-base">
               <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                 <TableRow>
                   <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
@@ -195,10 +194,10 @@ export default function ContratistaTomaDeEstadoPage() {
               </TableHeader>
               <TableBody>
                 {data.ciclos.map((ciclo) => (
-                  <TableRow key={ciclo.name} className="hover:bg-muted/50 transition-colors">
-                    <TableCell className="font-semibold text-base">{ciclo.name}</TableCell>
-                    <TableCell className="text-base">{ciclo.value}%</TableCell>
-                    <TableCell className="text-right text-base font-medium">{data.meta}%</TableCell>
+                  <TableRow key={ciclo.name}>
+                    <TableCell className="font-semibold">{ciclo.name}</TableCell>
+                    <TableCell>{ciclo.value}%</TableCell>
+                    <TableCell className="text-right font-medium">{data.meta}%</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
