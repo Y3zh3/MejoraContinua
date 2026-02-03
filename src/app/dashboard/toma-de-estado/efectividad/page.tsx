@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { TrendingUp } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -21,6 +21,17 @@ const efectividadData = {
             { name: 'C08', value: 98.4, total: 146232, lecturas: 143878 },
             { name: 'C09', value: 97.2, total: 139989, lecturas: 136007 },
             { name: 'C10', value: 98.7, total: 106208, lecturas: 104868 },
+        ]
+    },
+    comas: {
+        promedio: 95.8,
+        meta: 98.5,
+        ciclos: [
+            { name: 'C01', value: 96.1, total: 24500, lecturas: 23544 },
+            { name: 'C02', value: 93.2, total: 22100, lecturas: 20597 },
+            { name: 'C03', value: 94.5, total: 23000, lecturas: 21735 },
+            { name: 'C04', value: 95.8, total: 24100, lecturas: 23087 },
+            { name: 'C05', value: 95.6, total: 22800, lecturas: 21796 },
         ]
     }
 };

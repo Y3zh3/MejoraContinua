@@ -188,8 +188,8 @@ export default function CierresComunicadosPage() {
                 <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold">Cierres sin</TableHead>
-                    <TableHead className="font-bold">Total</TableHead>
+                    <TableHead className="font-bold text-right">Cierres sin</TableHead>
+                    <TableHead className="font-bold text-right">Total</TableHead>
                     <TableHead className="text-right font-bold">Efectividad (%)</TableHead>
                     </TableRow>
                 </TableHeader>

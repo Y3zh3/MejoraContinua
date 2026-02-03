@@ -127,8 +127,8 @@ export default function PreventivasComunicadosPage() {
                 <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold">Prev Sin</TableHead>
-                    <TableHead className="font-bold">Total</TableHead>
+                    <TableHead className="font-bold text-right">Prev Sin</TableHead>
+                    <TableHead className="font-bold text-right">Total</TableHead>
                     <TableHead className="text-right font-bold">Cumplimiento (%)</TableHead>
                     </TableRow>
                 </TableHeader>
