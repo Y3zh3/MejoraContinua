@@ -9,24 +9,24 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const efectividadData = {
     todas: {
-        promedio: 98.1,
+        promedio: 97.8,
         meta: 98.5,
         ciclos: [
             { name: 'C01', value: 98.4, efectivo: 9840, total: 10000 },
-            { name: 'C02', value: 98.5, efectivo: 9850, total: 10000 },
+            { name: 'C02', value: 97.5, efectivo: 9750, total: 10000 },
             { name: 'C03', value: 98.8, efectivo: 9880, total: 10000 },
-            { name: 'C04', value: 98.5, efectivo: 9850, total: 10000 },
+            { name: 'C04', value: 96.5, efectivo: 9650, total: 10000 },
             { name: 'C05', value: 98.2, efectivo: 9820, total: 10000 },
-            { name: 'C06', value: 98.2, efectivo: 9820, total: 10000 },
-            { name: 'C07', value: 97.3, efectivo: 9730, total: 10000 },
+            { name: 'C06', value: 97.2, efectivo: 9720, total: 10000 },
+            { name: 'C07', value: 96.3, efectivo: 9630, total: 10000 },
             { name: 'C08', value: 98.1, efectivo: 9810, total: 10000 },
             { name: 'C09', value: 97.8, efectivo: 9780, total: 10000 },
             { name: 'C10', value: 98.0, efectivo: 9800, total: 10000 },
-            { name: 'C11', value: 99.8, efectivo: 9980, total: 10000 },
+            { name: 'C11', value: 99.0, efectivo: 9900, total: 10000 },
         ]
     },
     comas: {
-        promedio: 96.1,
+        promedio: 95.8,
         meta: 98.5,
         ciclos: [
             { name: 'C01', value: 96.1, efectivo: 2390, total: 2487 },
@@ -60,54 +60,54 @@ const efectividadData = {
         ]
     },
     ate: {
-        promedio: 98.2,
+        promedio: 97.2,
         meta: 98.5,
         ciclos: [
             { name: 'C01', value: 98.5, efectivo: 1970, total: 2000 },
-            { name: 'C02', value: 98.6, efectivo: 1972, total: 2000 },
-            { name: 'C03', value: 98.2, efectivo: 1964, total: 2000 },
+            { name: 'C02', value: 95.6, efectivo: 1912, total: 2000 },
+            { name: 'C03', value: 94.2, efectivo: 1884, total: 2000 },
             { name: 'C04', value: 98.3, efectivo: 1966, total: 2000 },
-            { name: 'C05', value: 98.2, efectivo: 1964, total: 2000 },
-            { name: 'C06', value: 97.2, efectivo: 1944, total: 2000 },
-            { name: 'C07', value: 97.5, efectivo: 1950, total: 2000 },
+            { name: 'C05', value: 97.2, efectivo: 1944, total: 2000 },
+            { name: 'C06', value: 95.2, efectivo: 1904, total: 2000 },
+            { name: 'C07', value: 98.5, efectivo: 1970, total: 2000 },
             { name: 'C08', value: 98.3, efectivo: 1966, total: 2000 },
-            { name: 'C09', value: 98.5, efectivo: 1970, total: 2000 },
+            { name: 'C09', value: 96.5, efectivo: 1930, total: 2000 },
             { name: 'C10', value: 98.6, efectivo: 1972, total: 2000 },
             { name: 'C11', value: 98.8, efectivo: 1976, total: 2000 },
         ]
     },
-    brena: {
-        promedio: 98.1,
-        meta: 98.5,
-        ciclos: [
-            { name: 'C01', value: 98.3, efectivo: 1966, total: 2000 },
-            { name: 'C02', value: 98.6, efectivo: 1972, total: 2000 },
-            { name: 'C03', value: 98.7, efectivo: 1974, total: 2000 },
-            { name: 'C04', value: 98.8, efectivo: 1976, total: 2000 },
-            { name: 'C05', value: 97.4, efectivo: 1948, total: 2000 },
-            { name: 'C06', value: 98.0, efectivo: 1960, total: 2000 },
-            { name: 'C07', value: 98.2, efectivo: 1964, total: 2000 },
-            { name: 'C08', value: 98.5, efectivo: 1970, total: 2000 },
-            { name: 'C09', value: 97.1, efectivo: 1942, total: 2000 },
-            { name: 'C10', value: 98.4, efectivo: 1968, total: 2000 },
-            { name: 'C11', value: 98.5, efectivo: 1970, total: 2000 },
-        ]
-    },
     sjl: {
-        promedio: 98.8,
+        promedio: 99.1,
         meta: 98.5,
         ciclos: [
-            { name: 'C01', value: 96.6, efectivo: 2898, total: 3000 },
+            { name: 'C01', value: 98.6, efectivo: 2958, total: 3000 },
             { name: 'C02', value: 99.1, efectivo: 2973, total: 3000 },
             { name: 'C03', value: 99.0, efectivo: 2970, total: 3000 },
-            { name: 'C04', value: 98.5, efectivo: 2955, total: 3000 },
+            { name: 'C04', value: 99.5, efectivo: 2985, total: 3000 },
             { name: 'C05', value: 98.4, efectivo: 2952, total: 3000 },
             { name: 'C06', value: 99.0, efectivo: 2970, total: 3000 },
             { name: 'C07', value: 98.9, efectivo: 2967, total: 3000 },
-            { name: 'C08', value: 99.0, efectivo: 2970, total: 3000 },
+            { name: 'C08', value: 99.8, efectivo: 2994, total: 3000 },
             { name: 'C09', value: 98.9, efectivo: 2967, total: 3000 },
             { name: 'C10', value: 99.3, efectivo: 2979, total: 3000 },
             { name: 'C11', value: 99.5, efectivo: 2985, total: 3000 },
+        ]
+    },
+    brena: {
+        promedio: 94.5,
+        meta: 98.5,
+        ciclos: [
+            { name: 'C01', value: 95.3, efectivo: 1906, total: 2000 },
+            { name: 'C02', value: 94.6, efectivo: 1892, total: 2000 },
+            { name: 'C03', value: 93.7, efectivo: 1874, total: 2000 },
+            { name: 'C04', value: 95.8, efectivo: 1916, total: 2000 },
+            { name: 'C05', value: 92.4, efectivo: 1848, total: 2000 },
+            { name: 'C06', value: 95.0, efectivo: 1900, total: 2000 },
+            { name: 'C07', value: 94.2, efectivo: 1884, total: 2000 },
+            { name: 'C08', value: 96.5, efectivo: 1930, total: 2000 },
+            { name: 'C09', value: 92.1, efectivo: 1842, total: 2000 },
+            { name: 'C10', value: 94.4, efectivo: 1888, total: 2000 },
+            { name: 'C11', value: 95.5, efectivo: 1910, total: 2000 },
         ]
     },
     surquillo: {
@@ -128,37 +128,37 @@ const efectividadData = {
         ]
     },
     ves: {
-        promedio: 97.9,
+        promedio: 96.8,
         meta: 98.5,
         ciclos: [
-            { name: 'C01', value: 98.4, efectivo: 1968, total: 2000 },
-            { name: 'C02', value: 98.6, efectivo: 1972, total: 2000 },
-            { name: 'C03', value: 98.3, efectivo: 1966, total: 2000 },
-            { name: 'C04', value: 98.1, efectivo: 1962, total: 2000 },
-            { name: 'C05', value: 97.7, efectivo: 1954, total: 2000 },
-            { name: 'C06', value: 96.9, efectivo: 1938, total: 2000 },
-            { name: 'C07', value: 96.7, efectivo: 1934, total: 2000 },
+            { name: 'C01', value: 97.4, efectivo: 1948, total: 2000 },
+            { name: 'C02', value: 96.6, efectivo: 1932, total: 2000 },
+            { name: 'C03', value: 95.3, efectivo: 1906, total: 2000 },
+            { name: 'C04', value: 97.1, efectivo: 1942, total: 2000 },
+            { name: 'C05', value: 96.7, efectivo: 1934, total: 2000 },
+            { name: 'C06', value: 94.9, efectivo: 1898, total: 2000 },
+            { name: 'C07', value: 95.7, efectivo: 1914, total: 2000 },
             { name: 'C08', value: 98.0, efectivo: 1960, total: 2000 },
-            { name: 'C09', value: 98.1, efectivo: 1962, total: 2000 },
+            { name: 'C09', value: 97.1, efectivo: 1942, total: 2000 },
             { name: 'C10', value: 98.0, efectivo: 1960, total: 2000 },
             { name: 'C11', value: 98.2, efectivo: 1964, total: 2000 },
         ]
     },
     'clientes-e': {
-        promedio: 95.8,
+        promedio: 92.5,
         meta: 98.5,
         ciclos: [
             { name: 'C01', value: 96.3, efectivo: 963, total: 1000 },
-            { name: 'C02', value: 94.8, efectivo: 948, total: 1000 },
-            { name: 'C03', value: 95.5, efectivo: 955, total: 1000 },
+            { name: 'C02', value: 89.8, efectivo: 898, total: 1000 },
+            { name: 'C03', value: 90.5, efectivo: 905, total: 1000 },
             { name: 'C04', value: 95.4, efectivo: 954, total: 1000 },
-            { name: 'C05', value: 94.6, efectivo: 946, total: 1000 },
-            { name: 'C06', value: 94.3, efectivo: 943, total: 1000 },
+            { name: 'C05', value: 88.6, efectivo: 886, total: 1000 },
+            { name: 'C06', value: 91.3, efectivo: 913, total: 1000 },
             { name: 'C07', value: 96.6, efectivo: 966, total: 1000 },
-            { name: 'C08', value: 96.2, efectivo: 962, total: 1000 },
-            { name: 'C09', value: 95.6, efectivo: 956, total: 1000 },
+            { name: 'C08', value: 92.2, efectivo: 922, total: 1000 },
+            { name: 'C09', value: 90.6, efectivo: 906, total: 1000 },
             { name: 'C10', value: 95.9, efectivo: 959, total: 1000 },
-            { name: 'C11', value: 100.0, efectivo: 1000, total: 1000 },
+            { name: 'C11', value: 90.0, efectivo: 900, total: 1000 },
         ]
     }
 };
@@ -202,7 +202,7 @@ export default function EfectividadTomaDeEstadoPage() {
                         </div>
                          <div className="border border-border/50 p-6 rounded-2xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-2 uppercase tracking-[0.2em]">Meta</p>
-                            <p className="text-4xl font-black">98.5%</p>
+                            <p className="text-4xl font-black">{data.meta}%</p>
                         </div>
                     </div>
                 </CardContent>
