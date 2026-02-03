@@ -1,14 +1,32 @@
+
 "use client";
 
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ActivityDetailModal } from '@/components/activity-detail-modal';
 import { BaseSelector } from '@/components/base-selector';
-import { Handshake, Activity, Megaphone, ClipboardList } from 'lucide-react';
+import { Separator } from "@/components/ui/separator";
+import { 
+  Handshake, 
+  Activity, 
+  Megaphone, 
+  ClipboardList, 
+  TrendingUp, 
+  HardHat, 
+  CameraOff, 
+  ShieldCheck, 
+  AlertTriangle, 
+  CircleOff,
+  Clock4,
+  Clock9,
+  Gauge,
+  FileWarning,
+  Receipt
+} from 'lucide-react';
 
-const mockData = [
+const annualSummary = [
   {
-    id: 'persuasivas',
+    id: 'persuasivas_anual',
     nombre: 'Persuasivas',
     icon: Handshake,
     promedioAnual: 85,
@@ -26,7 +44,7 @@ const mockData = [
     ],
   },
   {
-    id: 'toma_de_estado',
+    id: 'toma_de_estado_anual',
     nombre: 'Toma de Estado',
     icon: Activity,
     promedioAnual: 98.5,
@@ -44,7 +62,7 @@ const mockData = [
     ],
   },
   {
-    id: 'comunicados',
+    id: 'comunicados_anual',
     nombre: 'Comunicados',
     icon: Megaphone,
     promedioAnual: 72,
@@ -62,7 +80,7 @@ const mockData = [
     ],
   },
   {
-    id: 'inspecciones',
+    id: 'inspecciones_anual',
     nombre: 'Inspecciones',
     icon: ClipboardList,
     promedioAnual: 94,
@@ -81,14 +99,73 @@ const mockData = [
   },
 ];
 
-type ActivityData = typeof mockData[0];
+const categories = [
+  {
+    title: "Toma de Estado",
+    items: [
+      { id: 'tde_efectividad', nombre: 'Efectividad', icon: TrendingUp, metaAnual: 98.5 },
+      { id: 'tde_contratista', nombre: 'Contratista', icon: HardHat, metaAnual: 15 },
+      { id: 'tde_incidencias', nombre: 'Incidencias de Fotografía', icon: CameraOff, metaAnual: 5 },
+    ]
+  },
+  {
+    title: "Comunicados",
+    items: [
+      { id: 'com_atipicas', nombre: 'Atípicas', icon: AlertTriangle, metaAnual: 85 },
+      { id: 'com_preventivas', nombre: 'Preventivas', icon: ShieldCheck, metaAnual: 85 },
+      { id: 'com_cierres', nombre: 'Cierres', icon: CircleOff, metaAnual: 15 },
+    ]
+  },
+  {
+    title: "Inspecciones",
+    items: [
+      { id: 'ins_atipicas', nombre: 'Atípicas', icon: AlertTriangle, metaAnual: 85 },
+      { id: 'ins_reclamos', nombre: 'Reclamos', icon: FileWarning, metaAnual: 85 },
+    ]
+  },
+  {
+    title: "Persuasivas",
+    items: [
+      { id: 'per_eficiencia', nombre: 'Eficiencia', icon: Gauge, metaAnual: 98 },
+      { id: 'per_24h', nombre: 'Eficacia 24H', icon: Clock4, metaAnual: 70 },
+      { id: 'per_48h', nombre: 'Eficacia 48H', icon: Clock9, metaAnual: 70 },
+      { id: 'per_reclamos', nombre: 'Reclamos', icon: FileWarning, metaAnual: 5 },
+    ]
+  },
+  {
+    title: "Recibos",
+    items: [
+      { id: 'rec_reclamos', nombre: 'Reclamos', icon: Receipt, metaAnual: 2 },
+    ]
+  }
+];
+
+// Mock generic detail data generator
+const generateMockDetail = (nombre: string, meta: number) => ({
+  nombre,
+  promedioAnual: Math.floor(Math.random() * 15) + (meta - 5),
+  metaAnual: meta,
+  historicoMensual: [
+    { mes: 'Ene', valor: meta - 2, meta }, { mes: 'Feb', valor: meta + 1, meta }, { mes: 'Mar', valor: meta - 1, meta },
+    { mes: 'Abr', valor: meta, meta }, { mes: 'May', valor: meta + 2, meta }, { mes: 'Jun', valor: meta - 3, meta },
+    { mes: 'Jul', valor: meta + 1, meta }, { mes: 'Ago', valor: meta - 1, meta }, { mes: 'Sep', valor: meta, meta },
+    { mes: 'Oct', valor: meta + 2, meta }, { mes: 'Nov', valor: meta - 2, meta }, { mes: 'Dic', valor: meta + 3, meta },
+  ],
+  detalleSedes: [
+    { sede: 'Comas', valor: meta + 1 }, { sede: 'Callao', valor: meta - 2 }, { sede: 'Ate', valor: meta + 3 },
+    { sede: 'Breña', valor: meta }, { sede: 'SJL', valor: meta - 4 }, { sede: 'Surquillo', valor: meta + 2 },
+    { sede: 'VES', valor: meta - 1 }, { sede: 'Clientes Especiales', valor: meta + 5 },
+  ],
+});
 
 export default function ReporteAnualPage() {
-    const [activities, setActivities] = useState(mockData);
-    const [selectedActivity, setSelectedActivity] = useState<ActivityData | null>(null);
+    const [summary, setSummary] = useState(annualSummary);
+    const [selectedActivity, setSelectedActivity] = useState<any | null>(null);
 
-    const handleCardClick = (activity: ActivityData) => {
-        setSelectedActivity(activity);
+    const handleCardClick = (activity: any) => {
+        // If it's a summary card, it already has the detail. If it's a category card, generate mock detail.
+        const detail = activity.historicoMensual ? activity : generateMockDetail(activity.nombre, activity.metaAnual);
+        setSelectedActivity(detail);
     };
 
     const handleCloseModal = () => {
@@ -96,37 +173,81 @@ export default function ReporteAnualPage() {
     };
 
     const handleBaseChange = (base: string) => {
-        // Simulate data change for the selected base
-        setActivities(mockData.map(activity => ({
+        setSummary(annualSummary.map(activity => ({
             ...activity,
             promedioAnual: Math.floor(Math.random() * 20) + 75
         })));
-        // Close modal to prevent showing stale data, as its data would be out of sync
         setSelectedActivity(null);
     };
 
     return (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-12 max-w-7xl mx-auto pb-12">
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <h1 className="font-headline text-3xl font-bold">Cuadros de Mando Anuales</h1>
-                    <p className="text-muted-foreground">Resumen de indicadores por grupo de actividad.</p>
+                    <h1 className="font-headline text-4xl font-bold text-primary">Cuadros de Mando Anuales</h1>
+                    <p className="text-xl text-muted-foreground">Visión 360° de los indicadores de gestión operativa.</p>
                 </div>
                 <BaseSelector onBaseChange={handleBaseChange} />
             </div>
 
+            {/* Top Annual Summary */}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {activities.map((activity) => (
-                    <Card key={activity.id} className="cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-105 hover:border-primary" onClick={() => handleCardClick(activity)}>
+                {summary.map((activity) => (
+                    <Card 
+                        key={activity.id} 
+                        className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 border-2 hover:border-primary/50 group"
+                        onClick={() => handleCardClick(activity)}
+                    >
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                             <CardTitle className="text-xl font-headline">{activity.nombre}</CardTitle>
-                             <activity.icon className="h-6 w-6 text-muted-foreground" />
+                             <CardTitle className="text-lg font-headline text-muted-foreground group-hover:text-primary transition-colors">
+                                {activity.nombre}
+                             </CardTitle>
+                             <activity.icon className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
                         </CardHeader>
                         <CardContent>
                             <div className="text-5xl font-bold text-primary">{activity.promedioAnual}%</div>
-                            <p className="text-xs text-muted-foreground">Promedio Anual Actual</p>
+                            <p className="text-sm text-muted-foreground mt-1 font-medium">Promedio Anual</p>
                         </CardContent>
                     </Card>
+                ))}
+            </div>
+
+            {/* Categorized Indicators */}
+            <div className="flex flex-col gap-10">
+                {categories.map((cat) => (
+                    <div key={cat.title} className="flex flex-col gap-6">
+                        <div className="flex items-center gap-4">
+                            <h2 className="font-headline text-2xl font-bold text-foreground whitespace-nowrap">{cat.title}</h2>
+                            <Separator className="flex-1" />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {cat.items.map((item) => (
+                                <Card 
+                                    key={item.id} 
+                                    className="cursor-pointer hover:bg-primary/5 transition-all border border-border/60 hover:border-primary/40 group"
+                                    onClick={() => handleCardClick(item)}
+                                >
+                                    <CardHeader className="p-4 flex flex-row items-center justify-between space-y-0">
+                                        <CardTitle className="text-base font-semibold text-muted-foreground group-hover:text-primary transition-colors">
+                                            {item.nombre}
+                                        </CardTitle>
+                                        <item.icon className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                                    </CardHeader>
+                                    <CardContent className="px-4 pb-4">
+                                        <div className="flex items-baseline gap-2">
+                                            <span className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                                                {Math.floor(Math.random() * 15) + (item.metaAnual - 5)}%
+                                            </span>
+                                            <span className="text-xs text-muted-foreground">Promedio</span>
+                                        </div>
+                                        <div className="mt-2 text-[10px] uppercase tracking-wider text-muted-foreground font-bold">
+                                            Meta: {item.metaAnual}%
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    </div>
                 ))}
             </div>
             
