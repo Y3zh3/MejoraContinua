@@ -1,27 +1,24 @@
 
 "use client";
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Line } from 'recharts';
-import { FileWarning } from "lucide-react";
-import { BaseSelector } from "@/components/base-selector";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-const initialWeeklyData = [
-  { name: 'Semana 1', value: 7, meta: 5 },
-  { name: 'Semana 2', value: 6, meta: 5 },
-  { name: 'Semana 3', value: 4, meta: 5 },
-  { name: 'Semana 4', value: 5, meta: 5 },
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
+import { FileWarning } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+const dataEnero = [
+  { name: 'Comas', value: 17, meta: 5 },
+  { name: 'Callao', value: 6, meta: 5 },
+  { name: 'Ate', value: 5, meta: 5 },
+  { name: 'Breña', value: 5, meta: 5 },
+  { name: 'SJL', value: 0, meta: 5 },
+  { name: 'Surquillo', value: 2, meta: 5 },
+  { name: 'VES', value: 2, meta: 5 },
 ];
 
 export default function ReclamosPersuasivasPage() {
-  const [weeklyData, setWeeklyData] = useState(initialWeeklyData);
-
-  const handleBaseChange = () => {
-    setWeeklyData(initialWeeklyData.map(d => ({...d, value: Math.floor(Math.random() * 6) + 3 })));
-  };
-  
-  const avgValue = Math.round(weeklyData.reduce((acc, item) => acc + item.value, 0) / weeklyData.length);
+  const totalReclamos = dataEnero.reduce((acc, item) => acc + item.value, 0);
   
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
@@ -30,89 +27,102 @@ export default function ReclamosPersuasivasPage() {
           <FileWarning className="h-8 w-8 text-[hsl(var(--chart-4))]" />
           <h1 className="font-headline text-3xl font-bold">Persuasivas: Reclamos</h1>
         </div>
-        <BaseSelector onBaseChange={handleBaseChange} />
+        <div className="w-full max-w-xs">
+            <Select defaultValue="todas">
+                <SelectTrigger>
+                    <SelectValue placeholder="Seleccionar Base" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="todas">Todas las bases</SelectItem>
+                </SelectContent>
+            </Select>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card className="transition-colors hover:bg-primary/10">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle>Rendimiento - Enero 2025</CardTitle>
+                <CardTitle className="text-xl">Distribución por Sede - Enero 2026</CardTitle>
             </CardHeader>
-            <CardContent className="h-96 p-2">
+            <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={weeklyData}>
-                  <defs>
-                      <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="hsl(var(--chart-4))" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="hsl(var(--chart-4))" stopOpacity={0}/>
-                      </linearGradient>
-                  </defs>
+                <BarChart data={dataEnero}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="name" />
-                  <YAxis unit=" uds."/>
+                  <YAxis unit=" uds." allowDecimals={false} />
                   <Tooltip
                       contentStyle={{
                       background: "hsl(var(--card))",
                       borderColor: "hsl(var(--border))",
+                      borderRadius: "8px",
                       }}
                       formatter={(value: number) => `${value} uds.`}
                   />
                   <Legend />
-                  <Area type="monotone" dataKey="value" name="Reclamos" stroke="hsl(var(--chart-4))" fillOpacity={1} fill="url(#colorValue)" />
-                  <Line type="monotone" dataKey="meta" name="Meta" stroke="hsl(var(--border))" strokeDasharray="5 5" />
-                </AreaChart>
+                  <Bar 
+                    dataKey="value" 
+                    name="Reclamos" 
+                    fill="hsl(var(--chart-4))" 
+                    radius={[4, 4, 0, 0]} 
+                  />
+                  <ReferenceLine y={5} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
+                </BarChart>
             </ResponsiveContainer>
             </CardContent>
         </Card>
 
-        <Card className="transition-colors hover:bg-primary/10">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader>
-            <CardTitle>Resumen del Indicador</CardTitle>
+            <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4 pt-6">
-                <p className="text-base text-muted-foreground">
-                    Análisis del indicador de <span className="font-semibold text-foreground">Reclamos de Persuasivas</span> para el periodo de <span className="font-semibold text-foreground">Enero 2025</span>.
+            <CardContent className="flex flex-col gap-6 pt-2">
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                    Análisis del indicador de <span className="font-semibold text-foreground">Reclamos de Persuasivas</span> para el periodo de <span className="font-semibold text-foreground">Enero 2026</span>.
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="border p-4 rounded-lg text-center">
-                        <p className="text-base text-muted-foreground">Promedio Semanal</p>
-                        <p className="text-3xl font-bold text-[hsl(var(--chart-4))]">{avgValue} uds.</p>
+                <div className="grid grid-cols-2 gap-6">
+                    <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
+                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>
+                        <p className="text-4xl font-bold text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
                     </div>
-                     <div className="border p-4 rounded-lg text-center">
-                        <p className="text-base text-muted-foreground">Meta (máx)</p>
-                        <p className="text-3xl font-bold">{weeklyData[0].meta} uds.</p>
+                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
+                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta (máx/sede)</p>
+                        <p className="text-4xl font-bold">5 uds.</p>
                     </div>
                 </div>
                 <div className="mt-2">
-                    <h4 className="font-semibold text-lg">Observaciones</h4>
-                    <p className="text-base text-muted-foreground">El número de reclamos ha estado cerca de la meta, con una baja en la tercera semana. Se debe investigar el pico de la primera semana.</p>
+                    <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                        El gráfico muestra el volumen de reclamos por sede durante Enero 2026. Comas presenta el valor más alto con 17 unidades, superando la meta de 5 por sede. SJL destaca por no registrar reclamos.
+                    </p>
                 </div>
             </CardContent>
         </Card>
       </div>
 
-       <Card className="transition-colors hover:bg-primary/10">
+       <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
         <CardHeader>
-            <CardTitle>Detalle Semanal de Reclamos</CardTitle>
+            <CardTitle className="text-xl">Detalle de Reclamos por Sede (Ene'26)</CardTitle>
             <p className="text-base text-muted-foreground">
-            Desglose de los reclamos de acciones persuasivas por semana.
+            Desglose comparativo de los reclamos de acciones persuasivas registrados en el mes de Enero 2026.
             </p>
         </CardHeader>
         <CardContent>
-            <div className="max-h-96 overflow-y-auto">
+            <div className="max-h-96 overflow-y-auto rounded-md border">
             <Table className="text-base">
-                <TableHeader className="sticky top-0 bg-card">
+                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                 <TableRow>
-                    <TableHead className="w-[150px]">Semana</TableHead>
-                    <TableHead>Reclamos</TableHead>
-                    <TableHead className="text-right">Meta (máx)</TableHead>
+                    <TableHead className="w-[200px] font-bold">Sede</TableHead>
+                    <TableHead className="font-bold">Reclamos</TableHead>
+                    <TableHead className="text-right font-bold">Meta (máx)</TableHead>
                 </TableRow>
                 </TableHeader>
                 <TableBody>
-                {weeklyData.map((item) => (
+                {dataEnero.map((item) => (
                     <TableRow key={item.name}>
-                    <TableCell className="font-medium">{item.name}</TableCell>
-                    <TableCell>{item.value} uds.</TableCell>
+                    <TableCell className="font-semibold">{item.name}</TableCell>
+                    <TableCell className={item.value > item.meta ? "text-destructive font-bold" : "text-foreground"}>
+                        {item.value} uds.
+                    </TableCell>
                     <TableCell className="text-right font-medium">{item.meta} uds.</TableCell>
                     </TableRow>
                 ))}
