@@ -169,6 +169,17 @@ const COM_EFECTIVIDAD_DATA: Record<string, number[]> = {
   'clientes-e': [74, 68, 70, 71, 77, 75, 73, 72, 0, 0],
 };
 
+const INS_ATIPICAS_DATA: Record<string, number[]> = {
+  comas: [77, 80, 85, 84, 79, 78, 80, 83, 74, 83],
+  callao: [78, 83, 85, 87, 88, 87, 80, 89, 86, 88],
+  ate: [58, 69, 73, 70, 70, 70, 67, 66, 65, 67],
+  brena: [69, 76, 81, 76, 77, 82, 83, 83, 80, 85],
+  sjl: [81, 80, 87, 90, 91, 88, 89, 90, 89, 89],
+  surquillo: [62, 62, 74, 76, 77, 78, 77, 75, 71, 77],
+  ves: [50, 60, 75, 78, 80, 81, 78, 77, 66, 63],
+  'clientes-e': [25, 82, 100, 75, 100, 82, 64, 100, 40, 56],
+};
+
 const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
@@ -186,11 +197,12 @@ export default function ReporteAnualPage() {
         else if (activity.id === 'com_preventivas') dataToUse = COM_PREVENTIVAS_DATA;
         else if (activity.id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
         else if (activity.id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
+        else if (activity.id === 'ins_atipicas') dataToUse = INS_ATIPICAS_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
                 values = MONTHS.map((_, i) => {
-                    const allVals = Object.values(dataToUse!).map(b => b[i]).filter(v => v > 0);
+                    const allVals = Object.values(dataToUse!).map(b => b[i]).filter(v => v !== undefined);
                     return allVals.length > 0 ? Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1)) : 0;
                 });
             } else {
@@ -205,9 +217,9 @@ export default function ReporteAnualPage() {
             nombre: activity.nombre,
             promedioAnual: Number((values.filter(v => v > 0).reduce((a, b) => a + b, 0) / values.filter(v => v > 0).length).toFixed(1)),
             metaAnual: activity.metaAnual,
-            historicoMensual: MONTHS.map((m, i) => ({ mes: m, valor: values[i], meta: activity.metaAnual })),
+            historicoMensual: MONTHS.map((m, i) => ({ mes: m, valor: values[i] || 0, meta: activity.metaAnual })),
             detalleTabla: isBaseSelected 
-                ? MONTHS.map((m, i) => ({ label: m, valor: values[i] }))
+                ? MONTHS.map((m, i) => ({ label: m, valor: values[i] || 0 }))
                 : (dataToUse ? Object.entries(dataToUse) : []).map(([key, val]) => ({
                     label: key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' '),
                     valor: val[val.length - 1]
@@ -236,10 +248,11 @@ export default function ReporteAnualPage() {
         else if (id === 'com_preventivas') dataToUse = COM_PREVENTIVAS_DATA;
         else if (id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
         else if (id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
+        else if (id === 'ins_atipicas') dataToUse = INS_ATIPICAS_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
-                const allLastMonthVals = Object.values(dataToUse).map(b => b[b.length - 1]).filter(v => v > 0);
+                const allLastMonthVals = Object.values(dataToUse).map(b => b[b.length - 1]).filter(v => v !== undefined);
                 return allLastMonthVals.length > 0 ? Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1)) : 0;
             }
             const baseVals = dataToUse[currentBase];
