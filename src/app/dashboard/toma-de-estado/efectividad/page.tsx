@@ -40,57 +40,7 @@ const efectividadData = {
             { name: 'C08', lecturas: 39454, total: 40723, value: 96.9 },
             { name: 'C09', lecturas: 32835, total: 34207, value: 96.0 },
             { name: 'C10', lecturas: 32525, total: 33765, value: 96.3 },
-        ]
-    },
-    callao: {
-        promedio: 98.4,
-        meta: 98.5,
-        label: "Callao",
-        ciclos: [
-            { name: 'C01', lecturas: 15151, total: 15457, value: 98.0 },
-            { name: 'C02', lecturas: 15771, total: 15971, value: 98.7 },
-            { name: 'C03', lecturas: 19912, total: 19991, value: 99.6 },
-            { name: 'C04', lecturas: 19370, total: 19490, value: 99.4 },
-            { name: 'C05', lecturas: 21464, total: 21571, value: 99.5 },
-            { name: 'C06', lecturas: 17978, total: 18202, value: 98.8 },
-            { name: 'C07', lecturas: 14759, total: 15003, value: 98.4 },
-            { name: 'C08', lecturas: 22312, total: 22579, value: 98.8 },
-            { name: 'C09', lecturas: 20210, total: 20435, value: 98.9 },
-            { name: 'C10', lecturas: 13444, total: 13703, value: 98.1 },
-        ]
-    },
-    ate: {
-        promedio: 98.6,
-        meta: 98.5,
-        label: "Ate",
-        ciclos: [
-            { name: 'C01', lecturas: 33140, total: 33671, value: 98.4 },
-            { name: 'C02', lecturas: 28248, total: 28819, value: 98.0 },
-            { name: 'C03', lecturas: 26301, total: 26542, value: 99.1 },
-            { name: 'C04', lecturas: 27955, total: 28156, value: 99.3 },
-            { name: 'C05', lecturas: 19822, total: 20028, value: 99.0 },
-            { name: 'C06', lecturas: 19869, total: 20139, value: 98.7 },
-            { name: 'C07', lecturas: 18366, total: 18573, value: 98.9 },
-            { name: 'C08', lecturas: 19735, total: 20077, value: 98.3 },
-            { name: 'C09', lecturas: 19686, total: 20123, value: 97.8 },
-            { name: 'C10', lecturas: 16987, total: 17157, value: 99.0 },
-        ]
-    },
-    brena: {
-        promedio: 97.8,
-        meta: 98.5,
-        label: "Breña",
-        ciclos: [
-            { name: 'C01', lecturas: 21598, total: 21775, value: 99.2 },
-            { name: 'C02', lecturas: 21113, total: 21475, value: 98.3 },
-            { name: 'C03', lecturas: 14461, total: 14640, value: 98.8 },
-            { name: 'C04', lecturas: 20658, total: 20857, value: 99.0 },
-            { name: 'C05', lecturas: 20233, total: 20419, value: 99.1 },
-            { name: 'C06', lecturas: 10327, total: 10620, value: 97.2 },
-            { name: 'C07', lecturas: 11198, total: 11617, value: 96.4 },
-            { name: 'C08', lecturas: 11230, total: 11533, value: 97.4 },
-            { name: 'C09', lecturas: 9562, total: 9662, value: 99.0 },
-            { name: 'C10', lecturas: 11804, total: 12082, value: 97.7 },
+            { name: 'C11', lecturas: 0, total: 0, value: 0 },
         ]
     },
     sjl: {
@@ -111,54 +61,21 @@ const efectividadData = {
             { name: 'C11', lecturas: 12237, total: 12297, value: 99.5 },
         ]
     },
-    surquillo: {
-        promedio: 99.0,
+    callao: {
+        promedio: 98.4,
         meta: 98.5,
-        label: "Surquillo",
+        label: "Callao",
         ciclos: [
-            { name: 'C01', lecturas: 18044, total: 18223, value: 99.0 },
-            { name: 'C02', lecturas: 18552, total: 18871, value: 98.3 },
-            { name: 'C03', lecturas: 19282, total: 19674, value: 98.0 },
-            { name: 'C04', lecturas: 19904, total: 20206, value: 98.5 },
-            { name: 'C05', lecturas: 23218, total: 23452, value: 99.0 },
-            { name: 'C06', lecturas: 20894, total: 21158, value: 98.8 },
-            { name: 'C07', lecturas: 19420, total: 19640, value: 98.9 },
-            { name: 'C08', lecturas: 16128, total: 16365, value: 98.6 },
-            { name: 'C09', lecturas: 15944, total: 16218, value: 98.3 },
-        ]
-    },
-    ves: {
-        promedio: 98.2,
-        meta: 98.5,
-        label: "Villa el Salvador",
-        ciclos: [
-            { name: 'C01', lecturas: 27638, total: 28153, value: 98.2 },
-            { name: 'C02', lecturas: 28916, total: 29509, value: 98.0 },
-            { name: 'C03', lecturas: 30200, total: 30927, value: 97.6 },
-            { name: 'C04', lecturas: 27909, total: 28265, value: 98.7 },
-            { name: 'C05', lecturas: 28764, total: 29252, value: 98.3 },
-            { name: 'C06', lecturas: 27765, total: 28216, value: 98.4 },
-            { name: 'C07', lecturas: 27013, total: 27930, value: 96.7 },
-            { name: 'C08', lecturas: 21168, total: 21444, value: 98.7 },
-            { name: 'C10', lecturas: 15521, total: 15893, value: 97.7 },
-        ]
-    },
-    'clientes-e': {
-        promedio: 96.4,
-        meta: 98.5,
-        label: "Clientes especiales",
-        ciclos: [
-            { name: 'C01', lecturas: 2007, total: 2085, value: 96.3 },
-            { name: 'C02', lecturas: 2003, total: 2108, value: 95.0 },
-            { name: 'C03', lecturas: 1636, total: 1692, value: 96.7 },
-            { name: 'C04', lecturas: 1386, total: 1452, value: 95.5 },
-            { name: 'C05', lecturas: 1448, total: 1497, value: 96.7 },
-            { name: 'C06', lecturas: 1611, total: 1670, value: 96.5 },
-            { name: 'C07', lecturas: 1122, total: 1190, value: 94.3 },
-            { name: 'C08', lecturas: 886, total: 925, value: 95.8 },
-            { name: 'C09', lecturas: 548, total: 564, value: 97.2 },
-            { name: 'C10', lecturas: 596, total: 623, value: 95.7 },
-            { name: 'C11', lecturas: 5, total: 5, value: 100 },
+            { name: 'C01', lecturas: 15151, total: 15457, value: 98.0 },
+            { name: 'C02', lecturas: 15771, total: 15971, value: 98.7 },
+            { name: 'C03', lecturas: 19912, total: 19991, value: 99.6 },
+            { name: 'C04', lecturas: 19370, total: 19490, value: 99.4 },
+            { name: 'C05', lecturas: 21464, total: 21571, value: 99.5 },
+            { name: 'C06', lecturas: 17978, total: 18202, value: 98.8 },
+            { name: 'C07', lecturas: 14759, total: 15003, value: 98.4 },
+            { name: 'C08', lecturas: 22312, total: 22579, value: 98.8 },
+            { name: 'C09', lecturas: 20210, total: 20435, value: 98.9 },
+            { name: 'C10', lecturas: 13444, total: 13703, value: 98.1 },
         ]
     }
 };
@@ -175,7 +92,7 @@ export default function EfectividadTomaDeEstadoPage() {
   const handleBaseChange = (base: string) => {
     const newData = (efectividadData as any)[base] || efectividadData.todas;
     setData(newData);
-    setSelectedBaseLabel(newData.label || "");
+    setSelectedBaseLabel(newData.label ? ` ${newData.label}` : "");
   };
 
   if (!isMounted) return null;
@@ -196,16 +113,21 @@ export default function EfectividadTomaDeEstadoPage() {
                 <CardHeader className="pb-4">
                     <CardTitle className="text-xl font-bold text-center">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent>
-                    <div className="grid grid-cols-2 gap-6">
-                        <div className="border border-border/50 p-6 rounded-2xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
-                            <p className="text-[10px] font-bold text-muted-foreground mb-2 uppercase tracking-[0.2em]">Promedio Periodo</p>
-                            <p className="text-4xl font-black text-[hsl(var(--chart-2))]">{data.promedio}%</p>
+                <CardContent className="flex flex-col gap-6">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                            <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Promedio Periodo</p>
+                            <p className="text-3xl font-black text-[hsl(var(--chart-2))]">{data.promedio}%</p>
                         </div>
-                         <div className="border border-border/50 p-6 rounded-2xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
-                            <p className="text-[10px] font-bold text-muted-foreground mb-2 uppercase tracking-[0.2em]">Meta</p>
-                            <p className="text-4xl font-black">98.5%</p>
+                         <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                            <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta</p>
+                            <p className="text-3xl font-black">98.5%</p>
                         </div>
+                    </div>
+                    <div className="px-2">
+                        <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
+                            Este indicador refleja el cumplimiento operativo en la captura de lecturas de medidores. Una alta efectividad asegura que la facturación se base en consumos reales, minimizando errores y mejorando la satisfacción del cliente final mediante procesos de toma de estado precisos y oportunos.
+                        </p>
                     </div>
                 </CardContent>
             </Card>
@@ -216,7 +138,7 @@ export default function EfectividadTomaDeEstadoPage() {
                 </CardHeader>
                 <CardContent className="h-[320px] p-0 px-2 pb-2">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={data.ciclos} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                    <BarChart data={data.ciclos.filter(c => c.value > 0)} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                         <XAxis dataKey="name" tick={{ fontSize: 12 }} />
                         <YAxis domain={[80, 105]} unit="%" tick={{ fontSize: 12 }} />
@@ -239,9 +161,9 @@ export default function EfectividadTomaDeEstadoPage() {
             </Card>
         </div>
 
-        <Card className="border shadow-sm h-full flex flex-col min-h-[600px]">
+        <Card className="border shadow-sm h-full flex flex-col min-h-[650px]">
             <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-bold">Detalle de Rendimiento por Ciclo {selectedBaseLabel}</CardTitle>
+                <CardTitle className="text-xl font-bold">Detalle de Rendimiento por Ciclo{selectedBaseLabel}</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 px-4">
             <div className="max-h-[650px] overflow-y-auto rounded-xl border border-border/60 bg-card">
@@ -255,7 +177,7 @@ export default function EfectividadTomaDeEstadoPage() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data.ciclos.map((item) => (
+                    {data.ciclos.filter(c => c.total > 0).map((item) => (
                     <TableRow key={item.name} className="hover:bg-muted/30 transition-colors border-b last:border-0">
                         <TableCell className="font-bold text-foreground pl-6">{item.name}</TableCell>
                         <TableCell className="text-right tabular-nums text-muted-foreground font-medium">
