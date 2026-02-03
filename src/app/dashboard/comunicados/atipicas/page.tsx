@@ -23,6 +23,15 @@ const atipicasData = {
             { name: 'C09', cfirma: 828, total: 1042, value: 79.5, meta: 85 },
             { name: 'C10', cfirma: 547, total: 648, value: 84.4, meta: 85 },
         ]
+    },
+    comas: {
+        promedio: 75.2,
+        meta: 85,
+        ciclos: [
+            { name: 'C01', cfirma: 300, total: 400, value: 75.0, meta: 85 },
+            { name: 'C02', cfirma: 280, total: 380, value: 73.7, meta: 85 },
+            { name: 'C03', cfirma: 310, total: 390, value: 79.5, meta: 85 },
+        ]
     }
 };
 
@@ -35,7 +44,8 @@ export default function AtipicasComunicadosPage() {
   }, []);
 
   const handleBaseChange = (base: string) => {
-    setData(atipicasData[base as keyof typeof atipicasData] || atipicasData.todas);
+    const newData = atipicasData[base as keyof typeof atipicasData] || atipicasData.todas;
+    setData(newData);
   };
 
   if (!isMounted) return null;
@@ -52,7 +62,7 @@ export default function AtipicasComunicadosPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
-            <Card className="border shadow-sm">
+            <Card className="border shadow-sm h-52">
                 <CardHeader className="pb-2">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
@@ -116,8 +126,8 @@ export default function AtipicasComunicadosPage() {
                     {data.ciclos.map((item) => (
                     <TableRow key={item.name}>
                         <TableCell className="font-semibold">{item.name}</TableCell>
-                        <TableCell className="text-right">{item.cfirma.toLocaleString()}</TableCell>
-                        <TableCell className="text-right">{item.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{item.cfirma?.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{item.total?.toLocaleString()}</TableCell>
                         <TableCell className={`text-right font-medium ${item.value < item.meta ? "text-destructive" : ""}`}>
                             {item.value}%
                         </TableCell>
