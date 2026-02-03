@@ -1,6 +1,4 @@
-
 "use client";
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
@@ -121,112 +119,97 @@ export default function PreventivasComunicadosPage() {
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <ShieldCheck className="h-8 w-8 text-[hsl(var(--chart-2))]" />
-          <h1 className="font-headline text-3xl font-bold">Comunicados: Preventivas</h1>
+            <ShieldCheck className="h-8 w-8 text-[hsl(var(--chart-2))]" />
+            <h1 className="font-headline text-3xl font-bold">Comunicados: Preventivas</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-            <CardHeader className="p-4">
-                <CardTitle className="text-xl">Tendencia de Cumplimiento (%)</CardTitle>
-            </CardHeader>
-            <CardContent className="h-60 p-0 px-2 pb-4">
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={data.ciclos}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="name" />
-                  <YAxis domain={[0, 110]} unit="%"/>
-                  <Tooltip
-                      contentStyle={{
-                      background: "hsl(var(--card))",
-                      borderColor: "hsl(var(--border))",
-                      borderRadius: "8px",
-                      }}
-                      formatter={(value: number) => `${value.toFixed(1)}%`}
-                  />
-                  <Legend />
-                  <Line 
-                    type="monotone" 
-                    dataKey="value" 
-                    name="Cumplimiento" 
-                    stroke="hsl(var(--chart-2))" 
-                    strokeWidth={3}
-                    dot={{ r: 6 }}
-                    activeDot={{ r: 8 }}
-                  />
-                  <ReferenceLine y={85} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
-                </LineChart>
-            </ResponsiveContainer>
-            </CardContent>
-        </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="flex flex-col gap-8">
+            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+                <CardHeader>
+                    <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-4">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
+                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
+                            <p className="text-3xl font-bold text-[hsl(var(--chart-2))]">{data.promedio}%</p>
+                        </div>
+                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
+                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta</p>
+                            <p className="text-3xl font-bold">{data.meta}%</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            Análisis del cumplimiento de Comunicaciones Preventivas. El cumplimiento preventivo es clave para la reducción de reclamos.
+                        </p>
+                    </div>
+                </CardContent>
+            </Card>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+                <CardHeader className="p-4">
+                    <CardTitle className="text-xl">Tendencia de Cumplimiento (%)</CardTitle>
+                </CardHeader>
+                <CardContent className="h-60 p-0 px-2 pb-4">
+                <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={data.ciclos}>
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                        <XAxis dataKey="name" />
+                        <YAxis domain={[0, 110]} unit="%"/>
+                        <Tooltip
+                            contentStyle={{
+                                background: "hsl(var(--card))",
+                                borderColor: "hsl(var(--border))",
+                                borderRadius: "8px",
+                            }}
+                            formatter={(value: number) => `${value.toFixed(1)}%`}
+                        />
+                        <Legend />
+                        <Line type="monotone" dataKey="value" name="Cumplimiento" stroke="hsl(var(--chart-2))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
+                        <ReferenceLine y={85} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
+                    </LineChart>
+                </ResponsiveContainer>
+                </CardContent>
+            </Card>
+        </div>
+
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
             <CardHeader>
-            <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
+                <CardTitle className="text-xl">Detalle de Cumplimiento Preventivo</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-6 pt-2 h-60 overflow-y-auto">
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                    Análisis del cumplimiento de <span className="font-semibold text-foreground">Comunicaciones Preventivas</span> para el periodo actual.
-                </p>
-                <div className="grid grid-cols-2 gap-6">
-                    <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
-                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio del periodo</p>
-                        <p className="text-4xl font-bold text-[hsl(var(--chart-2))]">{data.promedio}%</p>
-                    </div>
-                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
-                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta establecida</p>
-                        <p className="text-4xl font-bold">{data.meta}%</p>
-                    </div>
-                </div>
-                <div className="mt-2">
-                    <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        El cumplimiento preventivo es clave para la reducción de reclamos. Los valores por debajo del 85% requieren un análisis de las causas de no entrega.
-                    </p>
-                </div>
+            <CardContent className="flex-1">
+            <div className="max-h-[500px] overflow-y-auto rounded-md border">
+                <Table>
+                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
+                    <TableRow>
+                    <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
+                    <TableHead className="font-bold">Prev Sin</TableHead>
+                    <TableHead className="font-bold">Total</TableHead>
+                    <TableHead className="text-right font-bold">Cumplimiento (%)</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {data.ciclos.map((item) => (
+                    <TableRow key={item.name}>
+                        <TableCell className="font-semibold">{item.name}</TableCell>
+                        <TableCell>{item.prev.toLocaleString()}</TableCell>
+                        <TableCell>{item.total.toLocaleString()}</TableCell>
+                        <TableCell className={`text-right font-medium ${item.value < item.meta ? "text-destructive" : ""}`}>
+                            {item.value.toFixed(1)}%
+                        </TableCell>
+                    </TableRow>
+                    ))}
+                </TableBody>
+                </Table>
+            </div>
             </CardContent>
         </Card>
       </div>
-
-       <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-        <CardHeader>
-          <CardTitle className="text-xl">Detalle Semanal de Cumplimiento</CardTitle>
-          <p className="text-base text-muted-foreground">
-            Desglose porcentual y numérico del cumplimiento de comunicaciones preventivas por ciclo operativo.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <div className="max-h-96 overflow-y-auto rounded-md border">
-            <Table className="text-base">
-              <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
-                <TableRow>
-                  <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                  <TableHead className="font-bold">Prev Sin</TableHead>
-                  <TableHead className="font-bold">Total</TableHead>
-                  <TableHead className="font-bold">Cumplimiento (%)</TableHead>
-                  <TableHead className="text-right font-bold">Meta (%)</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {data.ciclos.map((item) => (
-                  <TableRow key={item.name}>
-                    <TableCell className="font-semibold">{item.name}</TableCell>
-                    <TableCell>{item.prev.toLocaleString()}</TableCell>
-                    <TableCell>{item.total.toLocaleString()}</TableCell>
-                    <TableCell className={item.value < item.meta ? "text-destructive font-bold" : "text-foreground"}>
-                        {item.value.toFixed(1)}%
-                    </TableCell>
-                    <TableCell className="text-right font-medium">{item.meta}%</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
-
     </div>
   );
 }

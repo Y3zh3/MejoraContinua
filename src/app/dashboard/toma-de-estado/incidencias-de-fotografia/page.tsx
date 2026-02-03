@@ -1,8 +1,7 @@
-
 "use client";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { CameraOff } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -23,22 +22,6 @@ const fotografiaData = {
             { name: 'C09', value: 12.6, casos: 2750, total: 21825 },
             { name: 'C10', value: 12.3, casos: 1850, total: 17961 },
         ]
-    },
-    comas: {
-        promedio: 11.5,
-        meta: 5,
-        ciclos: [
-            { name: 'C01', value: 11.1, casos: 56, total: 504 },
-            { name: 'C02', value: 28.3, casos: 167, total: 591 },
-            { name: 'C03', value: 7.2, casos: 60, total: 834 },
-            { name: 'C04', value: 5.0, casos: 99, total: 1964 },
-            { name: 'C05', value: 6.0, casos: 132, total: 2202 },
-            { name: 'C06', value: 5.3, casos: 63, total: 1179 },
-            { name: 'C07', value: 9.8, casos: 217, total: 2212 },
-            { name: 'C08', value: 7.9, casos: 106, total: 1349 },
-            { name: 'C09', value: 16.3, casos: 239, total: 1463 },
-            { name: 'C10', value: 13.6, casos: 148, total: 1087 },
-        ]
     }
 };
 
@@ -53,8 +36,8 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <CameraOff className="h-8 w-8 text-[hsl(var(--chart-4))]" />
-          <h1 className="font-headline text-3xl font-bold">Toma de Estado: Incidencias</h1>
+            <CameraOff className="h-8 w-8 text-[hsl(var(--chart-4))]" />
+            <h1 className="font-headline text-3xl font-bold">Toma de Estado: Incidencias</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
       </div>
@@ -62,7 +45,7 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader className="pb-4">
+                <CardHeader>
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
@@ -76,6 +59,12 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
+                    <div>
+                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            Evolución de incidencias de fotografía. La meta máxima permitida es del 5% para garantizar la calidad del proceso.
+                        </p>
+                    </div>
                 </CardContent>
             </Card>
 
@@ -86,53 +75,54 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
                 <CardContent className="h-60 p-0 px-2 pb-4">
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={data.ciclos}>
-                    <defs>
-                        <linearGradient id="colorIncidencia" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="hsl(var(--chart-4))" stopOpacity={0.8}/>
-                            <stop offset="95%" stopColor="hsl(var(--chart-4))" stopOpacity={0}/>
-                        </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="name" />
-                    <YAxis unit="%" />
-                    <Tooltip
-                        contentStyle={{
-                        background: "hsl(var(--card))",
-                        borderColor: "hsl(var(--border))",
-                        borderRadius: "8px",
-                        }}
-                        formatter={(value: number) => `${value}%`}
-                    />
-                    <Legend />
-                    <Area type="monotone" dataKey="value" name="Incidencia" stroke="hsl(var(--chart-4))" fillOpacity={1} fill="url(#colorIncidencia)" strokeWidth={3} />
+                        <defs>
+                            <linearGradient id="colorIncidencia" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor="hsl(var(--chart-4))" stopOpacity={0.8}/>
+                                <stop offset="95%" stopColor="hsl(var(--chart-4))" stopOpacity={0}/>
+                            </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                        <XAxis dataKey="name" />
+                        <YAxis unit="%" />
+                        <Tooltip
+                            contentStyle={{
+                                background: "hsl(var(--card))",
+                                borderColor: "hsl(var(--border))",
+                                borderRadius: "8px",
+                            }}
+                            formatter={(value: number) => `${value}%`}
+                        />
+                        <Legend />
+                        <Area type="monotone" dataKey="value" name="Incidencia" stroke="hsl(var(--chart-4))" fillOpacity={1} fill="url(#colorIncidencia)" strokeWidth={3} />
+                        <ReferenceLine y={5} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </AreaChart>
                 </ResponsiveContainer>
                 </CardContent>
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Incidencias por Ciclo</CardTitle>
             </CardHeader>
-            <CardContent>
-            <div className="rounded-md border overflow-hidden">
+            <CardContent className="flex-1">
+            <div className="max-h-[500px] overflow-y-auto rounded-md border">
                 <Table>
-                <TableHeader className="bg-secondary/50">
+                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold text-center">Incidencias</TableHead>
-                    <TableHead className="font-bold text-center">Total Lecturas</TableHead>
-                    <TableHead className="font-bold text-center">Porcentaje (%)</TableHead>
+                    <TableHead className="font-bold">Incidencias</TableHead>
+                    <TableHead className="font-bold">Total Lecturas</TableHead>
+                    <TableHead className="text-right font-bold">Porcentaje (%)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {data.ciclos.map((ciclo) => (
                     <TableRow key={ciclo.name}>
                         <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                        <TableCell className="text-center">{ciclo.casos.toLocaleString()}</TableCell>
-                        <TableCell className="text-center">{ciclo.total.toLocaleString()}</TableCell>
-                        <TableCell className="text-center font-medium">{ciclo.value}%</TableCell>
+                        <TableCell>{ciclo.casos.toLocaleString()}</TableCell>
+                        <TableCell>{ciclo.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
                     </TableRow>
                     ))}
                 </TableBody>

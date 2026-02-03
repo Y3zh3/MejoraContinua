@@ -1,8 +1,7 @@
-
 "use client";
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { HardHat } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -23,22 +22,6 @@ const contratistaData = {
             { name: 'C09', value: 33.1, lecturas: 1279, total: 3865 },
             { name: 'C10', value: 37.0, lecturas: 863, total: 2439 },
         ]
-    },
-    comas: {
-        promedio: 24.4,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 38.2, lecturas: 291, total: 761 },
-            { name: 'C02', value: 43.1, lecturas: 492, total: 1140 },
-            { name: 'C03', value: 14.3, lecturas: 121, total: 844 },
-            { name: 'C04', value: 12.4, lecturas: 245, total: 1965 },
-            { name: 'C05', value: 7.0, lecturas: 167, total: 2360 },
-            { name: 'C06', value: 21.2, lecturas: 320, total: 1507 },
-            { name: 'C07', value: 18.0, lecturas: 487, total: 2694 },
-            { name: 'C08', value: 23.2, lecturas: 313, total: 1349 },
-            { name: 'C09', value: 33.9, lecturas: 496, total: 1463 },
-            { name: 'C10', value: 32.8, lecturas: 434, total: 1322 },
-        ]
     }
 };
 
@@ -53,8 +36,8 @@ export default function ContratistaTomaDeEstadoPage() {
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <HardHat className="h-8 w-8 text-[hsl(var(--chart-3))]" />
-          <h1 className="font-headline text-3xl font-bold">Toma de Estado: Contratista</h1>
+            <HardHat className="h-8 w-8 text-[hsl(var(--chart-3))]" />
+            <h1 className="font-headline text-3xl font-bold">Toma de Estado: Contratista</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
       </div>
@@ -62,7 +45,7 @@ export default function ContratistaTomaDeEstadoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader className="pb-4">
+                <CardHeader>
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
@@ -76,6 +59,12 @@ export default function ContratistaTomaDeEstadoPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
+                    <div>
+                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            Rendimiento del contratista en la toma de estado. Los valores por encima de la meta del 15% requieren atención.
+                        </p>
+                    </div>
                 </CardContent>
             </Card>
 
@@ -86,47 +75,48 @@ export default function ContratistaTomaDeEstadoPage() {
                 <CardContent className="h-60 p-0 px-2 pb-4">
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={data.ciclos}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="name" />
-                    <YAxis unit="%" />
-                    <Tooltip
-                        contentStyle={{
-                        background: "hsl(var(--card))",
-                        borderColor: "hsl(var(--border))",
-                        borderRadius: "8px",
-                        }}
-                        formatter={(value: number) => `${value}%`}
-                    />
-                    <Legend />
-                    <Line type="monotone" dataKey="value" name="Rendimiento" stroke="hsl(var(--chart-3))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                        <XAxis dataKey="name" />
+                        <YAxis unit="%" />
+                        <Tooltip
+                            contentStyle={{
+                                background: "hsl(var(--card))",
+                                borderColor: "hsl(var(--border))",
+                                borderRadius: "8px",
+                            }}
+                            formatter={(value: number) => `${value}%`}
+                        />
+                        <Legend />
+                        <Line type="monotone" dataKey="value" name="Rendimiento" stroke="hsl(var(--chart-3))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
+                        <ReferenceLine y={15} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </LineChart>
                 </ResponsiveContainer>
                 </CardContent>
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
             </CardHeader>
-            <CardContent>
-            <div className="rounded-md border overflow-hidden">
+            <CardContent className="flex-1">
+            <div className="max-h-[500px] overflow-y-auto rounded-md border">
                 <Table>
-                <TableHeader className="bg-secondary/50">
+                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold text-center">Lecturas Realizadas</TableHead>
-                    <TableHead className="font-bold text-center">Total Lecturas</TableHead>
-                    <TableHead className="font-bold text-center">Rendimiento (%)</TableHead>
+                    <TableHead className="font-bold">Lecturas Realizadas</TableHead>
+                    <TableHead className="font-bold">Total Lecturas</TableHead>
+                    <TableHead className="text-right font-bold">Rendimiento (%)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {data.ciclos.map((ciclo) => (
                     <TableRow key={ciclo.name}>
                         <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                        <TableCell className="text-center">{ciclo.lecturas.toLocaleString()}</TableCell>
-                        <TableCell className="text-center">{ciclo.total.toLocaleString()}</TableCell>
-                        <TableCell className="text-center font-medium">{ciclo.value}%</TableCell>
+                        <TableCell>{ciclo.lecturas.toLocaleString()}</TableCell>
+                        <TableCell>{ciclo.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
                     </TableRow>
                     ))}
                 </TableBody>
