@@ -64,7 +64,7 @@ export default function ContratistaTomaDeEstadoPage() {
                         </div>
                          <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
                             <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta (máx)</p>
-                            <p className="text-3xl font-bold">{data.meta}%</p>
+                            <p className="text-3xl font-bold">15%</p>
                         </div>
                     </div>
                 </CardContent>
@@ -118,7 +118,9 @@ export default function ContratistaTomaDeEstadoPage() {
                         <TableCell className="font-semibold">{ciclo.name}</TableCell>
                         <TableCell className="text-right">{ciclo.lecturas.toLocaleString()}</TableCell>
                         <TableCell className="text-right">{ciclo.total.toLocaleString()}</TableCell>
-                        <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
+                        <TableCell className="text-right font-bold text-[hsl(var(--chart-3))]">
+                          {ciclo.value}%
+                        </TableCell>
                     </TableRow>
                     ))}
                 </TableBody>
