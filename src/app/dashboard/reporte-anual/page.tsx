@@ -213,6 +213,17 @@ const PER_24H_DATA: Record<string, number[]> = {
   'clientes-e': [18, 14, 17, 34, 28, 8, 22, 11, 22, 0],
 };
 
+const PER_48H_DATA: Record<string, number[]> = {
+  comas: [51, 53, 53, 61, 53, 65, 62, 69, 67, 68],
+  callao: [52, 53, 55, 56, 57, 59, 55, 63, 57, 67],
+  ate: [59, 56, 60, 60, 59, 62, 63, 66, 55, 66],
+  brena: [60, 61, 65, 63, 64, 68, 64, 69, 65, 76],
+  sjl: [61, 64, 58, 64, 65, 68, 70, 73, 73, 79],
+  surquillo: [67, 61, 65, 67, 71, 72, 68, 72, 66, 74],
+  ves: [60, 60, 61, 63, 61, 62, 58, 65, 64, 66],
+  'clientes-e': [25, 42, 17, 45, 32, 9, 25, 14, 21, 7],
+};
+
 const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
@@ -234,6 +245,7 @@ export default function ReporteAnualPage() {
         else if (activity.id === 'ins_reclamos') dataToUse = INS_RECLAMOS_DATA;
         else if (activity.id === 'per_eficiencia') dataToUse = PER_EFICIENCIA_DATA;
         else if (activity.id === 'per_24h') dataToUse = PER_24H_DATA;
+        else if (activity.id === 'per_48h') dataToUse = PER_48H_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
@@ -288,6 +300,7 @@ export default function ReporteAnualPage() {
         else if (id === 'ins_reclamos') dataToUse = INS_RECLAMOS_DATA;
         else if (id === 'per_eficiencia') dataToUse = PER_EFICIENCIA_DATA;
         else if (id === 'per_24h') dataToUse = PER_24H_DATA;
+        else if (id === 'per_48h') dataToUse = PER_48H_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
