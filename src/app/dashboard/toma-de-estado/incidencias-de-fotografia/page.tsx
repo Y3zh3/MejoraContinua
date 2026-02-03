@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { CameraOff } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -174,11 +174,17 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle className="text-xl text-center">Incidencia por Ciclo (%) - Enero 2026</CardTitle>
+                <CardTitle className="text-xl text-center">Evolución de Incidencia (%) - Enero 2026</CardTitle>
             </CardHeader>
             <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={data.ciclos}>
+                <AreaChart data={data.ciclos}>
+                <defs>
+                    <linearGradient id="colorIncidencia" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="hsl(var(--chart-4))" stopOpacity={0.8}/>
+                        <stop offset="95%" stopColor="hsl(var(--chart-4))" stopOpacity={0}/>
+                    </linearGradient>
+                </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" />
                 <YAxis unit="%" />
@@ -191,8 +197,16 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
                     formatter={(value: number) => `${value}%`}
                 />
                 <Legend />
-                <Line type="monotone" dataKey="value" name="Incidencia" stroke="hsl(var(--chart-4))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
-                </LineChart>
+                <Area 
+                    type="monotone" 
+                    dataKey="value" 
+                    name="Incidencia" 
+                    stroke="hsl(var(--chart-4))" 
+                    fillOpacity={1} 
+                    fill="url(#colorIncidencia)" 
+                    strokeWidth={3}
+                />
+                </AreaChart>
             </ResponsiveContainer>
             </CardContent>
         </Card>
@@ -218,7 +232,7 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
                 <div className="mt-2">
                     <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        Se observa una fluctuación en las incidencias de fotografía según el ciclo. Los ciclos con porcentajes superiores al 5% requieren una revisión inmediata de los procesos de captura.
+                        El gráfico de área muestra claramente la fluctuación de incidencias. Los picos que superan la meta del 5% indican ciclos con problemas críticos en la calidad de la toma de datos.
                     </p>
                 </div>
             </CardContent>
@@ -260,3 +274,4 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
     </div>
   );
 }
+
