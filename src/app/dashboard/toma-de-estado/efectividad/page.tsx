@@ -42,23 +42,6 @@ const efectividadData = {
             { name: 'C11', value: 97.2, efectivo: 1749, total: 1800 },
         ]
     },
-    callao: {
-        promedio: 98.4,
-        meta: 98.5,
-        ciclos: [
-            { name: 'C01', value: 98.0, efectivo: 2078, total: 2121 },
-            { name: 'C02', value: 98.8, efectivo: 2134, total: 2160 },
-            { name: 'C03', value: 99.0, efectivo: 2075, total: 2096 },
-            { name: 'C04', value: 98.9, efectivo: 2108, total: 2132 },
-            { name: 'C05', value: 99.0, efectivo: 2053, total: 2074 },
-            { name: 'C06', value: 98.8, efectivo: 1994, total: 2018 },
-            { name: 'C07', value: 98.0, efectivo: 1962, total: 2002 },
-            { name: 'C08', value: 97.0, efectivo: 1904, total: 1963 },
-            { name: 'C09', value: 98.1, efectivo: 1902, total: 1939 },
-            { name: 'C10', value: 98.9, efectivo: 1868, total: 1889 },
-            { name: 'C11', value: 99.1, efectivo: 1833, total: 1850 },
-        ]
-    },
     sjl: {
         promedio: 99.1,
         meta: 98.5,
@@ -74,6 +57,23 @@ const efectividadData = {
             { name: 'C09', value: 98.9, efectivo: 2967, total: 3000 },
             { name: 'C10', value: 99.3, efectivo: 2979, total: 3000 },
             { name: 'C11', value: 99.5, efectivo: 2985, total: 3000 },
+        ]
+    },
+    callao: {
+        promedio: 98.4,
+        meta: 98.5,
+        ciclos: [
+            { name: 'C01', value: 98.0, efectivo: 2078, total: 2121 },
+            { name: 'C02', value: 98.8, efectivo: 2134, total: 2160 },
+            { name: 'C03', value: 99.0, efectivo: 2075, total: 2096 },
+            { name: 'C04', value: 98.9, efectivo: 2108, total: 2132 },
+            { name: 'C05', value: 99.0, efectivo: 2053, total: 2074 },
+            { name: 'C06', value: 98.8, efectivo: 1994, total: 2018 },
+            { name: 'C07', value: 98.0, efectivo: 1962, total: 2002 },
+            { name: 'C08', value: 97.0, efectivo: 1904, total: 1963 },
+            { name: 'C09', value: 98.1, efectivo: 1902, total: 1939 },
+            { name: 'C10', value: 98.9, efectivo: 1868, total: 1889 },
+            { name: 'C11', value: 99.1, efectivo: 1833, total: 1850 },
         ]
     },
     ate: {
@@ -134,19 +134,19 @@ export default function EfectividadTomaDeEstadoPage() {
                         </div>
                          <div className="border border-border/50 p-6 rounded-2xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-2 uppercase tracking-[0.2em]">Meta</p>
-                            <p className="text-4xl font-black">{data.meta}%</p>
+                            <p className="text-4xl font-black">98.5%</p>
                         </div>
                     </div>
                 </CardContent>
             </Card>
 
             <Card className="border shadow-sm">
-                <CardHeader className="pb-4">
+                <CardHeader className="pb-2">
                     <CardTitle className="text-xl font-bold">Rendimiento por Ciclo (%)</CardTitle>
                 </CardHeader>
-                <CardContent className="h-[480px] p-0 px-2">
+                <CardContent className="h-[320px] p-0 px-2 pb-2">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={data.ciclos} margin={{ top: 20, right: 10, left: -20, bottom: 20 }}>
+                    <BarChart data={data.ciclos} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                         <XAxis dataKey="name" tick={{ fontSize: 12 }} />
                         <YAxis domain={[80, 100]} unit="%" tick={{ fontSize: 12 }} />
@@ -160,9 +160,9 @@ export default function EfectividadTomaDeEstadoPage() {
                             cursor={{ fill: 'hsl(var(--muted))', opacity: 0.4 }}
                             formatter={(value: number) => [`${value}%`, "Efectividad"]}
                         />
-                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '20px' }} />
+                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '10px' }} />
                         <Bar dataKey="value" name="Efectividad" fill="hsl(var(--chart-2))" radius={[6, 6, 0, 0]} />
-                        <ReferenceLine y={98.5} label={{ position: 'top', value: 'Meta', fontSize: 12, fill: 'hsl(var(--destructive))' }} stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
+                        <ReferenceLine y={98.5} label={{ position: 'top', value: 'Meta', fontSize: 10, fill: 'hsl(var(--destructive))' }} stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </BarChart>
                 </ResponsiveContainer>
                 </CardContent>
