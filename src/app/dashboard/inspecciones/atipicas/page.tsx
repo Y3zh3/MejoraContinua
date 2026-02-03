@@ -10,89 +10,140 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const atipicasData = {
     todas: {
-        promedio: 91.2,
-        meta: 98,
+        promedio: 79.4,
+        meta: 85,
         ciclos: [
-            { name: 'C01', efectivo: 7051, total: 7981, value: 88.3, meta: 98 },
-            { name: 'C02', efectivo: 6062, total: 6617, value: 91.6, meta: 98 },
-            { name: 'C03', efectivo: 6136, total: 6454, value: 95.1, meta: 98 },
-            { name: 'C04', efectivo: 3016, total: 3360, value: 89.8, meta: 98 },
+            { name: 'C01', efectivo: 75, total: 100, value: 75, meta: 85 },
+            { name: 'C02', efectivo: 76, total: 100, value: 76, meta: 85 },
+            { name: 'C03', efectivo: 80, total: 100, value: 80, meta: 85 },
+            { name: 'C04', efectivo: 78, total: 100, value: 78, meta: 85 },
+            { name: 'C05', efectivo: 81, total: 100, value: 81, meta: 85 },
+            { name: 'C06', efectivo: 84, total: 100, value: 84, meta: 85 },
+            { name: 'C07', efectivo: 82, total: 100, value: 82, meta: 85 },
+            { name: 'C08', efectivo: 83, total: 100, value: 83, meta: 85 },
+            { name: 'C09', efectivo: 85, total: 100, value: 85, meta: 85 },
+            { name: 'C10', efectivo: 70, total: 100, value: 70, meta: 85 },
         ]
     },
     comas: {
-        promedio: 88.2,
-        meta: 98,
+        promedio: 82.7,
+        meta: 85,
         ciclos: [
-            { name: 'C01', efectivo: 2316, total: 2873, value: 80.6, meta: 98 },
-            { name: 'C02', efectivo: 1999, total: 2173, value: 92.0, meta: 98 },
-            { name: 'C03', efectivo: 1705, total: 1775, value: 96.1, meta: 98 },
+            { name: 'C01', efectivo: 77, total: 100, value: 77, meta: 85 },
+            { name: 'C02', efectivo: 78, total: 100, value: 78, meta: 85 },
+            { name: 'C03', efectivo: 75, total: 100, value: 75, meta: 85 },
+            { name: 'C04', efectivo: 81, total: 100, value: 81, meta: 85 },
+            { name: 'C05', efectivo: 84, total: 100, value: 84, meta: 85 },
+            { name: 'C06', efectivo: 85, total: 100, value: 85, meta: 85 },
+            { name: 'C07', efectivo: 89, total: 100, value: 89, meta: 85 },
+            { name: 'C08', efectivo: 88, total: 100, value: 88, meta: 85 },
+            { name: 'C09', efectivo: 91, total: 100, value: 91, meta: 85 },
+            { name: 'C10', efectivo: 90, total: 100, value: 90, meta: 85 },
         ]
     },
     callao: {
-        promedio: 88.7,
-        meta: 98,
+        promedio: 88.4,
+        meta: 85,
         ciclos: [
-            { name: 'C01', efectivo: 480, total: 579, value: 82.9, meta: 98 },
-            { name: 'C02', efectivo: 375, total: 415, value: 90.4, meta: 98 },
-            { name: 'C03', efectivo: 475, total: 506, value: 93.9, meta: 98 },
+            { name: 'C01', efectivo: 87, total: 100, value: 87, meta: 85 },
+            { name: 'C02', efectivo: 81, total: 100, value: 81, meta: 85 },
+            { name: 'C03', efectivo: 85, total: 100, value: 85, meta: 85 },
+            { name: 'C04', efectivo: 82, total: 100, value: 82, meta: 85 },
+            { name: 'C05', efectivo: 84, total: 100, value: 84, meta: 85 },
+            { name: 'C06', efectivo: 91, total: 100, value: 91, meta: 85 },
+            { name: 'C07', efectivo: 95, total: 100, value: 95, meta: 85 },
+            { name: 'C08', efectivo: 95, total: 100, value: 95, meta: 85 },
+            { name: 'C09', efectivo: 95, total: 100, value: 95, meta: 85 },
+            { name: 'C10', efectivo: 85, total: 100, value: 85, meta: 85 },
         ]
     },
     ate: {
-        promedio: 92.6,
-        meta: 98,
+        promedio: 70.8,
+        meta: 85,
         ciclos: [
-            { name: 'C01', efectivo: 1005, total: 1095, value: 91.8, meta: 98 },
-            { name: 'C02', efectivo: 1134, total: 1232, value: 92.0, meta: 98 },
-            { name: 'C03', efectivo: 985, total: 1058, value: 93.1, meta: 98 },
-            { name: 'C04', efectivo: 544, total: 578, value: 94.1, meta: 98 },
+            { name: 'C01', efectivo: 55, total: 100, value: 55, meta: 85 },
+            { name: 'C02', efectivo: 67, total: 100, value: 67, meta: 85 },
+            { name: 'C03', efectivo: 74, total: 100, value: 74, meta: 85 },
+            { name: 'C04', efectivo: 65, total: 100, value: 65, meta: 85 },
+            { name: 'C05', efectivo: 70, total: 100, value: 70, meta: 85 },
+            { name: 'C06', efectivo: 73, total: 100, value: 73, meta: 85 },
+            { name: 'C07', efectivo: 79, total: 100, value: 79, meta: 85 },
+            { name: 'C08', efectivo: 77, total: 100, value: 77, meta: 85 },
+            { name: 'C09', efectivo: 77, total: 100, value: 77, meta: 85 },
+            { name: 'C10', efectivo: 79, total: 100, value: 79, meta: 85 },
         ]
     },
     brena: {
-        promedio: 94.0,
-        meta: 98,
+        promedio: 84.8,
+        meta: 85,
         ciclos: [
-            { name: 'C01', efectivo: 777, total: 801, value: 97.0, meta: 98 },
-            { name: 'C02', efectivo: 538, total: 592, value: 90.9, meta: 98 },
-            { name: 'C03', efectivo: 559, total: 589, value: 94.9, meta: 98 },
-            { name: 'C04', efectivo: 640, total: 691, value: 92.6, meta: 98 },
+            { name: 'C01', efectivo: 87, total: 100, value: 87, meta: 85 },
+            { name: 'C02', efectivo: 83, total: 100, value: 83, meta: 85 },
+            { name: 'C03', efectivo: 81, total: 100, value: 81, meta: 85 },
+            { name: 'C04', efectivo: 87, total: 100, value: 87, meta: 85 },
+            { name: 'C05', efectivo: 87, total: 100, value: 87, meta: 85 },
+            { name: 'C06', efectivo: 81, total: 100, value: 81, meta: 85 },
+            { name: 'C07', efectivo: 87, total: 100, value: 87, meta: 85 },
+            { name: 'C08', efectivo: 85, total: 100, value: 85, meta: 85 },
+            { name: 'C09', efectivo: 84, total: 100, value: 84, meta: 85 },
+            { name: 'C10', efectivo: 86, total: 100, value: 86, meta: 85 },
         ]
     },
     sjl: {
-        promedio: 97.8,
-        meta: 98,
+        promedio: 89.9,
+        meta: 85,
         ciclos: [
-            { name: 'C01', efectivo: 682, total: 687, value: 99.3, meta: 98 },
-            { name: 'C02', efectivo: 472, total: 474, value: 99.6, meta: 98 },
-            { name: 'C03', efectivo: 634, total: 642, value: 98.8, meta: 98 },
-            { name: 'C04', efectivo: 451, total: 486, value: 92.8, meta: 98 },
+            { name: 'C01', efectivo: 85, total: 100, value: 85, meta: 85 },
+            { name: 'C02', efectivo: 87, total: 100, value: 87, meta: 85 },
+            { name: 'C03', efectivo: 87, total: 100, value: 87, meta: 85 },
+            { name: 'C04', efectivo: 90, total: 100, value: 90, meta: 85 },
+            { name: 'C05', efectivo: 89, total: 100, value: 89, meta: 85 },
+            { name: 'C06', efectivo: 96, total: 100, value: 96, meta: 85 },
+            { name: 'C07', efectivo: 88, total: 100, value: 88, meta: 85 },
+            { name: 'C08', efectivo: 90, total: 100, value: 90, meta: 85 },
+            { name: 'C09', efectivo: 89, total: 100, value: 89, meta: 85 },
+            { name: 'C10', efectivo: 97, total: 100, value: 97, meta: 85 },
         ]
     },
     surquillo: {
-        promedio: 86.9,
-        meta: 98,
+        promedio: 78.3,
+        meta: 85,
         ciclos: [
-            { name: 'C01', efectivo: 489, total: 543, value: 90.1, meta: 98 },
-            { name: 'C02', efectivo: 404, total: 455, value: 88.8, meta: 98 },
-            { name: 'C03', efectivo: 385, total: 437, value: 88.1, meta: 98 },
-            { name: 'C04', efectivo: 428, total: 529, value: 80.9, meta: 98 },
+            { name: 'C01', efectivo: 80, total: 100, value: 80, meta: 85 },
+            { name: 'C02', efectivo: 75, total: 100, value: 75, meta: 85 },
+            { name: 'C03', efectivo: 79, total: 100, value: 79, meta: 85 },
+            { name: 'C04', efectivo: 75, total: 100, value: 75, meta: 85 },
+            { name: 'C05', efectivo: 77, total: 100, value: 77, meta: 85 },
+            { name: 'C06', efectivo: 73, total: 100, value: 73, meta: 85 },
+            { name: 'C07', efectivo: 80, total: 100, value: 80, meta: 85 },
+            { name: 'C08', efectivo: 80, total: 100, value: 80, meta: 85 },
+            { name: 'C09', efectivo: 83, total: 100, value: 83, meta: 85 },
         ]
     },
     ves: {
-        promedio: 91.3,
-        meta: 98,
+        promedio: 62.1,
+        meta: 85,
         ciclos: [
-            { name: 'C01', efectivo: 1302, total: 1403, value: 92.8, meta: 98 },
-            { name: 'C02', efectivo: 1129, total: 1254, value: 90.0, meta: 98 },
-            { name: 'C03', efectivo: 1393, total: 1496, value: 93.1, meta: 98 },
-            { name: 'C04', efectivo: 949, total: 1072, value: 88.5, meta: 98 },
+            { name: 'C01', efectivo: 74, total: 100, value: 74, meta: 85 },
+            { name: 'C02', efectivo: 72, total: 100, value: 72, meta: 85 },
+            { name: 'C03', efectivo: 73, total: 100, value: 73, meta: 85 },
+            { name: 'C04', efectivo: 68, total: 100, value: 68, meta: 85 },
+            { name: 'C05', efectivo: 67, total: 100, value: 67, meta: 85 },
+            { name: 'C06', efectivo: 73, total: 100, value: 73, meta: 85 },
+            { name: 'C07', efectivo: 50, total: 100, value: 50, meta: 85 },
+            { name: 'C08', efectivo: 73, total: 100, value: 73, meta: 85 },
+            { name: 'C09', efectivo: 28, total: 100, value: 28, meta: 85 },
         ]
     },
     'clientes-e': {
-        promedio: 88.2,
-        meta: 98,
+        promedio: 60.0,
+        meta: 85,
         ciclos: [
-            { name: 'C02', efectivo: 11, total: 12, value: 91.7, meta: 98 },
-            { name: 'C04', efectivo: 4, total: 5, value: 80.0, meta: 98 },
+            { name: 'C01', efectivo: 33, total: 100, value: 33, meta: 85 },
+            { name: 'C02', efectivo: 0, total: 100, value: 0, meta: 85 },
+            { name: 'C03', efectivo: 100, total: 100, value: 100, meta: 85 },
+            { name: 'C04', efectivo: 67, total: 100, value: 67, meta: 85 },
+            { name: 'C08', efectivo: 100, total: 100, value: 100, meta: 85 },
         ]
     }
 };
@@ -140,7 +191,7 @@ export default function AtipicasInspeccionesPage() {
                     fill="hsl(var(--chart-4))" 
                     radius={[4, 4, 0, 0]}
                   />
-                  <ReferenceLine y={98} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
+                  <ReferenceLine y={85} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                 </BarChart>
             </ResponsiveContainer>
             </CardContent>
@@ -167,7 +218,7 @@ export default function AtipicasInspeccionesPage() {
                 <div className="mt-2">
                     <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        El gráfico muestra el nivel de cumplimiento frente a la meta del 98%. Los ciclos que no alcanzan el objetivo requieren una revisión detallada de las causas de no efectividad.
+                        El gráfico muestra el nivel de cumplimiento frente a la meta del 85%. Los ciclos que no alcanzan el objetivo requieren una revisión detallada de las causas de no efectividad.
                     </p>
                 </div>
             </CardContent>
