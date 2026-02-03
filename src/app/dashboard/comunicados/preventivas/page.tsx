@@ -28,28 +28,6 @@ const preventivasData = {
             { name: 'C04', value: 0, prev: 0, total: 0, meta: 85 },
             { name: 'C05', value: 0, prev: 0, total: 0, meta: 85 },
         ]
-    },
-    callao: {
-        promedio: 86.3,
-        meta: 85,
-        ciclos: [
-            { name: 'C01', value: 84.0, prev: 2272, total: 2706, meta: 85 },
-            { name: 'C02', value: 89.1, prev: 2836, total: 3182, meta: 85 },
-            { name: 'C03', value: 88.3, prev: 3267, total: 3699, meta: 85 },
-            { name: 'C04', value: 82.9, prev: 2906, total: 3505, meta: 85 },
-            { name: 'C05', value: 86.9, prev: 3063, total: 3525, meta: 85 },
-        ]
-    },
-    ate: {
-        promedio: 83.0,
-        meta: 85,
-        ciclos: [
-            { name: 'C01', value: 83.2, prev: 2497, total: 3002, meta: 85 },
-            { name: 'C02', value: 81.0, prev: 4328, total: 5344, meta: 85 },
-            { name: 'C03', value: 85.3, prev: 1877, total: 2200, meta: 85 },
-            { name: 'C04', value: 83.0, prev: 3199, total: 3854, meta: 85 },
-            { name: 'C05', value: 84.3, prev: 1851, total: 2197, meta: 85 },
-        ]
     }
 };
 

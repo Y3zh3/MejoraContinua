@@ -99,8 +99,8 @@ export default function ContratistaTomaDeEstadoPage() {
                 <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold">Lecturas Realizadas</TableHead>
-                    <TableHead className="font-bold">Total Lecturas</TableHead>
+                    <TableHead className="font-bold text-right">Lecturas Realizadas</TableHead>
+                    <TableHead className="font-bold text-right">Total Lecturas</TableHead>
                     <TableHead className="text-right font-bold">Rendimiento (%)</TableHead>
                     </TableRow>
                 </TableHeader>
