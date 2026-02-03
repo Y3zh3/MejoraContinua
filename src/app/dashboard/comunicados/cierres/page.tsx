@@ -10,102 +10,102 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const cierresData = {
     todas: {
-        promedio: 38.1,
+        promedio: 54.8,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 47.0, meta: 15 },
-            { name: 'C02', value: 30.4, meta: 15 },
-            { name: 'C03', value: 37.3, meta: 15 },
-            { name: 'C04', value: 35.6, meta: 15 },
-            { name: 'C05', value: 40.1, meta: 15 },
+            { name: 'C01', cierres: 5312, total: 8437, value: 63.0, meta: 15 },
+            { name: 'C02', cierres: 3477, total: 7048, value: 49.3, meta: 15 },
+            { name: 'C03', cierres: 3662, total: 6843, value: 53.5, meta: 15 },
+            { name: 'C04', cierres: 4354, total: 7926, value: 54.9, meta: 15 },
+            { name: 'C05', cierres: 3580, total: 6712, value: 53.3, meta: 15 },
         ]
     },
     comas: {
         promedio: 100,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 100, meta: 15 },
-            { name: 'C02', value: 100, meta: 15 },
-            { name: 'C03', value: 100, meta: 15 },
-            { name: 'C04', value: 100, meta: 15 },
-            { name: 'C05', value: 100, meta: 15 },
+            { name: 'C01', cierres: 2971, total: 2971, value: 100, meta: 15 },
+            { name: 'C02', cierres: 2394, total: 2394, value: 100, meta: 15 },
+            { name: 'C03', cierres: 1867, total: 1867, value: 100, meta: 15 },
+            { name: 'C04', cierres: 2595, total: 2595, value: 100, meta: 15 },
+            { name: 'C05', cierres: 1845, total: 1845, value: 100, meta: 15 },
         ]
     },
     callao: {
         promedio: 18.2,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 29, meta: 15 },
-            { name: 'C02', value: 13, meta: 15 },
-            { name: 'C03', value: 15, meta: 15 },
-            { name: 'C04', value: 12, meta: 15 },
-            { name: 'C05', value: 22, meta: 15 },
+            { name: 'C01', cierres: 177, total: 611, value: 29.0, meta: 15 },
+            { name: 'C02', cierres: 53, total: 399, value: 13.3, meta: 15 },
+            { name: 'C03', cierres: 75, total: 507, value: 14.8, meta: 15 },
+            { name: 'C04', cierres: 82, total: 681, value: 12.0, meta: 15 },
+            { name: 'C05', cierres: 127, total: 589, value: 21.6, meta: 15 },
         ]
     },
     ate: {
         promedio: 52.6,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 56, meta: 15 },
-            { name: 'C02', value: 23, meta: 15 },
-            { name: 'C03', value: 72, meta: 15 },
-            { name: 'C04', value: 50, meta: 15 },
-            { name: 'C05', value: 62, meta: 15 },
+            { name: 'C01', cierres: 651, total: 1156, value: 56.3, meta: 15 },
+            { name: 'C02', cierres: 304, total: 1320, value: 23.0, meta: 15 },
+            { name: 'C03', cierres: 820, total: 1143, value: 71.7, meta: 15 },
+            { name: 'C04', cierres: 654, total: 1309, value: 50.0, meta: 15 },
+            { name: 'C05', cierres: 573, total: 919, value: 62.3, meta: 15 },
         ]
     },
     brena: {
         promedio: 11.2,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 32, meta: 15 },
-            { name: 'C02', value: 5, meta: 15 },
-            { name: 'C03', value: 4, meta: 15 },
-            { name: 'C04', value: 6, meta: 15 },
-            { name: 'C05', value: 9, meta: 15 },
+            { name: 'C01', cierres: 272, total: 844, value: 32.2, meta: 15 },
+            { name: 'C02', cierres: 29, total: 618, value: 4.7, meta: 15 },
+            { name: 'C03', cierres: 25, total: 595, value: 4.2, meta: 15 },
+            { name: 'C04', cierres: 41, total: 706, value: 5.8, meta: 15 },
+            { name: 'C05', cierres: 70, total: 765, value: 9.2, meta: 15 },
         ]
     },
     sjl: {
         promedio: 12.4,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 9, meta: 15 },
-            { name: 'C02', value: 10, meta: 15 },
-            { name: 'C03', value: 11, meta: 15 },
-            { name: 'C04', value: 14, meta: 15 },
-            { name: 'C05', value: 18, meta: 15 },
+            { name: 'C01', cierres: 64, total: 744, value: 8.6, meta: 15 },
+            { name: 'C02', cierres: 52, total: 517, value: 10.1, meta: 15 },
+            { name: 'C03', cierres: 79, total: 694, value: 11.4, meta: 15 },
+            { name: 'C04', cierres: 70, total: 508, value: 13.8, meta: 15 },
+            { name: 'C05', cierres: 136, total: 744, value: 18.3, meta: 15 },
         ]
     },
     surquillo: {
-        promedio: 21.0,
+        promedio: 20.9,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 43, meta: 15 },
-            { name: 'C02', value: 21, meta: 15 },
-            { name: 'C03', value: 12, meta: 15 },
-            { name: 'C04', value: 14, meta: 15 },
-            { name: 'C05', value: 15, meta: 15 },
+            { name: 'C01', cierres: 249, total: 575, value: 43.3, meta: 15 },
+            { name: 'C02', cierres: 98, total: 472, value: 20.8, meta: 15 },
+            { name: 'C03', cierres: 55, total: 444, value: 12.4, meta: 15 },
+            { name: 'C04', cierres: 75, total: 540, value: 13.9, meta: 15 },
+            { name: 'C05', cierres: 73, total: 481, value: 15.2, meta: 15 },
         ]
     },
     ves: {
-        promedio: 51.2,
+        promedio: 50.4,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 60, meta: 15 },
-            { name: 'C02', value: 41, meta: 15 },
-            { name: 'C03', value: 47, meta: 15 },
-            { name: 'C04', value: 53, meta: 15 },
-            { name: 'C05', value: 55, meta: 15 },
+            { name: 'C01', cierres: 928, total: 1536, value: 60.4, meta: 15 },
+            { name: 'C02', cierres: 547, total: 1328, value: 41.2, meta: 15 },
+            { name: 'C03', cierres: 741, total: 1593, value: 46.5, meta: 15 },
+            { name: 'C04', cierres: 837, total: 1587, value: 52.7, meta: 15 },
+            { name: 'C05', cierres: 756, total: 1369, value: 55.2, meta: 15 },
         ]
     },
     'clientes-e': {
         promedio: 100,
         meta: 15,
         ciclos: [
-            { name: 'C01', value: 100, meta: 15 },
-            { name: 'C02', value: 100, meta: 15 },
-            { name: 'C03', value: 100, meta: 15 },
-            { name: 'C04', value: 100, meta: 15 },
-            { name: 'C05', value: 100, meta: 15 },
+            { name: 'C01', cierres: 10, total: 10, value: 100, meta: 15 },
+            { name: 'C02', cierres: 10, total: 10, value: 100, meta: 15 },
+            { name: 'C03', cierres: 10, total: 10, value: 100, meta: 15 },
+            { name: 'C04', cierres: 10, total: 10, value: 100, meta: 15 },
+            { name: 'C05', cierres: 10, total: 10, value: 100, meta: 15 },
         ]
     }
 };
@@ -150,7 +150,7 @@ export default function CierresComunicadosPage() {
                       borderColor: "hsl(var(--border))",
                       borderRadius: "8px",
                       }}
-                      formatter={(value: number) => `${value}%`}
+                      formatter={(value: number) => `${value.toFixed(1)}%`}
                   />
                   <Legend />
                   <Area 
@@ -189,7 +189,7 @@ export default function CierresComunicadosPage() {
                 <div className="mt-2">
                     <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        El gráfico muestra la efectividad ciclo a ciclo comparada con la meta del 15%. La mayoría de las bases superan ampliamente el objetivo mínimo establecido.
+                        El gráfico muestra la efectividad ciclo a ciclo comparada con la meta del 15%. Los ciclos con rendimientos atípicos están siendo monitoreados para asegurar la calidad de los procesos.
                     </p>
                 </div>
             </CardContent>
@@ -200,7 +200,7 @@ export default function CierresComunicadosPage() {
         <CardHeader>
             <CardTitle className="text-xl">Detalle por Ciclo de Efectividad de Cierres</CardTitle>
             <p className="text-base text-muted-foreground">
-            Desglose porcentual de la efectividad de cierres por cada ciclo operativo.
+            Desglose porcentual y numérico de la efectividad de cierres por cada ciclo operativo.
             </p>
         </CardHeader>
         <CardContent>
@@ -209,6 +209,8 @@ export default function CierresComunicadosPage() {
                 <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                 <TableRow>
                     <TableHead className="w-[150px] font-bold">Ciclo</TableHead>
+                    <TableHead className="font-bold">Cierres sin</TableHead>
+                    <TableHead className="font-bold">Total</TableHead>
                     <TableHead className="font-bold">Efectividad (%)</TableHead>
                     <TableHead className="text-right font-bold">Meta (%)</TableHead>
                 </TableRow>
@@ -217,8 +219,10 @@ export default function CierresComunicadosPage() {
                 {data.ciclos.map((item) => (
                     <TableRow key={item.name}>
                     <TableCell className="font-semibold">{item.name}</TableCell>
+                    <TableCell>{item.cierres.toLocaleString()}</TableCell>
+                    <TableCell>{item.total.toLocaleString()}</TableCell>
                     <TableCell className={item.value < item.meta ? "text-destructive font-bold" : "text-foreground font-medium"}>
-                        {item.value}%
+                        {item.value.toFixed(1)}%
                     </TableCell>
                     <TableCell className="text-right font-medium">{item.meta}%</TableCell>
                     </TableRow>
@@ -231,3 +235,4 @@ export default function CierresComunicadosPage() {
     </div>
   );
 }
+
