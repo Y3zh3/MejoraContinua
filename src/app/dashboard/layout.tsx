@@ -70,8 +70,8 @@ export default function DashboardLayout({
   return (
     <div className="flex min-h-screen w-full flex-col bg-background">
        <header className="sticky top-0 z-50 w-full border-b bg-background">
-        <div className="container mx-auto px-4 flex h-20 items-center">
-            <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+        <div className="container mx-auto px-4 flex h-16 items-center">
+            <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-4 md:text-sm lg:gap-5">
                 {navItems.map((item) => {
                     const isActive = item.subItems 
                         ? pathname.startsWith(item.href) 
@@ -82,8 +82,8 @@ export default function DashboardLayout({
                             <DropdownMenuTrigger asChild>
                                 <button
                                     className={cn(
-                                        "flex items-center gap-1 px-3 py-2 text-sm font-medium text-primary outline-none",
-                                        isActive ? "font-semibold" : ""
+                                        "flex items-center gap-1 px-3 py-2 text-sm font-medium text-primary outline-none hover:bg-accent rounded-md transition-colors",
+                                        isActive ? "bg-accent font-semibold" : ""
                                     )}
                                 >
                                     {item.label}
@@ -103,8 +103,8 @@ export default function DashboardLayout({
                             key={item.href}
                             href={item.href}
                             className={cn(
-                                "px-3 py-2 text-sm font-medium text-primary",
-                                isActive ? "font-semibold" : ""
+                                "px-3 py-2 text-sm font-medium text-primary hover:bg-accent rounded-md transition-colors",
+                                isActive ? "bg-accent font-semibold" : ""
                             )}
                         >
                             {item.label}
@@ -119,13 +119,13 @@ export default function DashboardLayout({
                 <Input
                   type="search"
                   placeholder="Buscar"
-                  className="pl-9 sm:w-[150px] md:w-[200px] lg:w-[250px]"
+                  className="pl-9 sm:w-[150px] md:w-[180px] lg:w-[220px] h-9"
                 />
               </div>
             </div>
         </div>
       </header>
-      <main className="flex-1 p-4 sm:p-6 md:p-8">
+      <main className="flex-1 p-4 md:pt-6 md:px-8 md:pb-8">
         <div className="container mx-auto">
           {children}
         </div>
