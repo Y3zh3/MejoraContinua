@@ -16,7 +16,7 @@ export function LoginForm() {
     event.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
+    // Simular llamada a la API
     setTimeout(() => {
       router.push("/dashboard");
     }, 1000);
@@ -31,8 +31,8 @@ export function LoginForm() {
             <Input
               id="email"
               type="email"
-              placeholder="user@example.com"
-              defaultValue="user@example.com"
+              placeholder="mejora@gmail.com"
+              defaultValue="mejora@gmail.com"
               required
               disabled={isLoading}
             />
@@ -42,7 +42,7 @@ export function LoginForm() {
             <Input
               id="password"
               type="password"
-              defaultValue="password"
+              defaultValue="12345678"
               required
               disabled={isLoading}
             />
