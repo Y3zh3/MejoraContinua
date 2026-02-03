@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'Aqua Insights',
-  description: 'Centralized dashboard for water management metrics.',
+  title: 'Mejora Continua Was Solutions',
+  description: 'Panel centralizado de métricas de gestión operativa.',
 };
 
 export default function RootLayout({

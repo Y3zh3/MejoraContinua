@@ -10,7 +10,7 @@ export default function LoginPage() {
             <Droplet className="h-8 w-8" />
           </div>
           <h1 className="font-headline text-4xl font-bold text-primary">
-            Aqua Insights
+            Mejora Continua Was Solutions
           </h1>
           <p className="mt-2 text-muted-foreground">
             Por favor, inicia sesión para acceder a tu panel
