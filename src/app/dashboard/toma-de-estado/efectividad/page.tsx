@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const efectividadData = {
     todas: {
-        promedio: 97.8,
+        promedio: 97.2,
         meta: 98.5,
         ciclos: [
             { name: 'C01', value: 98.4, efectivo: 9840, total: 10000 },
@@ -59,23 +59,6 @@ const efectividadData = {
             { name: 'C11', value: 99.1, efectivo: 1833, total: 1850 },
         ]
     },
-    ate: {
-        promedio: 97.2,
-        meta: 98.5,
-        ciclos: [
-            { name: 'C01', value: 98.5, efectivo: 1970, total: 2000 },
-            { name: 'C02', value: 95.6, efectivo: 1912, total: 2000 },
-            { name: 'C03', value: 94.2, efectivo: 1884, total: 2000 },
-            { name: 'C04', value: 98.3, efectivo: 1966, total: 2000 },
-            { name: 'C05', value: 97.2, efectivo: 1944, total: 2000 },
-            { name: 'C06', value: 95.2, efectivo: 1904, total: 2000 },
-            { name: 'C07', value: 98.5, efectivo: 1970, total: 2000 },
-            { name: 'C08', value: 98.3, efectivo: 1966, total: 2000 },
-            { name: 'C09', value: 96.5, efectivo: 1930, total: 2000 },
-            { name: 'C10', value: 98.6, efectivo: 1972, total: 2000 },
-            { name: 'C11', value: 98.8, efectivo: 1976, total: 2000 },
-        ]
-    },
     sjl: {
         promedio: 99.1,
         meta: 98.5,
@@ -93,72 +76,21 @@ const efectividadData = {
             { name: 'C11', value: 99.5, efectivo: 2985, total: 3000 },
         ]
     },
-    brena: {
-        promedio: 94.5,
+    ate: {
+        promedio: 97.2,
         meta: 98.5,
         ciclos: [
-            { name: 'C01', value: 95.3, efectivo: 1906, total: 2000 },
-            { name: 'C02', value: 94.6, efectivo: 1892, total: 2000 },
-            { name: 'C03', value: 93.7, efectivo: 1874, total: 2000 },
-            { name: 'C04', value: 95.8, efectivo: 1916, total: 2000 },
-            { name: 'C05', value: 92.4, efectivo: 1848, total: 2000 },
-            { name: 'C06', value: 95.0, efectivo: 1900, total: 2000 },
-            { name: 'C07', value: 94.2, efectivo: 1884, total: 2000 },
-            { name: 'C08', value: 96.5, efectivo: 1930, total: 2000 },
-            { name: 'C09', value: 92.1, efectivo: 1842, total: 2000 },
-            { name: 'C10', value: 94.4, efectivo: 1888, total: 2000 },
-            { name: 'C11', value: 95.5, efectivo: 1910, total: 2000 },
-        ]
-    },
-    surquillo: {
-        promedio: 98.5,
-        meta: 98.5,
-        ciclos: [
-            { name: 'C01', value: 99.1, efectivo: 1982, total: 2000 },
-            { name: 'C02', value: 98.2, efectivo: 1964, total: 2000 },
-            { name: 'C03', value: 98.8, efectivo: 1976, total: 2000 },
-            { name: 'C04', value: 98.7, efectivo: 1974, total: 2000 },
-            { name: 'C05', value: 98.1, efectivo: 1962, total: 2000 },
-            { name: 'C06', value: 97.7, efectivo: 1954, total: 2000 },
-            { name: 'C07', value: 98.4, efectivo: 1968, total: 2000 },
-            { name: 'C08', value: 98.6, efectivo: 1972, total: 2000 },
-            { name: 'C09', value: 98.7, efectivo: 1974, total: 2000 },
+            { name: 'C01', value: 98.5, efectivo: 1970, total: 2000 },
+            { name: 'C02', value: 95.6, efectivo: 1912, total: 2000 },
+            { name: 'C03', value: 94.2, efectivo: 1884, total: 2000 },
+            { name: 'C04', value: 98.3, efectivo: 1966, total: 2000 },
+            { name: 'C05', value: 97.2, efectivo: 1944, total: 2000 },
+            { name: 'C06', value: 95.2, efectivo: 1904, total: 2000 },
+            { name: 'C07', value: 98.5, efectivo: 1970, total: 2000 },
+            { name: 'C08', value: 98.3, efectivo: 1966, total: 2000 },
+            { name: 'C09', value: 96.5, efectivo: 1930, total: 2000 },
             { name: 'C10', value: 98.6, efectivo: 1972, total: 2000 },
-            { name: 'C11', value: 98.9, efectivo: 1978, total: 2000 },
-        ]
-    },
-    ves: {
-        promedio: 96.8,
-        meta: 98.5,
-        ciclos: [
-            { name: 'C01', value: 97.4, efectivo: 1948, total: 2000 },
-            { name: 'C02', value: 96.6, efectivo: 1932, total: 2000 },
-            { name: 'C03', value: 95.3, efectivo: 1906, total: 2000 },
-            { name: 'C04', value: 97.1, efectivo: 1942, total: 2000 },
-            { name: 'C05', value: 96.7, efectivo: 1934, total: 2000 },
-            { name: 'C06', value: 94.9, efectivo: 1898, total: 2000 },
-            { name: 'C07', value: 95.7, efectivo: 1914, total: 2000 },
-            { name: 'C08', value: 98.0, efectivo: 1960, total: 2000 },
-            { name: 'C09', value: 97.1, efectivo: 1942, total: 2000 },
-            { name: 'C10', value: 98.0, efectivo: 1960, total: 2000 },
-            { name: 'C11', value: 98.2, efectivo: 1964, total: 2000 },
-        ]
-    },
-    'clientes-e': {
-        promedio: 92.5,
-        meta: 98.5,
-        ciclos: [
-            { name: 'C01', value: 96.3, efectivo: 963, total: 1000 },
-            { name: 'C02', value: 89.8, efectivo: 898, total: 1000 },
-            { name: 'C03', value: 90.5, efectivo: 905, total: 1000 },
-            { name: 'C04', value: 95.4, efectivo: 954, total: 1000 },
-            { name: 'C05', value: 88.6, efectivo: 886, total: 1000 },
-            { name: 'C06', value: 91.3, efectivo: 913, total: 1000 },
-            { name: 'C07', value: 96.6, efectivo: 966, total: 1000 },
-            { name: 'C08', value: 92.2, efectivo: 922, total: 1000 },
-            { name: 'C09', value: 90.6, efectivo: 906, total: 1000 },
-            { name: 'C10', value: 95.9, efectivo: 959, total: 1000 },
-            { name: 'C11', value: 90.0, efectivo: 900, total: 1000 },
+            { name: 'C11', value: 98.8, efectivo: 1976, total: 2000 },
         ]
     }
 };
@@ -172,7 +104,7 @@ export default function EfectividadTomaDeEstadoPage() {
   }, []);
 
   const handleBaseChange = (base: string) => {
-    const newData = efectividadData[base as keyof typeof efectividadData] || efectividadData.todas;
+    const newData = (efectividadData as any)[base] || efectividadData.todas;
     setData(newData);
   };
 
@@ -212,12 +144,12 @@ export default function EfectividadTomaDeEstadoPage() {
                 <CardHeader className="pb-4">
                     <CardTitle className="text-xl font-bold">Rendimiento por Ciclo (%)</CardTitle>
                 </CardHeader>
-                <CardContent className="h-64 p-0 px-2 pb-6">
+                <CardContent className="h-[480px] p-0 px-2">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={data.ciclos} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <BarChart data={data.ciclos} margin={{ top: 20, right: 10, left: -20, bottom: 20 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                         <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-                        <YAxis domain={[0, 110]} unit="%" tick={{ fontSize: 12 }} />
+                        <YAxis domain={[80, 100]} unit="%" tick={{ fontSize: 12 }} />
                         <Tooltip
                             contentStyle={{
                                 background: "hsl(var(--card))",
@@ -242,7 +174,7 @@ export default function EfectividadTomaDeEstadoPage() {
                 <CardTitle className="text-xl font-bold">Detalle de Rendimiento por Ciclo</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 px-4">
-            <div className="max-h-[580px] overflow-y-auto rounded-xl border border-border/60 bg-card">
+            <div className="max-h-[650px] overflow-y-auto rounded-xl border border-border/60 bg-card">
                 <Table>
                 <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
                     <TableRow className="hover:bg-transparent border-b">
