@@ -108,7 +108,7 @@ export default function EficienciaPersuasivasPage() {
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <Gauge className="h-8 w-8 text-[hsl(var(--chart-1))]" />
+          <Gauge className="h-8 w-8 text-[hsl(var(--chart-2))]" />
           <h1 className="font-headline text-3xl font-bold">Persuasivas: Eficiencia</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
@@ -137,7 +137,7 @@ export default function EficienciaPersuasivasPage() {
                   <Bar 
                     dataKey="value" 
                     name="Eficiencia" 
-                    fill="hsl(var(--chart-1))" 
+                    fill="hsl(var(--chart-2))" 
                     radius={[4, 4, 0, 0]}
                   />
                   <ReferenceLine y={98} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
@@ -157,7 +157,7 @@ export default function EficienciaPersuasivasPage() {
                 <div className="grid grid-cols-2 gap-6">
                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
                         <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio del periodo</p>
-                        <p className="text-4xl font-bold text-[hsl(var(--chart-1))]">{data.promedio}%</p>
+                        <p className="text-4xl font-bold text-[hsl(var(--chart-2))]">{data.promedio}%</p>
                     </div>
                      <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
                         <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta establecida</p>
