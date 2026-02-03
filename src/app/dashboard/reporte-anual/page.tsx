@@ -137,14 +137,14 @@ const COM_ATIPICAS_DATA: Record<string, number[]> = {
 };
 
 const COM_PREVENTIVAS_DATA: Record<string, number[]> = {
-  comas: [84, 83, 84, 82, 0, 0, 0, 0, 0, 0],
+  comas: [84, 83, 84, 82, 82, 81, 80, 79, 78, 80],
   callao: [86, 85, 83, 87, 83, 80, 82, 82, 87, 86],
   ate: [84, 78, 82, 85, 78, 79, 75, 80, 81, 83],
   brena: [71, 66, 68, 70, 69, 70, 70, 70, 70, 73],
   sjl: [80, 83, 85, 86, 81, 83, 85, 83, 85, 82],
   surquillo: [81, 82, 81, 83, 83, 82, 82, 80, 82, 81],
   ves: [73, 73, 78, 79, 78, 79, 77, 78, 78, 75],
-  'clientes-e': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  'clientes-e': [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
 };
 
 const COM_CIERRES_DATA: Record<string, number[]> = {
@@ -155,18 +155,18 @@ const COM_CIERRES_DATA: Record<string, number[]> = {
   sjl: [26, 30, 41, 31, 30, 35, 32, 28, 31, 13],
   surquillo: [51, 24, 26, 41, 43, 27, 22, 39, 43, 22],
   ves: [74, 65, 49, 44, 50, 48, 42, 45, 47, 51],
-  'clientes-e': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  'clientes-e': [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
 };
 
 const COM_EFECTIVIDAD_DATA: Record<string, number[]> = {
-  comas: [24, 16, 21, 16, 29, 38, 43, 38, 0, 0],
-  callao: [25, 27, 24, 32, 34, 26, 27, 25, 0, 0],
-  ate: [37, 43, 31, 32, 37, 38, 38, 51, 0, 0],
-  brena: [16, 23, 24, 23, 19, 24, 25, 15, 0, 0],
-  sjl: [53, 53, 53, 57, 51, 51, 49, 48, 0, 0],
-  surquillo: [48, 53, 53, 53, 52, 50, 49, 54, 0, 0],
-  ves: [7, 18, 26, 20, 18, 20, 23, 19, 0, 0],
-  'clientes-e': [74, 68, 70, 71, 77, 75, 73, 72, 0, 0],
+  comas: [38, 36, 32, 24, 29, 38, 43, 38, 35, 32],
+  callao: [25, 27, 24, 32, 34, 26, 27, 25, 28, 30],
+  ate: [37, 43, 31, 32, 37, 38, 38, 51, 45, 42],
+  brena: [16, 23, 24, 23, 19, 24, 25, 15, 20, 22],
+  sjl: [53, 53, 53, 57, 51, 51, 49, 48, 52, 54],
+  surquillo: [48, 53, 53, 53, 52, 50, 49, 54, 51, 53],
+  ves: [7, 18, 26, 20, 18, 20, 23, 19, 21, 24],
+  'clientes-e': [74, 68, 70, 71, 77, 75, 73, 72, 70, 71],
 };
 
 const INS_ATIPICAS_DATA: Record<string, number[]> = {
@@ -224,6 +224,17 @@ const PER_48H_DATA: Record<string, number[]> = {
   'clientes-e': [25, 42, 17, 45, 32, 9, 25, 14, 21, 7],
 };
 
+const PER_RECLAMOS_DATA: Record<string, number[]> = {
+  comas: [38, 43, 17, 24, 21, 20, 23, 28, 32, 17],
+  callao: [4, 6, 7, 5, 4, 1, 10, 4, 2, 6],
+  ate: [5, 5, 14, 3, 6, 3, 4, 1, 0, 5],
+  brena: [6, 3, 5, 1, 3, 0, 3, 3, 2, 5],
+  sjl: [0, 0, 2, 2, 0, 1, 1, 3, 0, 0],
+  surquillo: [13, 12, 8, 22, 13, 4, 10, 4, 4, 2],
+  ves: [14, 1, 6, 3, 2, 4, 7, 11, 9, 2],
+  'clientes-e': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+};
+
 const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
@@ -246,6 +257,7 @@ export default function ReporteAnualPage() {
         else if (activity.id === 'per_eficiencia') dataToUse = PER_EFICIENCIA_DATA;
         else if (activity.id === 'per_24h') dataToUse = PER_24H_DATA;
         else if (activity.id === 'per_48h') dataToUse = PER_48H_DATA;
+        else if (activity.id === 'per_reclamos') dataToUse = PER_RECLAMOS_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
@@ -301,6 +313,7 @@ export default function ReporteAnualPage() {
         else if (id === 'per_eficiencia') dataToUse = PER_EFICIENCIA_DATA;
         else if (id === 'per_24h') dataToUse = PER_24H_DATA;
         else if (id === 'per_48h') dataToUse = PER_48H_DATA;
+        else if (id === 'per_reclamos') dataToUse = PER_RECLAMOS_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
@@ -351,7 +364,7 @@ export default function ReporteAnualPage() {
                                         <CardContent className="px-5 pb-6">
                                             <div className="flex items-baseline gap-2">
                                                 <span className={`text-3xl font-bold text-foreground group-hover:${cat.color} transition-colors tabular-nums`}>
-                                                    {val > 0 ? `${val}%` : '-%'}
+                                                    {val > 0 ? `${val}${item.id.includes('reclamos') || item.id.includes('contratista') || item.id.includes('incidencias') ? ' uds.' : '%'}` : '-%'}
                                                 </span>
                                                 <span className="text-xs font-semibold text-muted-foreground uppercase">Actual</span>
                                             </div>
