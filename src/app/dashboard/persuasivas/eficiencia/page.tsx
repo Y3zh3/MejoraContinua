@@ -10,89 +10,89 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const eficienciaData = {
     todas: {
-        promedio: 91.5,
+        promedio: 91.1,
         meta: 98,
         ciclos: [
-            { name: 'C01', value: 90.7, meta: 98 },
-            { name: 'C02', value: 92.0, meta: 98 },
-            { name: 'C03', value: 94.0, meta: 98 },
-            { name: 'C04', value: 87.7, meta: 98 },
+            { name: 'C1', efectivo: 7051, total: 7981, value: 88.3, meta: 98 },
+            { name: 'C2', efectivo: 6062, total: 6607, value: 91.8, meta: 98 },
+            { name: 'C3', efectivo: 6136, total: 6503, value: 94.4, meta: 98 },
+            { name: 'C4', efectivo: 3016, total: 3361, value: 89.7, meta: 98 },
         ]
     },
     comas: {
-        promedio: 89.7,
+        promedio: 89.6,
         meta: 98,
         ciclos: [
-            { name: 'C01', value: 81, meta: 98 },
-            { name: 'C02', value: 92, meta: 98 },
-            { name: 'C03', value: 96, meta: 98 },
+            { name: 'C1', efectivo: 2316, total: 2873, value: 80.6, meta: 98 },
+            { name: 'C2', efectivo: 1999, total: 2173, value: 92.0, meta: 98 },
+            { name: 'C3', efectivo: 1705, total: 1775, value: 96.1, meta: 98 },
         ]
     },
     callao: {
-        promedio: 89.0,
+        promedio: 89.1,
         meta: 98,
         ciclos: [
-            { name: 'C01', value: 83, meta: 98 },
-            { name: 'C02', value: 90, meta: 98 },
-            { name: 'C03', value: 94, meta: 98 },
+            { name: 'C1', efectivo: 480, total: 579, value: 82.9, meta: 98 },
+            { name: 'C2', efectivo: 375, total: 415, value: 90.4, meta: 98 },
+            { name: 'C3', efectivo: 475, total: 506, value: 93.9, meta: 98 },
         ]
     },
     ate: {
         promedio: 92.8,
         meta: 98,
         ciclos: [
-            { name: 'C01', value: 92, meta: 98 },
-            { name: 'C02', value: 92, meta: 98 },
-            { name: 'C03', value: 93, meta: 98 },
-            { name: 'C04', value: 94, meta: 98 },
+            { name: 'C1', efectivo: 1005, total: 1095, value: 91.8, meta: 98 },
+            { name: 'C2', efectivo: 1134, total: 1232, value: 92.0, meta: 98 },
+            { name: 'C3', efectivo: 985, total: 1058, value: 93.1, meta: 98 },
+            { name: 'C4', efectivo: 544, total: 578, value: 94.1, meta: 98 },
         ]
     },
     brena: {
-        promedio: 94.0,
+        promedio: 93.9,
         meta: 98,
         ciclos: [
-            { name: 'C01', value: 97, meta: 98 },
-            { name: 'C02', value: 91, meta: 98 },
-            { name: 'C03', value: 95, meta: 98 },
-            { name: 'C04', value: 93, meta: 98 },
+            { name: 'C1', efectivo: 777, total: 801, value: 97.0, meta: 98 },
+            { name: 'C2', efectivo: 538, total: 592, value: 90.9, meta: 98 },
+            { name: 'C3', efectivo: 559, total: 589, value: 94.9, meta: 98 },
+            { name: 'C4', efectivo: 640, total: 691, value: 92.6, meta: 98 },
         ]
     },
     sjl: {
-        promedio: 97.8,
+        promedio: 97.6,
         meta: 98,
         ciclos: [
-            { name: 'C01', value: 99, meta: 98 },
-            { name: 'C02', value: 100, meta: 98 },
-            { name: 'C03', value: 99, meta: 98 },
-            { name: 'C04', value: 93, meta: 98 },
+            { name: 'C1', efectivo: 682, total: 687, value: 99.3, meta: 98 },
+            { name: 'C2', efectivo: 472, total: 474, value: 99.6, meta: 98 },
+            { name: 'C3', efectivo: 634, total: 642, value: 98.8, meta: 98 },
+            { name: 'C4', efectivo: 451, total: 486, value: 92.8, meta: 98 },
         ]
     },
     surquillo: {
         promedio: 87.0,
         meta: 98,
         ciclos: [
-            { name: 'C01', value: 90, meta: 98 },
-            { name: 'C02', value: 89, meta: 98 },
-            { name: 'C03', value: 88, meta: 98 },
-            { name: 'C04', value: 81, meta: 98 },
+            { name: 'C1', efectivo: 489, total: 543, value: 90.1, meta: 98 },
+            { name: 'C2', efectivo: 404, total: 455, value: 88.8, meta: 98 },
+            { name: 'C3', efectivo: 385, total: 437, value: 88.1, meta: 98 },
+            { name: 'C4', efectivo: 428, total: 529, value: 80.9, meta: 98 },
         ]
     },
     ves: {
-        promedio: 91.3,
+        promedio: 91.1,
         meta: 98,
         ciclos: [
-            { name: 'C01', value: 93, meta: 98 },
-            { name: 'C02', value: 90, meta: 98 },
-            { name: 'C03', value: 93, meta: 98 },
-            { name: 'C04', value: 89, meta: 98 },
+            { name: 'C1', efectivo: 1302, total: 1403, value: 92.8, meta: 98 },
+            { name: 'C2', efectivo: 1129, total: 1254, value: 90.0, meta: 98 },
+            { name: 'C3', efectivo: 1393, total: 1496, value: 93.1, meta: 98 },
+            { name: 'C4', efectivo: 949, total: 1072, value: 88.5, meta: 98 },
         ]
     },
     'clientes-e': {
-        promedio: 86.0,
+        promedio: 85.9,
         meta: 98,
         ciclos: [
-            { name: 'C02', value: 92, meta: 98 },
-            { name: 'C04', value: 80, meta: 98 },
+            { name: 'C2', efectivo: 11, total: 12, value: 91.7, meta: 98 },
+            { name: 'C4', efectivo: 4, total: 5, value: 80.0, meta: 98 },
         ]
     }
 };
@@ -178,7 +178,7 @@ export default function EficienciaPersuasivasPage() {
         <CardHeader>
           <CardTitle className="text-xl">Detalle de Eficiencia por Ciclo</CardTitle>
           <p className="text-base text-muted-foreground">
-            Desglose porcentual de la eficiencia alcanzada en cada ciclo operativo.
+            Desglose porcentual y numérico de la eficiencia alcanzada en cada ciclo operativo.
           </p>
         </CardHeader>
         <CardContent>
@@ -187,6 +187,8 @@ export default function EficienciaPersuasivasPage() {
               <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                 <TableRow>
                   <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
+                  <TableHead className="font-bold">Efectivo</TableHead>
+                  <TableHead className="font-bold">Total</TableHead>
                   <TableHead className="font-bold">Eficiencia (%)</TableHead>
                   <TableHead className="text-right font-bold">Meta (%)</TableHead>
                 </TableRow>
@@ -195,6 +197,8 @@ export default function EficienciaPersuasivasPage() {
                 {data.ciclos.map((item) => (
                   <TableRow key={item.name}>
                     <TableCell className="font-semibold">{item.name}</TableCell>
+                    <TableCell>{item.efectivo?.toLocaleString()}</TableCell>
+                    <TableCell>{item.total?.toLocaleString()}</TableCell>
                     <TableCell className={item.value < item.meta ? "text-destructive font-bold" : "text-foreground"}>
                         {item.value}%
                     </TableCell>
