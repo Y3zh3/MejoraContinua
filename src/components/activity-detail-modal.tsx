@@ -38,6 +38,7 @@ type ActivityData = {
   detalleTabla: { label: string; valor: number }[];
   tituloTabla: string;
   columnaLabel: string;
+  unidad?: string;
 };
 
 interface ActivityDetailModalProps {
@@ -55,6 +56,8 @@ export function ActivityDetailModal({
     return null;
   }
 
+  const unit = activityData.unidad || "%";
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl h-[80vh] flex flex-col">
@@ -63,7 +66,7 @@ export function ActivityDetailModal({
             {activityData.nombre}
           </DialogTitle>
           <DialogDescription>
-            Meta Anual establecida: {activityData.metaAnual}%
+            Meta Anual establecida: {activityData.metaAnual}{unit}
           </DialogDescription>
         </DialogHeader>
         <div className="flex-grow grid grid-cols-1 md:grid-cols-3 gap-6 overflow-y-auto pr-6">
@@ -74,14 +77,17 @@ export function ActivityDetailModal({
                     <LineChart data={activityData.historicoMensual} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} />
                         <XAxis dataKey="mes" />
-                        <YAxis domain={['auto', 'auto']} unit="%" />
-                        <Tooltip contentStyle={{
-                            background: "hsl(var(--background))",
-                            borderColor: "hsl(var(--border))",
-                            borderRadius: "8px"
-                        }}/>
+                        <YAxis domain={['auto', 'auto']} unit={unit === 'uds.' ? '' : unit} />
+                        <Tooltip 
+                            contentStyle={{
+                                background: "hsl(var(--background))",
+                                borderColor: "hsl(var(--border))",
+                                borderRadius: "8px"
+                            }}
+                            formatter={(value: number) => [`${value} ${unit}`, "Valor"]}
+                        />
                         <Legend />
-                        <Line type="monotone" dataKey="valor" name="Rendimiento (%)" stroke="hsl(var(--primary))" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                        <Line type="monotone" dataKey="valor" name={`Rendimiento (${unit})`} stroke="hsl(var(--primary))" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
                         <Line type="monotone" dataKey="meta" name="Meta Institucional" stroke="hsl(var(--destructive))" strokeWidth={2} strokeDasharray="5 5" />
                     </LineChart>
                 </ResponsiveContainer>
@@ -94,14 +100,14 @@ export function ActivityDetailModal({
                     <TableHeader className="bg-muted/50 sticky top-0 z-10">
                         <TableRow>
                         <TableHead>{activityData.columnaLabel}</TableHead>
-                        <TableHead className="text-right">Valor (%)</TableHead>
+                        <TableHead className="text-right">Valor ({unit})</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {activityData.detalleTabla.map((item, idx) => (
                         <TableRow key={idx}>
                             <TableCell className="font-medium">{item.label}</TableCell>
-                            <TableCell className="text-right">{item.valor}%</TableCell>
+                            <TableCell className="text-right">{item.valor}{unit}</TableCell>
                         </TableRow>
                         ))}
                     </TableBody>

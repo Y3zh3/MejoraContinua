@@ -235,6 +235,17 @@ const PER_RECLAMOS_DATA: Record<string, number[]> = {
   'clientes-e': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 };
 
+const REC_RECLAMOS_DATA: Record<string, number[]> = {
+  comas: [145, 138, 127, 130, 114, 97, 71, 36, 31, 10],
+  callao: [34, 25, 20, 16, 12, 13, 13, 12, 9, 13],
+  ate: [17, 15, 9, 11, 11, 13, 13, 11, 6, 5],
+  brena: [12, 12, 12, 5, 7, 7, 7, 8, 3, 3],
+  sjl: [16, 13, 18, 13, 7, 11, 4, 9, 7, 6],
+  surquillo: [12, 12, 11, 13, 12, 2, 2, 4, 4, 1],
+  ves: [4, 6, 11, 7, 0, 1, 0, 3, 13, 0],
+  'clientes-e': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+};
+
 const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
@@ -258,6 +269,7 @@ export default function ReporteAnualPage() {
         else if (activity.id === 'per_24h') dataToUse = PER_24H_DATA;
         else if (activity.id === 'per_48h') dataToUse = PER_48H_DATA;
         else if (activity.id === 'per_reclamos') dataToUse = PER_RECLAMOS_DATA;
+        else if (activity.id === 'rec_reclamos') dataToUse = REC_RECLAMOS_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
@@ -273,10 +285,13 @@ export default function ReporteAnualPage() {
         }
 
         const isBaseSelected = currentBase !== 'todas';
+        const unit = activity.id.includes('reclamos') || activity.id.includes('contratista') || activity.id.includes('incidencias') ? 'uds.' : '%';
+        
         const detail = {
             nombre: activity.nombre,
             promedioAnual: Number((values.filter(v => v > 0).reduce((a, b) => a + b, 0) / values.filter(v => v > 0).length).toFixed(1)),
             metaAnual: activity.metaAnual,
+            unidad: unit,
             historicoMensual: MONTHS.map((m, i) => ({ mes: m, valor: values[i] || 0, meta: activity.metaAnual })),
             detalleTabla: isBaseSelected 
                 ? MONTHS.map((m, i) => ({ label: m, valor: values[i] || 0 }))
@@ -314,6 +329,7 @@ export default function ReporteAnualPage() {
         else if (id === 'per_24h') dataToUse = PER_24H_DATA;
         else if (id === 'per_48h') dataToUse = PER_48H_DATA;
         else if (id === 'per_reclamos') dataToUse = PER_RECLAMOS_DATA;
+        else if (id === 'rec_reclamos') dataToUse = REC_RECLAMOS_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
@@ -349,6 +365,7 @@ export default function ReporteAnualPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {cat.items.map((item) => {
                                 const val = getIndicatorValue(item.id, item.metaAnual);
+                                const isUnit = item.id.includes('reclamos') || item.id.includes('contratista') || item.id.includes('incidencias');
                                 return (
                                     <Card 
                                         key={item.id} 
@@ -364,7 +381,7 @@ export default function ReporteAnualPage() {
                                         <CardContent className="px-5 pb-6">
                                             <div className="flex items-baseline gap-2">
                                                 <span className={`text-3xl font-bold text-foreground group-hover:${cat.color} transition-colors tabular-nums`}>
-                                                    {val > 0 ? `${val}${item.id.includes('reclamos') || item.id.includes('contratista') || item.id.includes('incidencias') ? ' uds.' : '%'}` : '-%'}
+                                                    {val > 0 ? `${val}${isUnit ? ' uds.' : '%'}` : '-%'}
                                                 </span>
                                                 <span className="text-xs font-semibold text-muted-foreground uppercase">Actual</span>
                                             </div>
@@ -375,7 +392,7 @@ export default function ReporteAnualPage() {
                                                         style={{ width: `${Math.min(100, val)}%` }}
                                                     />
                                                 </div>
-                                                <span className="text-[10px] font-bold text-muted-foreground whitespace-nowrap uppercase">Meta: {item.metaAnual}%</span>
+                                                <span className="text-[10px] font-bold text-muted-foreground whitespace-nowrap uppercase">Meta: {item.metaAnual}{isUnit ? ' uds.' : '%'}</span>
                                             </div>
                                         </CardContent>
                                     </Card>
