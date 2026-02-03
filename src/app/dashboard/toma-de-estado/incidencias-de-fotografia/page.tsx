@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { CameraOff } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -174,11 +174,11 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle className="text-xl">Incidencia por Ciclo (%) - Enero 2026</CardTitle>
+                <CardTitle className="text-xl text-center">Incidencia por Ciclo (%) - Enero 2026</CardTitle>
             </CardHeader>
             <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data.ciclos}>
+                <LineChart data={data.ciclos}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" />
                 <YAxis unit="%" />
@@ -191,8 +191,8 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
                     formatter={(value: number) => `${value}%`}
                 />
                 <Legend />
-                <Bar dataKey="value" name="Incidencia" fill="hsl(var(--chart-4))" radius={[4, 4, 0, 0]} />
-                </BarChart>
+                <Line type="monotone" dataKey="value" name="Incidencia" stroke="hsl(var(--chart-4))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
+                </LineChart>
             </ResponsiveContainer>
             </CardContent>
         </Card>
