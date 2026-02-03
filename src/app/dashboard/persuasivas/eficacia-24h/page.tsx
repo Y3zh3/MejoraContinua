@@ -52,20 +52,20 @@ export default function Eficacia24hPersuasivasPage() {
                 <CardHeader className="pb-2">
                     <CardTitle className="text-xl font-bold text-center">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-4">
+                <CardContent className="flex flex-col gap-3">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                        <div className="border border-border/50 py-2 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Promedio Periodo</p>
                             <p className="text-3xl font-black text-[hsl(var(--chart-2))]">{data.promedio}%</p>
                         </div>
-                         <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                         <div className="border border-border/50 py-2 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta</p>
                             <p className="text-3xl font-black">{data.meta}%</p>
                         </div>
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Este indicador mide la rapidez con la que se concretan las reaperturas o compromisos de pago en las primeras 24 horas tras una gestión persuasiva exitosa, garantizando agilidad comercial.
+                            Mide el éxito en lograr la reapertura o regularización del servicio en las primeras 24 horas tras la ejecución de un cierre en la gestión persuasiva, evaluando la rapidez de recuperación comercial.
                         </p>
                     </div>
                 </CardContent>
