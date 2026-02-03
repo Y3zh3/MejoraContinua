@@ -134,6 +134,17 @@ const COM_ATIPICAS_DATA: Record<string, number[]> = {
   'clientes-e': [100, 100, 90, 100, 100, 88, 82, 89, 100, 100],
 };
 
+const COM_PREVENTIVAS_DATA: Record<string, number[]> = {
+  comas: [84, 83, 84, 82, 0, 0, 0, 0, 0, 0],
+  callao: [86, 85, 83, 87, 83, 80, 82, 82, 87, 86],
+  ate: [84, 78, 82, 85, 78, 79, 75, 80, 81, 83],
+  brena: [71, 66, 68, 70, 69, 70, 70, 70, 70, 73],
+  sjl: [80, 83, 85, 86, 81, 83, 85, 83, 85, 82],
+  surquillo: [81, 82, 81, 83, 83, 82, 82, 80, 82, 81],
+  ves: [73, 73, 78, 79, 78, 79, 77, 78, 78, 75],
+  'clientes-e': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+};
+
 const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
@@ -179,6 +190,15 @@ export default function ReporteAnualPage() {
             } else {
                 values = COM_ATIPICAS_DATA[currentBase] || [];
             }
+        } else if (activity.id === 'com_preventivas') {
+            if (currentBase === 'todas') {
+                values = MONTHS.map((_, i) => {
+                    const allVals = Object.values(COM_PREVENTIVAS_DATA).map(b => b[i]).filter(v => v > 0);
+                    return allVals.length > 0 ? Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1)) : 0;
+                });
+            } else {
+                values = COM_PREVENTIVAS_DATA[currentBase] || [];
+            }
         } else {
             values = MONTHS.map(() => Math.floor(Math.random() * 10) + (activity.metaAnual - 5));
         }
@@ -186,7 +206,7 @@ export default function ReporteAnualPage() {
         const isBaseSelected = currentBase !== 'todas';
         const detail = {
             nombre: activity.nombre,
-            promedioAnual: Number((values.reduce((a, b) => a + b, 0) / values.length).toFixed(1)),
+            promedioAnual: Number((values.filter(v => v > 0).reduce((a, b) => a + b, 0) / values.filter(v => v > 0).length).toFixed(1)),
             metaAnual: activity.metaAnual,
             historicoMensual: MONTHS.map((m, i) => ({ mes: m, valor: values[i], meta: activity.metaAnual })),
             detalleTabla: isBaseSelected 
@@ -199,7 +219,9 @@ export default function ReporteAnualPage() {
                             ? Object.entries(TDE_INCIDENCIAS_DATA)
                             : activity.id === 'com_atipicas'
                                 ? Object.entries(COM_ATIPICAS_DATA)
-                                : []).map(([key, val]) => ({
+                                : activity.id === 'com_preventivas'
+                                    ? Object.entries(COM_PREVENTIVAS_DATA)
+                                    : []).map(([key, val]) => ({
                             label: key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' '),
                             valor: val[val.length - 1]
                         })),
@@ -247,6 +269,13 @@ export default function ReporteAnualPage() {
             }
             const baseVals = COM_ATIPICAS_DATA[currentBase];
             return baseVals ? baseVals[baseVals.length - 1] : 0;
+        } else if (id === 'com_preventivas') {
+            if (currentBase === 'todas') {
+                const allLastMonthVals = Object.values(COM_PREVENTIVAS_DATA).map(b => b[b.length - 1]).filter(v => v > 0);
+                return allLastMonthVals.length > 0 ? Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1)) : 0;
+            }
+            const baseVals = COM_PREVENTIVAS_DATA[currentBase];
+            return baseVals ? baseVals[baseVals.length - 1] : 0;
         }
         return Math.floor(Math.random() * 10) + (metaAnual - 5);
     };
@@ -289,7 +318,7 @@ export default function ReporteAnualPage() {
                                         <CardContent className="px-5 pb-6">
                                             <div className="flex items-baseline gap-2">
                                                 <span className={`text-3xl font-bold text-foreground group-hover:${cat.color} transition-colors tabular-nums`}>
-                                                    {val}%
+                                                    {val > 0 ? `${val}%` : '-%'}
                                                 </span>
                                                 <span className="text-xs font-semibold text-muted-foreground uppercase">Actual</span>
                                             </div>
