@@ -39,112 +39,6 @@ const contratistaData = {
             { name: 'C09', value: 33.9, lecturas: 496, total: 1463 },
             { name: 'C10', value: 32.8, lecturas: 434, total: 1322 },
         ]
-    },
-    callao: {
-        promedio: 18.7,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 19.5, lecturas: 94, total: 481 },
-            { name: 'C02', value: 6.6, lecturas: 37, total: 556 },
-            { name: 'C03', value: 7.8, lecturas: 32, total: 409 },
-            { name: 'C04', value: 22.6, lecturas: 50, total: 221 },
-            { name: 'C05', value: 6.1, lecturas: 40, total: 655 },
-            { name: 'C06', value: 28.2, lecturas: 131, total: 463 },
-            { name: 'C07', value: 26.1, lecturas: 126, total: 482 },
-            { name: 'C08', value: 23.2, lecturas: 123, total: 530 },
-            { name: 'C09', value: 10.1, lecturas: 74, total: 732 },
-            { name: 'C10', value: 36.8, lecturas: 122, total: 331 },
-        ]
-    },
-    ate: {
-        promedio: 49.5,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 59.1, lecturas: 341, total: 577 },
-            { name: 'C02', value: 55.3, lecturas: 343, total: 620 },
-            { name: 'C03', value: 41.4, lecturas: 112, total: 270 },
-            { name: 'C04', value: 29.1, lecturas: 72, total: 247 },
-            { name: 'C05', value: 40.5, lecturas: 128, total: 316 },
-            { name: 'C06', value: 42.2, lecturas: 187, total: 443 },
-            { name: 'C07', value: 26.5, lecturas: 139, total: 524 },
-            { name: 'C08', value: 67.7, lecturas: 265, total: 391 },
-            { name: 'C09', value: 68.6, lecturas: 324, total: 472 },
-            { name: 'C10', value: 64.4, lecturas: 118, total: 183 },
-        ]
-    },
-    brena: {
-        promedio: 27.5,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 21.3, lecturas: 56, total: 262 },
-            { name: 'C02', value: 34.4, lecturas: 152, total: 441 },
-            { name: 'C03', value: 25.0, lecturas: 67, total: 268 },
-            { name: 'C04', value: 29.9, lecturas: 80, total: 267 },
-            { name: 'C05', value: 38.6, lecturas: 101, total: 261 },
-            { name: 'C06', value: 24.3, lecturas: 86, total: 353 },
-            { name: 'C07', value: 30.2, lecturas: 142, total: 469 },
-            { name: 'C08', value: 16.9, lecturas: 66, total: 389 },
-            { name: 'C09', value: 27.2, lecturas: 36, total: 132 },
-            { name: 'C10', value: 26.7, lecturas: 88, total: 329 },
-        ]
-    },
-    sjl: {
-        promedio: 11.3,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 6.0, lecturas: 39, total: 648 },
-            { name: 'C02', value: 5.2, lecturas: 23, total: 440 },
-            { name: 'C03', value: 8.2, lecturas: 37, total: 450 },
-            { name: 'C04', value: 6.3, lecturas: 27, total: 426 },
-            { name: 'C05', value: 10.9, lecturas: 58, total: 529 },
-            { name: 'C06', value: 14.4, lecturas: 59, total: 408 },
-            { name: 'C07', value: 5.2, lecturas: 19, total: 363 },
-            { name: 'C08', value: 4.8, lecturas: 16, total: 330 },
-            { name: 'C09', value: 26.2, lecturas: 132, total: 502 },
-            { name: 'C10', value: 25.8, lecturas: 78, total: 302 },
-        ]
-    },
-    surquillo: {
-        promedio: 15.7,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 21.4, lecturas: 81, total: 378 },
-            { name: 'C02', value: 18.0, lecturas: 117, total: 650 },
-            { name: 'C03', value: 17.2, lecturas: 103, total: 598 },
-            { name: 'C04', value: 19.7, lecturas: 121, total: 612 },
-            { name: 'C05', value: 15.3, lecturas: 72, total: 469 },
-            { name: 'C06', value: 10.8, lecturas: 52, total: 481 },
-            { name: 'C07', value: 10.5, lecturas: 55, total: 521 },
-            { name: 'C08', value: 7.3, lecturas: 41, total: 555 },
-            { name: 'C09', value: 20.8, lecturas: 92, total: 441 },
-        ]
-    },
-    ves: {
-        promedio: 21.4,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 10.8, lecturas: 89, total: 819 },
-            { name: 'C02', value: 25.0, lecturas: 199, total: 795 },
-            { name: 'C03', value: 19.4, lecturas: 182, total: 937 },
-            { name: 'C04', value: 28.5, lecturas: 146, total: 511 },
-            { name: 'C05', value: 23.0, lecturas: 147, total: 639 },
-            { name: 'C06', value: 19.1, lecturas: 118, total: 615 },
-            { name: 'C07', value: 12.9, lecturas: 131, total: 1009 },
-            { name: 'C08', value: 26.8, lecturas: 115, total: 429 },
-            { name: 'C09', value: 27.2, lecturas: 120, total: 440 },
-        ]
-    },
-    'clientes-e': {
-        promedio: 24.6,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 26.5, lecturas: 22, total: 83 },
-            { name: 'C02', value: 21.6, lecturas: 27, total: 125 },
-            { name: 'C03', value: 25.3, lecturas: 17, total: 67 },
-            { name: 'C04', value: 27.9, lecturas: 19, total: 68 },
-            { name: 'C05', value: 29.6, lecturas: 19, total: 64 },
-            { name: 'C06', value: 31.3, lecturas: 21, total: 67 },
-        ]
     }
 };
 
@@ -168,13 +62,13 @@ export default function ContratistaTomaDeEstadoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader>
+                <CardHeader className="pb-4">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Simple</p>
+                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
                             <p className="text-3xl font-bold text-[hsl(var(--chart-3))]">{data.promedio}%</p>
                         </div>
                          <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
@@ -182,18 +76,12 @@ export default function ContratistaTomaDeEstadoPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            El rendimiento del contratista varía significativamente entre ciclos. Es fundamental supervisar los ciclos con desviaciones mayores a la meta del 15%.
-                        </p>
-                    </div>
                 </CardContent>
             </Card>
 
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
                 <CardHeader className="p-4">
-                    <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
+                    <CardTitle className="text-xl">Rendimiento por Ciclo (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
                 <ResponsiveContainer width="100%" height="100%">
@@ -217,28 +105,28 @@ export default function ContratistaTomaDeEstadoPage() {
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1">
-            <div className="max-h-[500px] overflow-y-auto rounded-md border">
+            <CardContent>
+            <div className="rounded-md border overflow-hidden">
                 <Table>
-                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
+                <TableHeader className="bg-secondary/50">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold">Lecturas Realizadas</TableHead>
-                    <TableHead className="font-bold">Total Lecturas</TableHead>
-                    <TableHead className="text-right font-bold">Rendimiento (%)</TableHead>
+                    <TableHead className="font-bold text-center">Lecturas Realizadas</TableHead>
+                    <TableHead className="font-bold text-center">Total Lecturas</TableHead>
+                    <TableHead className="font-bold text-center">Rendimiento (%)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {data.ciclos.map((ciclo) => (
                     <TableRow key={ciclo.name}>
                         <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                        <TableCell>{ciclo.lecturas.toLocaleString()}</TableCell>
-                        <TableCell>{ciclo.total.toLocaleString()}</TableCell>
-                        <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
+                        <TableCell className="text-center">{ciclo.lecturas.toLocaleString()}</TableCell>
+                        <TableCell className="text-center">{ciclo.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-center font-medium">{ciclo.value}%</TableCell>
                     </TableRow>
                     ))}
                 </TableBody>

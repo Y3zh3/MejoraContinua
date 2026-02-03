@@ -39,16 +39,6 @@ const fotografiaData = {
             { name: 'C09', value: 16.3, casos: 239, total: 1463 },
             { name: 'C10', value: 13.6, casos: 148, total: 1087 },
         ]
-    },
-    callao: {
-        promedio: 23.7,
-        meta: 5,
-        ciclos: [
-            { name: 'C02', value: 11.8, casos: 6, total: 51 },
-            { name: 'C03', value: 22.5, casos: 47, total: 209 },
-            { name: 'C04', value: 12.5, casos: 14, total: 112 },
-            { name: 'C05', value: 28.7, casos: 78, total: 272 },
-        ]
     }
 };
 
@@ -72,13 +62,13 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader>
+                <CardHeader className="pb-4">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Simple</p>
+                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
                             <p className="text-3xl font-bold text-[hsl(var(--chart-4))]">{data.promedio}%</p>
                         </div>
                          <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
@@ -86,18 +76,12 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            El gráfico de área muestra la fluctuación de incidencias. Los picos que superan la meta del 5% indican ciclos con problemas críticos en la calidad de la toma.
-                        </p>
-                    </div>
                 </CardContent>
             </Card>
 
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
                 <CardHeader className="p-4">
-                    <CardTitle className="text-xl">Evolución de Incidencia - Enero 2026</CardTitle>
+                    <CardTitle className="text-xl">Evolución de Incidencia (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
                 <ResponsiveContainer width="100%" height="100%">
@@ -127,28 +111,28 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Incidencias por Ciclo</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1">
-            <div className="max-h-[500px] overflow-y-auto rounded-md border">
+            <CardContent>
+            <div className="rounded-md border overflow-hidden">
                 <Table>
-                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
+                <TableHeader className="bg-secondary/50">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold">Incidencias</TableHead>
-                    <TableHead className="font-bold">Total Lecturas</TableHead>
-                    <TableHead className="text-right font-bold">Porcentaje (%)</TableHead>
+                    <TableHead className="font-bold text-center">Incidencias</TableHead>
+                    <TableHead className="font-bold text-center">Total Lecturas</TableHead>
+                    <TableHead className="font-bold text-center">Porcentaje (%)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {data.ciclos.map((ciclo) => (
                     <TableRow key={ciclo.name}>
                         <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                        <TableCell>{ciclo.casos.toLocaleString()}</TableCell>
-                        <TableCell>{ciclo.total.toLocaleString()}</TableCell>
-                        <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
+                        <TableCell className="text-center">{ciclo.casos.toLocaleString()}</TableCell>
+                        <TableCell className="text-center">{ciclo.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-center font-medium">{ciclo.value}%</TableCell>
                     </TableRow>
                     ))}
                 </TableBody>

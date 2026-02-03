@@ -22,7 +22,6 @@ const efectividadData = {
             { name: 'C08', value: 98.4, total: 146232, lecturas: 143878 },
             { name: 'C09', value: 97.2, total: 139989, lecturas: 136007 },
             { name: 'C10', value: 98.7, total: 106208, lecturas: 104868 },
-            { name: 'C11', value: 99.5, total: 12302, lecturas: 12242 },
         ]
     },
     comas: {
@@ -103,7 +102,6 @@ const efectividadData = {
             { name: 'C08', value: 99.3, total: 13056, lecturas: 12962 },
             { name: 'C09', value: 98.9, total: 18971, lecturas: 18761 },
             { name: 'C10', value: 94.2, total: 14438, lecturas: 14327 },
-            { name: 'C11', value: 99.5, total: 12297, lecturas: 12237 },
         ]
     },
     surquillo: {
@@ -121,7 +119,7 @@ const efectividadData = {
             { name: 'C09', value: 98.3, total: 16218, lecturas: 15944 },
         ]
     },
-    ves: { // Villa el Salvador
+    ves: {
         promedio: 98.0,
         meta: 98.5,
         ciclos: [
@@ -146,11 +144,6 @@ const efectividadData = {
             { name: 'C04', value: 95.5, total: 1452, lecturas: 1386 },
             { name: 'C05', value: 96.7, total: 1497, lecturas: 1448 },
             { name: 'C06', value: 96.5, total: 1670, lecturas: 1611 },
-            { name: 'C07', value: 94.3, total: 1190, lecturas: 1122 },
-            { name: 'C08', value: 925, total: 925, lecturas: 886 },
-            { name: 'C09', value: 97.2, total: 564, lecturas: 548 },
-            { name: 'C10', value: 95.7, total: 623, lecturas: 596 },
-            { name: 'C11', value: 100.0, total: 5, lecturas: 5 },
         ]
     }
 };
@@ -175,13 +168,13 @@ export default function EfectividadTomaDeEstadoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader>
+                <CardHeader className="pb-4">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio</p>
+                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
                             <p className="text-3xl font-bold text-[hsl(var(--chart-2))]">{data.promedio}%</p>
                         </div>
                          <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
@@ -189,18 +182,12 @@ export default function EfectividadTomaDeEstadoPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            La efectividad es extremadamente alta, muy cerca o alcanzando el 100%. El proceso es robusto y se ejecuta con un alto grado de precisión.
-                        </p>
-                    </div>
                 </CardContent>
             </Card>
 
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
                 <CardHeader className="p-4">
-                    <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
+                    <CardTitle className="text-xl">Tendencia por Ciclo (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
                 <ResponsiveContainer width="100%" height="100%">
@@ -224,28 +211,28 @@ export default function EfectividadTomaDeEstadoPage() {
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Lecturas por Ciclo</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1">
-            <div className="max-h-[500px] overflow-y-auto rounded-md border">
+            <CardContent>
+            <div className="rounded-md border overflow-hidden">
                 <Table>
-                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
+                <TableHeader className="bg-secondary/50">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold">Lecturas Realizadas</TableHead>
-                    <TableHead className="font-bold">Total Lecturas</TableHead>
-                    <TableHead className="text-right font-bold">Efectividad (%)</TableHead>
+                    <TableHead className="font-bold text-center">Lecturas Realizadas</TableHead>
+                    <TableHead className="font-bold text-center">Total Lecturas</TableHead>
+                    <TableHead className="font-bold text-center">Efectividad (%)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {data.ciclos.map((ciclo) => (
                     <TableRow key={ciclo.name}>
                         <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                        <TableCell>{ciclo.lecturas.toLocaleString()}</TableCell>
-                        <TableCell>{ciclo.total.toLocaleString()}</TableCell>
-                        <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
+                        <TableCell className="text-center">{ciclo.lecturas.toLocaleString()}</TableCell>
+                        <TableCell className="text-center">{ciclo.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-center font-medium">{ciclo.value}%</TableCell>
                     </TableRow>
                     ))}
                 </TableBody>
