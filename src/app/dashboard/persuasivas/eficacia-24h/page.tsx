@@ -65,7 +65,7 @@ export default function Eficacia24hPersuasivasPage() {
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Mide la velocidad de respuesta en las acciones persuasivas, asegurando que los compromisos de pago o regularizaciones se concreten en las primeras 24 horas para optimizar el flujo de caja.
+                            Este indicador mide la rapidez con la que se concretan las reaperturas o compromisos de pago en las primeras 24 horas tras una gestión persuasiva exitosa, garantizando agilidad comercial.
                         </p>
                     </div>
                 </CardContent>

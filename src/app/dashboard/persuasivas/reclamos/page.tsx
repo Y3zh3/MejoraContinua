@@ -31,7 +31,6 @@ const COLORS = [
 export default function ReclamosPersuasivasPage() {
   const totalReclamos = dataEnero.reduce((acc, item) => acc + item.value, 0);
   const pieData = dataEnero.filter(item => item.value > 0);
-  const sedesCumplidoras = dataEnero.filter(item => item.value === 0).map(item => item.name);
   
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
@@ -71,7 +70,7 @@ export default function ReclamosPersuasivasPage() {
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Monitoreo de incidencias y reclamos derivados de las acciones persuasivas en campo, asegurando que el proceso de recuperación sea transparente y respetuoso con el usuario.
+                            Monitoreo de inconformidades presentadas por los usuarios respecto a las visitas persuasivas, buscando garantizar un trato justo y procesos de recuperación transparentes.
                         </p>
                     </div>
                 </CardContent>

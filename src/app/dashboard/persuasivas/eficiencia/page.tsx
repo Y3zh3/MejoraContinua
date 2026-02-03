@@ -65,7 +65,7 @@ export default function EficienciaPersuasivasPage() {
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            La eficiencia en la gestión persuasiva mide el éxito en la recuperación de cartera y regularización de servicios mediante acciones directas de campo antes de proceder a medidas drásticas.
+                            La eficiencia persuasiva evalúa el éxito en la recuperación de cartera y regularización de servicios antes de aplicar medidas de corte definitivas, optimizando la recaudación mediante la gestión directa en campo.
                         </p>
                     </div>
                 </CardContent>

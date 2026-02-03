@@ -65,7 +65,7 @@ export default function Eficacia48hPersuasivasPage() {
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Mide la eficacia de las gestiones persuasivas dentro de las 48 horas, monitoreando el cumplimiento de acuerdos y la regularización técnica y comercial del servicio.
+                            Evalúa la efectividad de las acciones persuasivas para lograr la regularización del servicio en un plazo máximo de 48 horas, asegurando la continuidad operativa y comercial del suministro.
                         </p>
                     </div>
                 </CardContent>
