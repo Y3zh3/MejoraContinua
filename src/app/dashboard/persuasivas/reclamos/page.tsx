@@ -3,18 +3,18 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { FileWarning } from "lucide-react";
+import { FileWarning, CheckCircle2 } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const dataEnero = [
-  { name: 'Comas', value: 17, meta: 5 },
-  { name: 'Callao', value: 6, meta: 5 },
-  { name: 'Ate', value: 5, meta: 5 },
-  { name: 'Breña', value: 5, meta: 5 },
-  { name: 'SJL', value: 0, meta: 5 },
-  { name: 'Surquillo', value: 2, meta: 5 },
-  { name: 'VES', value: 2, meta: 5 },
+  { name: 'Comas', value: 17, meta: 0 },
+  { name: 'Callao', value: 6, meta: 0 },
+  { name: 'Ate', value: 5, meta: 0 },
+  { name: 'Breña', value: 5, meta: 0 },
+  { name: 'SJL', value: 0, meta: 0 },
+  { name: 'Surquillo', value: 2, meta: 0 },
+  { name: 'VES', value: 2, meta: 0 },
 ];
 
 const COLORS = [
@@ -30,6 +30,7 @@ const COLORS = [
 export default function ReclamosPersuasivasPage() {
   const totalReclamos = dataEnero.reduce((acc, item) => acc + item.value, 0);
   const pieData = dataEnero.filter(item => item.value > 0);
+  const sedesCumplidoras = dataEnero.filter(item => item.value === 0).map(item => item.name);
   
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
@@ -95,16 +96,27 @@ export default function ReclamosPersuasivasPage() {
                         <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>
                         <p className="text-4xl font-bold text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
                     </div>
-                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
+                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm border-primary/20 bg-primary/5">
                         <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta Máxima p/Sede</p>
-                        <p className="text-4xl font-bold">5 uds.</p>
+                        <p className="text-4xl font-bold text-primary">0 uds.</p>
                     </div>
                 </div>
-                <div className="mt-4">
-                    <h4 className="font-semibold text-lg mb-2">Análisis Crítico</h4>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        Comas concentra el <span className="font-bold text-foreground">46%</span> de los reclamos totales del mes, superando ampliamente la meta máxima.
-                    </p>
+                <div className="mt-4 flex flex-col gap-4">
+                    <div>
+                        <h4 className="font-semibold text-lg mb-2 flex items-center gap-2">
+                            <CheckCircle2 className="h-5 w-5 text-primary" />
+                            Logro del Mes
+                        </h4>
+                        <p className="text-base text-muted-foreground leading-relaxed">
+                            La sede <span className="font-bold text-foreground">{sedesCumplidoras.join(", ")}</span> ha alcanzado la meta de excelencia con <span className="font-bold text-primary">0 reclamos</span> registrados.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 className="font-semibold text-lg mb-2">Análisis Crítico</h4>
+                        <p className="text-base text-muted-foreground leading-relaxed">
+                            Comas concentra el <span className="font-bold text-foreground">46%</span> de las incidencias, lo que requiere un plan de acción inmediato para converger a la meta de cero.
+                        </p>
+                    </div>
                 </div>
             </CardContent>
         </Card>
@@ -114,7 +126,7 @@ export default function ReclamosPersuasivasPage() {
         <CardHeader>
             <CardTitle className="text-xl">Detalle Mensual por Sede (Ene'26)</CardTitle>
             <p className="text-base text-muted-foreground">
-            Desglose comparativo de los reclamos de acciones persuasivas registrados en el mes de Enero 2026.
+            Desglose comparativo frente a la meta de cero reclamos.
             </p>
         </CardHeader>
         <CardContent>
@@ -131,8 +143,9 @@ export default function ReclamosPersuasivasPage() {
                 {dataEnero.map((item) => (
                     <TableRow key={item.name}>
                     <TableCell className="font-semibold">{item.name}</TableCell>
-                    <TableCell className={item.value > item.meta ? "text-destructive font-bold" : "text-foreground"}>
+                    <TableCell className={item.value > item.meta ? "text-destructive font-bold" : "text-primary font-bold flex items-center gap-2"}>
                         {item.value} uds.
+                        {item.value === 0 && <CheckCircle2 className="h-4 w-4" />}
                     </TableCell>
                     <TableCell className="text-right font-medium">{item.meta} uds.</TableCell>
                     </TableRow>
