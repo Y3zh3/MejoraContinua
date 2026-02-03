@@ -21,7 +21,8 @@ import {
   Activity,
   Megaphone,
   ClipboardList,
-  Handshake
+  Handshake,
+  CheckCircle2
 } from 'lucide-react';
 
 const categories = [
@@ -49,6 +50,7 @@ const categories = [
       { id: 'com_atipicas', nombre: 'Atípicas', icon: AlertTriangle, metaAnual: 85 },
       { id: 'com_preventivas', nombre: 'Preventivas', icon: ShieldCheck, metaAnual: 85 },
       { id: 'com_cierres', nombre: 'Cierres', icon: CircleOff, metaAnual: 15 },
+      { id: 'com_efectividad', nombre: 'Efectividad', icon: CheckCircle2, metaAnual: 85 },
     ]
   },
   {
@@ -156,6 +158,17 @@ const COM_CIERRES_DATA: Record<string, number[]> = {
   'clientes-e': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 };
 
+const COM_EFECTIVIDAD_DATA: Record<string, number[]> = {
+  comas: [88, 89, 90, 91, 92, 93, 94, 95, 96, 97],
+  callao: [90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
+  ate: [85, 86, 87, 88, 89, 90, 91, 92, 93, 94],
+  brena: [82, 83, 84, 85, 86, 87, 88, 89, 90, 91],
+  sjl: [89, 90, 91, 92, 93, 94, 95, 96, 97, 98],
+  surquillo: [91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
+  ves: [84, 85, 86, 87, 88, 89, 90, 91, 92, 93],
+  'clientes-e': [95, 96, 97, 98, 99, 100, 95, 96, 97, 98],
+};
+
 const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
@@ -172,6 +185,7 @@ export default function ReporteAnualPage() {
         else if (activity.id === 'com_atipicas') dataToUse = COM_ATIPICAS_DATA;
         else if (activity.id === 'com_preventivas') dataToUse = COM_PREVENTIVAS_DATA;
         else if (activity.id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
+        else if (activity.id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
@@ -221,6 +235,7 @@ export default function ReporteAnualPage() {
         else if (id === 'com_atipicas') dataToUse = COM_ATIPICAS_DATA;
         else if (id === 'com_preventivas') dataToUse = COM_PREVENTIVAS_DATA;
         else if (id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
+        else if (id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
