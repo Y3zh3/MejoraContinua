@@ -180,6 +180,17 @@ const INS_ATIPICAS_DATA: Record<string, number[]> = {
   'clientes-e': [25, 82, 100, 75, 100, 82, 64, 100, 40, 56],
 };
 
+const INS_RECLAMOS_DATA: Record<string, number[]> = {
+  comas: [77, 83, 83, 81, 79, 78, 80, 80, 79, 79],
+  callao: [85, 86, 86, 84, 86, 87, 88, 87, 85, 88],
+  ate: [80, 81, 80, 81, 80, 83, 81, 80, 79, 80],
+  brena: [79, 82, 81, 80, 82, 83, 82, 82, 78, 80],
+  sjl: [77, 78, 75, 73, 75, 82, 77, 79, 73, 83],
+  surquillo: [78, 78, 79, 82, 80, 81, 80, 82, 82, 81],
+  ves: [72, 75, 76, 76, 77, 72, 74, 68, 69, 74],
+  'clientes-e': [82, 85, 85, 85, 84, 80, 84, 86, 74, 91],
+};
+
 const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
@@ -198,6 +209,7 @@ export default function ReporteAnualPage() {
         else if (activity.id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
         else if (activity.id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
         else if (activity.id === 'ins_atipicas') dataToUse = INS_ATIPICAS_DATA;
+        else if (activity.id === 'ins_reclamos') dataToUse = INS_RECLAMOS_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
@@ -249,6 +261,7 @@ export default function ReporteAnualPage() {
         else if (id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
         else if (id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
         else if (id === 'ins_atipicas') dataToUse = INS_ATIPICAS_DATA;
+        else if (id === 'ins_reclamos') dataToUse = INS_RECLAMOS_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
