@@ -191,6 +191,17 @@ const INS_RECLAMOS_DATA: Record<string, number[]> = {
   'clientes-e': [82, 85, 85, 85, 84, 80, 84, 86, 74, 91],
 };
 
+const PER_EFICIENCIA_DATA: Record<string, number[]> = {
+  comas: [96, 93, 95, 95, 96, 97, 95, 93, 94, 88],
+  callao: [93, 94, 96, 90, 92, 93, 95, 93, 89, 89],
+  ate: [95, 93, 96, 93, 94, 97, 95, 95, 94, 93],
+  brena: [95, 96, 98, 93, 95, 97, 95, 88, 94, 94],
+  sjl: [99, 100, 100, 97, 99, 100, 100, 97, 99, 98],
+  surquillo: [97, 95, 99, 89, 96, 97, 97, 93, 93, 87],
+  ves: [93, 91, 95, 91, 95, 98, 95, 93, 91, 91],
+  'clientes-e': [88, 98, 96, 94, 94, 94, 92, 97, 90, 88],
+};
+
 const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
@@ -210,6 +221,7 @@ export default function ReporteAnualPage() {
         else if (activity.id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
         else if (activity.id === 'ins_atipicas') dataToUse = INS_ATIPICAS_DATA;
         else if (activity.id === 'ins_reclamos') dataToUse = INS_RECLAMOS_DATA;
+        else if (activity.id === 'per_eficiencia') dataToUse = PER_EFICIENCIA_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
@@ -262,6 +274,7 @@ export default function ReporteAnualPage() {
         else if (id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
         else if (id === 'ins_atipicas') dataToUse = INS_ATIPICAS_DATA;
         else if (id === 'ins_reclamos') dataToUse = INS_RECLAMOS_DATA;
+        else if (id === 'per_eficiencia') dataToUse = PER_EFICIENCIA_DATA;
 
         if (dataToUse) {
             if (currentBase === 'todas') {
