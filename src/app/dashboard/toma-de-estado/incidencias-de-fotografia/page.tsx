@@ -261,8 +261,8 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
                 {data.ciclos.map((ciclo) => (
                   <TableRow key={ciclo.name}>
                     <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                    <TableCell>{ciclo.casos.toLocaleString()} uds.</TableCell>
-                    <TableCell>{ciclo.total.toLocaleString()} uds.</TableCell>
+                    <TableCell>{ciclo.casos.toLocaleString()}</TableCell>
+                    <TableCell>{ciclo.total.toLocaleString()}</TableCell>
                     <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
                   </TableRow>
                 ))}
