@@ -40,22 +40,6 @@ const contratistaData: Record<string, any> = {
             { name: 'C10', value: 22, lecturas: 7428, total: 33765 },
         ]
     },
-    callao: {
-        promedio: 11.5,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 22, lecturas: 105, total: 481 },
-            { name: 'C02', value: 11, lecturas: 61, total: 556 },
-            { name: 'C03', value: 14, lecturas: 57, total: 409 },
-            { name: 'C04', value: 10, lecturas: 22, total: 221 },
-            { name: 'C05', value: 10, lecturas: 65, total: 655 },
-            { name: 'C06', value: 9, lecturas: 41, total: 463 },
-            { name: 'C07', value: 8, lecturas: 38, total: 482 },
-            { name: 'C08', value: 9, lecturas: 47, total: 530 },
-            { name: 'C09', value: 15, lecturas: 109, total: 732 },
-            { name: 'C10', value: 17, lecturas: 56, total: 331 },
-        ]
-    },
     ate: {
         promedio: 38.5,
         meta: 15,
@@ -102,6 +86,22 @@ const contratistaData: Record<string, any> = {
             { name: 'C08', value: 13, lecturas: 1697, total: 13056 },
             { name: 'C09', value: 11, lecturas: 2086, total: 18971 },
             { name: 'C10', value: 12, lecturas: 1732, total: 14438 },
+        ]
+    },
+    callao: {
+        promedio: 11.5,
+        meta: 15,
+        ciclos: [
+            { name: 'C01', value: 22, lecturas: 105, total: 481 },
+            { name: 'C02', value: 11, lecturas: 61, total: 556 },
+            { name: 'C03', value: 14, lecturas: 57, total: 409 },
+            { name: 'C04', value: 10, lecturas: 22, total: 221 },
+            { name: 'C05', value: 10, lecturas: 65, total: 655 },
+            { name: 'C06', value: 9, lecturas: 41, total: 463 },
+            { name: 'C07', value: 8, lecturas: 38, total: 482 },
+            { name: 'C08', value: 9, lecturas: 47, total: 530 },
+            { name: 'C09', value: 15, lecturas: 109, total: 732 },
+            { name: 'C10', value: 17, lecturas: 56, total: 331 },
         ]
     },
     surquillo: {
@@ -200,7 +200,7 @@ export default function ContratistaTomaDeEstadoPage() {
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Monitoreo de incidencias por contratista en campo. El objetivo principal es la reducción progresiva de estos eventos, asegurando un proceso de toma de estado limpio y eficiente que minimice las anomalías.
+                            Monitoreo de incidencias por contratista en campo. El objetivo es la reducción progresiva de estos eventos para asegurar un proceso de toma de estado limpio y eficiente que minimice las anomalías.
                         </p>
                     </div>
                 </CardContent>
@@ -225,7 +225,7 @@ export default function ContratistaTomaDeEstadoPage() {
                             }}
                             formatter={(value: number) => [`${value}%`, "Rendimiento"]}
                         />
-                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '5px' }} />
+                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '10px' }} />
                         <Line type="monotone" dataKey="value" name="Rendimiento" stroke="hsl(var(--chart-3))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
                         <ReferenceLine y={15} label={{ position: 'top', value: 'Meta', fontSize: 10, fill: 'hsl(var(--destructive))' }} stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </LineChart>
