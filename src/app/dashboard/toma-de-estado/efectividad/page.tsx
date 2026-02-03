@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -40,7 +39,6 @@ const efectividadData = {
             { name: 'C08', lecturas: 39454, total: 40723, value: 96.9 },
             { name: 'C09', lecturas: 32835, total: 34207, value: 96.0 },
             { name: 'C10', lecturas: 32525, total: 33765, value: 96.3 },
-            { name: 'C11', lecturas: 0, total: 0, value: 0 },
         ]
     },
     sjl: {
@@ -59,23 +57,6 @@ const efectividadData = {
             { name: 'C09', lecturas: 18761, total: 18971, value: 98.9 },
             { name: 'C10', lecturas: 14327, total: 14438, value: 99.2 },
             { name: 'C11', lecturas: 12237, total: 12297, value: 99.5 },
-        ]
-    },
-    callao: {
-        promedio: 98.4,
-        meta: 98.5,
-        label: "Callao",
-        ciclos: [
-            { name: 'C01', lecturas: 15151, total: 15457, value: 98.0 },
-            { name: 'C02', lecturas: 15771, total: 15971, value: 98.7 },
-            { name: 'C03', lecturas: 19912, total: 19991, value: 99.6 },
-            { name: 'C04', lecturas: 19370, total: 19490, value: 99.4 },
-            { name: 'C05', lecturas: 21464, total: 21571, value: 99.5 },
-            { name: 'C06', lecturas: 17978, total: 18202, value: 98.8 },
-            { name: 'C07', lecturas: 14759, total: 15003, value: 98.4 },
-            { name: 'C08', lecturas: 22312, total: 22579, value: 98.8 },
-            { name: 'C09', lecturas: 20210, total: 20435, value: 98.9 },
-            { name: 'C10', lecturas: 13444, total: 13703, value: 98.1 },
         ]
     }
 };
@@ -108,25 +89,25 @@ export default function EfectividadTomaDeEstadoPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6">
             <Card className="border shadow-sm">
-                <CardHeader className="pb-4">
+                <CardHeader className="pb-2">
                     <CardTitle className="text-xl font-bold text-center">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-6">
+                <CardContent className="flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                        <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Promedio Periodo</p>
                             <p className="text-3xl font-black text-[hsl(var(--chart-2))]">{data.promedio}%</p>
                         </div>
-                         <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                         <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta</p>
                             <p className="text-3xl font-black">98.5%</p>
                         </div>
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Este indicador refleja el cumplimiento operativo en la captura de lecturas de medidores. Una alta efectividad asegura que la facturación se base en consumos reales, minimizando errores y mejorando la satisfacción del cliente final mediante procesos de toma de estado precisos y oportunos.
+                            Este indicador refleja el cumplimiento operativo en la captura de lecturas de medidores. Una alta efectividad asegura que la facturación se base en consumos reales, minimizando errores y mejorando la satisfacción del cliente.
                         </p>
                     </div>
                 </CardContent>
@@ -152,7 +133,7 @@ export default function EfectividadTomaDeEstadoPage() {
                             cursor={{ fill: 'hsl(var(--muted))', opacity: 0.4 }}
                             formatter={(value: number) => [`${value}%`, "Efectividad"]}
                         />
-                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '10px' }} />
+                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '5px' }} />
                         <Bar dataKey="value" name="Efectividad" fill="hsl(var(--chart-2))" radius={[6, 6, 0, 0]} />
                         <ReferenceLine y={98.5} label={{ position: 'top', value: 'Meta', fontSize: 10, fill: 'hsl(var(--destructive))' }} stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </BarChart>
@@ -161,12 +142,12 @@ export default function EfectividadTomaDeEstadoPage() {
             </Card>
         </div>
 
-        <Card className="border shadow-sm h-full flex flex-col min-h-[650px]">
+        <Card className="border shadow-sm h-full flex flex-col min-h-[600px]">
             <CardHeader className="pb-4">
                 <CardTitle className="text-xl font-bold">Detalle de Rendimiento por Ciclo{selectedBaseLabel}</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 px-4">
-            <div className="max-h-[650px] overflow-y-auto rounded-xl border border-border/60 bg-card">
+            <div className="max-h-[600px] overflow-y-auto rounded-xl border border-border/60 bg-card">
                 <Table>
                 <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
                     <TableRow className="hover:bg-transparent border-b">

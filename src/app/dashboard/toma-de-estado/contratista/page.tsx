@@ -53,25 +53,25 @@ export default function ContratistaTomaDeEstadoPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-6">
             <Card className="border shadow-sm">
-                <CardHeader className="pb-4">
+                <CardHeader className="pb-2">
                     <CardTitle className="text-xl font-bold text-center">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-6">
+                <CardContent className="flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                        <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Promedio Periodo</p>
                             <p className="text-3xl font-black text-[hsl(var(--chart-3))]">{data.promedio}%</p>
                         </div>
-                         <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                         <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta</p>
                             <p className="text-3xl font-black">15%</p>
                         </div>
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Evalúa el desempeño directo del personal contratista en campo, monitoreando la calidad y cantidad de las lecturas capturadas para asegurar el cumplimiento de los niveles de servicio acordados.
+                            Evalúa el desempeño directo del personal contratista en campo, monitoreando la calidad y cantidad de las lecturas capturadas para asegurar el cumplimiento del servicio.
                         </p>
                     </div>
                 </CardContent>
@@ -96,7 +96,7 @@ export default function ContratistaTomaDeEstadoPage() {
                             }}
                             formatter={(value: number) => [`${value}%`, "Rendimiento"]}
                         />
-                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '10px' }} />
+                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '5px' }} />
                         <Line type="monotone" dataKey="value" name="Rendimiento" stroke="hsl(var(--chart-3))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
                         <ReferenceLine y={15} label={{ position: 'top', value: 'Meta', fontSize: 10, fill: 'hsl(var(--destructive))' }} stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </LineChart>
@@ -105,12 +105,12 @@ export default function ContratistaTomaDeEstadoPage() {
             </Card>
         </div>
 
-        <Card className="border shadow-sm h-full flex flex-col min-h-[650px]">
+        <Card className="border shadow-sm h-full flex flex-col min-h-[600px]">
             <CardHeader className="pb-4">
                 <CardTitle className="text-xl font-bold">Detalle de Rendimiento por Ciclo{selectedBaseLabel}</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 px-4">
-            <div className="max-h-[650px] overflow-y-auto rounded-xl border border-border/60 bg-card">
+            <div className="max-h-[600px] overflow-y-auto rounded-xl border border-border/60 bg-card">
                 <Table>
                 <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
                     <TableRow className="hover:bg-transparent border-b">
