@@ -2,37 +2,61 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { TrendingUp } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const efectividadData = {
     todas: {
-        promedio: 98.2,
+        promedio: 98.6,
         meta: 98.5,
         ciclos: [
             { name: 'C01', value: 98.6 },
             { name: 'C02', value: 99.1 },
-            { name: 'C03', value: 98.4 },
-            { name: 'C04', value: 97.2 },
-            { name: 'C05', value: 98.5 },
-            { name: 'C06', value: 96.2 },
-            { name: 'C07', value: 98.8 },
-            { name: 'C08', value: 97.4 },
-            { name: 'C09', value: 99.0 },
-            { name: 'C10', value: 98.1 },
+            { name: 'C03', value: 98.8 },
+            { name: 'C04', value: 98.2 },
+            { name: 'C05', value: 97.5 },
+            { name: 'C06', value: 98.0 },
+            { name: 'C07', value: 96.9 },
+            { name: 'C08', value: 98.5 },
+            { name: 'C09', value: 97.4 },
+            { name: 'C10', value: 99.0 },
+            { name: 'C11', value: 99.8 },
         ]
     },
     comas: {
-        promedio: 96.5,
+        promedio: 97.2,
         meta: 98.5,
         ciclos: [
-            { name: 'C01', value: 95.2 },
-            { name: 'C02', value: 96.1 },
-            { name: 'C03', value: 95.8 },
-            { name: 'C04', value: 96.4 },
-            { name: 'C05', value: 97.1 },
+            { name: 'C01', value: 96.5 },
+            { name: 'C02', value: 100.9 },
+            { name: 'C03', value: 97.2 },
+            { name: 'C04', value: 96.8 },
+            { name: 'C05', value: 95.4 },
+            { name: 'C06', value: 96.1 },
+            { name: 'C07', value: 95.8 },
+            { name: 'C08', value: 97.5 },
+            { name: 'C09', value: 96.2 },
+            { name: 'C10', value: 98.1 },
+            { name: 'C11', value: 98.8 },
+        ]
+    },
+    callao: {
+        promedio: 99.2,
+        meta: 98.5,
+        ciclos: [
+            { name: 'C01', value: 99.0 },
+            { name: 'C02', value: 99.5 },
+            { name: 'C03', value: 99.2 },
+            { name: 'C04', value: 99.4 },
+            { name: 'C05', value: 98.8 },
+            { name: 'C06', value: 99.1 },
+            { name: 'C07', value: 98.9 },
+            { name: 'C08', value: 99.3 },
+            { name: 'C09', value: 99.0 },
+            { name: 'C10', value: 99.5 },
+            { name: 'C11', value: 99.7 },
         ]
     }
 };
@@ -64,7 +88,7 @@ export default function EfectividadTomaDeEstadoPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
-            <Card className="border shadow-sm h-52">
+            <Card className="border shadow-sm">
                 <CardHeader className="pb-2">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
@@ -84,11 +108,11 @@ export default function EfectividadTomaDeEstadoPage() {
 
             <Card className="border shadow-sm">
                 <CardHeader className="pb-4">
-                    <CardTitle className="text-xl">Tendencia de Efectividad (%)</CardTitle>
+                    <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data.ciclos}>
+                    <BarChart data={data.ciclos}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} />
                         <XAxis dataKey="name" />
                         <YAxis domain={[90, 102]} unit="%"/>
@@ -102,8 +126,8 @@ export default function EfectividadTomaDeEstadoPage() {
                         />
                         <Legend />
                         <ReferenceLine y={98.5} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
-                        <Line type="monotone" dataKey="value" name="Efectividad" stroke="hsl(var(--chart-2))" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
-                    </LineChart>
+                        <Bar dataKey="value" name="Efectividad" fill="hsl(var(--chart-2))" radius={[4, 4, 0, 0]} />
+                    </BarChart>
                 </ResponsiveContainer>
                 </CardContent>
             </Card>
