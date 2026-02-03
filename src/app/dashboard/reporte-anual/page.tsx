@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -50,7 +49,6 @@ const categories = [
       { id: 'com_atipicas', nombre: 'Atípicas', icon: AlertTriangle, metaAnual: 85 },
       { id: 'com_preventivas', nombre: 'Preventivas', icon: ShieldCheck, metaAnual: 85 },
       { id: 'com_cierres', nombre: 'Cierres', icon: CircleOff, metaAnual: 15 },
-      { id: 'com_efectividad', nombre: 'Efectividad', icon: CheckCircle2, metaAnual: 85 },
     ]
   },
   {
@@ -158,17 +156,6 @@ const COM_CIERRES_DATA: Record<string, number[]> = {
   'clientes-e': [100, 100, 100, 100, 100, 100, 100, 100, 100, 100],
 };
 
-const COM_EFECTIVIDAD_DATA: Record<string, number[]> = {
-  comas: [38, 36, 32, 24, 29, 38, 43, 38, 35, 32],
-  callao: [25, 27, 24, 32, 34, 26, 27, 25, 28, 30],
-  ate: [37, 43, 31, 32, 37, 38, 38, 51, 45, 42],
-  brena: [16, 23, 24, 23, 19, 24, 25, 15, 20, 22],
-  sjl: [53, 53, 53, 57, 51, 51, 49, 48, 52, 54],
-  surquillo: [48, 53, 53, 53, 52, 50, 49, 54, 51, 53],
-  ves: [7, 18, 26, 20, 18, 20, 23, 19, 21, 24],
-  'clientes-e': [74, 68, 70, 71, 77, 75, 73, 72, 70, 71],
-};
-
 const INS_ATIPICAS_DATA: Record<string, number[]> = {
   comas: [77, 80, 85, 84, 79, 78, 80, 83, 74, 83],
   callao: [78, 83, 85, 87, 88, 87, 80, 89, 86, 88],
@@ -262,7 +249,6 @@ export default function ReporteAnualPage() {
         else if (activity.id === 'com_atipicas') dataToUse = COM_ATIPICAS_DATA;
         else if (activity.id === 'com_preventivas') dataToUse = COM_PREVENTIVAS_DATA;
         else if (activity.id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
-        else if (activity.id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
         else if (activity.id === 'ins_atipicas') dataToUse = INS_ATIPICAS_DATA;
         else if (activity.id === 'ins_reclamos') dataToUse = INS_RECLAMOS_DATA;
         else if (activity.id === 'per_eficiencia') dataToUse = PER_EFICIENCIA_DATA;
@@ -322,7 +308,6 @@ export default function ReporteAnualPage() {
         else if (id === 'com_atipicas') dataToUse = COM_ATIPICAS_DATA;
         else if (id === 'com_preventivas') dataToUse = COM_PREVENTIVAS_DATA;
         else if (id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
-        else if (id === 'com_efectividad') dataToUse = COM_EFECTIVIDAD_DATA;
         else if (id === 'ins_atipicas') dataToUse = INS_ATIPICAS_DATA;
         else if (id === 'ins_reclamos') dataToUse = INS_RECLAMOS_DATA;
         else if (id === 'per_eficiencia') dataToUse = PER_EFICIENCIA_DATA;

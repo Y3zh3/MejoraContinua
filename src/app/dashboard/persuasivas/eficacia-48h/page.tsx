@@ -19,7 +19,7 @@ const eficacia48Data = {
     }
 };
 
-export default function Efectividad48hPersuasivasPage() {
+export default function Eficacia48hPersuasivasPage() {
   const [isMounted, setIsMounted] = useState(false);
   const [data, setData] = useState(eficacia48Data.todas);
   const [selectedBaseLabel, setSelectedBaseLabel] = useState("");
@@ -41,7 +41,7 @@ export default function Efectividad48hPersuasivasPage() {
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
             <Clock9 className="h-8 w-8 text-[hsl(var(--chart-1))]" />
-            <h1 className="font-headline text-3xl font-bold uppercase tracking-tight text-primary">Persuasivas: Efectividad 48H</h1>
+            <h1 className="font-headline text-3xl font-bold uppercase tracking-tight text-primary">Persuasivas: Eficacia 48H</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
       </div>
@@ -65,7 +65,7 @@ export default function Efectividad48hPersuasivasPage() {
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Evalúa el cumplimiento físico de las órdenes de corte en un plazo de 48 horas. Garantizamos que el servicio sea efectivamente suspendido cuando el cliente no cumple con sus obligaciones de pago.
+                            Evalúa la recuperación de cartera en un plazo de 48 horas tras la ejecución del corte. Mide cuántos de los usuarios afectados por la suspensión regularizaron su deuda ante el impacto de la medida.
                         </p>
                     </div>
                 </CardContent>
@@ -73,7 +73,7 @@ export default function Efectividad48hPersuasivasPage() {
 
             <Card className="border shadow-sm">
                 <CardHeader className="pb-2">
-                    <CardTitle className="text-xl font-bold">Tendencia de Efectividad (%)</CardTitle>
+                    <CardTitle className="text-xl font-bold">Tendencia de Eficacia (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-[320px] p-0 px-2 pb-2">
                 <ResponsiveContainer width="100%" height="100%">
@@ -88,10 +88,10 @@ export default function Efectividad48hPersuasivasPage() {
                                 borderRadius: "12px",
                                 boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
                             }}
-                            formatter={(value: number) => [`${value}%`, "Efectividad"]}
+                            formatter={(value: number) => [`${value}%`, "Eficacia"]}
                         />
                         <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '10px' }} />
-                        <Line type="monotone" dataKey="value" name="Efectividad" stroke="hsl(var(--chart-1))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
+                        <Line type="monotone" dataKey="value" name="Eficacia" stroke="hsl(var(--chart-1))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
                         <ReferenceLine y={70} label={{ position: 'top', value: 'Meta', fontSize: 10, fill: 'hsl(var(--destructive))' }} stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </LineChart>
                 </ResponsiveContainer>
@@ -101,7 +101,7 @@ export default function Efectividad48hPersuasivasPage() {
 
         <Card className="border shadow-sm h-full flex flex-col min-h-[650px]">
             <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-bold">Detalle de Ejecución por Ciclo{selectedBaseLabel}</CardTitle>
+                <CardTitle className="text-xl font-bold">Detalle de Pagos por Ciclo{selectedBaseLabel}</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 px-4">
             <div className="max-h-[650px] overflow-y-auto rounded-xl border border-border/60 bg-card">
@@ -109,9 +109,9 @@ export default function Efectividad48hPersuasivasPage() {
                 <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
                     <TableRow className="hover:bg-transparent border-b">
                     <TableHead className="w-[100px] font-bold text-muted-foreground uppercase text-[11px] tracking-wider pl-6">Ciclo</TableHead>
-                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Cortes Efectivos</TableHead>
-                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Total Programado</TableHead>
-                    <TableHead className="text-right font-bold text-muted-foreground uppercase text-[11px] tracking-wider pr-6">Efectividad (%)</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Pagos (48h)</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Total Cortes</TableHead>
+                    <TableHead className="text-right font-bold text-muted-foreground uppercase text-[11px] tracking-wider pr-6">Eficacia (%)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
