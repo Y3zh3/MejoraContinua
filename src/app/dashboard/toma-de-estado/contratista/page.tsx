@@ -1,6 +1,5 @@
 
 "use client";
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
@@ -103,7 +102,6 @@ const contratistaData = {
             { name: 'C08', value: 4.8, lecturas: 16, total: 330 },
             { name: 'C09', value: 26.2, lecturas: 132, total: 502 },
             { name: 'C10', value: 25.8, lecturas: 78, total: 302 },
-            { name: 'C11', value: 31.5, lecturas: 42, total: 133 },
         ]
     },
     surquillo: {
@@ -146,11 +144,6 @@ const contratistaData = {
             { name: 'C04', value: 27.9, lecturas: 19, total: 68 },
             { name: 'C05', value: 29.6, lecturas: 19, total: 64 },
             { name: 'C06', value: 31.3, lecturas: 21, total: 67 },
-            { name: 'C07', value: 15.4, lecturas: 11, total: 71 },
-            { name: 'C08', value: 30.2, lecturas: 13, total: 43 },
-            { name: 'C09', value: 23.8, lecturas: 5, total: 21 },
-            { name: 'C10', value: 39.2, lecturas: 11, total: 28 },
-            { name: 'C11', value: 0.0, lecturas: 0, total: 0 },
         ]
     }
 };
@@ -167,97 +160,93 @@ export default function ContratistaTomaDeEstadoPage() {
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <HardHat className="h-8 w-8 text-[hsl(var(--chart-3))]" />
-          <h1 className="font-headline text-3xl font-bold text-foreground">Toma de Estado: Contratista</h1>
+          <h1 className="font-headline text-3xl font-bold">Toma de Estado: Contratista</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-            <CardHeader className="p-4">
-                <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
-            </CardHeader>
-            <CardContent className="h-60 p-0 px-2 pb-4">
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={data.ciclos}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="name" />
-                <YAxis unit="%" />
-                <Tooltip
-                    contentStyle={{
-                    background: "hsl(var(--card))",
-                    borderColor: "hsl(var(--border))",
-                    borderRadius: "8px",
-                    }}
-                    formatter={(value: number) => `${value}%`}
-                />
-                <Legend />
-                <Line type="monotone" dataKey="value" name="Rendimiento" stroke="hsl(var(--chart-3))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
-                </LineChart>
-            </ResponsiveContainer>
-            </CardContent>
-        </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <div className="flex flex-col gap-8">
+            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+                <CardHeader>
+                    <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-4">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
+                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Simple</p>
+                            <p className="text-3xl font-bold text-[hsl(var(--chart-3))]">{data.promedio}%</p>
+                        </div>
+                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
+                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta (máx)</p>
+                            <p className="text-3xl font-bold">{data.meta}%</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                            El rendimiento del contratista varía significativamente entre ciclos. Es fundamental supervisar los ciclos con desviaciones mayores a la meta del 15%.
+                        </p>
+                    </div>
+                </CardContent>
+            </Card>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+                <CardHeader className="p-4">
+                    <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
+                </CardHeader>
+                <CardContent className="h-60 p-0 px-2 pb-4">
+                <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={data.ciclos}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="name" />
+                    <YAxis unit="%" />
+                    <Tooltip
+                        contentStyle={{
+                        background: "hsl(var(--card))",
+                        borderColor: "hsl(var(--border))",
+                        borderRadius: "8px",
+                        }}
+                        formatter={(value: number) => `${value}%`}
+                    />
+                    <Legend />
+                    <Line type="monotone" dataKey="value" name="Rendimiento" stroke="hsl(var(--chart-3))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
+                    </LineChart>
+                </ResponsiveContainer>
+                </CardContent>
+            </Card>
+        </div>
+
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
             <CardHeader>
-            <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
+                <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-6 pt-2 h-60 overflow-y-auto">
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                    Análisis del rendimiento de <span className="font-semibold text-foreground">Contratistas</span> para el periodo de <span className="font-semibold text-foreground">Enero 2026</span>.
-                </p>
-                <div className="grid grid-cols-2 gap-6">
-                    <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
-                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Simple</p>
-                        <p className="text-4xl font-bold text-[hsl(var(--chart-3))]">{data.promedio}%</p>
-                    </div>
-                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
-                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta (máx)</p>
-                        <p className="text-4xl font-bold">{data.meta}%</p>
-                    </div>
-                </div>
-                <div className="mt-2">
-                    <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        El rendimiento del contratista varía significativamente entre ciclos. Es fundamental supervisar los ciclos con desviaciones mayores a la meta del 15%.
-                    </p>
-                </div>
+            <CardContent className="flex-1">
+            <div className="max-h-[500px] overflow-y-auto rounded-md border">
+                <Table>
+                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
+                    <TableRow>
+                    <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
+                    <TableHead className="font-bold">Lecturas Realizadas</TableHead>
+                    <TableHead className="font-bold">Total Lecturas</TableHead>
+                    <TableHead className="text-right font-bold">Rendimiento (%)</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {data.ciclos.map((ciclo) => (
+                    <TableRow key={ciclo.name}>
+                        <TableCell className="font-semibold">{ciclo.name}</TableCell>
+                        <TableCell>{ciclo.lecturas.toLocaleString()}</TableCell>
+                        <TableCell>{ciclo.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
+                    </TableRow>
+                    ))}
+                </TableBody>
+                </Table>
+            </div>
             </CardContent>
         </Card>
       </div>
-
-       <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-        <CardHeader>
-          <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
-          <p className="text-base text-muted-foreground">
-            Desglose porcentual y numérico del rendimiento del contratista en cada ciclo operativo.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <div className="max-h-96 overflow-y-auto rounded-md border">
-            <Table>
-              <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
-                <TableRow>
-                  <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                  <TableHead className="font-bold">Lecturas Realizadas</TableHead>
-                  <TableHead className="font-bold">Total Lecturas</TableHead>
-                  <TableHead className="text-right font-bold">Rendimiento (%)</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {data.ciclos.map((ciclo) => (
-                  <TableRow key={ciclo.name}>
-                    <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                    <TableCell>{ciclo.lecturas.toLocaleString()}</TableCell>
-                    <TableCell>{ciclo.total.toLocaleString()}</TableCell>
-                    <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }
