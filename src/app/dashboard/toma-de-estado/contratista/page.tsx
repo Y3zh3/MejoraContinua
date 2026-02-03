@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -176,7 +177,7 @@ export default function ContratistaTomaDeEstadoPage() {
             <CardHeader className="p-4">
                 <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
             </CardHeader>
-            <CardContent className="h-80 p-0 px-2 pb-4">
+            <CardContent className="h-72 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={data.ciclos}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -234,7 +235,7 @@ export default function ContratistaTomaDeEstadoPage() {
         </CardHeader>
         <CardContent>
           <div className="max-h-96 overflow-y-auto rounded-md border">
-            <Table className="text-base">
+            <Table>
               <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                 <TableRow>
                   <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
