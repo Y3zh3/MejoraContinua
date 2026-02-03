@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { AlertTriangle } from "lucide-react";
 import { BaseSelector } from '@/components/base-selector';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -170,17 +170,11 @@ export default function AtipicasComunicadosPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle className="text-xl">Evolución de Rendimiento (%)</CardTitle>
+                <CardTitle className="text-xl">Comparativa de Rendimiento (%)</CardTitle>
             </CardHeader>
             <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={data.ciclos}>
-                  <defs>
-                      <linearGradient id="colorAtipicas" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="hsl(var(--chart-1))" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="hsl(var(--chart-1))" stopOpacity={0}/>
-                      </linearGradient>
-                  </defs>
+                <BarChart data={data.ciclos}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="name" />
                   <YAxis domain={[0, 110]} unit="%"/>
@@ -193,17 +187,14 @@ export default function AtipicasComunicadosPage() {
                       formatter={(value: number) => `${value}%`}
                   />
                   <Legend />
-                  <Area 
-                    type="monotone" 
+                  <Bar 
                     dataKey="value" 
                     name="Rendimiento" 
-                    stroke="hsl(var(--chart-1))" 
-                    fillOpacity={1} 
-                    fill="url(#colorAtipicas)" 
-                    strokeWidth={3}
+                    fill="hsl(var(--chart-1))" 
+                    radius={[4, 4, 0, 0]}
                   />
-                  <Line type="monotone" dataKey="meta" name="Meta" stroke="hsl(var(--destructive))" strokeDasharray="5 5" strokeWidth={2} dot={false} />
-                </AreaChart>
+                  <ReferenceLine y={85} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
+                </BarChart>
             </ResponsiveContainer>
             </CardContent>
         </Card>
@@ -229,7 +220,7 @@ export default function AtipicasComunicadosPage() {
                 <div className="mt-2">
                     <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        El rendimiento de las comunicaciones atípicas muestra variaciones notables entre las distintas bases. Es fundamental monitorear los ciclos que se encuentran por debajo de la meta del 85%.
+                        El gráfico muestra el rendimiento ciclo a ciclo frente a la meta del 85%. Los ciclos por debajo de la línea de meta requieren una revisión de los procesos operativos.
                     </p>
                 </div>
             </CardContent>
