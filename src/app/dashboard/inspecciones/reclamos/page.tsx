@@ -1,5 +1,6 @@
+
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { FileWarning } from "lucide-react";
@@ -34,11 +35,18 @@ const reclamosData = {
 };
 
 export default function ReclamosInspeccionesPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const [data, setData] = useState(reclamosData.todas);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleBaseChange = (base: string) => {
     setData(reclamosData[base as keyof typeof reclamosData] || reclamosData.todas);
   };
+
+  if (!isMounted) return null;
   
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">

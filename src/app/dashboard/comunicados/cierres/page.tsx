@@ -1,5 +1,6 @@
+
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { CircleOff } from "lucide-react";
@@ -109,11 +110,18 @@ const cierresData = {
 };
 
 export default function CierresComunicadosPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const [data, setData] = useState(cierresData.todas);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleBaseChange = (base: string) => {
     setData(cierresData[base as keyof typeof cierresData] || cierresData.todas);
   };
+
+  if (!isMounted) return null;
   
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">

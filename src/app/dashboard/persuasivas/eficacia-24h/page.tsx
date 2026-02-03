@@ -1,5 +1,6 @@
+
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { Clock4 } from "lucide-react";
@@ -20,11 +21,18 @@ const eficaciaData = {
 };
 
 export default function Eficacia24hPersuasivasPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const [data, setData] = useState(eficaciaData.todas);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleBaseChange = (base: string) => {
     setData(eficaciaData[base as keyof typeof eficaciaData] || eficaciaData.todas);
   };
+
+  if (!isMounted) return null;
   
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
@@ -38,11 +46,11 @@ export default function Eficacia24hPersuasivasPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader>
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-2">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-4">
+                <CardContent>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
                             <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
@@ -53,17 +61,11 @@ export default function Eficacia24hPersuasivasPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            Análisis de la Eficacia 24H. El gráfico muestra la evolución de la eficacia en las primeras 24 horas frente a la meta del 70%.
-                        </p>
-                    </div>
                 </CardContent>
             </Card>
 
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader className="p-4">
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-4">
                     <CardTitle className="text-xl">Tendencia de Eficacia (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
@@ -95,7 +97,7 @@ export default function Eficacia24hPersuasivasPage() {
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
+        <Card className="border shadow-sm h-full flex flex-col">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
             </CardHeader>
@@ -105,8 +107,8 @@ export default function Eficacia24hPersuasivasPage() {
                 <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold">Con Reap Antes 24</TableHead>
-                    <TableHead className="font-bold">Total</TableHead>
+                    <TableHead className="font-bold text-right">Con Reap Antes 24</TableHead>
+                    <TableHead className="font-bold text-right">Total</TableHead>
                     <TableHead className="text-right font-bold">Eficacia (%)</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -114,8 +116,8 @@ export default function Eficacia24hPersuasivasPage() {
                     {data.ciclos.map((item) => (
                     <TableRow key={item.name}>
                         <TableCell className="font-semibold">{item.name}</TableCell>
-                        <TableCell>{item.atendidos.toLocaleString()}</TableCell>
-                        <TableCell>{item.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{item.atendidos.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{item.total.toLocaleString()}</TableCell>
                         <TableCell className={`text-right font-medium ${item.value < item.meta ? "text-destructive" : ""}`}>
                             {item.value}%
                         </TableCell>

@@ -1,5 +1,6 @@
+
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { AlertTriangle } from "lucide-react";
@@ -26,11 +27,18 @@ const atipicasData = {
 };
 
 export default function AtipicasInspeccionesPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const [data, setData] = useState(atipicasData.todas);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleBaseChange = (base: string) => {
     setData(atipicasData[base as keyof typeof atipicasData] || atipicasData.todas);
   };
+
+  if (!isMounted) return null;
   
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">

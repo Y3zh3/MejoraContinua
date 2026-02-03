@@ -1,7 +1,8 @@
+
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { TrendingUp } from "lucide-react";
 import { BaseSelector } from "@/components/base-selector";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -37,11 +38,18 @@ const efectividadData = {
 };
 
 export default function EfectividadTomaDeEstadoPage() {
+  const [isMounted, setIsMounted] = useState(false);
   const [data, setData] = useState(efectividadData.todas);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const handleBaseChange = (base: string) => {
     setData(efectividadData[base as keyof typeof efectividadData] || efectividadData.todas);
   };
+
+  if (!isMounted) return null;
   
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
@@ -93,6 +101,7 @@ export default function EfectividadTomaDeEstadoPage() {
                         />
                         <Legend />
                         <Bar dataKey="value" name="Efectividad" fill="hsl(var(--chart-2))" radius={[4, 4, 0, 0]} />
+                        <ReferenceLine y={98.5} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </BarChart>
                 </ResponsiveContainer>
                 </CardContent>
