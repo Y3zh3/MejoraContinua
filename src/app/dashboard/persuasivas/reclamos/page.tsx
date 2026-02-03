@@ -54,23 +54,23 @@ export default function ReclamosPersuasivasPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-6">
             <Card className="border shadow-sm">
-                <CardHeader className="pb-2">
+                <CardHeader className="p-4 pb-0">
                     <CardTitle className="text-xl font-bold text-center">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-4">
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                <CardContent className="p-4 pt-2">
+                    <div className="grid grid-cols-2 gap-4 mb-3">
+                        <div className="border border-border/50 py-2 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Total Reclamos</p>
                             <p className="text-3xl font-black text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
                         </div>
-                         <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center border-primary/20 bg-primary/5">
+                         <div className="border border-border/50 py-2 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center border-primary/20 bg-primary/5">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta Máxima</p>
                             <p className="text-3xl font-black text-primary">0 uds.</p>
                         </div>
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Monitoreo de inconformidades presentadas por los usuarios respecto a las visitas persuasivas, buscando garantizar un trato justo y procesos de recuperación transparentes.
+                            Este indicador monitorea las inconformidades de los usuarios relacionadas con la falta de reapertura del servicio tras el pago o cierres ejecutados de forma equivocada en campo. Buscamos garantizar la precisión técnica y la satisfacción del cliente.
                         </p>
                     </div>
                 </CardContent>
@@ -88,7 +88,7 @@ export default function ReclamosPersuasivasPage() {
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Pie>
-                        <Tooltip contentStyle={{ background: "hsl(var(--card))", borderColor: "hsl(var(--border))", borderRadius: "8px" }} />
+                        <Tooltip contentStyle={{ background: "hsl(var(--background))", borderColor: "hsl(var(--border))", borderRadius: "8px" }} />
                         <Legend />
                     </PieChart>
                 </ResponsiveContainer>
