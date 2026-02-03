@@ -66,7 +66,7 @@ export default function ContratistaTomaDeEstadoPage() {
                         </div>
                          <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta</p>
-                            <p className="text-3xl font-black">15%</p>
+                            <p className="text-3xl font-black">{data.meta}%</p>
                         </div>
                     </div>
                     <div className="px-2">

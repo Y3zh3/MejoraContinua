@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { FileWarning, CheckCircle2 } from "lucide-react";
+import { FileWarning } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -38,7 +38,7 @@ export default function ReclamosPersuasivasPage() {
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
             <FileWarning className="h-8 w-8 text-[hsl(var(--chart-4))]" />
-            <h1 className="font-headline text-3xl font-bold">Persuasivas: Reclamos</h1>
+            <h1 className="font-headline text-3xl font-bold uppercase tracking-tight text-primary">Persuasivas: Reclamos</h1>
         </div>
         <div className="w-full max-w-xs">
             <Select defaultValue="todas">
@@ -53,32 +53,31 @@ export default function ReclamosPersuasivasPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        <div className="flex flex-col gap-8">
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader>
-                    <CardTitle className="text-xl">Resumen de Enero '26</CardTitle>
+        <div className="flex flex-col gap-6">
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-2">
+                    <CardTitle className="text-xl font-bold text-center">Resumen del Indicador</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>
-                            <p className="text-3xl font-bold text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
+                        <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                            <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Total Reclamos</p>
+                            <p className="text-3xl font-black text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
                         </div>
-                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm border-primary/20 bg-primary/5">
-                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta Máxima</p>
-                            <p className="text-3xl font-bold text-primary">0 uds.</p>
+                         <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center border-primary/20 bg-primary/5">
+                            <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta Máxima</p>
+                            <p className="text-3xl font-black text-primary">0 uds.</p>
                         </div>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Logro del Mes</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            {sedesCumplidoras.length > 1 ? "Las sedes" : "La sede"} <span className="font-bold text-foreground">{sedesCumplidoras.join(" y ")}</span> alcanzó la excelencia con 0 reclamos.
+                    <div className="px-2">
+                        <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
+                            Monitoreo de incidencias y reclamos derivados de las acciones persuasivas en campo, asegurando que el proceso de recuperación sea transparente y respetuoso con el usuario.
                         </p>
                     </div>
                 </CardContent>
             </Card>
 
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+            <Card className="border shadow-sm">
                 <CardHeader className="p-4">
                     <CardTitle className="text-xl text-center">Distribución de Reclamos (%)</CardTitle>
                 </CardHeader>
@@ -98,28 +97,28 @@ export default function ReclamosPersuasivasPage() {
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
-            <CardHeader>
-                <CardTitle className="text-xl">Detalle Mensual por Sede (Ene'26)</CardTitle>
+        <Card className="border shadow-sm h-full flex flex-col min-h-[600px]">
+            <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-bold">Detalle Mensual por Sede (Ene'26)</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1">
-            <div className="max-h-[500px] overflow-y-auto rounded-md border">
+            <CardContent className="flex-1 px-4">
+            <div className="max-h-[600px] overflow-y-auto rounded-xl border border-border/60 bg-card">
                 <Table>
-                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
-                    <TableRow>
-                    <TableHead className="w-[120px] font-bold">Sede</TableHead>
-                    <TableHead className="font-bold">Reclamos</TableHead>
-                    <TableHead className="text-right font-bold">Meta (máx)</TableHead>
+                <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
+                    <TableRow className="hover:bg-transparent border-b">
+                    <TableHead className="w-[120px] font-bold text-muted-foreground uppercase text-[11px] tracking-wider pl-6">Sede</TableHead>
+                    <TableHead className="font-bold text-muted-foreground uppercase text-[11px] tracking-wider">Reclamos</TableHead>
+                    <TableHead className="text-right font-bold text-muted-foreground uppercase text-[11px] tracking-wider pr-6">Meta (máx)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {dataEnero.map((item) => (
-                    <TableRow key={item.name}>
-                        <TableCell className="font-semibold">{item.name}</TableCell>
-                        <TableCell className={item.value > item.meta ? "text-destructive font-bold" : "text-primary font-bold"}>
+                    <TableRow key={item.name} className="hover:bg-muted/30 transition-colors border-b last:border-0">
+                        <TableCell className="font-bold text-foreground pl-6">{item.name}</TableCell>
+                        <TableCell className={`font-bold tabular-nums ${item.value > item.meta ? "text-destructive" : "text-primary"}`}>
                             {item.value} uds.
                         </TableCell>
-                        <TableCell className="text-right font-medium">{item.meta} uds.</TableCell>
+                        <TableCell className="text-right font-medium pr-6">{item.meta} uds.</TableCell>
                     </TableRow>
                     ))}
                 </TableBody>

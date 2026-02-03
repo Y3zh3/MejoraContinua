@@ -27,7 +27,6 @@ const efectividadData = {
     comas: {
         promedio: 96.8,
         meta: 98.5,
-        label: "Comas",
         ciclos: [
             { name: 'C01', lecturas: 49915, total: 50621, value: 98.6 },
             { name: 'C02', lecturas: 42440, total: 42077, value: 100.9 },
@@ -44,7 +43,6 @@ const efectividadData = {
     sjl: {
         promedio: 99.3,
         meta: 98.5,
-        label: "SJL",
         ciclos: [
             { name: 'C01', lecturas: 23933, total: 24130, value: 99.2 },
             { name: 'C02', lecturas: 17333, total: 17437, value: 99.4 },
@@ -73,7 +71,7 @@ export default function EfectividadTomaDeEstadoPage() {
   const handleBaseChange = (base: string) => {
     const newData = (efectividadData as any)[base] || efectividadData.todas;
     setData(newData);
-    setSelectedBaseLabel(newData.label ? ` ${newData.label}` : "");
+    setSelectedBaseLabel(base !== "todas" ? ` ${base.charAt(0).toUpperCase() + base.slice(1)}` : "");
   };
 
   if (!isMounted) return null;
@@ -102,7 +100,7 @@ export default function EfectividadTomaDeEstadoPage() {
                         </div>
                          <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta</p>
-                            <p className="text-3xl font-black">98.5%</p>
+                            <p className="text-3xl font-black">{data.meta}%</p>
                         </div>
                     </div>
                     <div className="px-2">
@@ -119,7 +117,7 @@ export default function EfectividadTomaDeEstadoPage() {
                 </CardHeader>
                 <CardContent className="h-[320px] p-0 px-2 pb-2">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={data.ciclos.filter(c => c.value > 0)} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                    <BarChart data={data.ciclos} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
                         <XAxis dataKey="name" tick={{ fontSize: 12 }} />
                         <YAxis domain={[80, 105]} unit="%" tick={{ fontSize: 12 }} />
@@ -158,17 +156,13 @@ export default function EfectividadTomaDeEstadoPage() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {data.ciclos.filter(c => c.total > 0).map((item) => (
+                    {data.ciclos.map((item) => (
                     <TableRow key={item.name} className="hover:bg-muted/30 transition-colors border-b last:border-0">
                         <TableCell className="font-bold text-foreground pl-6">{item.name}</TableCell>
-                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">
-                            {item.lecturas?.toLocaleString()}
-                        </TableCell>
-                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">
-                            {item.total?.toLocaleString()}
-                        </TableCell>
+                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">{item.lecturas.toLocaleString()}</TableCell>
+                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">{item.total.toLocaleString()}</TableCell>
                         <TableCell className={`text-right font-bold tabular-nums pr-6 ${item.value < 98.5 ? "text-destructive" : "text-foreground"}`}>
-                            {item.value.toFixed(1)}%
+                            {item.value}%
                         </TableCell>
                     </TableRow>
                     ))}
