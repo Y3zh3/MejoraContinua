@@ -285,7 +285,7 @@ export default function ReporteAnualPage() {
         }
 
         const isBaseSelected = currentBase !== 'todas';
-        const unit = activity.id.includes('reclamos') || activity.id.includes('contratista') || activity.id.includes('incidencias') ? 'uds.' : '%';
+        const unit = (activity.id === 'per_reclamos' || activity.id === 'rec_reclamos') ? 'uds.' : '%';
         
         const detail = {
             nombre: activity.nombre,
@@ -365,7 +365,7 @@ export default function ReporteAnualPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {cat.items.map((item) => {
                                 const val = getIndicatorValue(item.id, item.metaAnual);
-                                const isUnit = item.id.includes('reclamos') || item.id.includes('contratista') || item.id.includes('incidencias');
+                                const isUnit = (item.id === 'per_reclamos' || item.id === 'rec_reclamos');
                                 return (
                                     <Card 
                                         key={item.id} 
@@ -383,7 +383,7 @@ export default function ReporteAnualPage() {
                                                 <span className={`text-3xl font-bold text-foreground group-hover:${cat.color} transition-colors tabular-nums`}>
                                                     {val > 0 ? `${val}${isUnit ? ' uds.' : '%'}` : '-%'}
                                                 </span>
-                                                <span className="text-xs font-semibold text-muted-foreground uppercase">Actual</span>
+                                                <span className="text-xs font-semibold text-muted-foreground uppercase">Anual</span>
                                             </div>
                                             <div className="mt-3 flex items-center gap-2">
                                                 <div className="h-1.5 flex-1 bg-secondary rounded-full overflow-hidden">
