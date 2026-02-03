@@ -145,6 +145,17 @@ const COM_PREVENTIVAS_DATA: Record<string, number[]> = {
   'clientes-e': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 };
 
+const COM_CIERRES_DATA: Record<string, number[]> = {
+  comas: [57, 33, 39, 59, 100, 100, 100, 100, 100, 100],
+  callao: [33, 41, 29, 39, 12, 43, 23, 22, 20, 18],
+  ate: [68, 54, 61, 63, 55, 61, 77, 57, 56, 51],
+  brena: [17, 21, 14, 15, 21, 21, 11, 12, 7, 12],
+  sjl: [26, 30, 41, 31, 30, 35, 32, 28, 31, 13],
+  surquillo: [51, 24, 26, 41, 43, 27, 22, 39, 43, 22],
+  ves: [74, 65, 49, 44, 50, 48, 42, 45, 47, 51],
+  'clientes-e': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+};
+
 const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
@@ -153,51 +164,23 @@ export default function ReporteAnualPage() {
 
     const handleCardClick = (activity: any) => {
         let values: number[] = [];
+        let dataToUse: Record<string, number[]> | null = null;
         
-        if (activity.id === 'tde_efectividad') {
+        if (activity.id === 'tde_efectividad') dataToUse = TDE_EFECTIVIDAD_DATA;
+        else if (activity.id === 'tde_contratista') dataToUse = TDE_CONTRATISTA_DATA;
+        else if (activity.id === 'tde_incidencias') dataToUse = TDE_INCIDENCIAS_DATA;
+        else if (activity.id === 'com_atipicas') dataToUse = COM_ATIPICAS_DATA;
+        else if (activity.id === 'com_preventivas') dataToUse = COM_PREVENTIVAS_DATA;
+        else if (activity.id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
+
+        if (dataToUse) {
             if (currentBase === 'todas') {
                 values = MONTHS.map((_, i) => {
-                    const allVals = Object.values(TDE_EFECTIVIDAD_DATA).map(b => b[i]);
-                    return Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1));
-                });
-            } else {
-                values = TDE_EFECTIVIDAD_DATA[currentBase] || [];
-            }
-        } else if (activity.id === 'tde_contratista') {
-            if (currentBase === 'todas') {
-                values = MONTHS.map((_, i) => {
-                    const allVals = Object.values(TDE_CONTRATISTA_DATA).map(b => b[i]);
-                    return Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1));
-                });
-            } else {
-                values = TDE_CONTRATISTA_DATA[currentBase] || [];
-            }
-        } else if (activity.id === 'tde_incidencias') {
-            if (currentBase === 'todas') {
-                values = MONTHS.map((_, i) => {
-                    const allVals = Object.values(TDE_INCIDENCIAS_DATA).map(b => b[i]);
-                    return Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1));
-                });
-            } else {
-                values = TDE_INCIDENCIAS_DATA[currentBase] || [];
-            }
-        } else if (activity.id === 'com_atipicas') {
-            if (currentBase === 'todas') {
-                values = MONTHS.map((_, i) => {
-                    const allVals = Object.values(COM_ATIPICAS_DATA).map(b => b[i]);
-                    return Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1));
-                });
-            } else {
-                values = COM_ATIPICAS_DATA[currentBase] || [];
-            }
-        } else if (activity.id === 'com_preventivas') {
-            if (currentBase === 'todas') {
-                values = MONTHS.map((_, i) => {
-                    const allVals = Object.values(COM_PREVENTIVAS_DATA).map(b => b[i]).filter(v => v > 0);
+                    const allVals = Object.values(dataToUse!).map(b => b[i]).filter(v => v > 0);
                     return allVals.length > 0 ? Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1)) : 0;
                 });
             } else {
-                values = COM_PREVENTIVAS_DATA[currentBase] || [];
+                values = dataToUse[currentBase] || [];
             }
         } else {
             values = MONTHS.map(() => Math.floor(Math.random() * 10) + (activity.metaAnual - 5));
@@ -211,20 +194,10 @@ export default function ReporteAnualPage() {
             historicoMensual: MONTHS.map((m, i) => ({ mes: m, valor: values[i], meta: activity.metaAnual })),
             detalleTabla: isBaseSelected 
                 ? MONTHS.map((m, i) => ({ label: m, valor: values[i] }))
-                : (activity.id === 'tde_efectividad' 
-                    ? Object.entries(TDE_EFECTIVIDAD_DATA)
-                    : activity.id === 'tde_contratista' 
-                        ? Object.entries(TDE_CONTRATISTA_DATA)
-                        : activity.id === 'tde_incidencias'
-                            ? Object.entries(TDE_INCIDENCIAS_DATA)
-                            : activity.id === 'com_atipicas'
-                                ? Object.entries(COM_ATIPICAS_DATA)
-                                : activity.id === 'com_preventivas'
-                                    ? Object.entries(COM_PREVENTIVAS_DATA)
-                                    : []).map(([key, val]) => ({
-                            label: key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' '),
-                            valor: val[val.length - 1]
-                        })),
+                : (dataToUse ? Object.entries(dataToUse) : []).map(([key, val]) => ({
+                    label: key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' '),
+                    valor: val[val.length - 1]
+                })),
             tituloTabla: isBaseSelected ? `Detalle de ${currentBase.charAt(0).toUpperCase() + currentBase.slice(1)}` : "Detalle por Sede",
             columnaLabel: isBaseSelected ? "Mes" : "Sede"
         };
@@ -241,40 +214,20 @@ export default function ReporteAnualPage() {
     };
 
     const getIndicatorValue = (id: string, metaAnual: number) => {
-        if (id === 'tde_efectividad') {
+        let dataToUse: Record<string, number[]> | null = null;
+        if (id === 'tde_efectividad') dataToUse = TDE_EFECTIVIDAD_DATA;
+        else if (id === 'tde_contratista') dataToUse = TDE_CONTRATISTA_DATA;
+        else if (id === 'tde_incidencias') dataToUse = TDE_INCIDENCIAS_DATA;
+        else if (id === 'com_atipicas') dataToUse = COM_ATIPICAS_DATA;
+        else if (id === 'com_preventivas') dataToUse = COM_PREVENTIVAS_DATA;
+        else if (id === 'com_cierres') dataToUse = COM_CIERRES_DATA;
+
+        if (dataToUse) {
             if (currentBase === 'todas') {
-                const allLastMonthVals = Object.values(TDE_EFECTIVIDAD_DATA).map(b => b[b.length - 1]);
-                return Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1));
-            }
-            const baseVals = TDE_EFECTIVIDAD_DATA[currentBase];
-            return baseVals ? baseVals[baseVals.length - 1] : 0;
-        } else if (id === 'tde_contratista') {
-            if (currentBase === 'todas') {
-                const allLastMonthVals = Object.values(TDE_CONTRATISTA_DATA).map(b => b[b.length - 1]);
-                return Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1));
-            }
-            const baseVals = TDE_CONTRATISTA_DATA[currentBase];
-            return baseVals ? baseVals[baseVals.length - 1] : 0;
-        } else if (id === 'tde_incidencias') {
-            if (currentBase === 'todas') {
-                const allLastMonthVals = Object.values(TDE_INCIDENCIAS_DATA).map(b => b[b.length - 1]);
-                return Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1));
-            }
-            const baseVals = TDE_INCIDENCIAS_DATA[currentBase];
-            return baseVals ? baseVals[baseVals.length - 1] : 0;
-        } else if (id === 'com_atipicas') {
-            if (currentBase === 'todas') {
-                const allLastMonthVals = Object.values(COM_ATIPICAS_DATA).map(b => b[b.length - 1]);
-                return Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1));
-            }
-            const baseVals = COM_ATIPICAS_DATA[currentBase];
-            return baseVals ? baseVals[baseVals.length - 1] : 0;
-        } else if (id === 'com_preventivas') {
-            if (currentBase === 'todas') {
-                const allLastMonthVals = Object.values(COM_PREVENTIVAS_DATA).map(b => b[b.length - 1]).filter(v => v > 0);
+                const allLastMonthVals = Object.values(dataToUse).map(b => b[b.length - 1]).filter(v => v > 0);
                 return allLastMonthVals.length > 0 ? Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1)) : 0;
             }
-            const baseVals = COM_PREVENTIVAS_DATA[currentBase];
+            const baseVals = dataToUse[currentBase];
             return baseVals ? baseVals[baseVals.length - 1] : 0;
         }
         return Math.floor(Math.random() * 10) + (metaAnual - 5);
