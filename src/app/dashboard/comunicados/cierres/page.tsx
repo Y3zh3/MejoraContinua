@@ -1,3 +1,4 @@
+
 "use client";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -66,7 +67,7 @@ export default function CierresComunicadosPage() {
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Este indicador mide la efectividad en la entrega y gestión de comunicados de cierre, asegurando que los usuarios estén debidamente informados sobre el estado de sus servicios y procesos administrativos.
+                            En este indicador verificamos si de todos los cierres registrados se ha gestionado adecuadamente su comunicación preventiva, asegurando que el usuario esté informado antes de cualquier medida administrativa o técnica.
                         </p>
                     </div>
                 </CardContent>
@@ -116,7 +117,7 @@ export default function CierresComunicadosPage() {
                 <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
                     <TableRow className="hover:bg-transparent border-b">
                     <TableHead className="w-[100px] font-bold text-muted-foreground uppercase text-[11px] tracking-wider pl-6">Ciclo</TableHead>
-                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Cierres sin</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Cierres sin Prev.</TableHead>
                     <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Total</TableHead>
                     <TableHead className="text-right font-bold text-muted-foreground uppercase text-[11px] tracking-wider pr-6">Efectividad (%)</TableHead>
                     </TableRow>
