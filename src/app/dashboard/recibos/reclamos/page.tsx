@@ -1,8 +1,9 @@
+
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { FileWarning, CheckCircle2, Receipt } from "lucide-react";
+import { CheckCircle2, Receipt } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
@@ -57,7 +58,7 @@ export default function ReclamosRecibosPage() {
             <CardHeader className="p-4">
                 <CardTitle className="text-xl">Distribución de Reclamos por Sede (%) - Ene'26</CardTitle>
             </CardHeader>
-            <CardContent className="h-80 p-0 px-2 pb-4">
+            <CardContent className="h-60 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -91,7 +92,7 @@ export default function ReclamosRecibosPage() {
             <CardHeader>
             <CardTitle className="text-xl">Resumen de Enero '26</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-6 pt-2">
+            <CardContent className="flex flex-col gap-6 pt-2 h-60 overflow-y-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
                         <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>

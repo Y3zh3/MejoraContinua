@@ -119,7 +119,7 @@ export default function EficienciaPersuasivasPage() {
             <CardHeader className="p-4">
                 <CardTitle className="text-xl">Rendimiento por Ciclo (%)</CardTitle>
             </CardHeader>
-            <CardContent className="h-80 p-0 px-2 pb-4">
+            <CardContent className="h-60 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data.ciclos}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -150,7 +150,7 @@ export default function EficienciaPersuasivasPage() {
             <CardHeader>
             <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-6 pt-2">
+            <CardContent className="flex flex-col gap-6 pt-2 h-60 overflow-y-auto">
                 <p className="text-lg text-muted-foreground leading-relaxed">
                     Análisis del cumplimiento de <span className="font-semibold text-foreground">Eficiencia</span> en acciones persuasivas para el periodo actual.
                 </p>
@@ -183,7 +183,7 @@ export default function EficienciaPersuasivasPage() {
         </CardHeader>
         <CardContent>
           <div className="max-h-96 overflow-y-auto rounded-md border">
-            <Table className="text-base">
+            <Table>
               <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                 <TableRow>
                   <TableHead className="w-[120px] font-bold">Ciclo</TableHead>

@@ -132,7 +132,7 @@ export default function PreventivasComunicadosPage() {
             <CardHeader className="p-4">
                 <CardTitle className="text-xl">Tendencia de Cumplimiento (%)</CardTitle>
             </CardHeader>
-            <CardContent className="h-80 p-0 px-2 pb-4">
+            <CardContent className="h-60 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={data.ciclos}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -166,7 +166,7 @@ export default function PreventivasComunicadosPage() {
             <CardHeader>
             <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-6 pt-2">
+            <CardContent className="flex flex-col gap-6 pt-2 h-60 overflow-y-auto">
                 <p className="text-lg text-muted-foreground leading-relaxed">
                     Análisis del cumplimiento de <span className="font-semibold text-foreground">Comunicaciones Preventivas</span> para el periodo actual.
                 </p>

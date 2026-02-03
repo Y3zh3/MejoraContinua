@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -122,7 +123,7 @@ export default function Eficacia24hPersuasivasPage() {
             <CardHeader className="p-4">
                 <CardTitle className="text-xl text-center">Tendencia de Eficacia (%)</CardTitle>
             </CardHeader>
-            <CardContent className="h-80 p-0 px-2 pb-4">
+            <CardContent className="h-60 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data.ciclos}>
                   <defs>
@@ -162,7 +163,7 @@ export default function Eficacia24hPersuasivasPage() {
             <CardHeader>
             <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-6 pt-2">
+            <CardContent className="flex flex-col gap-6 pt-2 h-60 overflow-y-auto">
                 <p className="text-lg text-muted-foreground leading-relaxed">
                     Análisis de la <span className="font-semibold text-foreground">Eficacia 24H</span> para las acciones persuasivas del periodo actual.
                 </p>
