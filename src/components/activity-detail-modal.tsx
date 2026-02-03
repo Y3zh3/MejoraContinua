@@ -61,37 +61,38 @@ export function ActivityDetailModal({
             {activityData.nombre}
           </DialogTitle>
           <DialogDescription>
-            Meta Anual: {activityData.metaAnual}%
+            Meta Anual establecida: {activityData.metaAnual}%
           </DialogDescription>
         </DialogHeader>
         <div className="flex-grow grid grid-cols-1 md:grid-cols-3 gap-6 overflow-y-auto pr-6">
           <div className="md:col-span-2 flex flex-col gap-6">
-            <h3 className="font-headline text-lg">Evolución Mensual</h3>
+            <h3 className="font-headline text-lg">Evolución Mensual del Indicador</h3>
             <div className="h-96">
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={activityData.historicoMensual} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} />
                         <XAxis dataKey="mes" />
-                        <YAxis />
+                        <YAxis domain={['auto', 'auto']} unit="%" />
                         <Tooltip contentStyle={{
                             background: "hsl(var(--background))",
                             borderColor: "hsl(var(--border))",
+                            borderRadius: "8px"
                         }}/>
                         <Legend />
-                        <Line type="monotone" dataKey="valor" name="Valor" stroke="hsl(var(--primary))" strokeWidth={2} />
-                        <Line type="monotone" dataKey="meta" name="Meta" stroke="hsl(var(--accent))" strokeWidth={2} strokeDasharray="5 5" />
+                        <Line type="monotone" dataKey="valor" name="Efectividad (%)" stroke="hsl(var(--primary))" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                        <Line type="monotone" dataKey="meta" name="Meta Institucional" stroke="hsl(var(--destructive))" strokeWidth={2} strokeDasharray="5 5" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
           </div>
           <div className="md:col-span-1">
-             <h3 className="font-headline text-lg mb-4">Acumulado por Sede</h3>
+             <h3 className="font-headline text-lg mb-4">Detalle por Sede</h3>
             <div className="border rounded-lg max-h-[calc(80vh-12rem)] overflow-y-auto">
                 <Table>
-                    <TableHeader>
+                    <TableHeader className="bg-muted/50">
                         <TableRow>
                         <TableHead>Sede</TableHead>
-                        <TableHead className="text-right">Valor</TableHead>
+                        <TableHead className="text-right">Valor (%)</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -106,12 +107,12 @@ export function ActivityDetailModal({
             </div>
           </div>
         </div>
-        <DialogFooter className="pt-4">
+        <DialogFooter className="pt-4 border-t">
           <Button variant="outline">
             <FileDown className="mr-2 h-4 w-4" />
-            Exportar
+            Exportar Datos
           </Button>
-          <Button onClick={onClose}>Cerrar</Button>
+          <Button onClick={onClose}>Cerrar Panel</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

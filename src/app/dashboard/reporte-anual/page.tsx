@@ -85,29 +85,52 @@ const categories = [
   }
 ];
 
-// Mock generic detail data generator
-const generateMockDetail = (nombre: string, meta: number) => ({
-  nombre,
-  promedioAnual: Math.floor(Math.random() * 15) + (meta - 5),
-  metaAnual: meta,
-  historicoMensual: [
-    { mes: 'Ene', valor: meta - 2, meta }, { mes: 'Feb', valor: meta + 1, meta }, { mes: 'Mar', valor: meta - 1, meta },
-    { mes: 'Abr', valor: meta, meta }, { mes: 'May', valor: meta + 2, meta }, { mes: 'Jun', valor: meta - 3, meta },
-    { mes: 'Jul', valor: meta + 1, meta }, { mes: 'Ago', valor: meta - 1, meta }, { mes: 'Sep', valor: meta, meta },
-    { mes: 'Oct', valor: meta + 2, meta }, { mes: 'Nov', valor: meta - 2, meta }, { mes: 'Dic', valor: meta + 3, meta },
-  ],
-  detalleSedes: [
-    { sede: 'Comas', valor: meta + 1 }, { sede: 'Callao', valor: meta - 2 }, { sede: 'Ate', valor: meta + 3 },
-    { sede: 'Breña', valor: meta }, { sede: 'SJL', valor: meta - 4 }, { sede: 'Surquillo', valor: meta + 2 },
-    { sede: 'VES', valor: meta - 1 }, { sede: 'Clientes Especiales', valor: meta + 5 },
-  ],
-});
+// Datos reales de la imagen para Toma de Estado: Efectividad
+const TDE_EFECTIVIDAD_DATA: Record<string, number[]> = {
+  comas: [96.1, 93.2, 94.5, 95.8, 95.6, 97.0, 97.0, 96.9, 96.2, 96.8],
+  callao: [98.0, 98.8, 99.0, 98.9, 99.0, 98.8, 98.0, 97.0, 98.1, 98.9],
+  ate: [98.5, 98.6, 98.2, 98.3, 98.2, 97.2, 97.5, 98.3, 98.5, 98.6],
+  brena: [98.3, 98.6, 98.7, 98.8, 97.4, 98.0, 98.2, 98.5, 97.1, 98.4],
+  sjl: [96.6, 99.1, 99.0, 98.5, 98.4, 99.0, 98.9, 99.0, 98.9, 99.3],
+  surquillo: [99.1, 98.2, 98.8, 98.7, 98.1, 97.7, 98.4, 98.6, 98.7, 98.6],
+  ves: [98.4, 98.6, 98.3, 98.1, 97.7, 96.9, 96.7, 98.0, 98.1, 98.0],
+  'clientes-e': [96.3, 94.8, 95.5, 95.4, 94.6, 94.3, 96.6, 96.2, 95.6, 95.9],
+};
+
+const MONTHS = ['Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic', 'Ene'];
 
 export default function ReporteAnualPage() {
     const [selectedActivity, setSelectedActivity] = useState<any | null>(null);
+    const [currentBase, setCurrentBase] = useState('todas');
 
     const handleCardClick = (activity: any) => {
-        const detail = generateMockDetail(activity.nombre, activity.metaAnual);
+        let values: number[] = [];
+        
+        if (activity.id === 'tde_efectividad') {
+            if (currentBase === 'todas') {
+                // Promedio de todas las bases para el gráfico consolidado
+                values = MONTHS.map((_, i) => {
+                    const allVals = Object.values(TDE_EFECTIVIDAD_DATA).map(b => b[i]);
+                    return Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1));
+                });
+            } else {
+                values = TDE_EFECTIVIDAD_DATA[currentBase] || [];
+            }
+        } else {
+            // Mock data para otros indicadores
+            values = MONTHS.map(() => Math.floor(Math.random() * 10) + (activity.metaAnual - 5));
+        }
+
+        const detail = {
+            nombre: activity.nombre,
+            promedioAnual: Number((values.reduce((a, b) => a + b, 0) / values.length).toFixed(1)),
+            metaAnual: activity.metaAnual,
+            historicoMensual: MONTHS.map((m, i) => ({ mes: m, valor: values[i], meta: activity.metaAnual })),
+            detalleSedes: Object.entries(TDE_EFECTIVIDAD_DATA).map(([key, val]) => ({
+                sede: key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' '),
+                valor: val[val.length - 1] // Mostrar el último mes (Ene)
+            })),
+        };
         setSelectedActivity(detail);
     };
 
@@ -116,6 +139,7 @@ export default function ReporteAnualPage() {
     };
 
     const handleBaseChange = (base: string) => {
+        setCurrentBase(base);
         setSelectedActivity(null);
     };
 
@@ -129,7 +153,6 @@ export default function ReporteAnualPage() {
                 <BaseSelector onBaseChange={handleBaseChange} />
             </div>
 
-            {/* Categorized Indicators */}
             <div className="flex flex-col gap-14">
                 {categories.map((cat) => (
                     <div key={cat.title} className="flex flex-col gap-6">
@@ -156,7 +179,9 @@ export default function ReporteAnualPage() {
                                     <CardContent className="px-5 pb-6">
                                         <div className="flex items-baseline gap-2">
                                             <span className={`text-3xl font-bold text-foreground group-hover:${cat.color} transition-colors tabular-nums`}>
-                                                {Math.floor(Math.random() * 10) + (item.metaAnual - 5)}%
+                                                {item.id === 'tde_efectividad' 
+                                                    ? (currentBase === 'todas' ? 97.7 : (TDE_EFECTIVIDAD_DATA[currentBase]?.[TDE_EFECTIVIDAD_DATA[currentBase].length-1] || 0))
+                                                    : Math.floor(Math.random() * 10) + (item.metaAnual - 5)}%
                                             </span>
                                             <span className="text-xs font-semibold text-muted-foreground uppercase">Promedio</span>
                                         </div>
@@ -164,7 +189,7 @@ export default function ReporteAnualPage() {
                                             <div className="h-1.5 flex-1 bg-secondary rounded-full overflow-hidden">
                                                 <div 
                                                     className={`h-full opacity-80 bg-current ${cat.color}`} 
-                                                    style={{ width: `${Math.min(100, Math.floor(Math.random() * 10) + (item.metaAnual - 5))}%` }}
+                                                    style={{ width: `${Math.min(100, item.id === 'tde_efectividad' ? 97.7 : Math.floor(Math.random() * 10) + (item.metaAnual - 5))}%` }}
                                                 />
                                             </div>
                                             <span className="text-[10px] font-bold text-muted-foreground whitespace-nowrap">META: {item.metaAnual}%</span>
@@ -185,4 +210,3 @@ export default function ReporteAnualPage() {
         </div>
     );
 }
-
