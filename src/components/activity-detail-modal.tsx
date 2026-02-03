@@ -120,7 +120,7 @@ export function ActivityDetailModal({
             <FileDown className="mr-2 h-4 w-4" />
             Exportar Datos
           </Button>
-          <Button onClick={onClose}>Cerrar Panel</Button>
+          <Button onClick={onClose}>Cerrar</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
