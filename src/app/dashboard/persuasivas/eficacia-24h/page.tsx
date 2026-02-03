@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
 import { Clock4 } from "lucide-react";
 import { BaseSelector } from '@/components/base-selector';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -121,11 +121,17 @@ export default function Eficacia24hPersuasivasPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle className="text-xl">Rendimiento por Ciclo (%)</CardTitle>
+                <CardTitle className="text-xl text-center">Tendencia de Eficacia (%)</CardTitle>
             </CardHeader>
             <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data.ciclos}>
+                <AreaChart data={data.ciclos}>
+                  <defs>
+                      <linearGradient id="colorEficacia" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(var(--chart-2))" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="hsl(var(--chart-2))" stopOpacity={0}/>
+                      </linearGradient>
+                  </defs>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="name" />
                   <YAxis domain={[0, 110]} unit="%"/>
@@ -138,14 +144,17 @@ export default function Eficacia24hPersuasivasPage() {
                       formatter={(value: number) => `${value}%`}
                   />
                   <Legend />
-                  <Bar 
+                  <Area 
+                    type="monotone" 
                     dataKey="value" 
                     name="Eficacia" 
-                    fill="hsl(var(--chart-2))" 
-                    radius={[4, 4, 0, 0]}
+                    stroke="hsl(var(--chart-2))" 
+                    fillOpacity={1} 
+                    fill="url(#colorEficacia)" 
+                    strokeWidth={3}
                   />
                   <ReferenceLine y={70} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
-                </BarChart>
+                </AreaChart>
             </ResponsiveContainer>
             </CardContent>
         </Card>
@@ -171,7 +180,7 @@ export default function Eficacia24hPersuasivasPage() {
                 <div className="mt-2">
                     <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        El gráfico muestra el nivel de eficacia en las primeras 24 horas frente a la meta del 70%. Los ciclos que no alcanzan el objetivo requieren una revisión de la estrategia de contacto inicial.
+                        El gráfico de área muestra la evolución de la eficacia en las primeras 24 horas. La meta establecida del 70% es el objetivo mínimo para garantizar la efectividad de las acciones preventivas.
                     </p>
                 </div>
             </CardContent>
