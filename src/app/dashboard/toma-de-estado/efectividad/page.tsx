@@ -30,7 +30,7 @@ const efectividadData = {
         meta: 98.5,
         ciclos: [
             { name: 'C01', value: 96.5, efectivo: 2400, total: 2487 },
-            { name: 'C02', value: 100.9, efectivo: 2500, total: 2477 },
+            { name: 'C02', value: 99.1, efectivo: 2500, total: 2522 },
             { name: 'C03', value: 97.2, efectivo: 2300, total: 2366 },
             { name: 'C04', value: 96.8, efectivo: 2200, total: 2272 },
             { name: 'C05', value: 95.4, efectivo: 2100, total: 2201 },
@@ -144,11 +144,11 @@ export default function EfectividadTomaDeEstadoPage() {
             <CardContent className="flex-1 px-4">
             <div className="max-h-[580px] overflow-y-auto rounded-xl border border-border/60 bg-card">
                 <Table>
-                <TableHeader className="sticky top-0 bg-background/95 backdrop-blur-md z-10">
+                <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
                     <TableRow className="hover:bg-transparent border-b">
                     <TableHead className="w-[100px] font-bold text-muted-foreground uppercase text-[11px] tracking-wider pl-6">Ciclo</TableHead>
-                    <TableHead className="font-bold text-center text-muted-foreground uppercase text-[11px] tracking-wider">Efectivo</TableHead>
-                    <TableHead className="font-bold text-center text-muted-foreground uppercase text-[11px] tracking-wider">Total</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">C/Ingreso</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Total</TableHead>
                     <TableHead className="text-right font-bold text-muted-foreground uppercase text-[11px] tracking-wider pr-6">Rendimiento (%)</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -156,14 +156,14 @@ export default function EfectividadTomaDeEstadoPage() {
                     {data.ciclos.map((item) => (
                     <TableRow key={item.name} className="hover:bg-muted/30 transition-colors border-b last:border-0">
                         <TableCell className="font-bold text-foreground pl-6">{item.name}</TableCell>
-                        <TableCell className="text-center tabular-nums text-muted-foreground font-medium">
+                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">
                             {item.efectivo?.toLocaleString()}
                         </TableCell>
-                        <TableCell className="text-center tabular-nums text-muted-foreground font-medium">
+                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">
                             {item.total?.toLocaleString()}
                         </TableCell>
-                        <TableCell className={`text-right font-bold tabular-nums pr-6 ${item.value < 98.5 ? "text-destructive" : "text-[hsl(var(--chart-2))]"}`}>
-                            {item.value}%
+                        <TableCell className={`text-right font-bold tabular-nums pr-6 ${item.value < 98.5 ? "text-destructive" : "text-foreground"}`}>
+                            {item.value.toFixed(1)}%
                         </TableCell>
                     </TableRow>
                     ))}
