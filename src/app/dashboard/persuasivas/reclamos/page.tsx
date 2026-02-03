@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -51,20 +50,20 @@ export default function ReclamosPersuasivasPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <Card className="lg:col-span-2 transition-colors hover:bg-primary/10 border shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle className="text-xl">Distribución de Reclamos por Sede (%) - Enero '26</CardTitle>
+                <CardTitle className="text-xl">Distribución de Reclamos por Sede (%) - Ene'26</CardTitle>
             </CardHeader>
-            <CardContent className="h-96 p-0 px-2 pb-4">
+            <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={pieData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={80}
-                    outerRadius={120}
+                    innerRadius={60}
+                    outerRadius={100}
                     paddingAngle={5}
                     dataKey="value"
                     label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
@@ -91,32 +90,28 @@ export default function ReclamosPersuasivasPage() {
             <CardTitle className="text-xl">Resumen de Enero '26</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-6 pt-2">
-                <div className="grid grid-cols-1 gap-6">
-                    <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
-                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>
-                        <p className="text-4xl font-bold text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
+                        <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>
+                        <p className="text-3xl font-bold text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
                     </div>
-                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm border-primary/20 bg-primary/5">
-                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta Máxima p/Sede</p>
-                        <p className="text-4xl font-bold text-primary">0 uds.</p>
+                     <div className="border p-4 rounded-xl text-center bg-card shadow-sm border-primary/20 bg-primary/5">
+                        <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta Máxima</p>
+                        <p className="text-3xl font-bold text-primary">0 uds.</p>
                     </div>
                 </div>
-                <div className="mt-4 flex flex-col gap-4">
-                    <div>
-                        <h4 className="font-semibold text-lg mb-2 flex items-center gap-2">
-                            <CheckCircle2 className="h-5 w-5 text-primary" />
-                            Logro del Mes
-                        </h4>
-                        <p className="text-base text-muted-foreground leading-relaxed">
-                            La sede <span className="font-bold text-foreground">{sedesCumplidoras.join(", ")}</span> ha alcanzado la meta de excelencia con <span className="font-bold text-primary">0 reclamos</span> registrados.
-                        </p>
-                    </div>
-                    <div>
-                        <h4 className="font-semibold text-lg mb-2">Análisis Crítico</h4>
-                        <p className="text-base text-muted-foreground leading-relaxed">
-                            Comas concentra el <span className="font-bold text-foreground">46%</span> de las incidencias, lo que requiere un plan de acción inmediato para converger a la meta de cero.
-                        </p>
-                    </div>
+                <div className="flex flex-col gap-3">
+                    <h4 className="font-semibold text-base flex items-center gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary" />
+                        Logro del Mes
+                    </h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                        La sede <span className="font-bold text-foreground">{sedesCumplidoras.join(", ")}</span> alcanzó la excelencia con <span className="font-bold text-primary">0 reclamos</span>.
+                    </p>
+                    <h4 className="font-semibold text-base mt-1">Análisis Crítico</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                        Comas concentra el <span className="font-bold text-foreground">46%</span> de las incidencias, lo que requiere un plan de acción inmediato.
+                    </p>
                 </div>
             </CardContent>
         </Card>
@@ -125,7 +120,7 @@ export default function ReclamosPersuasivasPage() {
        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
         <CardHeader>
             <CardTitle className="text-xl">Detalle Mensual por Sede (Ene'26)</CardTitle>
-            <p className="text-base text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
             Desglose comparativo frente a la meta de cero reclamos.
             </p>
         </CardHeader>
