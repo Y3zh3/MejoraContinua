@@ -108,7 +108,7 @@ export default function EfectividadTomaDeEstadoPage() {
 
             <Card className="border shadow-sm">
                 <CardHeader className="pb-4">
-                    <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
+                    <CardTitle className="text-xl">Rendimiento por Ciclo</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
                 <ResponsiveContainer width="100%" height="100%">
@@ -151,12 +151,12 @@ export default function EfectividadTomaDeEstadoPage() {
                     {data.ciclos.map((item) => (
                     <TableRow key={item.name}>
                         <TableCell className="font-semibold">{item.name}</TableCell>
-                        <TableCell className={`text-right font-medium ${item.value < data.meta ? "text-destructive" : "text-primary"}`}>
+                        <TableCell className={`text-right font-medium ${item.value < 98.5 ? "text-destructive" : "text-primary"}`}>
                             {item.value}%
                         </TableCell>
                         <TableCell className="text-right">
-                           <span className={`px-2 py-1 rounded-full text-xs font-bold ${item.value < data.meta ? "bg-destructive/10 text-destructive" : "bg-primary/10 text-primary"}`}>
-                             {item.value < data.meta ? "Bajo Meta" : "Cumple"}
+                           <span className={`px-2 py-1 rounded-full text-xs font-bold ${item.value < 98.5 ? "bg-destructive/10 text-destructive" : "bg-primary/10 text-primary"}`}>
+                             {item.value < 98.5 ? "Bajo Meta" : "Cumple"}
                            </span>
                         </TableCell>
                     </TableRow>
