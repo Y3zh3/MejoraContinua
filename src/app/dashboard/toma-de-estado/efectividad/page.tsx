@@ -101,7 +101,7 @@ const efectividadData = {
             { name: 'C07', value: 99.5, total: 13235, lecturas: 13174 },
             { name: 'C08', value: 99.3, total: 13056, lecturas: 12962 },
             { name: 'C09', value: 98.9, total: 18971, lecturas: 18761 },
-            { name: 'C10', value: 99.2, total: 14438, lecturas: 14327 },
+            { name: 'C10', value: 94.2, total: 14438, lecturas: 14327 },
             { name: 'C11', value: 99.5, total: 12297, lecturas: 12237 },
         ]
     },
@@ -172,11 +172,11 @@ export default function EfectividadTomaDeEstadoPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <Card className="transition-colors hover:bg-primary/10">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle>Rendimiento por Ciclo - Enero 2026</CardTitle>
+                <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
             </CardHeader>
-            <CardContent className="h-96 p-2">
+            <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data.ciclos}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -186,6 +186,7 @@ export default function EfectividadTomaDeEstadoPage() {
                     contentStyle={{
                     background: "hsl(var(--card))",
                     borderColor: "hsl(var(--border))",
+                    borderRadius: "8px",
                     }}
                     formatter={(value: number) => `${value}%`}
                 />
@@ -196,54 +197,56 @@ export default function EfectividadTomaDeEstadoPage() {
             </CardContent>
         </Card>
 
-        <Card className="transition-colors hover:bg-primary/10">
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader>
-            <CardTitle>Resumen del Indicador</CardTitle>
+            <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4 pt-6">
-                <p className="text-base text-muted-foreground">
+            <CardContent className="flex flex-col gap-6 pt-2">
+                <p className="text-lg text-muted-foreground leading-relaxed">
                     Análisis del indicador de <span className="font-semibold text-foreground">Efectividad</span> para el periodo de <span className="font-semibold text-foreground">Enero 2026</span>.
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="border p-4 rounded-lg text-center">
-                        <p className="text-base text-muted-foreground">Promedio del periodo</p>
-                        <p className="text-3xl font-bold text-[hsl(var(--chart-2))]">{data.promedio}%</p>
+                <div className="grid grid-cols-2 gap-6">
+                    <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
+                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio del periodo</p>
+                        <p className="text-4xl font-bold text-[hsl(var(--chart-2))]">{data.promedio}%</p>
                     </div>
-                     <div className="border p-4 rounded-lg text-center">
-                        <p className="text-base text-muted-foreground">Meta establecida</p>
-                        <p className="text-3xl font-bold">{data.meta}%</p>
+                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
+                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta establecida</p>
+                        <p className="text-4xl font-bold">{data.meta}%</p>
                     </div>
                 </div>
                 <div className="mt-2">
-                    <h4 className="font-semibold text-lg">Observaciones</h4>
-                    <p className="text-base text-muted-foreground">La efectividad es extremadamente alta, muy cerca o alcanzando el 100%. El proceso es robusto y se ejecuta con un alto grado de precisión.</p>
+                    <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                        La efectividad es extremadamente alta, muy cerca o alcanzando el 100%. El proceso es robusto y se ejecuta con un alto grado de precisión.
+                    </p>
                 </div>
             </CardContent>
         </Card>
       </div>
 
-      <Card className="transition-colors hover:bg-primary/10">
+       <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
         <CardHeader>
-          <CardTitle>Detalle de Lecturas por Ciclo</CardTitle>
+          <CardTitle className="text-xl">Detalle de Lecturas por Ciclo</CardTitle>
           <p className="text-base text-muted-foreground">
             Desglose de lecturas realizadas frente al total programado para cada ciclo.
           </p>
         </CardHeader>
         <CardContent>
-          <div className="max-h-96 overflow-y-auto">
+          <div className="max-h-96 overflow-y-auto rounded-md border">
             <Table className="text-base">
-              <TableHeader className="sticky top-0 bg-card">
+              <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                 <TableRow>
-                  <TableHead className="w-[100px]">Ciclo</TableHead>
-                  <TableHead>Lecturas Realizadas</TableHead>
-                  <TableHead>Total Lecturas</TableHead>
-                  <TableHead className="text-right">Efectividad</TableHead>
+                  <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
+                  <TableHead className="font-bold">Lecturas Realizadas</TableHead>
+                  <TableHead className="font-bold">Total Lecturas</TableHead>
+                  <TableHead className="text-right font-bold">Efectividad (%)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {data.ciclos.map((ciclo) => (
                   <TableRow key={ciclo.name}>
-                    <TableCell className="font-medium">{ciclo.name}</TableCell>
+                    <TableCell className="font-semibold">{ciclo.name}</TableCell>
                     <TableCell>{ciclo.lecturas.toLocaleString()}</TableCell>
                     <TableCell>{ciclo.total.toLocaleString()}</TableCell>
                     <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
