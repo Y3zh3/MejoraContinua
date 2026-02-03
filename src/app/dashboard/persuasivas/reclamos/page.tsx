@@ -2,7 +2,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine, PieChart, Pie, Cell } from 'recharts';
 import { FileWarning } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -17,8 +17,19 @@ const dataEnero = [
   { name: 'VES', value: 2, meta: 5 },
 ];
 
+const COLORS = [
+  'hsl(var(--chart-1))',
+  'hsl(var(--chart-2))',
+  'hsl(var(--chart-3))',
+  'hsl(var(--chart-4))',
+  'hsl(var(--chart-5))',
+  '#2563eb',
+  '#7c3aed',
+];
+
 export default function ReclamosPersuasivasPage() {
   const totalReclamos = dataEnero.reduce((acc, item) => acc + item.value, 0);
+  const pieData = dataEnero.filter(item => item.value > 0);
   
   return (
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
@@ -39,10 +50,10 @@ export default function ReclamosPersuasivasPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle className="text-xl">Distribución por Sede - Enero 2026</CardTitle>
+                <CardTitle className="text-xl">Comparativa por Sede</CardTitle>
             </CardHeader>
             <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
@@ -72,27 +83,52 @@ export default function ReclamosPersuasivasPage() {
         </Card>
 
         <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+            <CardHeader className="p-4">
+                <CardTitle className="text-xl">Distribución (%)</CardTitle>
+            </CardHeader>
+            <CardContent className="h-80 p-0 px-2 pb-4">
+            <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={80}
+                    paddingAngle={5}
+                    dataKey="value"
+                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+            </ResponsiveContainer>
+            </CardContent>
+        </Card>
+
+        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader>
-            <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
+            <CardTitle className="text-xl">Resumen de Enero '26</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-6 pt-2">
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                    Análisis del indicador de <span className="font-semibold text-foreground">Reclamos de Persuasivas</span> para el periodo de <span className="font-semibold text-foreground">Enero 2026</span>.
-                </p>
-                <div className="grid grid-cols-2 gap-6">
-                    <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
-                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>
-                        <p className="text-4xl font-bold text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
+                <div className="grid grid-cols-1 gap-6">
+                    <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
+                        <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>
+                        <p className="text-3xl font-bold text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
                     </div>
-                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
-                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta (máx/sede)</p>
-                        <p className="text-4xl font-bold">5 uds.</p>
+                     <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
+                        <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta Máxima p/Sede</p>
+                        <p className="text-3xl font-bold">5 uds.</p>
                     </div>
                 </div>
                 <div className="mt-2">
-                    <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                        El gráfico muestra el volumen de reclamos por sede durante Enero 2026. Comas presenta el valor más alto con 17 unidades, superando la meta de 5 por sede. SJL destaca por no registrar reclamos.
+                    <h4 className="font-semibold text-sm mb-1">Análisis</h4>
+                    <p className="text-sm text-muted-foreground leading-snug">
+                        Comas concentra el <span className="font-bold">46%</span> de los reclamos totales. Ate y Breña se mantienen en el límite de la meta.
                     </p>
                 </div>
             </CardContent>
@@ -101,7 +137,7 @@ export default function ReclamosPersuasivasPage() {
 
        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
         <CardHeader>
-            <CardTitle className="text-xl">Detalle de Reclamos por Sede (Ene'26)</CardTitle>
+            <CardTitle className="text-xl">Detalle Mensual por Sede (Ene'26)</CardTitle>
             <p className="text-base text-muted-foreground">
             Desglose comparativo de los reclamos de acciones persuasivas registrados en el mes de Enero 2026.
             </p>
