@@ -112,7 +112,18 @@ const TDE_CONTRATISTA_DATA: Record<string, number[]> = {
   'clientes-e': [45, 46, 45, 59, 54, 29, 40, 32, 27, 26],
 };
 
-const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'24', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
+const TDE_INCIDENCIAS_DATA: Record<string, number[]> = {
+  comas: [8, 9, 11, 12, 10, 11, 9, 10, 23, 10],
+  callao: [15, 12, 14, 13, 15, 16, 14, 15, 57, 29],
+  ate: [10, 11, 12, 11, 10, 12, 11, 10, 24, 17],
+  brena: [5, 4, 6, 5, 4, 5, 6, 5, 12, 1],
+  sjl: [2, 1, 3, 2, 1, 2, 3, 2, 3, 0],
+  surquillo: [4, 5, 6, 5, 4, 5, 6, 5, 6, 5],
+  ves: [15, 14, 16, 15, 14, 15, 16, 15, 20, 2],
+  'clientes-e': [2, 1, 3, 2, 1, 2, 3, 2, 1, 1],
+};
+
+const MONTHS = ['Abr\'25', 'May\'25', 'Jun\'25', 'Jul\'25', 'Ago\'25', 'Set\'25', 'Oct\'25', 'Nov\'25', 'Dic\'25', 'Ene\'26'];
 
 export default function ReporteAnualPage() {
     const [selectedActivity, setSelectedActivity] = useState<any | null>(null);
@@ -139,6 +150,15 @@ export default function ReporteAnualPage() {
             } else {
                 values = TDE_CONTRATISTA_DATA[currentBase] || [];
             }
+        } else if (activity.id === 'tde_incidencias') {
+            if (currentBase === 'todas') {
+                values = MONTHS.map((_, i) => {
+                    const allVals = Object.values(TDE_INCIDENCIAS_DATA).map(b => b[i]);
+                    return Number((allVals.reduce((a, b) => a + b, 0) / allVals.length).toFixed(1));
+                });
+            } else {
+                values = TDE_INCIDENCIAS_DATA[currentBase] || [];
+            }
         } else {
             values = MONTHS.map(() => Math.floor(Math.random() * 10) + (activity.metaAnual - 5));
         }
@@ -155,7 +175,9 @@ export default function ReporteAnualPage() {
                     ? Object.entries(TDE_EFECTIVIDAD_DATA)
                     : activity.id === 'tde_contratista' 
                         ? Object.entries(TDE_CONTRATISTA_DATA)
-                        : []).map(([key, val]) => ({
+                        : activity.id === 'tde_incidencias'
+                            ? Object.entries(TDE_INCIDENCIAS_DATA)
+                            : []).map(([key, val]) => ({
                             label: key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' '),
                             valor: val[val.length - 1]
                         })),
@@ -188,6 +210,13 @@ export default function ReporteAnualPage() {
                 return Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1));
             }
             const baseVals = TDE_CONTRATISTA_DATA[currentBase];
+            return baseVals ? baseVals[baseVals.length - 1] : 0;
+        } else if (id === 'tde_incidencias') {
+            if (currentBase === 'todas') {
+                const allLastMonthVals = Object.values(TDE_INCIDENCIAS_DATA).map(b => b[b.length - 1]);
+                return Number((allLastMonthVals.reduce((a, b) => a + b, 0) / allLastMonthVals.length).toFixed(1));
+            }
+            const baseVals = TDE_INCIDENCIAS_DATA[currentBase];
             return baseVals ? baseVals[baseVals.length - 1] : 0;
         }
         return Math.floor(Math.random() * 10) + (metaAnual - 5);
