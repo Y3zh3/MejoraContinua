@@ -44,11 +44,11 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader>
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-2">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-4">
+                <CardContent>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
                             <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
@@ -59,17 +59,11 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            Evolución de incidencias de fotografía. La meta máxima permitida es del 5% para garantizar la calidad del proceso.
-                        </p>
-                    </div>
                 </CardContent>
             </Card>
 
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader className="p-4">
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-4">
                     <CardTitle className="text-xl">Evolución de Incidencia (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
@@ -101,7 +95,7 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
+        <Card className="border shadow-sm h-full flex flex-col">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Incidencias por Ciclo</CardTitle>
             </CardHeader>
@@ -120,8 +114,8 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
                     {data.ciclos.map((ciclo) => (
                     <TableRow key={ciclo.name}>
                         <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                        <TableCell>{ciclo.casos.toLocaleString()}</TableCell>
-                        <TableCell>{ciclo.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{ciclo.casos.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{ciclo.total.toLocaleString()}</TableCell>
                         <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
                     </TableRow>
                     ))}

@@ -127,11 +127,11 @@ export default function PreventivasComunicadosPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader>
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-2">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-4">
+                <CardContent>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
                             <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
@@ -142,17 +142,11 @@ export default function PreventivasComunicadosPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            Análisis del cumplimiento de Comunicaciones Preventivas. El cumplimiento preventivo es clave para la reducción de reclamos.
-                        </p>
-                    </div>
                 </CardContent>
             </Card>
 
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader className="p-4">
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-4">
                     <CardTitle className="text-xl">Tendencia de Cumplimiento (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
@@ -178,7 +172,7 @@ export default function PreventivasComunicadosPage() {
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
+        <Card className="border shadow-sm h-full flex flex-col">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Cumplimiento Preventivo</CardTitle>
             </CardHeader>
@@ -197,8 +191,8 @@ export default function PreventivasComunicadosPage() {
                     {data.ciclos.map((item) => (
                     <TableRow key={item.name}>
                         <TableCell className="font-semibold">{item.name}</TableCell>
-                        <TableCell>{item.prev.toLocaleString()}</TableCell>
-                        <TableCell>{item.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{item.prev.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{item.total.toLocaleString()}</TableCell>
                         <TableCell className={`text-right font-medium ${item.value < item.meta ? "text-destructive" : ""}`}>
                             {item.value.toFixed(1)}%
                         </TableCell>

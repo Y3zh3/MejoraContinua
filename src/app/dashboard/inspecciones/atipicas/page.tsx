@@ -70,79 +70,6 @@ const atipicasData = {
             { name: 'C9', efectivo: 146, total: 190, value: 76.8, meta: 85 },
             { name: 'C10', efectivo: 79, total: 100, value: 79.0, meta: 85 },
         ]
-    },
-    brena: {
-        promedio: 84.8,
-        meta: 85,
-        ciclos: [
-            { name: 'C1', efectivo: 117, total: 135, value: 86.7, meta: 85 },
-            { name: 'C2', efectivo: 163, total: 196, value: 83.2, meta: 85 },
-            { name: 'C3', efectivo: 63, total: 78, value: 80.8, meta: 85 },
-            { name: 'C4', efectivo: 145, total: 167, value: 86.8, meta: 85 },
-            { name: 'C5', efectivo: 116, total: 133, value: 87.2, meta: 85 },
-            { name: 'C6', efectivo: 34, total: 42, value: 81.0, meta: 85 },
-            { name: 'C7', efectivo: 67, total: 77, value: 87.0, meta: 85 },
-            { name: 'C8', efectivo: 46, total: 54, value: 85.2, meta: 85 },
-            { name: 'C9', efectivo: 49, total: 58, value: 84.5, meta: 85 },
-            { name: 'C10', efectivo: 59, total: 69, value: 85.5, meta: 85 },
-        ]
-    },
-    sjl: {
-        promedio: 89.9,
-        meta: 85,
-        ciclos: [
-            { name: 'C1', efectivo: 145, total: 171, value: 84.8, meta: 85 },
-            { name: 'C2', efectivo: 121, total: 139, value: 87.1, meta: 85 },
-            { name: 'C3', efectivo: 160, total: 184, value: 87.0, meta: 85 },
-            { name: 'C4', efectivo: 120, total: 133, value: 90.2, meta: 85 },
-            { name: 'C5', efectivo: 104, total: 117, value: 88.9, meta: 85 },
-            { name: 'C6', efectivo: 75, total: 78, value: 96.2, meta: 85 },
-            { name: 'C7', efectivo: 82, total: 93, value: 88.2, meta: 85 },
-            { name: 'C8', efectivo: 61, total: 68, value: 89.7, meta: 85 },
-            { name: 'C9', efectivo: 56, total: 63, value: 88.9, meta: 85 },
-            { name: 'C10', efectivo: 69, total: 71, value: 97.2, meta: 85 },
-        ]
-    },
-    surquillo: {
-        promedio: 78.4,
-        meta: 85,
-        ciclos: [
-            { name: 'C1', efectivo: 125, total: 157, value: 79.6, meta: 85 },
-            { name: 'C2', efectivo: 131, total: 175, value: 74.9, meta: 85 },
-            { name: 'C3', efectivo: 147, total: 187, value: 78.6, meta: 85 },
-            { name: 'C4', efectivo: 275, total: 368, value: 74.7, meta: 85 },
-            { name: 'C5', efectivo: 188, total: 243, value: 77.4, meta: 85 },
-            { name: 'C6', efectivo: 146, total: 200, value: 73.0, meta: 85 },
-            { name: 'C7', efectivo: 121, total: 152, value: 79.6, meta: 85 },
-            { name: 'C8', efectivo: 83, total: 104, value: 79.8, meta: 85 },
-            { name: 'C9', efectivo: 130, total: 156, value: 83.3, meta: 85 },
-        ]
-    },
-    ves: {
-        promedio: 61.2,
-        meta: 85,
-        ciclos: [
-            { name: 'C1', efectivo: 212, total: 287, value: 73.9, meta: 85 },
-            { name: 'C2', efectivo: 221, total: 308, value: 71.8, meta: 85 },
-            { name: 'C3', efectivo: 205, total: 280, value: 73.2, meta: 85 },
-            { name: 'C4', efectivo: 204, total: 298, value: 68.5, meta: 85 },
-            { name: 'C5', efectivo: 153, total: 228, value: 67.1, meta: 85 },
-            { name: 'C6', efectivo: 144, total: 197, value: 73.1, meta: 85 },
-            { name: 'C7', efectivo: 109, total: 217, value: 50.2, meta: 85 },
-            { name: 'C8', efectivo: 97, total: 133, value: 72.9, meta: 85 },
-            { name: 'C9', efectivo: 94, total: 338, value: 27.8, meta: 85 },
-        ]
-    },
-    'clientes-e': {
-        promedio: 60.0,
-        meta: 85,
-        ciclos: [
-            { name: 'C1', efectivo: 1, total: 3, value: 33.3, meta: 85 },
-            { name: 'C2', efectivo: 0, total: 1, value: 0.0, meta: 85 },
-            { name: 'C3', efectivo: 1, total: 1, value: 100, meta: 85 },
-            { name: 'C4', efectivo: 2, total: 3, value: 66.7, meta: 85 },
-            { name: 'C7', efectivo: 1, total: 1, value: 100, meta: 85 },
-        ]
     }
 };
 
@@ -165,11 +92,11 @@ export default function AtipicasInspeccionesPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader>
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-2">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-4">
+                <CardContent>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
                             <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
@@ -180,17 +107,11 @@ export default function AtipicasInspeccionesPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            Análisis del indicador de Inspecciones Atípicas. El gráfico muestra el nivel de cumplimiento frente a la meta del 85%.
-                        </p>
-                    </div>
                 </CardContent>
             </Card>
 
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader className="p-4">
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-4">
                     <CardTitle className="text-xl">Rendimiento por Ciclo (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
@@ -216,7 +137,7 @@ export default function AtipicasInspeccionesPage() {
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
+        <Card className="border shadow-sm h-full flex flex-col">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
             </CardHeader>
@@ -235,8 +156,8 @@ export default function AtipicasInspeccionesPage() {
                     {data.ciclos.map((item) => (
                     <TableRow key={item.name}>
                         <TableCell className="font-semibold">{item.name}</TableCell>
-                        <TableCell>{item.efectivo.toLocaleString()}</TableCell>
-                        <TableCell>{item.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{item.efectivo.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{item.total.toLocaleString()}</TableCell>
                         <TableCell className={`text-right font-medium ${item.value < item.meta ? "text-destructive" : ""}`}>
                             {item.value.toFixed(1)}%
                         </TableCell>

@@ -44,11 +44,11 @@ export default function EfectividadTomaDeEstadoPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader>
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-2">
                     <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-4">
+                <CardContent>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
                             <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
@@ -59,17 +59,11 @@ export default function EfectividadTomaDeEstadoPage() {
                             <p className="text-3xl font-bold">{data.meta}%</p>
                         </div>
                     </div>
-                    <div>
-                        <h4 className="font-semibold text-base mb-1 uppercase tracking-tight text-muted-foreground">Observaciones</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                            Análisis de la Efectividad en la Toma de Estado. El gráfico muestra la tendencia por ciclo frente a la meta del 98.5%.
-                        </p>
-                    </div>
                 </CardContent>
             </Card>
 
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader className="p-4">
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-4">
                     <CardTitle className="text-xl">Tendencia por Ciclo (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-60 p-0 px-2 pb-4">
@@ -94,7 +88,7 @@ export default function EfectividadTomaDeEstadoPage() {
             </Card>
         </div>
 
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
+        <Card className="border shadow-sm h-full flex flex-col">
             <CardHeader>
                 <CardTitle className="text-xl">Detalle de Lecturas por Ciclo</CardTitle>
             </CardHeader>
@@ -113,8 +107,8 @@ export default function EfectividadTomaDeEstadoPage() {
                     {data.ciclos.map((ciclo) => (
                     <TableRow key={ciclo.name}>
                         <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                        <TableCell>{ciclo.lecturas.toLocaleString()}</TableCell>
-                        <TableCell>{ciclo.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{ciclo.lecturas.toLocaleString()}</TableCell>
+                        <TableCell className="text-right">{ciclo.total.toLocaleString()}</TableCell>
                         <TableCell className="text-right font-medium">{ciclo.value}%</TableCell>
                     </TableRow>
                     ))}
