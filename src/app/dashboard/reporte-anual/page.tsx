@@ -85,7 +85,6 @@ const categories = [
   }
 ];
 
-// Datos reales de la imagen para Toma de Estado: Efectividad
 const TDE_EFECTIVIDAD_DATA: Record<string, number[]> = {
   comas: [96.1, 93.2, 94.5, 95.8, 95.6, 97.0, 97.0, 96.9, 96.2, 96.8],
   callao: [98.0, 98.8, 99.0, 98.9, 99.0, 98.8, 98.0, 97.0, 98.1, 98.9],
@@ -116,19 +115,23 @@ export default function ReporteAnualPage() {
                 values = TDE_EFECTIVIDAD_DATA[currentBase] || [];
             }
         } else {
-            // Mock data para otros indicadores
             values = MONTHS.map(() => Math.floor(Math.random() * 10) + (activity.metaAnual - 5));
         }
 
+        const isBaseSelected = currentBase !== 'todas';
         const detail = {
             nombre: activity.nombre,
             promedioAnual: Number((values.reduce((a, b) => a + b, 0) / values.length).toFixed(1)),
             metaAnual: activity.metaAnual,
             historicoMensual: MONTHS.map((m, i) => ({ mes: m, valor: values[i], meta: activity.metaAnual })),
-            detalleSedes: Object.entries(TDE_EFECTIVIDAD_DATA).map(([key, val]) => ({
-                sede: key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' '),
-                valor: val[val.length - 1] // Mostrar el último mes (Ene)
-            })),
+            detalleTabla: isBaseSelected 
+                ? MONTHS.map((m, i) => ({ label: m, valor: values[i] }))
+                : Object.entries(TDE_EFECTIVIDAD_DATA).map(([key, val]) => ({
+                    label: key.charAt(0).toUpperCase() + key.slice(1).replace('-', ' '),
+                    valor: val[val.length - 1]
+                })),
+            tituloTabla: isBaseSelected ? `Detalle de ${currentBase.charAt(0).toUpperCase() + currentBase.slice(1)}` : "Detalle por Sede",
+            columnaLabel: isBaseSelected ? "Mes" : "Sede"
         };
         setSelectedActivity(detail);
     };
@@ -139,7 +142,6 @@ export default function ReporteAnualPage() {
 
     const handleBaseChange = (base: string) => {
         setCurrentBase(base);
-        // Cerramos el modal si estaba abierto para forzar recarga de datos al volver a abrir
         setSelectedActivity(null);
     };
 
@@ -152,7 +154,6 @@ export default function ReporteAnualPage() {
             const baseVals = TDE_EFECTIVIDAD_DATA[currentBase];
             return baseVals ? baseVals[baseVals.length - 1] : 0;
         }
-        // Para los otros que aún no tienen datos reales
         return Math.floor(Math.random() * 10) + (metaAnual - 5);
     };
 
