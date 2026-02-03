@@ -10,89 +10,89 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const eficacia48Data = {
     todas: {
-        promedio: 65.7,
+        promedio: 69.5,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 73.8, meta: 70 },
-            { name: 'C02:24', value: 71.7, meta: 70 },
-            { name: 'C03', value: 72.8, meta: 70 },
-            { name: 'C04', value: 44.5, meta: 70 },
+            { name: 'C1', atendidos: 5214, total: 7464, value: 69.9, meta: 70 },
+            { name: 'C2', atendidos: 3774, total: 5732, value: 65.8, meta: 70 },
+            { name: 'C3', atendidos: 4325, total: 6129, value: 70.6, meta: 70 },
+            { name: 'C4', atendidos: 2746, total: 3794, value: 72.4, meta: 70 },
         ]
     },
     comas: {
-        promedio: 67.7,
+        promedio: 67.9,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 68, meta: 70 },
-            { name: 'C02', value: 65, meta: 70 },
-            { name: 'C03', value: 70, meta: 70 },
+            { name: 'C1', atendidos: 1575, total: 2312, value: 68.1, meta: 70 },
+            { name: 'C2', atendidos: 1309, total: 1999, value: 65.5, meta: 70 },
+            { name: 'C3', atendidos: 1197, total: 1703, value: 70.3, meta: 70 },
         ]
     },
     callao: {
-        promedio: 67.0,
+        promedio: 66.8,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 63, meta: 70 },
-            { name: 'C02', value: 67, meta: 70 },
-            { name: 'C03', value: 71, meta: 70 },
+            { name: 'C1', atendidos: 301, total: 480, value: 62.7, meta: 70 },
+            { name: 'C2', atendidos: 245, total: 364, value: 67.3, meta: 70 },
+            { name: 'C3', atendidos: 334, total: 473, value: 70.6, meta: 70 },
         ]
     },
     ate: {
         promedio: 66.0,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 71, meta: 70 },
-            { name: 'C02', value: 64, meta: 70 },
-            { name: 'C03', value: 69, meta: 70 },
-            { name: 'C04', value: 60, meta: 70 },
+            { name: 'C1', atendidos: 711, total: 1008, value: 70.5, meta: 70 },
+            { name: 'C2', atendidos: 726, total: 1132, value: 64.1, meta: 70 },
+            { name: 'C3', atendidos: 680, total: 992, value: 68.5, meta: 70 },
+            { name: 'C4', atendidos: 538, total: 890, value: 60.4, meta: 70 },
         ]
     },
     brena: {
-        promedio: 76.3,
+        promedio: 75.9,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 75, meta: 70 },
-            { name: 'C02', value: 78, meta: 70 },
-            { name: 'C03', value: 79, meta: 70 },
-            { name: 'C04', value: 73, meta: 70 },
+            { name: 'C1', atendidos: 580, total: 778, value: 74.6, meta: 70 },
+            { name: 'C2', atendidos: 415, total: 529, value: 78.4, meta: 70 },
+            { name: 'C3', atendidos: 432, total: 550, value: 78.5, meta: 70 },
+            { name: 'C4', atendidos: 470, total: 642, value: 73.2, meta: 70 },
         ]
     },
     sjl: {
-        promedio: 79.3,
+        promedio: 79.1,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 80, meta: 70 },
-            { name: 'C02', value: 82, meta: 70 },
-            { name: 'C03', value: 76, meta: 70 },
-            { name: 'C04', value: 79, meta: 70 },
+            { name: 'C1', atendidos: 544, total: 682, value: 79.8, meta: 70 },
+            { name: 'C2', atendidos: 386, total: 472, value: 81.8, meta: 70 },
+            { name: 'C3', atendidos: 481, total: 629, value: 76.5, meta: 70 },
+            { name: 'C4', atendidos: 356, total: 451, value: 78.9, meta: 70 },
         ]
     },
     surquillo: {
-        promedio: 73.5,
+        promedio: 73.7,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 80, meta: 70 },
-            { name: 'C02', value: 76, meta: 70 },
-            { name: 'C03', value: 68, meta: 70 },
-            { name: 'C04', value: 70, meta: 70 },
+            { name: 'C1', atendidos: 391, total: 490, value: 79.8, meta: 70 },
+            { name: 'C2', atendidos: 306, total: 402, value: 76.1, meta: 70 },
+            { name: 'C3', atendidos: 260, total: 383, value: 67.9, meta: 70 },
+            { name: 'C4', atendidos: 328, total: 469, value: 69.9, meta: 70 },
         ]
     },
     ves: {
-        promedio: 66.8,
+        promedio: 66.2,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 78, meta: 70 },
-            { name: 'C02', value: 70, meta: 70 },
-            { name: 'C03', value: 67, meta: 70 },
-            { name: 'C04', value: 52, meta: 70 },
+            { name: 'C1', atendidos: 1011, total: 1302, value: 77.6, meta: 70 },
+            { name: 'C2', atendidos: 788, total: 1125, value: 70.0, meta: 70 },
+            { name: 'C3', atendidos: 936, total: 1392, value: 67.2, meta: 70 },
+            { name: 'C4', atendidos: 758, total: 1456, value: 52.1, meta: 70 },
         ]
     },
     'clientes-e': {
-        promedio: 4.5,
+        promedio: 7.1,
         meta: 70,
         ciclos: [
-            { name: 'C02', value: 9, meta: 70 },
-            { name: 'C04', value: 0, meta: 70 },
+            { name: 'C2', atendidos: 1, total: 11, value: 9.1, meta: 70 },
+            { name: 'C4', atendidos: 0, total: 3, value: 0.0, meta: 70 },
         ]
     }
 };
@@ -181,7 +181,7 @@ export default function Eficacia48hPersuasivasPage() {
         <CardHeader>
           <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
           <p className="text-base text-muted-foreground">
-            Desglose porcentual de la eficacia 48H por cada ciclo operativo.
+            Desglose porcentual y numérico de la eficacia alcanzada hasta las 48h por ciclo.
           </p>
         </CardHeader>
         <CardContent>
@@ -190,6 +190,8 @@ export default function Eficacia48hPersuasivasPage() {
               <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                 <TableRow>
                   <TableHead className="w-[150px] font-bold">Ciclo</TableHead>
+                  <TableHead className="font-bold">Con Reap hasta 48</TableHead>
+                  <TableHead className="font-bold">Total</TableHead>
                   <TableHead className="font-bold">Eficacia (%)</TableHead>
                   <TableHead className="text-right font-bold">Meta (%)</TableHead>
                 </TableRow>
@@ -198,6 +200,8 @@ export default function Eficacia48hPersuasivasPage() {
                 {data.ciclos.map((item) => (
                   <TableRow key={item.name}>
                     <TableCell className="font-semibold">{item.name}</TableCell>
+                    <TableCell>{item.atendidos.toLocaleString()}</TableCell>
+                    <TableCell>{item.total.toLocaleString()}</TableCell>
                     <TableCell className={item.value < item.meta ? "text-destructive font-bold" : "text-foreground"}>
                         {item.value}%
                     </TableCell>
