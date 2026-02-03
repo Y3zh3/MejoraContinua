@@ -50,61 +50,6 @@ const preventivasData = {
             { name: 'C04', value: 83.0, prev: 3199, total: 3854, meta: 85 },
             { name: 'C05', value: 84.3, prev: 1851, total: 2197, meta: 85 },
         ]
-    },
-    brena: {
-        promedio: 72.5,
-        meta: 85,
-        ciclos: [
-            { name: 'C01', value: 82.3, prev: 2647, total: 3218, meta: 85 },
-            { name: 'C02', value: 72.2, prev: 1531, total: 2120, meta: 85 },
-            { name: 'C03', value: 70.6, prev: 1368, total: 1938, meta: 85 },
-            { name: 'C04', value: 69.7, prev: 1533, total: 2198, meta: 85 },
-            { name: 'C05', value: 67.9, prev: 1471, total: 2166, meta: 85 },
-        ]
-    },
-    sjl: {
-        promedio: 82.8,
-        meta: 85,
-        ciclos: [
-            { name: 'C01', value: 83.5, prev: 3449, total: 4129, meta: 85 },
-            { name: 'C02', value: 84.0, prev: 2448, total: 2913, meta: 85 },
-            { name: 'C03', value: 81.4, prev: 2685, total: 3300, meta: 85 },
-            { name: 'C04', value: 78.9, prev: 1634, total: 2072, meta: 85 },
-            { name: 'C05', value: 82.3, prev: 2820, total: 3428, meta: 85 },
-        ]
-    },
-    surquillo: {
-        promedio: 80.2,
-        meta: 85,
-        ciclos: [
-            { name: 'C01', value: 75.1, prev: 985, total: 1311, meta: 85 },
-            { name: 'C02', value: 83.6, prev: 1903, total: 2277, meta: 85 },
-            { name: 'C03', value: 80.4, prev: 1591, total: 1980, meta: 85 },
-            { name: 'C04', value: 80.3, prev: 1895, total: 2360, meta: 85 },
-            { name: 'C05', value: 81.4, prev: 1781, total: 2189, meta: 85 },
-        ]
-    },
-    ves: {
-        promedio: 75.4,
-        meta: 85,
-        ciclos: [
-            { name: 'C01', value: 79.8, prev: 2395, total: 3003, meta: 85 },
-            { name: 'C02', value: 74.0, prev: 2217, total: 2998, meta: 85 },
-            { name: 'C03', value: 71.6, prev: 2152, total: 3004, meta: 85 },
-            { name: 'C04', value: 71.8, prev: 1903, total: 2652, meta: 85 },
-            { name: 'C05', value: 79.7, prev: 2399, total: 3009, meta: 85 },
-        ]
-    },
-    'clientes-e': {
-        promedio: 100,
-        meta: 85,
-        ciclos: [
-            { name: 'C01', value: 100, prev: 50, total: 50, meta: 85 },
-            { name: 'C02', value: 100, prev: 50, total: 50, meta: 85 },
-            { name: 'C03', value: 100, prev: 50, total: 50, meta: 85 },
-            { name: 'C04', value: 100, prev: 50, total: 50, meta: 85 },
-            { name: 'C05', value: 100, prev: 50, total: 50, meta: 85 },
-        ]
     }
 };
 

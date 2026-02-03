@@ -22,54 +22,6 @@ const atipicasData = {
             { name: 'C9', efectivo: 851, total: 1210, value: 70.3, meta: 85 },
             { name: 'C10', efectivo: 563, total: 647, value: 87.0, meta: 85 },
         ]
-    },
-    comas: {
-        promedio: 82.5,
-        meta: 85,
-        ciclos: [
-            { name: 'C1', efectivo: 235, total: 306, value: 76.8, meta: 85 },
-            { name: 'C2', efectivo: 298, total: 381, value: 78.2, meta: 85 },
-            { name: 'C3', efectivo: 297, total: 395, value: 75.2, meta: 85 },
-            { name: 'C4', efectivo: 232, total: 287, value: 80.8, meta: 85 },
-            { name: 'C5', efectivo: 169, total: 201, value: 84.1, meta: 85 },
-            { name: 'C6', efectivo: 274, total: 322, value: 85.1, meta: 85 },
-            { name: 'C7', efectivo: 255, total: 286, value: 89.2, meta: 85 },
-            { name: 'C8', efectivo: 189, total: 215, value: 87.9, meta: 85 },
-            { name: 'C9', efectivo: 233, total: 255, value: 91.4, meta: 85 },
-            { name: 'C10', efectivo: 197, total: 219, value: 90.0, meta: 85 },
-        ]
-    },
-    callao: {
-        promedio: 84.2,
-        meta: 85,
-        ciclos: [
-            { name: 'C1', efectivo: 97, total: 112, value: 86.6, meta: 85 },
-            { name: 'C2', efectivo: 118, total: 145, value: 81.4, meta: 85 },
-            { name: 'C3', efectivo: 184, total: 216, value: 85.2, meta: 85 },
-            { name: 'C4', efectivo: 138, total: 168, value: 82.1, meta: 85 },
-            { name: 'C5', efectivo: 112, total: 134, value: 83.6, meta: 85 },
-            { name: 'C6', efectivo: 111, total: 122, value: 91.0, meta: 85 },
-            { name: 'C7', efectivo: 123, total: 130, value: 94.6, meta: 85 },
-            { name: 'C8', efectivo: 134, total: 141, value: 95.0, meta: 85 },
-            { name: 'C9', efectivo: 143, total: 150, value: 95.3, meta: 85 },
-            { name: 'C10', efectivo: 159, total: 188, value: 84.6, meta: 85 },
-        ]
-    },
-    ate: {
-        promedio: 73.0,
-        meta: 85,
-        ciclos: [
-            { name: 'C1', efectivo: 436, total: 787, value: 55.4, meta: 85 },
-            { name: 'C2', efectivo: 198, total: 296, value: 66.9, meta: 85 },
-            { name: 'C3', efectivo: 202, total: 272, value: 74.3, meta: 85 },
-            { name: 'C4', efectivo: 193, total: 298, value: 64.8, meta: 85 },
-            { name: 'C5', efectivo: 128, total: 183, value: 69.9, meta: 85 },
-            { name: 'C6', efectivo: 147, total: 202, value: 72.8, meta: 85 },
-            { name: 'C7', efectivo: 143, total: 180, value: 79.4, meta: 85 },
-            { name: 'C8', efectivo: 150, total: 194, value: 77.3, meta: 85 },
-            { name: 'C9', efectivo: 146, total: 190, value: 76.8, meta: 85 },
-            { name: 'C10', efectivo: 79, total: 100, value: 79.0, meta: 85 },
-        ]
     }
 };
 
@@ -147,8 +99,8 @@ export default function AtipicasInspeccionesPage() {
                 <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
                     <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold">C/Ingreso</TableHead>
-                    <TableHead className="font-bold">Total</TableHead>
+                    <TableHead className="font-bold text-right">C/Ingreso</TableHead>
+                    <TableHead className="font-bold text-right">Total</TableHead>
                     <TableHead className="text-right font-bold">Rendimiento (%)</TableHead>
                     </TableRow>
                 </TableHeader>
