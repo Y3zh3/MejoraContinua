@@ -56,38 +56,6 @@ const contratistaData: Record<string, any> = {
             { name: 'C10', value: 37, lecturas: 122, total: 331 },
         ]
     },
-    ate: {
-        promedio: 47.2,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 59, lecturas: 341, total: 577 },
-            { name: 'C02', value: 55, lecturas: 343, total: 620 },
-            { name: 'C03', value: 41, lecturas: 112, total: 270 },
-            { name: 'C04', value: 29, lecturas: 72, total: 247 },
-            { name: 'C05', value: 41, lecturas: 128, total: 316 },
-            { name: 'C06', value: 42, lecturas: 187, total: 443 },
-            { name: 'C07', value: 27, lecturas: 139, total: 524 },
-            { name: 'C08', value: 68, lecturas: 265, total: 391 },
-            { name: 'C09', value: 69, lecturas: 324, total: 472 },
-            { name: 'C10', value: 64, lecturas: 118, total: 183 },
-        ]
-    },
-    brena: {
-        promedio: 27.7,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 21, lecturas: 56, total: 262 },
-            { name: 'C02', value: 34, lecturas: 152, total: 441 },
-            { name: 'C03', value: 25, lecturas: 67, total: 268 },
-            { name: 'C04', value: 30, lecturas: 80, total: 267 },
-            { name: 'C05', value: 39, lecturas: 101, total: 261 },
-            { name: 'C06', value: 24, lecturas: 86, total: 353 },
-            { name: 'C07', value: 30, lecturas: 142, total: 469 },
-            { name: 'C08', value: 17, lecturas: 66, total: 389 },
-            { name: 'C09', value: 27, lecturas: 36, total: 132 },
-            { name: 'C10', value: 27, lecturas: 88, total: 329 },
-        ]
-    },
     sjl: {
         promedio: 11.6,
         meta: 15,
@@ -102,54 +70,6 @@ const contratistaData: Record<string, any> = {
             { name: 'C08', value: 5, lecturas: 16, total: 330 },
             { name: 'C09', value: 26, lecturas: 132, total: 502 },
             { name: 'C10', value: 26, lecturas: 78, total: 302 },
-            { name: 'C11', value: 32, lecturas: 42, total: 133 },
-        ]
-    },
-    surquillo: {
-        promedio: 14.8,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 21, lecturas: 81, total: 378 },
-            { name: 'C02', value: 18, lecturas: 117, total: 650 },
-            { name: 'C03', value: 17, lecturas: 103, total: 598 },
-            { name: 'C04', value: 20, lecturas: 121, total: 612 },
-            { name: 'C05', value: 15, lecturas: 72, total: 469 },
-            { name: 'C06', value: 11, lecturas: 52, total: 481 },
-            { name: 'C07', value: 11, lecturas: 55, total: 521 },
-            { name: 'C08', value: 7, lecturas: 41, total: 555 },
-            { name: 'C09', value: 21, lecturas: 92, total: 441 },
-        ]
-    },
-    ves: {
-        promedio: 20.3,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 11, lecturas: 89, total: 819 },
-            { name: 'C02', value: 25, lecturas: 199, total: 795 },
-            { name: 'C03', value: 19, lecturas: 182, total: 937 },
-            { name: 'C04', value: 29, lecturas: 146, total: 511 },
-            { name: 'C05', value: 23, lecturas: 147, total: 639 },
-            { name: 'C06', value: 19, lecturas: 118, total: 615 },
-            { name: 'C07', value: 13, lecturas: 131, total: 1009 },
-            { name: 'C08', value: 27, lecturas: 115, total: 429 },
-            { name: 'C09', value: 27, lecturas: 120, total: 440 },
-        ]
-    },
-    'clientes-e': {
-        promedio: 24.6,
-        meta: 15,
-        ciclos: [
-            { name: 'C01', value: 27, lecturas: 22, total: 83 },
-            { name: 'C02', value: 22, lecturas: 27, total: 125 },
-            { name: 'C03', value: 25, lecturas: 17, total: 67 },
-            { name: 'C04', value: 28, lecturas: 19, total: 68 },
-            { name: 'C05', value: 30, lecturas: 19, total: 64 },
-            { name: 'C06', value: 31, lecturas: 21, total: 67 },
-            { name: 'C07', value: 15, lecturas: 11, total: 71 },
-            { name: 'C08', value: 30, lecturas: 13, total: 43 },
-            { name: 'C09', value: 24, lecturas: 5, total: 21 },
-            { name: 'C10', value: 39, lecturas: 11, total: 28 },
-            { name: 'C11', value: 0, lecturas: 0, total: 0 },
         ]
     }
 };
@@ -200,7 +120,7 @@ export default function ContratistaTomaDeEstadoPage() {
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            Evalúa el desempeño directo del personal contratista en campo, monitoreando la calidad y cantidad de las lecturas capturadas para asegurar el cumplimiento del servicio.
+                            Monitoreo de incidencias operativas del personal contratista en campo. Buscamos la reducción constante de estos eventos para garantizar la excelencia en la recolección de datos y la calidad del servicio.
                         </p>
                     </div>
                 </CardContent>
@@ -255,7 +175,7 @@ export default function ContratistaTomaDeEstadoPage() {
                         <TableCell className="font-bold text-foreground pl-6">{ciclo.name}</TableCell>
                         <TableCell className="text-right tabular-nums text-muted-foreground font-medium">{ciclo.lecturas.toLocaleString()}</TableCell>
                         <TableCell className="text-right tabular-nums text-muted-foreground font-medium">{ciclo.total.toLocaleString()}</TableCell>
-                        <TableCell className={`text-right font-bold tabular-nums pr-6 ${ciclo.value > data.meta ? "text-destructive" : "text-[hsl(var(--chart-3))]"}`}>
+                        <TableCell className={`text-right font-bold tabular-nums pr-6 ${ciclo.value > data.meta ? "text-destructive" : "text-foreground"}`}>
                           {ciclo.value}%
                         </TableCell>
                     </TableRow>
