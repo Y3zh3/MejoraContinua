@@ -10,93 +10,93 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const eficaciaData = {
     todas: {
-        promedio: 59.8,
+        promedio: 57.3,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 63.7, meta: 70 },
-            { name: 'C02', value: 60.1, meta: 70 },
-            { name: 'C03', value: 64.1, meta: 70 },
-            { name: 'C04', value: 52.7, meta: 70 },
+            { name: 'C1', atendidos: 4992, total: 7254, value: 68.8, meta: 70 },
+            { name: 'C2', atendidos: 3249, total: 6183, value: 52.5, meta: 70 },
+            { name: 'C3', atendidos: 3841, total: 5832, value: 65.9, meta: 70 },
+            { name: 'C4', atendidos: 3529, total: 8185, value: 43.1, meta: 70 },
         ]
     },
     comas: {
-        promedio: 59.5,
+        promedio: 59.4,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 60, meta: 70 },
-            { name: 'C02', value: 45, meta: 70 },
-            { name: 'C03', value: 57, meta: 70 },
-            { name: 'C04', value: 76, meta: 70 },
+            { name: 'C1', atendidos: 1382, total: 2312, value: 59.8, meta: 70 },
+            { name: 'C2', atendidos: 906, total: 1999, value: 45.3, meta: 70 },
+            { name: 'C3', atendidos: 965, total: 1703, value: 56.7, meta: 70 },
+            { name: 'C4', atendidos: 1540, total: 2029, value: 75.9, meta: 70 },
         ]
     },
     callao: {
-        promedio: 61.8,
+        promedio: 61.7,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 55, meta: 70 },
-            { name: 'C02', value: 60, meta: 70 },
-            { name: 'C03', value: 67, meta: 70 },
-            { name: 'C04', value: 65, meta: 70 },
+            { name: 'C1', atendidos: 265, total: 480, value: 55.2, meta: 70 },
+            { name: 'C2', atendidos: 217, total: 364, value: 59.6, meta: 70 },
+            { name: 'C3', atendidos: 315, total: 473, value: 66.6, meta: 70 },
+            { name: 'C4', atendidos: 372, total: 570, value: 65.3, meta: 70 },
         ]
     },
     ate: {
-        promedio: 46.0,
+        promedio: 45.5,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 57, meta: 70 },
-            { name: 'C02', value: 45, meta: 70 },
-            { name: 'C03', value: 57, meta: 70 },
-            { name: 'C04', value: 25, meta: 70 },
+            { name: 'C1', atendidos: 579, total: 1008, value: 57.4, meta: 70 },
+            { name: 'C2', atendidos: 514, total: 1132, value: 45.4, meta: 70 },
+            { name: 'C3', atendidos: 563, total: 992, value: 56.8, meta: 70 },
+            { name: 'C4', atendidos: 320, total: 1305, value: 24.5, meta: 70 },
         ]
     },
     brena: {
-        promedio: 67.3,
+        promedio: 67.0,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 68, meta: 70 },
-            { name: 'C02', value: 72, meta: 70 },
-            { name: 'C03', value: 73, meta: 70 },
-            { name: 'C04', value: 56, meta: 70 },
+            { name: 'C1', atendidos: 527, total: 778, value: 67.7, meta: 70 },
+            { name: 'C2', atendidos: 379, total: 529, value: 71.6, meta: 70 },
+            { name: 'C3', atendidos: 399, total: 550, value: 72.5, meta: 70 },
+            { name: 'C4', atendidos: 387, total: 689, value: 56.2, meta: 70 },
         ]
     },
     sjl: {
-        promedio: 68.3,
+        promedio: 68.2,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 68, meta: 70 },
-            { name: 'C02', value: 73, meta: 70 },
-            { name: 'C03', value: 70, meta: 70 },
-            { name: 'C04', value: 62, meta: 70 },
+            { name: 'C1', atendidos: 464, total: 682, value: 68.0, meta: 70 },
+            { name: 'C2', atendidos: 343, total: 472, value: 72.7, meta: 70 },
+            { name: 'C3', atendidos: 439, total: 629, value: 69.8, meta: 70 },
+            { name: 'C4', atendidos: 280, total: 451, value: 62.1, meta: 70 },
         ]
     },
     surquillo: {
         promedio: 62.5,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 68, meta: 70 },
-            { name: 'C02', value: 68, meta: 70 },
-            { name: 'C03', value: 62, meta: 70 },
-            { name: 'C04', value: 52, meta: 70 },
+            { name: 'C1', atendidos: 331, total: 490, value: 67.6, meta: 70 },
+            { name: 'C2', atendidos: 272, total: 402, value: 67.7, meta: 70 },
+            { name: 'C3', atendidos: 239, total: 383, value: 62.4, meta: 70 },
+            { name: 'C4', atendidos: 245, total: 469, value: 52.2, meta: 70 },
         ]
     },
     ves: {
-        promedio: 55.5,
+        promedio: 55.4,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 70, meta: 70 },
-            { name: 'C02', value: 58, meta: 70 },
-            { name: 'C03', value: 61, meta: 70 },
-            { name: 'C04', value: 33, meta: 70 },
+            { name: 'C1', atendidos: 913, total: 1302, value: 70.1, meta: 70 },
+            { name: 'C2', atendidos: 647, total: 1125, value: 57.5, meta: 70 },
+            { name: 'C3', atendidos: 849, total: 1392, value: 61.0, meta: 70 },
+            { name: 'C4', atendidos: 482, total: 1459, value: 33.0, meta: 70 },
         ]
     },
     'clientes-e': {
         promedio: 0,
         meta: 70,
         ciclos: [
-            { name: 'C01', value: 0, meta: 70 },
-            { name: 'C02', value: 0, meta: 70 },
-            { name: 'C03', value: 0, meta: 70 },
-            { name: 'C04', value: 0, meta: 70 },
+            { name: 'C1', atendidos: 0, total: 0, value: 0, meta: 70 },
+            { name: 'C2', atendidos: 0, total: 11, value: 0.0, meta: 70 },
+            { name: 'C3', atendidos: 0, total: 0, value: 0, meta: 70 },
+            { name: 'C4', atendidos: 0, total: 3, value: 0.0, meta: 70 },
         ]
     }
 };
@@ -180,7 +180,7 @@ export default function Eficacia24hPersuasivasPage() {
                 <div className="mt-2">
                     <h4 className="font-semibold text-lg mb-2">Observaciones</h4>
                     <p className="text-base text-muted-foreground leading-relaxed">
-                        El gráfico de área muestra la evolución de la eficacia en las primeras 24 horas. La meta establecida del 70% es el objetivo mínimo para garantizar la efectividad de las acciones preventivas.
+                        El gráfico muestra la evolución de la eficacia en las primeras 24 horas. La meta establecida del 70% busca garantizar una respuesta rápida en los procesos de recaudación.
                     </p>
                 </div>
             </CardContent>
@@ -191,7 +191,7 @@ export default function Eficacia24hPersuasivasPage() {
         <CardHeader>
             <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
             <p className="text-base text-muted-foreground">
-            Desglose porcentual de la eficacia 24H por cada ciclo operativo.
+            Desglose porcentual y numérico de la eficacia 24H por cada ciclo operativo.
             </p>
         </CardHeader>
         <CardContent>
@@ -200,6 +200,8 @@ export default function Eficacia24hPersuasivasPage() {
                 <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                 <TableRow>
                     <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
+                    <TableHead className="font-bold">Con Reap Antes 24</TableHead>
+                    <TableHead className="font-bold">Total</TableHead>
                     <TableHead className="font-bold">Eficacia (%)</TableHead>
                     <TableHead className="text-right font-bold">Meta (%)</TableHead>
                 </TableRow>
@@ -208,6 +210,8 @@ export default function Eficacia24hPersuasivasPage() {
                 {data.ciclos.map((item) => (
                     <TableRow key={item.name}>
                     <TableCell className="font-semibold">{item.name}</TableCell>
+                    <TableCell>{item.atendidos.toLocaleString()}</TableCell>
+                    <TableCell>{item.total.toLocaleString()}</TableCell>
                     <TableCell className={item.value < item.meta ? "text-destructive font-bold" : "text-foreground"}>
                         {item.value}%
                     </TableCell>
