@@ -41,7 +41,7 @@ export default function EficienciaPersuasivasPage() {
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
             <Gauge className="h-8 w-8 text-[hsl(var(--chart-5))]" />
-            <h1 className="font-headline text-3xl font-bold uppercase tracking-tight text-primary">Persuasivas: Eficiencia</h1>
+            <h1 className="font-headline text-3xl font-bold uppercase tracking-tight text-primary">Persuasivas: Eficiencia Operativa</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
       </div>
@@ -49,23 +49,23 @@ export default function EficienciaPersuasivasPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-6">
             <Card className="border shadow-sm">
-                <CardHeader className="pb-2">
+                <CardHeader className="p-4 pb-0">
                     <CardTitle className="text-xl font-bold text-center">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-4">
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                <CardContent className="p-4 pt-2">
+                    <div className="grid grid-cols-2 gap-4 mb-3">
+                        <div className="border border-border/50 py-2 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Promedio Periodo</p>
                             <p className="text-3xl font-black text-[hsl(var(--chart-5))]">{data.promedio}%</p>
                         </div>
-                         <div className="border border-border/50 py-3 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                         <div className="border border-border/50 py-2 px-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
                             <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta</p>
                             <p className="text-3xl font-black">{data.meta}%</p>
                         </div>
                     </div>
                     <div className="px-2">
                         <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
-                            La eficiencia persuasiva evalúa el éxito en la recuperación de cartera y regularización de servicios antes de aplicar medidas de corte definitivas, optimizando la recaudación mediante la gestión directa en campo.
+                            Mide el grado de cumplimiento en la ejecución física de los cortes programados. Para nosotros, la efectividad del corte ante la falta de pago es la métrica clave para garantizar la disciplina comercial en campo.
                         </p>
                     </div>
                 </CardContent>
@@ -73,7 +73,7 @@ export default function EficienciaPersuasivasPage() {
 
             <Card className="border shadow-sm">
                 <CardHeader className="pb-2">
-                    <CardTitle className="text-xl font-bold">Rendimiento por Ciclo (%)</CardTitle>
+                    <CardTitle className="text-xl font-bold">Rendimiento Operativo (%)</CardTitle>
                 </CardHeader>
                 <CardContent className="h-[320px] p-0 px-2 pb-2">
                 <ResponsiveContainer width="100%" height="100%">
@@ -101,7 +101,7 @@ export default function EficienciaPersuasivasPage() {
 
         <Card className="border shadow-sm h-full flex flex-col min-h-[650px]">
             <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-bold">Detalle de Eficiencia por Ciclo{selectedBaseLabel}</CardTitle>
+                <CardTitle className="text-xl font-bold">Detalle de Ejecución por Ciclo{selectedBaseLabel}</CardTitle>
             </CardHeader>
             <CardContent className="flex-1 px-4">
             <div className="max-h-[650px] overflow-y-auto rounded-xl border border-border/60 bg-card">
@@ -109,9 +109,9 @@ export default function EficienciaPersuasivasPage() {
                 <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
                     <TableRow className="hover:bg-transparent border-b">
                     <TableHead className="w-[100px] font-bold text-muted-foreground uppercase text-[11px] tracking-wider pl-6">Ciclo</TableHead>
-                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Efectivo</TableHead>
-                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Total</TableHead>
-                    <TableHead className="text-right font-bold text-muted-foreground uppercase text-[11px] tracking-wider pr-6">Eficiencia (%)</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Cortes Efectivos</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Total Programado</TableHead>
+                    <TableHead className="text-right font-bold text-muted-foreground uppercase text-[11px] tracking-wider pr-6">Efectividad (%)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>

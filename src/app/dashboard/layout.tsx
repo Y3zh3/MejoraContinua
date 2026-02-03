@@ -45,8 +45,8 @@ const navItems = [
         href: "/dashboard/persuasivas",
         subItems: [
             { href: "/dashboard/persuasivas/eficiencia", label: "Eficiencia" },
-            { href: "/dashboard/persuasivas/eficacia-24h", label: "Eficacia 24H" },
-            { href: "/dashboard/persuasivas/eficacia-48h", label: "Eficacia 48h" },
+            { href: "/dashboard/persuasivas/eficacia-24h", label: "Efectividad 24H" },
+            { href: "/dashboard/persuasivas/eficacia-48h", label: "Efectividad 48H" },
             { href: "/dashboard/persuasivas/reclamos", label: "Reclamos" },
         ]
     },
