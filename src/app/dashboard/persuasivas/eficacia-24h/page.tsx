@@ -112,7 +112,7 @@ export default function Eficacia24hPersuasivasPage() {
     <div className="max-w-7xl mx-auto flex flex-col gap-8">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-            <Clock4 className="h-8 w-8 text-[hsl(var(--chart-2))]" />
+            <Clock4 className="h-8 w-8 text-[hsl(var(--chart-4))]" />
             <h1 className="font-headline text-3xl font-bold">Persuasivas: Eficacia 24H</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
@@ -128,8 +128,8 @@ export default function Eficacia24hPersuasivasPage() {
                 <AreaChart data={data.ciclos}>
                   <defs>
                       <linearGradient id="colorEficacia" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="hsl(var(--chart-2))" stopOpacity={0.8}/>
-                          <stop offset="95%" stopColor="hsl(var(--chart-2))" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="hsl(var(--chart-4))" stopOpacity={0.8}/>
+                          <stop offset="95%" stopColor="hsl(var(--chart-4))" stopOpacity={0}/>
                       </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -148,7 +148,7 @@ export default function Eficacia24hPersuasivasPage() {
                     type="monotone" 
                     dataKey="value" 
                     name="Eficacia" 
-                    stroke="hsl(var(--chart-2))" 
+                    stroke="hsl(var(--chart-4))" 
                     fillOpacity={1} 
                     fill="url(#colorEficacia)" 
                     strokeWidth={3}
@@ -170,7 +170,7 @@ export default function Eficacia24hPersuasivasPage() {
                 <div className="grid grid-cols-2 gap-6">
                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
                         <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio del periodo</p>
-                        <p className="text-4xl font-bold text-[hsl(var(--chart-2))]">{data.promedio}%</p>
+                        <p className="text-4xl font-bold text-[hsl(var(--chart-4))]">{data.promedio}%</p>
                     </div>
                      <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
                         <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta establecida</p>
