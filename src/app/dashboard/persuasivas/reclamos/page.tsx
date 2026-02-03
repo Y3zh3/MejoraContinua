@@ -2,7 +2,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine, PieChart, Pie, Cell } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { FileWarning } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -51,50 +51,19 @@ export default function ReclamosPersuasivasPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+        <Card className="lg:col-span-2 transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle className="text-xl">Comparativa por Sede</CardTitle>
+                <CardTitle className="text-xl">Distribución de Reclamos por Sede (%) - Enero '26</CardTitle>
             </CardHeader>
-            <CardContent className="h-80 p-0 px-2 pb-4">
-            <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={dataEnero}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="name" />
-                  <YAxis unit=" uds." allowDecimals={false} />
-                  <Tooltip
-                      contentStyle={{
-                      background: "hsl(var(--card))",
-                      borderColor: "hsl(var(--border))",
-                      borderRadius: "8px",
-                      }}
-                      formatter={(value: number) => `${value} uds.`}
-                  />
-                  <Legend />
-                  <Bar 
-                    dataKey="value" 
-                    name="Reclamos" 
-                    fill="hsl(var(--chart-4))" 
-                    radius={[4, 4, 0, 0]} 
-                  />
-                  <ReferenceLine y={5} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
-                </BarChart>
-            </ResponsiveContainer>
-            </CardContent>
-        </Card>
-
-        <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-            <CardHeader className="p-4">
-                <CardTitle className="text-xl">Distribución (%)</CardTitle>
-            </CardHeader>
-            <CardContent className="h-80 p-0 px-2 pb-4">
+            <CardContent className="h-96 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={pieData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
+                    innerRadius={80}
+                    outerRadius={120}
                     paddingAngle={5}
                     dataKey="value"
                     label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
@@ -103,7 +72,13 @@ export default function ReclamosPersuasivasPage() {
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip 
+                    contentStyle={{
+                      background: "hsl(var(--card))",
+                      borderColor: "hsl(var(--border))",
+                      borderRadius: "8px",
+                    }}
+                  />
                   <Legend />
                 </PieChart>
             </ResponsiveContainer>
@@ -116,19 +91,19 @@ export default function ReclamosPersuasivasPage() {
             </CardHeader>
             <CardContent className="flex flex-col gap-6 pt-2">
                 <div className="grid grid-cols-1 gap-6">
-                    <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                        <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>
-                        <p className="text-3xl font-bold text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
+                    <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
+                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Total Reclamos</p>
+                        <p className="text-4xl font-bold text-[hsl(var(--chart-4))]">{totalReclamos} uds.</p>
                     </div>
-                     <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                        <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta Máxima p/Sede</p>
-                        <p className="text-3xl font-bold">5 uds.</p>
+                     <div className="border p-6 rounded-xl text-center bg-card shadow-sm">
+                        <p className="text-sm font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta Máxima p/Sede</p>
+                        <p className="text-4xl font-bold">5 uds.</p>
                     </div>
                 </div>
-                <div className="mt-2">
-                    <h4 className="font-semibold text-sm mb-1">Análisis</h4>
-                    <p className="text-sm text-muted-foreground leading-snug">
-                        Comas concentra el <span className="font-bold">46%</span> de los reclamos totales. Ate y Breña se mantienen en el límite de la meta.
+                <div className="mt-4">
+                    <h4 className="font-semibold text-lg mb-2">Análisis Crítico</h4>
+                    <p className="text-base text-muted-foreground leading-relaxed">
+                        Comas concentra el <span className="font-bold text-foreground">46%</span> de los reclamos totales del mes, superando ampliamente la meta máxima.
                     </p>
                 </div>
             </CardContent>
