@@ -175,31 +175,6 @@ export default function EfectividadTomaDeEstadoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
-                <CardHeader className="p-4">
-                    <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
-                </CardHeader>
-                <CardContent className="h-60 p-0 px-2 pb-4">
-                <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={data.ciclos}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="name" />
-                    <YAxis domain={[90, 101]} unit="%"/>
-                    <Tooltip
-                        contentStyle={{
-                        background: "hsl(var(--card))",
-                        borderColor: "hsl(var(--border))",
-                        borderRadius: "8px",
-                        }}
-                        formatter={(value: number) => `${value}%`}
-                    />
-                    <Legend />
-                    <Bar dataKey="value" name="Efectividad" fill="hsl(var(--chart-2))" radius={[4, 4, 0, 0]} />
-                    </BarChart>
-                </ResponsiveContainer>
-                </CardContent>
-            </Card>
-
-            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
                 <CardHeader>
                 <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
@@ -223,6 +198,31 @@ export default function EfectividadTomaDeEstadoPage() {
                             La efectividad es extremadamente alta, muy cerca o alcanzando el 100%. El proceso es robusto y se ejecuta con un alto grado de precisión.
                         </p>
                     </div>
+                </CardContent>
+            </Card>
+
+            <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
+                <CardHeader className="p-4">
+                    <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
+                </CardHeader>
+                <CardContent className="h-60 p-0 px-2 pb-4">
+                <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={data.ciclos}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="name" />
+                    <YAxis domain={[90, 101]} unit="%"/>
+                    <Tooltip
+                        contentStyle={{
+                        background: "hsl(var(--card))",
+                        borderColor: "hsl(var(--border))",
+                        borderRadius: "8px",
+                        }}
+                        formatter={(value: number) => `${value}%`}
+                    />
+                    <Legend />
+                    <Bar dataKey="value" name="Efectividad" fill="hsl(var(--chart-2))" radius={[4, 4, 0, 0]} />
+                    </BarChart>
+                </ResponsiveContainer>
                 </CardContent>
             </Card>
         </div>
