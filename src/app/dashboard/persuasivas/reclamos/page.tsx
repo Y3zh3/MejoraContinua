@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,6 +15,7 @@ const dataEnero = [
   { name: 'SJL', value: 0, meta: 0 },
   { name: 'Surquillo', value: 2, meta: 0 },
   { name: 'VES', value: 2, meta: 0 },
+  { name: 'Clientes E.', value: 0, meta: 0 },
 ];
 
 const COLORS = [
@@ -24,6 +26,7 @@ const COLORS = [
   'hsl(var(--chart-5))',
   '#2563eb',
   '#7c3aed',
+  '#10b981',
 ];
 
 export default function ReclamosPersuasivasPage() {
@@ -106,11 +109,11 @@ export default function ReclamosPersuasivasPage() {
                         Logro del Mes
                     </h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                        La sede <span className="font-bold text-foreground">{sedesCumplidoras.join(", ")}</span> alcanzó la excelencia con <span className="font-bold text-primary">0 reclamos</span>.
+                        {sedesCumplidoras.length > 1 ? "Las sedes" : "La sede"} <span className="font-bold text-foreground">{sedesCumplidoras.join(" y ")}</span> alcanzó la excelencia con <span className="font-bold text-primary">0 reclamos</span>.
                     </p>
                     <h4 className="font-semibold text-base mt-1">Análisis Crítico</h4>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                        Comas concentra el <span className="font-bold text-foreground">46%</span> de las incidencias, lo que requiere un plan de acción inmediato.
+                        Comas concentra el <span className="font-bold text-foreground">{((17 / totalReclamos) * 100).toFixed(0)}%</span> de las incidencias, lo que requiere un plan de acción inmediato.
                     </p>
                 </div>
             </CardContent>
