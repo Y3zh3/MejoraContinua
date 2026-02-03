@@ -176,9 +176,9 @@ export default function EfectividadTomaDeEstadoPage() {
         <div className="flex flex-col gap-8">
             <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
                 <CardHeader>
-                <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
+                    <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-6 pt-2 h-60 overflow-y-auto">
+                <CardContent className="flex flex-col gap-6 pt-2 h-52 overflow-y-auto">
                     <p className="text-lg text-muted-foreground leading-relaxed">
                         Análisis del indicador de <span className="font-semibold text-foreground">Efectividad</span> para el periodo de <span className="font-semibold text-foreground">Enero 2026</span>.
                     </p>
@@ -229,13 +229,10 @@ export default function EfectividadTomaDeEstadoPage() {
 
         <Card className="transition-colors hover:bg-primary/10 border shadow-sm h-full flex flex-col">
             <CardHeader>
-            <CardTitle className="text-xl">Detalle de Lecturas por Ciclo</CardTitle>
-            <p className="text-base text-muted-foreground">
-                Desglose de lecturas realizadas frente al total programado para cada ciclo.
-            </p>
+                <CardTitle className="text-xl">Detalle de Lecturas por Ciclo</CardTitle>
             </CardHeader>
             <CardContent className="flex-1">
-            <div className="max-h-[580px] overflow-y-auto rounded-md border">
+            <div className="max-h-[540px] overflow-y-auto rounded-md border">
                 <Table>
                 <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm">
                     <TableRow>
