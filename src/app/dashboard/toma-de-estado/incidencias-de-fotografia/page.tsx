@@ -10,23 +10,23 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const fotografiaData = {
     todas: {
-        promedio: 9.4,
+        promedio: 10.3,
         meta: 5,
         ciclos: [
-            { name: 'C01', value: 5.4, casos: 1245, total: 23055 },
-            { name: 'C02', value: 11.2, casos: 3102, total: 27696 },
+            { name: 'C01', value: 5.6, casos: 1245, total: 23055 },
+            { name: 'C02', value: 8.9, casos: 3102, total: 27696 },
             { name: 'C03', value: 9.8, casos: 2450, total: 25000 },
             { name: 'C04', value: 6.5, casos: 1540, total: 23692 },
-            { name: 'C05', value: 8.2, casos: 1980, total: 24146 },
-            { name: 'C06', value: 12.4, casos: 2800, total: 22580 },
+            { name: 'C05', value: 11.2, casos: 1980, total: 24146 },
+            { name: 'C06', value: 13.4, casos: 2800, total: 22580 },
             { name: 'C07', value: 7.9, casos: 1650, total: 20886 },
-            { name: 'C08', value: 14.1, casos: 3200, total: 22695 },
+            { name: 'C08', value: 15.1, casos: 3200, total: 22695 },
             { name: 'C09', value: 12.6, casos: 2750, total: 21825 },
-            { name: 'C10', value: 10.3, casos: 1850, total: 17961 },
+            { name: 'C10', value: 12.3, casos: 1850, total: 17961 },
         ]
     },
     comas: {
-        promedio: 11.0,
+        promedio: 11.5,
         meta: 5,
         ciclos: [
             { name: 'C01', value: 11, casos: 524, total: 4763 },
@@ -42,7 +42,7 @@ const fotografiaData = {
         ]
     },
     callao: {
-        promedio: 21.5,
+        promedio: 23.7,
         meta: 5,
         ciclos: [
             { name: 'C01', value: 0, casos: 0, total: 481 },
@@ -90,7 +90,7 @@ const fotografiaData = {
         ]
     },
     sjl: {
-        promedio: 0.5,
+        promedio: 0.45,
         meta: 5,
         ciclos: [
             { name: 'C01', value: 0, casos: 0, total: 648 },
@@ -122,7 +122,7 @@ const fotografiaData = {
         ]
     },
     ves: {
-        promedio: 1.9,
+        promedio: 1.6,
         meta: 5,
         ciclos: [
             { name: 'C01', value: 1, casos: 8, total: 819 },
@@ -174,24 +174,24 @@ export default function IncidenciasFotografiaTomaDeEstadoPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <Card className="transition-colors hover:bg-primary/10 border shadow-sm">
             <CardHeader className="p-4">
-                <CardTitle className="text-xl">Rendimiento por Ciclo - Enero 2026</CardTitle>
+                <CardTitle className="text-xl">Incidencia por Ciclo (%) - Enero 2026</CardTitle>
             </CardHeader>
             <CardContent className="h-80 p-0 px-2 pb-4">
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data.ciclos}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" />
-                <YAxis unit=" uds." />
+                <YAxis unit="%" />
                 <Tooltip
                     contentStyle={{
                     background: "hsl(var(--card))",
                     borderColor: "hsl(var(--border))",
                     borderRadius: "8px",
                     }}
-                    formatter={(value: number) => `${value.toLocaleString()} uds.`}
+                    formatter={(value: number) => `${value}%`}
                 />
                 <Legend />
-                <Bar dataKey="casos" name="Casos" fill="hsl(var(--chart-4))" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="value" name="Incidencia" fill="hsl(var(--chart-4))" radius={[4, 4, 0, 0]} />
                 </BarChart>
             </ResponsiveContainer>
             </CardContent>
