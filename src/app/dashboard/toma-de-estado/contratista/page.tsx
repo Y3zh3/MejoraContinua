@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,13 +28,16 @@ const contratistaData = {
 export default function ContratistaTomaDeEstadoPage() {
   const [isMounted, setIsMounted] = useState(false);
   const [data, setData] = useState(contratistaData.todas);
+  const [selectedBaseLabel, setSelectedBaseLabel] = useState("");
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   const handleBaseChange = (base: string) => {
-    setData(contratistaData[base as keyof typeof contratistaData] || contratistaData.todas);
+    const newData = (contratistaData as any)[base] || contratistaData.todas;
+    setData(newData);
+    setSelectedBaseLabel(base !== "todas" ? ` ${base.charAt(0).toUpperCase() + base.slice(1)}` : "");
   };
 
   if (!isMounted) return null;
@@ -45,7 +47,7 @@ export default function ContratistaTomaDeEstadoPage() {
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
             <HardHat className="h-8 w-8 text-[hsl(var(--chart-3))]" />
-            <h1 className="font-headline text-3xl font-bold">Toma de Estado: Contratista</h1>
+            <h1 className="font-headline text-3xl font-bold uppercase tracking-tight text-primary">Toma de Estado: Contratista</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
       </div>
@@ -53,72 +55,78 @@ export default function ContratistaTomaDeEstadoPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
             <Card className="border shadow-sm">
-                <CardHeader className="pb-2">
-                    <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
+                <CardHeader className="pb-4">
+                    <CardTitle className="text-xl font-bold text-center">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex flex-col gap-6">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
-                            <p className="text-3xl font-bold text-[hsl(var(--chart-3))]">{data.promedio}%</p>
+                        <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                            <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Promedio Periodo</p>
+                            <p className="text-3xl font-black text-[hsl(var(--chart-3))]">{data.promedio}%</p>
                         </div>
-                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta (máx)</p>
-                            <p className="text-3xl font-bold">15%</p>
+                         <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                            <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta</p>
+                            <p className="text-3xl font-black">15%</p>
                         </div>
+                    </div>
+                    <div className="px-2">
+                        <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
+                            Evalúa el desempeño directo del personal contratista en campo, monitoreando la calidad y cantidad de las lecturas capturadas para asegurar el cumplimiento de los niveles de servicio acordados.
+                        </p>
                     </div>
                 </CardContent>
             </Card>
 
             <Card className="border shadow-sm">
-                <CardHeader className="pb-4">
-                    <CardTitle className="text-xl">Rendimiento por Ciclo (%)</CardTitle>
+                <CardHeader className="pb-2">
+                    <CardTitle className="text-xl font-bold">Rendimiento por Ciclo (%)</CardTitle>
                 </CardHeader>
-                <CardContent className="h-60 p-0 px-2 pb-4">
+                <CardContent className="h-[320px] p-0 px-2 pb-2">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data.ciclos}>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                        <XAxis dataKey="name" />
-                        <YAxis unit="%" />
+                    <LineChart data={data.ciclos} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
+                        <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                        <YAxis unit="%" tick={{ fontSize: 12 }} />
                         <Tooltip
                             contentStyle={{
                                 background: "hsl(var(--card))",
                                 borderColor: "hsl(var(--border))",
-                                borderRadius: "8px",
+                                borderRadius: "12px",
+                                boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
                             }}
-                            formatter={(value: number) => `${value}%`}
+                            formatter={(value: number) => [`${value}%`, "Rendimiento"]}
                         />
-                        <Legend />
+                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '10px' }} />
                         <Line type="monotone" dataKey="value" name="Rendimiento" stroke="hsl(var(--chart-3))" strokeWidth={3} dot={{ r: 6 }} activeDot={{ r: 8 }} />
-                        <ReferenceLine y={15} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
+                        <ReferenceLine y={15} label={{ position: 'top', value: 'Meta', fontSize: 10, fill: 'hsl(var(--destructive))' }} stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </LineChart>
                 </ResponsiveContainer>
                 </CardContent>
             </Card>
         </div>
 
-        <Card className="border shadow-sm h-full flex flex-col">
-            <CardHeader>
-                <CardTitle className="text-xl">Detalle de Rendimiento por Ciclo</CardTitle>
+        <Card className="border shadow-sm h-full flex flex-col min-h-[650px]">
+            <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-bold">Detalle de Rendimiento por Ciclo{selectedBaseLabel}</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1">
-            <div className="max-h-[500px] overflow-y-auto rounded-md border">
+            <CardContent className="flex-1 px-4">
+            <div className="max-h-[650px] overflow-y-auto rounded-xl border border-border/60 bg-card">
                 <Table>
-                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
-                    <TableRow>
-                    <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold text-right">Lecturas Realizadas</TableHead>
-                    <TableHead className="font-bold text-right">Total Lecturas</TableHead>
-                    <TableHead className="text-right font-bold">Rendimiento (%)</TableHead>
+                <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
+                    <TableRow className="hover:bg-transparent border-b">
+                    <TableHead className="w-[100px] font-bold text-muted-foreground uppercase text-[11px] tracking-wider pl-6">Ciclo</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Lecturas Realizadas</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Total Lecturas</TableHead>
+                    <TableHead className="text-right font-bold text-muted-foreground uppercase text-[11px] tracking-wider pr-6">Rendimiento (%)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {data.ciclos.map((ciclo) => (
-                    <TableRow key={ciclo.name}>
-                        <TableCell className="font-semibold">{ciclo.name}</TableCell>
-                        <TableCell className="text-right">{ciclo.lecturas.toLocaleString()}</TableCell>
-                        <TableCell className="text-right">{ciclo.total.toLocaleString()}</TableCell>
-                        <TableCell className="text-right font-bold text-[hsl(var(--chart-3))]">
+                    <TableRow key={ciclo.name} className="hover:bg-muted/30 transition-colors border-b last:border-0">
+                        <TableCell className="font-bold text-foreground pl-6">{ciclo.name}</TableCell>
+                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">{ciclo.lecturas.toLocaleString()}</TableCell>
+                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">{ciclo.total.toLocaleString()}</TableCell>
+                        <TableCell className="text-right font-bold tabular-nums pr-6 text-[hsl(var(--chart-3))]">
                           {ciclo.value}%
                         </TableCell>
                     </TableRow>

@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,30 +16,22 @@ const eficienciaData = {
             { name: 'C3', efectivo: 6136, total: 6503, value: 94.4, meta: 98 },
             { name: 'C4', efectivo: 3016, total: 3361, value: 89.7, meta: 98 },
         ]
-    },
-    comas: {
-        promedio: 89.5,
-        meta: 98,
-        ciclos: [
-            { name: 'C1', efectivo: 1200, total: 1350, value: 88.8, meta: 98 },
-            { name: 'C2', efectivo: 1150, total: 1280, value: 89.8, meta: 98 },
-            { name: 'C3', efectivo: 1300, total: 1450, value: 89.6, meta: 98 },
-            { name: 'C4', efectivo: 1100, total: 1225, value: 89.7, meta: 98 },
-        ]
     }
 };
 
 export default function EficienciaTomaDeEstadoPage() {
   const [isMounted, setIsMounted] = useState(false);
   const [data, setData] = useState(eficienciaData.todas);
+  const [selectedBaseLabel, setSelectedBaseLabel] = useState("");
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   const handleBaseChange = (base: string) => {
-    const newData = eficienciaData[base as keyof typeof eficienciaData] || eficienciaData.todas;
+    const newData = (eficienciaData as any)[base] || eficienciaData.todas;
     setData(newData);
+    setSelectedBaseLabel(base !== "todas" ? ` ${base.charAt(0).toUpperCase() + base.slice(1)}` : "");
   };
 
   if (!isMounted) return null;
@@ -50,80 +41,86 @@ export default function EficienciaTomaDeEstadoPage() {
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
             <Gauge className="h-8 w-8 text-[hsl(var(--chart-2))]" />
-            <h1 className="font-headline text-3xl font-bold">Toma de Estado: Eficiencia</h1>
+            <h1 className="font-headline text-3xl font-bold uppercase tracking-tight text-primary">Toma de Estado: Eficiencia</h1>
         </div>
         <BaseSelector onBaseChange={handleBaseChange} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         <div className="flex flex-col gap-8">
-            <Card className="border shadow-sm h-52">
-                <CardHeader className="pb-2">
-                    <CardTitle className="text-xl">Resumen del Indicador</CardTitle>
+            <Card className="border shadow-sm">
+                <CardHeader className="pb-4">
+                    <CardTitle className="text-xl font-bold text-center">Resumen del Indicador</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex flex-col gap-6">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Promedio Periodo</p>
-                            <p className="text-3xl font-bold text-[hsl(var(--chart-2))]">{data.promedio}%</p>
+                        <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                            <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Promedio Periodo</p>
+                            <p className="text-3xl font-black text-[hsl(var(--chart-2))]">{data.promedio}%</p>
                         </div>
-                         <div className="border p-4 rounded-xl text-center bg-card shadow-sm">
-                            <p className="text-xs font-medium text-muted-foreground mb-1 uppercase tracking-wider">Meta</p>
-                            <p className="text-3xl font-bold">{data.meta}%</p>
+                         <div className="border border-border/50 p-4 rounded-xl text-center bg-card shadow-sm flex flex-col items-center justify-center">
+                            <p className="text-[10px] font-bold text-muted-foreground mb-1 uppercase tracking-[0.2em]">Meta</p>
+                            <p className="text-3xl font-black">{data.meta}%</p>
                         </div>
+                    </div>
+                    <div className="px-2">
+                        <p className="text-sm text-muted-foreground leading-relaxed text-center italic">
+                            La eficiencia operativa en la toma de estado mide la optimización de los recorridos y la capacidad instalada para cumplir con la totalidad de los suministros programados en cada ciclo.
+                        </p>
                     </div>
                 </CardContent>
             </Card>
 
             <Card className="border shadow-sm">
-                <CardHeader className="pb-4">
-                    <CardTitle className="text-xl">Rendimiento de Eficiencia (%)</CardTitle>
+                <CardHeader className="pb-2">
+                    <CardTitle className="text-xl font-bold">Rendimiento de Eficiencia (%)</CardTitle>
                 </CardHeader>
-                <CardContent className="h-60 p-0 px-2 pb-4">
+                <CardContent className="h-[320px] p-0 px-2 pb-2">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={data.ciclos}>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                        <XAxis dataKey="name" />
-                        <YAxis domain={[0, 110]} unit="%"/>
+                    <BarChart data={data.ciclos} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" />
+                        <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+                        <YAxis domain={[0, 110]} unit="%" tick={{ fontSize: 12 }} />
                         <Tooltip
                             contentStyle={{
                                 background: "hsl(var(--card))",
                                 borderColor: "hsl(var(--border))",
-                                borderRadius: "8px",
+                                borderRadius: "12px",
+                                boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
                             }}
-                            formatter={(value: number) => `${value}%`}
+                            formatter={(value: number) => [`${value}%`, "Eficiencia"]}
                         />
-                        <Legend />
-                        <Bar dataKey="value" name="Eficiencia" fill="hsl(var(--chart-2))" radius={[4, 4, 0, 0]} />
-                        <ReferenceLine y={98} label="Meta" stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
+                        <Legend iconType="rect" verticalAlign="bottom" wrapperStyle={{ paddingTop: '10px' }} />
+                        <Bar dataKey="value" name="Eficiencia" fill="hsl(var(--chart-2))" radius={[6, 6, 0, 0]} />
+                        <ReferenceLine y={98} label={{ position: 'top', value: 'Meta', fontSize: 10, fill: 'hsl(var(--destructive))' }} stroke="hsl(var(--destructive))" strokeDasharray="3 3" />
                     </BarChart>
                 </ResponsiveContainer>
                 </CardContent>
             </Card>
         </div>
 
-        <Card className="border shadow-sm h-full flex flex-col">
-            <CardHeader>
-                <CardTitle className="text-xl">Detalle de Eficiencia por Ciclo</CardTitle>
+        <Card className="border shadow-sm h-full flex flex-col min-h-[650px]">
+            <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-bold">Detalle de Eficiencia por Ciclo{selectedBaseLabel}</CardTitle>
             </CardHeader>
-            <CardContent className="flex-1">
-            <div className="max-h-[500px] overflow-y-auto rounded-md border">
+            <CardContent className="flex-1 px-4">
+            <div className="max-h-[650px] overflow-y-auto rounded-xl border border-border/60 bg-card">
                 <Table>
-                <TableHeader className="sticky top-0 bg-secondary/50 backdrop-blur-sm z-10">
-                    <TableRow>
-                    <TableHead className="w-[120px] font-bold">Ciclo</TableHead>
-                    <TableHead className="font-bold text-right">Efectivo</TableHead>
-                    <TableHead className="font-bold text-right">Total</TableHead>
-                    <TableHead className="text-right font-bold">Eficiencia (%)</TableHead>
+                <TableHeader className="sticky top-0 bg-secondary/30 backdrop-blur-md z-10">
+                    <TableRow className="hover:bg-transparent border-b">
+                    <TableHead className="w-[100px] font-bold text-muted-foreground uppercase text-[11px] tracking-wider pl-6">Ciclo</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Efectivo</TableHead>
+                    <TableHead className="font-bold text-right text-muted-foreground uppercase text-[11px] tracking-wider">Total</TableHead>
+                    <TableHead className="text-right font-bold text-muted-foreground uppercase text-[11px] tracking-wider pr-6">Eficiencia (%)</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {data.ciclos.map((item) => (
-                    <TableRow key={item.name}>
-                        <TableCell className="font-semibold">{item.name}</TableCell>
-                        <TableCell className="text-right">{item.efectivo?.toLocaleString()}</TableCell>
-                        <TableCell className="text-right">{item.total?.toLocaleString()}</TableCell>
-                        <TableCell className={`text-right font-medium ${item.value < data.meta ? "text-destructive" : ""}`}>
+                    <TableRow key={item.name} className="hover:bg-muted/30 transition-colors border-b last:border-0">
+                        <TableCell className="font-bold text-foreground pl-6">{item.name}</TableCell>
+                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">{item.efectivo?.toLocaleString()}</TableCell>
+                        <TableCell className="text-right tabular-nums text-muted-foreground font-medium">{item.total?.toLocaleString()}</TableCell>
+                        <TableCell className={`text-right font-bold tabular-nums pr-6 ${item.value < data.meta ? "text-destructive" : "text-foreground"}`}>
                             {item.value}%
                         </TableCell>
                     </TableRow>
